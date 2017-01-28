@@ -38,11 +38,18 @@ Capítulo 5 del Marlsand (2009) "Machine Learning, an Algorithmic Perspective"
 Capítulo 5 del Smola & Vishwanathan (2008) "Introduction to Machine Learning"
 http://en.wikipedia.org/wiki/Logistic_regression
 http://en.wikipedia.org/wiki/Linear_regression
-Capítulo 13 del Owen et al. (2012)
+Capítulo 13 del Owen et al. (2012), Capítulo 2 y 4 del Owen et al. (2012)
 http://ufal.mff.cuni.cz/~zabokrtsky/courses/npfl104/html/feature_engineering.pdf
+http://aprendizajengrande.net/cronograma.html
+
+
+Procesamiento de imagenes
 
 
 Aprendizaje Automatico, Machine Learning
+https://en.wikipedia.org/wiki/Machine_learning
+Tom M. Mitchell provided a widely quoted, more formal definition: "A computer program is said to learn from experience E with respect to some class of tasks T and 
+performance measure P if its performance at tasks in T, as measured by P, improves with experience E
 Algoritmos con error intrínseco
 ¿Qué hacer con un programa que falla aún habiendo sido programado correctamente?
 No todos los problemas pueden ser abordados vía Aprendizaje Automático
@@ -61,15 +68,13 @@ Ingeniería de features
 No-free lunch theorem
 
 
-Aprendizaje supervisado 
+Aprendizaje No supervisado 
 Clustering
-Aprendizaje semi supervisado
-Recomendación
-Un problema en el medio entre supervisado y no supervisado
-Dado un conjunto de personas y objetos, recomendar nuevos objetos similares a los que la persona elige, pero que no conoce
-Amplia utilidad práctica
-
-Aprendizaje No supervisado
+El objetivo de los métodos de clustering es descubrir grupos significativos presentes en los datos
+Una cuestión de distancias
+El concepto central en clustering es la definición de una distancia entre instancias
+Cada definición de distancias induce un agrupamiento de los datos, basado en esa métrica
+La distancia es donde se incorpora la información humana
 Descubrir lo que uno no sabe
 También llamado minería de datos
 Concepto clave: función de distancia entre las instancias
@@ -78,6 +83,30 @@ Cerveza al lado de pañales descartables
 Se trata de aplicar una estructura a los datos
 El tipo de estructura está dado por el algoritmo, y de la estructura se pueden leer características importantes de los datos
 
+Aprendizaje semi supervisado
+Recomendación
+Un problema en el medio entre supervisado y no supervisado
+Dado un conjunto de personas y objetos, recomendar nuevos objetos similares a los que la persona elige, pero que no conoce
+Amplia utilidad práctica
+Collaborative Filtering
+Filtrar información usando comunidades de personas
+Usuarios, ítems y preferencias
+
+Recomendación basada en Usuarios
+para cada ítem i para el cual el usuario u no tiene preferencia:
+para cada otro usuario v que tiene preferencia por i:
+calcular la similitud s entre u y v
+acumular la preferencia de v por i, pesada por s
+devolver los ítems con mayor preferencia pesada
+
+Recomendación basada en Ítems
+para cada ítem i para el cual el usuario u no tiene preferencia:
+para cada ítem j que u tiene una preferencia:
+calcular la similitud s entre i y j
+acumular la preferencia de u por j, pesada por s
+devolver los ítems con mayor preferencia pesada
+
+Aprendizaje supervisado
 Clasificación
 El Aprendizaje Automático sin calificar
 Aprender lo que uno ya sabe
@@ -95,6 +124,8 @@ Entrada: vectores de features, sin la clase objetivo, más el modelo entrenado
 Salida: la clase objetivo predicha
 
 Clasificacion lineal, regresion logistica, SVM
+
+Reinforcement learning  A computer program interacts with a dynamic environment in which it must perform a certain goal
 
 
 Ciclo del Aprendizaje Automático
@@ -189,11 +220,18 @@ donde E es la matriz de los autovectores y L es la matriz diagonal de los autove
 Si Ek son las primeras k columnas de E, entonces MEk es una representación en k dimensiones de M
 Véase http://infolab.stanford.edu/~ullman/mmds/ch11.pdf
 
+
+Information Gain
+Podemos definir Information Gain a partir de la entropía (qué tan "ruidosa" es la partición)
+
 Modelos
 
 ¿Qué es un modelo?
 “Un ente que aprende que no asume nada acerca de la identidad del concepto objetivo no tiene ninguna base racional para clasificar cosas que nunca vio.”
 Mitchel (1997)
+A core objective of a learner is to generalize from its experience.[20][21] Generalization in this context is the ability of a learning machine to perform accurately on new,
+unseen examples/tasks after having experienced a learning data set. The training examples come from some generally unknown probability distribution 
+(considered representative of the space of occurrences) and the learner has to build a general model about this space that enables it to produce sufficiently accurate predictions in new cases.
 Los modelos capturan la información en los datos de entrada (o en los datos en general, en aprendizaje no supervisado)
 Representan la forma de ver el mundo que permite extrapolar cuando se observan nuevos datos (nunca vistos)
 Los modelos pueden ser matemáticamente bien formados (estadísticos) o simplemente algoritmicos (cascadas de if-then-else)
@@ -384,3 +422,11 @@ faster when their inputs are sized in powers of 2.
 
 BACKPROPAGATION
 http://cs231n.github.io/optimization-2/
+backpropagation, which is a way of computing gradients of expressions through recursive application of chain rule. 
+Understanding of this process and its subtleties is critical for you to understand, and effectively develop, design and debug Neural Networks.
+
+ARTIFICIAL NEURAL NETWORK
+An artificial neural network (ANN) learning algorithm, usually called "neural network" (NN), is a learning algorithm that is inspired by the structure and functional aspects 
+of biological neural networks. Computations are structured in terms of an interconnected group of artificial neurons, processing information using a connectionist approach 
+to computation. Modern neural networks are non-linear statistical data modeling tools. They are usually used to model complex relationships between inputs and outputs, 
+to find patterns in data, or to capture the statistical structure in an unknown joint probability distribution between observed variables.
