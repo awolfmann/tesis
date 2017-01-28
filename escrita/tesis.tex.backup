@@ -1,0 +1,386 @@
+INTRODUCCION
+
+En los ultimos años las fotografias estan cada vez mas pasando a ser un virtual en lugar de fisico, de la mano del gran aumento en el uso de los dispositivos moviles 
+cualquier persona puede tomar miles fotografias en un instante de tiempo, y compartirla en las redes sociales.
+A partir de esto, se han desarrollado muchas aplicaciones entorno a las fotografias, ya sea desde redes sociales masivamente utilizadas, hasta aplicaciones que aplican efectos o filtros 
+a la fotografia para transformarla en un retrato en blanco y negro o sepia por ejemplo.
+Muy recientemente se han comenzado a desarrollar aplicaciones que logran transferir el estilo de una obra de arte a una fotografia. Esto es posible gracias al incremento 
+del poder de cómputo de los nuevos dispositivos, ya que las técnicas computacionales empleadas para esto, requieren un cómputo mucho mas complejo.
+Las principal herramienta utilizada para poder llevar esta tarea a cabo son Redes Neuronales Convolucionales, provenientes del area de  
+Inteligencia Artificial y Aprendizaje Automatico, que al aplicarse al area de Vision por Computadoras han logrado resultados absolutamente disruptivos, 
+comparado a los ultimos avances que se venian obteniendo en el area, principalmente para la clasificacion de imagenes, detección y reconocimiento de objetos.
+Existen articulos de investigación en los cuales se definen algoritmos para la transferencia de estilos artisticos en fotografias, que se basan en modelos estocasticos, 
+los cuales requieren una gran cantidad de hiper parametros predefinidos empiricamente, es decir parametros que deben ser fijados previo a la ejecución del algoritmo que dependen 
+de la elección propia del usuario, pero que influyen en gran manera sobre el resultado.
+El principal objetivo de este trabajo es poder realizar una elección inteligente de uno de los principales hiper parametros como lo es el numero de iteraciones 
+que debe realizar el algoritmo hasta obtener un resultado interesante.
+Debido a que las obras de arte, sueles calificadas con metricas cualitativas y no tanto cuantitativas, se decidió utilizar otra red neuronal convolucional, 
+entrenada especialmente para reconocer estilos artisticos y en base a los resultados que arroja se define si el numero de iteraciones es suficiente para generar el resultado final 
+o es necesario continuar iterando.
+A lo largo de este trabajo se hará un recorrido por los principales conceptos para comprender tanto el problema como la solución y las tecnicas empleadas.
+El capitulo 2 contendrá el marco teorico y cuestiones formales requeridas, principalmente orientado al aprendizaje Automatico y a las redes neuronales.
+En el capitulo 3 se hara un recorrido por los principales articulos de investigación y los algoritmos alli definidos para las tecnicas de transferencia y reconocimiento de estilos artisticos.
+Para luego abordar en detalle la solución propuesta, junto con un analisis y evaluacion empirica de la misma.
+En el capitulo 4 será quien contenga los experimentos realizado y los resultados obtenidos, para finalmente en el capitulo 5 establecer una conclusión acerca del trabajo realizado, 
+junto con las perspectivas y posibles tareas a futuro.
+
+
+MARCO TEORICO
+
+Material para revisar
+http://cs231n.github.io/
+Capítulo 2 del Mitchel (1997), Capítulos 3 y 6 del Mitchel (1997)
+Wolpert, D.H., Macready, W.G. (1997), "No Free Lunch Theorems for Optimization," IEEE Transactions on Evolutionary Computation 1, 67
+http://en.wikipedia.org/wiki/Inductive_bias
+http://en.wikipedia.org/wiki/Overfitting
+http://en.wikipedia.org/wiki/SURF
+Capítulo 5 del Marlsand (2009) "Machine Learning, an Algorithmic Perspective"
+Capítulo 5 del Smola & Vishwanathan (2008) "Introduction to Machine Learning"
+http://en.wikipedia.org/wiki/Logistic_regression
+http://en.wikipedia.org/wiki/Linear_regression
+Capítulo 13 del Owen et al. (2012)
+http://ufal.mff.cuni.cz/~zabokrtsky/courses/npfl104/html/feature_engineering.pdf
+
+
+Aprendizaje Automatico, Machine Learning
+Algoritmos con error intrínseco
+¿Qué hacer con un programa que falla aún habiendo sido programado correctamente?
+No todos los problemas pueden ser abordados vía Aprendizaje Automático
+Incluir el error dentro del modelo de uso
+
+Datos
+Limpieza de datos es fundamental
+La tarea que más trabajo lleva en una implantación de Aprendizaje Automático
+Hay una diferencia infinita entre "tenemos datos" y "estos datos son útiles y listos para hacer Aprendizaje Automático"
+
+
+Algoritmos vs. teoría
+A medida que el campo va pasando de investigadores a profesionales, el enfoque cambia de ventajas teóricas a practicas
+Popularización de sistemas híbridos
+Ingeniería de features
+No-free lunch theorem
+
+
+Aprendizaje supervisado 
+Clustering
+Aprendizaje semi supervisado
+Recomendación
+Un problema en el medio entre supervisado y no supervisado
+Dado un conjunto de personas y objetos, recomendar nuevos objetos similares a los que la persona elige, pero que no conoce
+Amplia utilidad práctica
+
+Aprendizaje No supervisado
+Descubrir lo que uno no sabe
+También llamado minería de datos
+Concepto clave: función de distancia entre las instancias
+Concepto clave: el valor (sorpresa) de los datos descubiertos
+Cerveza al lado de pañales descartables
+Se trata de aplicar una estructura a los datos
+El tipo de estructura está dado por el algoritmo, y de la estructura se pueden leer características importantes de los datos
+
+Clasificación
+El Aprendizaje Automático sin calificar
+Aprender lo que uno ya sabe
+Tratar de aprender una función f(x1, …, xn) → y donde
+xi son las caracterísita de aprendizaje (features) de entrada
+y es la clase objetivo
+La clave es extrapolación, queremos que la función generalize a entradas nunca vistas.
+Interpolación lineal es en sí una forma de hacer Aprendizaje Automático supervisado.
+Una visión como desarrolladores
+Entrenamiento/Estimación/“compilación”:
+Entrada: vectores de features, incluyendo la clase objetivo
+Salida: un modelo entrenado
+Ejecución/Predicción/“interpretado”:
+Entrada: vectores de features, sin la clase objetivo, más el modelo entrenado
+Salida: la clase objetivo predicha
+
+Clasificacion lineal, regresion logistica, SVM
+
+
+Ciclo del Aprendizaje Automático
+
+Recopilación de datos
+El recopilado de datos es crucial
+Puede requerir mucho esfuerzo y cambio de procesos complejos
+Por ejemplo, evitar la destrucción de un envase utilizado en un procedimiento médico y su posterior análisis
+El concepto de Garbage-In-Garbage-Out se aplica aquí más que nunca
+Gran diferencia entre investigación (conseguir datos, hacer experimentos, comunicar resultados) y uso profesional (donde la adquisión de datos es continua)
+Anotación
+Muchas veces la clase objetivo tiene que ser calculada a mano por grupos de personas designadas para la tarea
+Guías de anotación
+Cros y auto concordancia
+Tareas aburridas, inclusive a veces más fáciles para computadoras que para personas
+Entrenamiento
+Manteniendo datos y modelos en sincronía
+Proceso por lotes vs. tiempo real
+Entendiendo como funciona el modelo en la práctica
+Una base de datos es un sistema de Aprendizaje Automático muy pobre
+Esto depende del poder expresivo del modelo, el tema de nuestra próxima clase
+Entendiendo el error
+Como los sistemas de Aprendizaje Automático funcionan por extrapolación es fácil confundirse
+Un sistema puede funcionar correctamente en los casos disponibles y aún así exhibir un comportamiento patológico en la práctica que lo deja inútil.
+Para ello se utilizan conjuntos separados de entrenamiento y testeo
+Pero eso no es suficiente, con el tiempo el profesional del Aprendizaje Automático desarrolla intuiciones sobre el conjunto de testeo. A partir de cierto punto esas intuiciones son erróneas y hay que cambiar de conjunto.
+
+
+Features
+Características (features) para el Aprendizaje
+
+Representando una instancia
+Representaciones planas
+Nuevos sistemas permiten representar árboles o grafos
+Tipos de features: booleanas (true, false), numéricas (4, 1, -5), de punto flotante (0.5, 1, 9.2), enumeraciones (rojo,azul,verde,amarillo)
+Representando valores complejos
+Texto
+Cada palabra es un elemento en una enumeración
+Cada palabra es un feature binario
+Cada palabra es un feature numérico dependiendo de cuantas veces aparece
+Conjuntos
+Features binarios por la presencia de cada elemento
+Clase objetivo de conjuntos: entrenar un sistema independiente por cada elemento
+Inventando features
+Probar con todo lo que se le ocurra a uno
+Reflexionar
+¿Qué información utilizaría usted para resolver ese problema?
+Mire trabajos publicados
+Artículos de investigación: http://aclweb.org/anthology-new/
+Blogs
+Proyectos de software libre
+Agregue features computables
+¡Aprender a sumar requiere montañas de datos!
+
+Feature engineering
+
+Representando Instancias
+Tipos de features
+booleanas (true, false)
+numéricas (4, 1, -5)
+de punto flotante o continuas (0.5, 1, 9.2)
+enumeraciones o discretas (rojo,azul,verde,amarillo)
+
+Representando un texto
+Bag of words
+Una feature por palabra, indicando si la palabra aparece en el texto o no (binaria) o cuantas veces aparece (numérico)
+Puede extenderse a pares de palabras (bigram model) o más
+Sólo se pueden usar palabras vistas durante el entrenamiento
+
+Representando imágenes
+Campo de investigación muy activa
+Método más sencillo: usar el valor de los píxeles directamente
+No generaliza muy bien
+Pero puede mejorar utilizando transformaciones algorítmicas del conjunto de entrenamiento
+Siguiente paso: tomar el promedio sobre pequeños cuadrados de la imágen
+Representando imágenes
+Métodos más complejos (SIFT/SURF)
+
+
+Normalización
+Algunos algoritmos de aprendizaje funcionan mejor si los valores de las features de entrada tienen media cero y dispersión 1
+Muchas veces se agrega la versión normalizada del feature como un feature extra y se deja al algoritmo de aprendizaje que decida qué feature es más útil.
+El valor absoluto de un feature muchas veces contiene información relevante
+
+Reducción de dimensionalidad
+Selección de features es una técnica de reducción de dimensionalidad
+Otras involucran todas las features a la vez y generan un cambio de coordenadas, de un espacio mayo a uno menor
+Una muy utilizada es descomposición en valores singulares (SVD) o también llamada análisis de componentes principales (PCA)
+Tomamos nuestras instancias como filas y armamos una matriz M, entonces
+MTME = EL
+donde E es la matriz de los autovectores y L es la matriz diagonal de los autovectores
+Si Ek son las primeras k columnas de E, entonces MEk es una representación en k dimensiones de M
+Véase http://infolab.stanford.edu/~ullman/mmds/ch11.pdf
+
+Modelos
+
+¿Qué es un modelo?
+“Un ente que aprende que no asume nada acerca de la identidad del concepto objetivo no tiene ninguna base racional para clasificar cosas que nunca vio.”
+Mitchel (1997)
+Los modelos capturan la información en los datos de entrada (o en los datos en general, en aprendizaje no supervisado)
+Representan la forma de ver el mundo que permite extrapolar cuando se observan nuevos datos (nunca vistos)
+Los modelos pueden ser matemáticamente bien formados (estadísticos) o simplemente algoritmicos (cascadas de if-then-else)
+El modelo como código objeto
+La clase pasada hablábamos de una metáfora de programación para el Aprendizaje Automático
+En dicha metáfora el modelo sería el código objeto obtenido a partir de los datos de entrenamiento
+Diferenciamos el modelo del algoritmo usado para obtener el modelo
+De la misma manera que diferenciamos el código objeto del compilador que lo obtuvo
+Muchos modelos tienen varios algoritmos que pueden ser usados para construirlos
+Entrenamiento de redes neuronales vía backpropagation vs. algoritmos genéticos
+Propiedades de los modelos
+Sesgo inductivo
+El dilema del sesgo vs. varianza (bias–variance dilemma)
+Para modelos estadísticos
+Modelos generativos
+Modelos discriminantes
+Teorema no-free lunch (NFL)
+Sesgo inductivo
+Distintos modelos asumen distintas cosas sobre la población de elementos a predecir
+Es importante entender este sesgo inductivo para comprender el comportamiento del modelo sobre una población dada
+http://en.wikipedia.org/wiki/Inductive_bias
+
+
+Modelos Generativos vs. Discriminantes
+Para modelos estadísticos
+Calcular la probablidad de la clase objetivo dada las features de entrada
+Podemos realizar este cálculo si tenemos un modelado probabilístico de la probabilidad conjunta de entradas y la clase objetivo
+Sin embargo, no es un requerimiento el modelado de la probabilidad conjunta
+Simulación vs. emulación
+Modelos Generativos
+Calcular P(y|x1, …, xn) via P(x1, …, xn, y)
+El cálculo de la probabilidad conjunta habilita sistemas reversibles
+Cualquier variable puede ser una clase objetivo
+Requiere un “historia generativa” de como los datos existen y se interrelacionan
+Dependencia entre variables
+Necesitan más datos y/o hacen uso menos eficiente de los mismos
+Si sólo nos interesa la clase objetivo, estamos modelando de más
+Modelos Discriminantes
+Sólo se centran en modelar P(y|x1, …, xn)
+Muchas veces ni siquiera modelan la probabilidad pero probabilidades sin normalizar
+Likelihoods
+Son suficientes para decidir entre distintos valores posibles de la clase objetivo
+Suelen ofrecer mejores resultados en la práctica
+Tienen menos ventajas teóricas
+Teorema del No Free Lunch
+El teorema No Free Lunch dice que, dado una distribución de funciones objetivos que sea completamente al azar, no puede haber un algoritmo que funcione mejor sobre todas las funciones objetivo.
+
+Evaluación
+
+Evaluando modelos
+Medir cuantas veces un sistema devuelve la respuesta correcta (“exactitud/accuracy”) no es suficiente
+Muchos problemas de interés práctico tienen un gran sesgo hacia una sola clase (clase de fondo)
+Si el 95% de las veces algo no ocurre, decir que nunca ocurrirá (¡un modelo que no es particularmente muy útil!) se equivocará sólo un 5% del tiempo
+Datos apartados (no entrenar y testear sobre los mismos datos)
+Los datos apartados tienen que ser representativos del problema y la población donde se utilizará el sistema
+Múltiples experimentos
+Cada vez que se ejecuta algo sobre los datos de evaluación, te cambian a uno mismo
+Precision/Recall
+TP: true positives, los elementos anotados correctos
+FP: false positives, elementos anotados incorrectos
+FN: false negatives, elementos no anotados correctos
+
+Métrica F Promedio entre precision / recall
+
+ROC
+Cuando se puede variar Precision/Recall con un parámetro, esto forma una curva
+El área bajo esa curva nos dá la idea de que tan bien funciona un sistema
+Un sistema que funciona todo el tiempo con muy buena precision y recall, tendrá un área muy grande
+Un sistema que tiene gran precision pero clasifica pocas instancias y muy poca precision cuando clasifica muchas tendrá muy poca área
+Promediado micro y macro
+Cuando el sistema se ejecuta sobre varios conjuntos de testeo
+¿Cómo definimos precision/recall?
+Dos opciones:
+Acumulamos los TP/FP/FN sobre los distintos conjuntos: promediado micro (micro-averaging)
+Promediamos los resultados de precision/recall calculado en cada conjunto por separado: promediado macro (macro-averaging)
+Trampas de evaluación
+Errores comunes de evaluación
+Testear donde se entrenó
+Target leak: una de las features contiene la clase objetivo
+En general, si algo no concuerda, no tiene sentido, hay que investigar
+Posible error de programación en el sistema de testeo
+No quedarse sólo con los números, hacer análisis de errors viendo casos concretos
+Fácil detectar errores de código en el sistema
+
+Overfitting
+Cuando el sesgo estadísitico disminuye demasiado y la varianza empieza a dispararse
+
+Cros-validación
+Prácticamente como entrenar y testear en los mismo datos
+datos = {A,B,C}
+entrenar en A,B, testear en C
+entrenar en A,C, testear en B
+entrenar en B,C, testear en A
+Útil cuando se tienen pocos datos
+
+
+Image Classification
+Motivation. In this section we will introduce the Image Classification problem, which is the task of assigning an input image one label from a fixed set of categories. 
+This is one of the core problems in Computer Vision that, despite its simplicity, has a large variety of practical applications. Moreover, as we will see later in the course, 
+many other seemingly distinct Computer Vision tasks (such as object detection, segmentation) can be reduced to image classification.
+Challenges. 
+Since this task of recognizing a visual concept (e.g. cat) is relatively trivial for a human to perform, it is worth considering the challenges involved from the perspective of a 
+Computer Vision algorithm. As we present (an inexhaustive) list of challenges below, keep in mind the raw representation of images as a 3-D array of brightness values:
+Viewpoint variation. A single instance of an object can be oriented in many ways with respect to the camera.
+Scale variation. Visual classes often exhibit variation in their size (size in the real world, not only in terms of their extent in the image).
+Deformation. Many objects of interest are not rigid bodies and can be deformed in extreme ways.
+Occlusion. The objects of interest can be occluded. Sometimes only a small portion of an object (as little as few pixels) could be visible.
+Illumination conditions. The effects of illumination are drastic on the pixel level.
+Background clutter. The objects of interest may blend into their environment, making them hard to identify.
+Intra-class variation. The classes of interest can often be relatively broad, such as chair. There are many different types of these objects, each with their own appearance.
+A good image classification model must be invariant to the cross product of all these variations, while simultaneously retaining sensitivity to the inter-class variations.
+
+Data-driven approach. 
+How might we go about writing an algorithm that can classify images into distinct categories? Unlike writing an algorithm for, for example, sorting a list of numbers, 
+it is not obvious how one might write an algorithm for identifying cats in images. Therefore, instead of trying to specify what every one of the categories of interest look like directly in code, the approach that we will take is not unlike one you would take with a child: we’re going to provide the computer with many examples of each class and then develop learning algorithms that look at these examples and learn about the visual appearance of each class. 
+This approach is referred to as a data-driven approach, since it relies on first accumulating a training dataset of labeled images. 
+
+
+CLASIFICACION LINEAL
+Overview. We are now going to develop a more powerful approach to image classification that we will eventually naturally extend to entire Neural Networks and 
+Convolutional Neural Networks. The approach will have two major components: a score function that maps the raw data to class scores, and a loss function that quantifies 
+the agreement between the predicted scores and the ground truth labels. We will then cast this as an optimization problem in which we will minimize the loss function 
+with respect to the parameters of the score function.
+
+
+SCORE FUNCTION Parameterized mapping from images to label scores
+The first component of this approach is to define the score function that maps the pixel values of an image to confidence scores for each class.
+We will develop the approach with a concrete example. As before, let’s assume a training dataset of images xi∈RDxi∈RD, each associated with a label yiyi. 
+Here i=1…Ni=1…N and yi∈1…Kyi∈1…K. That is, we have N examples (each with a dimensionality D) and K distinct categories. 
+For example, in CIFAR-10 we have a training set of N = 50,000 images, each with D = 32 x 32 x 3 = 3072 pixels, and K = 10, since there are 10 distinct classes (dog, cat, car, etc).
+We will now define the score function f:RD↦RKf:RD↦RK that maps the raw image pixels to class scores.
+
+LOSS FUNCTION
+In the previous section we defined a function from the pixel values to class scores, which was parameterized by a set of weights WW. 
+Moreover, we saw that we don’t have control over the data (xi,yi)(xi,yi) (it is fixed and given), but we do have control over these weights and we want to set 
+them so that the predicted class scores are consistent with the ground truth labels in the training data.
+For example, going back to the example image of a cat and its scores for the classes “cat”, “dog” and “ship”, we saw that the particular set of weights in that example 
+was not very good at all: We fed in the pixels that depict a cat but the cat score came out very low (-96.8) compared to the other classes (dog score 437.9 and ship score 61.95).
+We are going to measure our unhappiness with outcomes such as this one with a loss function (or sometimes also referred to as the cost function or the objective). 
+Intuitively, the loss will be high if we’re doing a poor job of classifying the training data, and it will be low if we’re doing well.
+
+
+OPTIMIZATION
+To reiterate, the loss function lets us quantify the quality of any particular set of weights W. The goal of optimization is to find W that minimizes the loss function.
+We will now motivate and slowly develop an approach to optimizing the loss function. 
+For those of you coming to this class with previous experience, this section might seem odd since the working example we’ll use (the SVM loss) is a convex problem,
+but keep in mind that our goal is to eventually optimize Neural Networks where we can’t easily use any of the tools developed in the Convex Optimization literature.
+
+
+GRADIENTE Following the Gradient
+In the previous section we tried to find a direction in the weight-space that would improve our weight vector (and give us a lower loss). 
+It turns out that there is no need to randomly search for a good direction: we can compute the best direction along which we should change our weight vector 
+that is mathematically guaranteed to be the direction of the steepest descend (at least in the limit as the step size goes towards zero). 
+This direction will be related to the gradient of the loss function. In our hiking analogy, this approach roughly corresponds to feeling the slope of the hill below our feet 
+and stepping down the direction that feels steepest.
+In one-dimensional functions, the slope is the instantaneous rate of change of the function at any point you might be interested in. 
+The gradient is a generalization of slope for functions that don’t take a single number but a vector of numbers. 
+Additionally, the gradient is just a vector of slopes (more commonly referred to as derivatives) for each dimension in the input space. 
+The mathematical expression for the derivative of a 1-D function with respect its input is:
+df(x)dx=limh →0f(x+h)−f(x)h
+df(x)dx=limh →0f(x+h)−f(x)h
+When the functions of interest take a vector of numbers instead of a single number, we call the derivatives partial derivatives, 
+and the gradient is simply the vector of partial derivatives in each dimension.
+
+Computing the gradient
+There are two ways to compute the gradient: A slow, approximate but easy way (numerical gradient), and a fast, exact but more error-prone way that requires calculus 
+(analytic gradient). We will now present both.
+Gradient Descent
+Now that we can compute the gradient of the loss function, the procedure of repeatedly evaluating the gradient and then performing a parameter update is called Gradient Descent. 
+This simple loop is at the core of all Neural Network libraries. There are other ways of performing the optimization (e.g. LBFGS),
+but Gradient Descent is currently by far the most common and established way of optimizing Neural Network loss functions. 
+Throughout the class we will put some bells and whistles on the details of this loop (e.g. the exact details of the update equation), 
+but the core idea of following the gradient until we’re happy with the results will remain the same.
+Mini-batch gradient descent. In large-scale applications (such as the ILSVRC challenge), the training data can have on order of millions of examples. 
+Hence, it seems wasteful to compute the full loss function over the entire training set in order to perform only a single parameter update. 
+A very common approach to addressing this challenge is to compute the gradient over batches of the training data. For example, in current state of the art ConvNets, 
+a typical batch contains 256 examples from the entire training set of 1.2 million.
+
+This process is called Stochastic Gradient Descent (SGD) (or also sometimes on-line gradient descent). 
+This is relatively less common to see because in practice due to vectorized code optimizations it can be computationally much more efficient to evaluate the gradient for 100 examples,
+than the gradient for one example 100 times. Even though SGD technically refers to using a single example at a time to evaluate the gradient, 
+you will hear people use the term SGD even when referring to mini-batch gradient descent (i.e. mentions of MGD for “Minibatch Gradient Descent”, 
+or BGD for “Batch gradient descent” are rare to see), where it is usually assumed that mini-batches are used. 
+The size of the mini-batch is a hyperparameter but it is not very common to cross-validate it. 
+It is usually based on memory constraints (if any), or set to some value, e.g. 32, 64 or 128. We use powers of 2 in practice because many vectorized operation implementations work 
+faster when their inputs are sized in powers of 2.
+
+
+BACKPROPAGATION
+http://cs231n.github.io/optimization-2/
