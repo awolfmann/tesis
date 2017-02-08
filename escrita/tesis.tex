@@ -1,14 +1,65 @@
-INTRODUCCION
+\documentclass[a4paper,10pt]{article}
+%\usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{url}
+\usepackage[procnames]{listings}
+\usepackage{color}
+\usepackage{graphicx} % graficos
+
+\begin{document}
+\definecolor{keywords}{RGB}{255,0,90}
+\definecolor{comments}{RGB}{0,0,113}
+\definecolor{red}{RGB}{160,0,0}
+\definecolor{green}{RGB}{0,150,0}
+
+\lstset{language=Python, 
+        basicstyle=\ttfamily\small, 
+        keywordstyle=\color{keywords},
+        commentstyle=\color{comments},
+        stringstyle=\color{red},
+        showstringspaces=false,
+        identifierstyle=\color{green},
+        procnamekeys={def,class}}
+
+
+\begin{titlepage}
+  \begin{center}
+  \vspace*{1in}
+    \begin{Huge}
+    \textbf{Laboratorio 2}\\
+    \textbf{Informe} \\
+    \end{Huge}
+  \end{center}
+  \begin{center}
+    \begin{large}
+      \vspace*{1in}
+      Transferencia de estilo en fotografias utilizando Redes Neuronales Convolucionales \\
+      Wolfmann, Ariel Mauricio\\
+    \end{large}
+    \vspace*{0.15in}
+     Marzo de 2017\\
+    \vspace*{0.15in}
+    Universidad Nacional de Córdoba\\
+    \vspace*{0.15in}
+    Facultad de Matemática, Astronomía y Física\\
+    \vspace*{0.6in}
+  \end{center}
+\end{titlepage}
+
+\pagebreak
+
+\section{INTRODUCCION}
 
 En los ultimos años las fotografias estan cada vez mas pasando a ser un virtual en lugar de fisico, de la mano del gran aumento en el uso de los dispositivos moviles 
 cualquier persona puede tomar miles fotografias en un instante de tiempo, y compartirla en las redes sociales.
 A partir de esto, se han desarrollado muchas aplicaciones entorno a las fotografias, ya sea desde redes sociales masivamente utilizadas, hasta aplicaciones que aplican efectos o filtros 
 a la fotografia para transformarla en un retrato en blanco y negro o sepia por ejemplo.
 Muy recientemente se han comenzado a desarrollar aplicaciones que logran transferir el estilo de una obra de arte a una fotografia. Esto es posible gracias al incremento 
-del poder de cómputo de los nuevos dispositivos, ya que las técnicas computacionales empleadas para esto, requieren un cómputo mucho mas complejo.
+del poder de cómputo y al decrecimiento del precio de los nuevos dispositivos, ya que las técnicas computacionales empleadas para esto, requieren un cómputo mucho mas complejo.
 Las principal herramienta utilizada para poder llevar esta tarea a cabo son Redes Neuronales Convolucionales, provenientes del area de  
 Inteligencia Artificial y Aprendizaje Automatico, que al aplicarse al area de Vision por Computadoras han logrado resultados absolutamente disruptivos, 
 comparado a los ultimos avances que se venian obteniendo en el area, principalmente para la clasificacion de imagenes, detección y reconocimiento de objetos.
+Por mencionar otro ejemplo de gran investigacion en la actualidad, los autos que se conducen por si solos, emplean estas tecnicas para lograrlo.
 Existen articulos de investigación en los cuales se definen algoritmos para la transferencia de estilos artisticos en fotografias, que se basan en modelos estocasticos, 
 los cuales requieren una gran cantidad de hiper parametros predefinidos empiricamente, es decir parametros que deben ser fijados previo a la ejecución del algoritmo que dependen 
 de la elección propia del usuario, pero que influyen en gran manera sobre el resultado.
@@ -24,138 +75,72 @@ Para luego abordar en detalle la solución propuesta, junto con un analisis y ev
 En el capitulo 4 será quien contenga los experimentos realizado y los resultados obtenidos, para finalmente en el capitulo 5 establecer una conclusión acerca del trabajo realizado, 
 junto con las perspectivas y posibles tareas a futuro.
 
-
-MARCO TEORICO
-
-Material para revisar
-http://cs231n.github.io/
-Capítulo 2 del Mitchel (1997), Capítulos 3 y 6 del Mitchel (1997)
-Wolpert, D.H., Macready, W.G. (1997), "No Free Lunch Theorems for Optimization," IEEE Transactions on Evolutionary Computation 1, 67
-http://en.wikipedia.org/wiki/Inductive_bias
-http://en.wikipedia.org/wiki/Overfitting
-http://en.wikipedia.org/wiki/SURF
-Capítulo 5 del Marlsand (2009) "Machine Learning, an Algorithmic Perspective"
-Capítulo 5 del Smola & Vishwanathan (2008) "Introduction to Machine Learning"
-http://en.wikipedia.org/wiki/Logistic_regression
-http://en.wikipedia.org/wiki/Linear_regression
-Capítulo 13 del Owen et al. (2012), Capítulo 2 y 4 del Owen et al. (2012)
-http://ufal.mff.cuni.cz/~zabokrtsky/courses/npfl104/html/feature_engineering.pdf
-http://aprendizajengrande.net/cronograma.html
+A continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artistico a fotografias:
+ADJUNTAR EJEMPLOS
 
 
+\section{MARCO TEORICO}
 
-Aprendizaje Automatico, Machine Learning
-https://en.wikipedia.org/wiki/Machine_learning
+%Material para revisar
+%http://cs231n.github.io/
+%Capítulo 2 del Mitchel (1997), Capítulos 3 y 6 del Mitchel (1997)
+%Wolpert, D.H., Macready, W.G. (1997), "No Free Lunch Theorems for Optimization," IEEE Transactions on Evolutionary Computation 1, 67
+%http://en.wikipedia.org/wiki/Inductive_bias
+%http://en.wikipedia.org/wiki/Overfitting
+%http://en.wikipedia.org/wiki/SURF
+%Capítulo 5 del Marlsand (2009) "Machine Learning, an Algorithmic Perspective"
+%Capítulo 5 del Smola & Vishwanathan (2008) "Introduction to Machine Learning"
+%http://en.wikipedia.org/wiki/Logistic_regression
+%http://en.wikipedia.org/wiki/Linear_regression
+%Capítulo 13 del Owen et al. (2012), Capítulo 2 y 4 del Owen et al. (2012)
+%http://ufal.mff.cuni.cz/~zabokrtsky/courses/npfl104/html/feature_engineering.pdf
+%http://aprendizajengrande.net/cronograma.html
+%http://www.deeplearningbook.org/
+%Bishop
+
+
+
+\subsection{Aprendizaje Automatico, Machine Learning}
+%https://en.wikipedia.org/wiki/Machine_learning
+
+El aprendizaje Automatico es un sub campo de las ciencias de la computacion que le otorga a las computadoras la habilidad de aprender o inferir reglas que no fueron explicitamente programadas.
+Surge desde el estudio de reconocimiento de patrones, y el aprendizaje computacional, provenientes de la Inteligencia aritificial, este campo explora el estudio y la construccion de algoritmos
+que pueden aprender y realizar predicciones a partir de datos. En base a las reglas determinadas explicitamente en el programa y los datos de ejemplo, se crea un modelo que intenta predecir
+características de un dato nuevo. Este tipo de algoritmos tienen su enfoque basado en los datos
 Tom M. Mitchell provided a widely quoted, more formal definition: "A computer program is said to learn from experience E with respect to some class of tasks T and 
-performance measure P if its performance at tasks in T, as measured by P, improves with experience E
+performance measure P if its performance at tasks in T, as measured by P, improves with experience E"
 Algoritmos con error intrínseco
 ¿Qué hacer con un programa que falla aún habiendo sido programado correctamente?
 No todos los problemas pueden ser abordados vía Aprendizaje Automático
 Incluir el error dentro del modelo de uso
 
-Datos
-Limpieza de datos es fundamental
-La tarea que más trabajo lleva en una implantación de Aprendizaje Automático
-Hay una diferencia infinita entre "tenemos datos" y "estos datos son útiles y listos para hacer Aprendizaje Automático"
+\subsubsection{Datos}
+Al ser un area que tiene su enfoque basado en los datos de entrada, estos pasan a cumplir un rol fundamental en el desarrollo del algoritmo, por ello es necesario que 
+esten los mas limpios y puros posible, es decir lograr obtener un conjunto de datos utiles a los que se le puedan aplicar algoritmos de aprendizaje automatico, 
+motivo por el cual en muchas ocasiones se realiza una fase de preprocesamiento de datos, la cual puede llegar a ser la etapa que mas trabajo requiera del proceso completo. 
 
 
-Algoritmos vs. teoría
-A medida que el campo va pasando de investigadores a profesionales, el enfoque cambia de ventajas teóricas a practicas
-Popularización de sistemas híbridos
-Ingeniería de features
-No-free lunch theorem
+\subsubsection{Ciclo del Aprendizaje Automático}
+  \begin{itemize}
+    \item Recopilación de datos
+El recopilado de datos es crucial, puede requerir mucho esfuerzo y cambio de procesos complejos, 
+Anotación, Muchas veces la clase objetivo tiene que ser calculada a mano por grupos de personas designadas para la tarea
+\item Definicion de caracteristicas
+\item Entrenamiento
+Antes de comenzar el entrenamiento el conjunto de datos se divide en 2 subconjuntos, un conjunto de datos de entrenamiento y un conjunto de datos de prueba. 
+Para entrenar el modelo solo se utiliza el conjunto de datos de entrenamiento, el conjunto de datos de prueba se separa.
+Determinar la estructura del modelo de aprendizaje, en base al tipo de problema y a la forma en la que se representan las caracteristicas de los datos.
+En algunos modelos, a partir del conjunto de datos de entrenamiento, se realiza otra particion de un pequeño subconjunto llamado conjunto de datos de validacion, este conjunto sirve 
+para afinar ciertos hiperparametros del modelo.
+Entrenar el modelo elegido sobre el conjunto de datos de entrenamiento
+\item Evaluacion
+Se aplica el modelo entrenado a los datos del conjunto de prueba, y se aplican metricas para poder establecer que tan bien predice el modelo entrenado para datos nunca antes vistos.
+\end{itemize}
 
 
-Aprendizaje No supervisado 
-Clustering
-El objetivo de los métodos de clustering es descubrir grupos significativos presentes en los datos
-Una cuestión de distancias
-El concepto central en clustering es la definición de una distancia entre instancias
-Cada definición de distancias induce un agrupamiento de los datos, basado en esa métrica
-La distancia es donde se incorpora la información humana
-Descubrir lo que uno no sabe
-También llamado minería de datos
-Concepto clave: función de distancia entre las instancias
-Concepto clave: el valor (sorpresa) de los datos descubiertos
-Cerveza al lado de pañales descartables
-Se trata de aplicar una estructura a los datos
-El tipo de estructura está dado por el algoritmo, y de la estructura se pueden leer características importantes de los datos
-
-Aprendizaje semi supervisado
-Recomendación
-Un problema en el medio entre supervisado y no supervisado
-Dado un conjunto de personas y objetos, recomendar nuevos objetos similares a los que la persona elige, pero que no conoce
-Amplia utilidad práctica
-Collaborative Filtering
-Filtrar información usando comunidades de personas
-Usuarios, ítems y preferencias
-
-Recomendación basada en Usuarios
-para cada ítem i para el cual el usuario u no tiene preferencia:
-para cada otro usuario v que tiene preferencia por i:
-calcular la similitud s entre u y v
-acumular la preferencia de v por i, pesada por s
-devolver los ítems con mayor preferencia pesada
-
-Recomendación basada en Ítems
-para cada ítem i para el cual el usuario u no tiene preferencia:
-para cada ítem j que u tiene una preferencia:
-calcular la similitud s entre i y j
-acumular la preferencia de u por j, pesada por s
-devolver los ítems con mayor preferencia pesada
-
-Aprendizaje supervisado
-Clasificación
-El Aprendizaje Automático sin calificar
-Aprender lo que uno ya sabe
-Tratar de aprender una función f(x1, …, xn) → y donde
-xi son las caracterísita de aprendizaje (features) de entrada
-y es la clase objetivo
-La clave es extrapolación, queremos que la función generalize a entradas nunca vistas.
-Interpolación lineal es en sí una forma de hacer Aprendizaje Automático supervisado.
-Una visión como desarrolladores
-Entrenamiento/Estimación/“compilación”:
-Entrada: vectores de features, incluyendo la clase objetivo
-Salida: un modelo entrenado
-Ejecución/Predicción/“interpretado”:
-Entrada: vectores de features, sin la clase objetivo, más el modelo entrenado
-Salida: la clase objetivo predicha
-
-Clasificacion lineal, regresion logistica, SVM
-
-Reinforcement learning  A computer program interacts with a dynamic environment in which it must perform a certain goal
-
-
-Ciclo del Aprendizaje Automático
-
-Recopilación de datos
-El recopilado de datos es crucial
-Puede requerir mucho esfuerzo y cambio de procesos complejos
-Por ejemplo, evitar la destrucción de un envase utilizado en un procedimiento médico y su posterior análisis
-El concepto de Garbage-In-Garbage-Out se aplica aquí más que nunca
-Gran diferencia entre investigación (conseguir datos, hacer experimentos, comunicar resultados) y uso profesional (donde la adquisión de datos es continua)
-Anotación
-Muchas veces la clase objetivo tiene que ser calculada a mano por grupos de personas designadas para la tarea
-Guías de anotación
-Cros y auto concordancia
-Tareas aburridas, inclusive a veces más fáciles para computadoras que para personas
-Entrenamiento
-Manteniendo datos y modelos en sincronía
-Proceso por lotes vs. tiempo real
-Entendiendo como funciona el modelo en la práctica
-Una base de datos es un sistema de Aprendizaje Automático muy pobre
-Esto depende del poder expresivo del modelo, el tema de nuestra próxima clase
-Entendiendo el error
-Como los sistemas de Aprendizaje Automático funcionan por extrapolación es fácil confundirse
-Un sistema puede funcionar correctamente en los casos disponibles y aún así exhibir un comportamiento patológico en la práctica que lo deja inútil.
-Para ello se utilizan conjuntos separados de entrenamiento y testeo
-Pero eso no es suficiente, con el tiempo el profesional del Aprendizaje Automático desarrolla intuiciones sobre el conjunto de testeo. A partir de cierto punto esas intuiciones son erróneas y hay que cambiar de conjunto.
-
-
-Features
-Características (features) para el Aprendizaje
-
-Representando una instancia
+\subsubsection{Características (features) para el Aprendizaje}
+\begin{itemize}
+ \item Representando una instancia
 Representaciones planas
 Nuevos sistemas permiten representar árboles o grafos
 Tipos de features: booleanas (true, false), numéricas (4, 1, -5), de punto flotante (0.5, 1, 9.2), enumeraciones (rojo,azul,verde,amarillo)
@@ -167,291 +152,487 @@ Cada palabra es un feature numérico dependiendo de cuantas veces aparece
 Conjuntos
 Features binarios por la presencia de cada elemento
 Clase objetivo de conjuntos: entrenar un sistema independiente por cada elemento
-Inventando features
-Probar con todo lo que se le ocurra a uno
-Reflexionar
-¿Qué información utilizaría usted para resolver ese problema?
-Mire trabajos publicados
-Artículos de investigación: http://aclweb.org/anthology-new/
-Blogs
-Proyectos de software libre
-Agregue features computables
-¡Aprender a sumar requiere montañas de datos!
-
-Feature engineering
-
-Representando Instancias
-Tipos de features
-booleanas (true, false)
-numéricas (4, 1, -5)
-de punto flotante o continuas (0.5, 1, 9.2)
-enumeraciones o discretas (rojo,azul,verde,amarillo)
-
-Representando un texto
+  \item Representando un texto
 Bag of words
 Una feature por palabra, indicando si la palabra aparece en el texto o no (binaria) o cuantas veces aparece (numérico)
 Puede extenderse a pares de palabras (bigram model) o más
 Sólo se pueden usar palabras vistas durante el entrenamiento
-
-Representando imágenes
+\item Representando imágenes
 Campo de investigación muy activa
 Método más sencillo: usar el valor de los píxeles directamente
 No generaliza muy bien
 Pero puede mejorar utilizando transformaciones algorítmicas del conjunto de entrenamiento
 Siguiente paso: tomar el promedio sobre pequeños cuadrados de la imágen
 Representando imágenes
-Métodos más complejos (SIFT/SURF)
+Métodos más complejos relativos al area de vision por computadoras (SIFT/SURF)
+\end{itemize}
 
 
-Normalización
+\subsubsection{Normalización}
 Algunos algoritmos de aprendizaje funcionan mejor si los valores de las features de entrada tienen media cero y dispersión 1
 Muchas veces se agrega la versión normalizada del feature como un feature extra y se deja al algoritmo de aprendizaje que decida qué feature es más útil.
 El valor absoluto de un feature muchas veces contiene información relevante
 
-Reducción de dimensionalidad
+\subsubsection{Reducción de dimensionalidad}
 Selección de features es una técnica de reducción de dimensionalidad
 Otras involucran todas las features a la vez y generan un cambio de coordenadas, de un espacio mayo a uno menor
 Una muy utilizada es descomposición en valores singulares (SVD) o también llamada análisis de componentes principales (PCA)
-Tomamos nuestras instancias como filas y armamos una matriz M, entonces
-MTME = EL
-donde E es la matriz de los autovectores y L es la matriz diagonal de los autovectores
-Si Ek son las primeras k columnas de E, entonces MEk es una representación en k dimensiones de M
+
 Véase http://infolab.stanford.edu/~ullman/mmds/ch11.pdf
 
 
-Procesamiento de imagenes
-
-
-Information Gain
+\paragraph{Information Gain}
 Podemos definir Information Gain a partir de la entropía (qué tan "ruidosa" es la partición)
 
-Modelos
+\subsubsection{Modelos}
 
 ¿Qué es un modelo?
 “Un ente que aprende que no asume nada acerca de la identidad del concepto objetivo no tiene ninguna base racional para clasificar cosas que nunca vio.”
 Mitchel (1997)
-A core objective of a learner is to generalize from its experience.[20][21] Generalization in this context is the ability of a learning machine to perform accurately on new,
-unseen examples/tasks after having experienced a learning data set. The training examples come from some generally unknown probability distribution 
-(considered representative of the space of occurrences) and the learner has to build a general model about this space that enables it to produce sufficiently accurate predictions in new cases.
+El principal objetivo de un sistema de aprendizaje es generalizar desde su experiencia o conocimiento previo. Generalizar en este contexto es la habilidad del sistema de realizar
+predicciones con precision sobre un ejemplo nuevo no visto antes, luego de aprender sobre el conjunto de entrenamiento. Los ejemplos de entrenamiento provienen de un espacio 
+con probabilidad de distribución desconocida del cual es considerado representativo. El sistema de aprendizaje debe construir un modelo sobre el espacio total que le permite realizar
+predicciones lo suficientemente precisas sobre nuevos ejemplos.
 Los modelos capturan la información en los datos de entrada (o en los datos en general, en aprendizaje no supervisado)
 Representan la forma de ver el mundo que permite extrapolar cuando se observan nuevos datos (nunca vistos)
 Los modelos pueden ser matemáticamente bien formados (estadísticos) o simplemente algoritmicos (cascadas de if-then-else)
-El modelo como código objeto
-La clase pasada hablábamos de una metáfora de programación para el Aprendizaje Automático
-En dicha metáfora el modelo sería el código objeto obtenido a partir de los datos de entrenamiento
-Diferenciamos el modelo del algoritmo usado para obtener el modelo
-De la misma manera que diferenciamos el código objeto del compilador que lo obtuvo
-Muchos modelos tienen varios algoritmos que pueden ser usados para construirlos
-Entrenamiento de redes neuronales vía backpropagation vs. algoritmos genéticos
-Propiedades de los modelos
-Sesgo inductivo
-El dilema del sesgo vs. varianza (bias–variance dilemma)
-Para modelos estadísticos
-Modelos generativos
-Modelos discriminantes
-Teorema no-free lunch (NFL)
-Sesgo inductivo
+El modelo como código objeto: Diferenciamos el modelo del algoritmo usado para obtener el modelo
+
+\paragraph{Propiedades de los modelos}
+\begin{itemize}
+ \item Sesgo inductivo
+\item El dilema del sesgo vs. varianza (bias–variance dilemma)
+\item Para modelos estadísticos: Modelos generativos, Modelos discriminantes
+\item Teorema no-free lunch (NFL)
+\end{itemize}
+
+\paragraph{Sesgo inductivo}
 Distintos modelos asumen distintas cosas sobre la población de elementos a predecir
 Es importante entender este sesgo inductivo para comprender el comportamiento del modelo sobre una población dada
-http://en.wikipedia.org/wiki/Inductive_bias
+%http://en.wikipedia.org/wiki/Inductive_bias
 
 
-Modelos Generativos vs. Discriminantes
-Para modelos estadísticos
-Calcular la probablidad de la clase objetivo dada las features de entrada
-Podemos realizar este cálculo si tenemos un modelado probabilístico de la probabilidad conjunta de entradas y la clase objetivo
-Sin embargo, no es un requerimiento el modelado de la probabilidad conjunta
-Simulación vs. emulación
-Modelos Generativos
-Calcular P(y|x1, …, xn) via P(x1, …, xn, y)
-El cálculo de la probabilidad conjunta habilita sistemas reversibles
-Cualquier variable puede ser una clase objetivo
-Requiere un “historia generativa” de como los datos existen y se interrelacionan
-Dependencia entre variables
-Necesitan más datos y/o hacen uso menos eficiente de los mismos
-Si sólo nos interesa la clase objetivo, estamos modelando de más
-Modelos Discriminantes
-Sólo se centran en modelar P(y|x1, …, xn)
-Muchas veces ni siquiera modelan la probabilidad pero probabilidades sin normalizar
-Likelihoods
-Son suficientes para decidir entre distintos valores posibles de la clase objetivo
-Suelen ofrecer mejores resultados en la práctica
-Tienen menos ventajas teóricas
-Teorema del No Free Lunch
+\paragraph{Modelos Generativos vs. Discriminantes}
+\begin{itemize}
+ \item Para modelos estadísticos
+\item Calcular la probablidad de la clase objetivo dada las features de entrada
+\item Podemos realizar este cálculo si tenemos un modelado probabilístico de la probabilidad conjunta de entradas y la clase objetivo
+\item Sin embargo, no es un requerimiento el modelado de la probabilidad conjunta
+\item Simulación vs. emulación
+\end{itemize}
+
+
+
+\paragraph{Modelos Generativos}
+\begin{itemize}
+ \item Calcular P(y|x1, …, xn) via P(x1, …, xn, y)
+\item El cálculo de la probabilidad conjunta habilita sistemas reversibles
+\item Cualquier variable puede ser una clase objetivo
+\item Requiere un “historia generativa” de como los datos existen y se interrelacionan
+\item Dependencia entre variables
+\item Necesitan más datos y/o hacen uso menos eficiente de los mismos
+\item Si sólo nos interesa la clase objetivo, estamos modelando de más
+\end{itemize}
+
+
+
+\paragraph{Modelos Discriminantes}
+\begin{itemize}
+ \item Sólo se centran en modelar P(y|x1, …, xn)
+\item Muchas veces ni siquiera modelan la probabilidad pero probabilidades sin normalizar
+\item Likelihoods
+\item Son suficientes para decidir entre distintos valores posibles de la clase objetivo
+\item Suelen ofrecer mejores resultados en la práctica
+\item Tienen menos ventajas teóricas
+\end{itemize}
+
+
+
+\paragraph{Teorema del No Free Lunch}
 El teorema No Free Lunch dice que, dado una distribución de funciones objetivos que sea completamente al azar, no puede haber un algoritmo que funcione mejor sobre todas las funciones objetivo.
 
-Evaluación
+\subsubsection{Evaluación}
 
-Evaluando modelos
-Medir cuantas veces un sistema devuelve la respuesta correcta (“exactitud/accuracy”) no es suficiente
-Muchos problemas de interés práctico tienen un gran sesgo hacia una sola clase (clase de fondo)
-Si el 95% de las veces algo no ocurre, decir que nunca ocurrirá (¡un modelo que no es particularmente muy útil!) se equivocará sólo un 5% del tiempo
-Datos apartados (no entrenar y testear sobre los mismos datos)
-Los datos apartados tienen que ser representativos del problema y la población donde se utilizará el sistema
-Múltiples experimentos
-Cada vez que se ejecuta algo sobre los datos de evaluación, te cambian a uno mismo
-Precision/Recall
-TP: true positives, los elementos anotados correctos
-FP: false positives, elementos anotados incorrectos
-FN: false negatives, elementos no anotados correctos
+\paragraph {Evaluando modelos}
+\begin{itemize}
+ \item Medir cuantas veces un sistema devuelve la respuesta correcta (“exactitud/accuracy”) no es suficiente
+\item Muchos problemas de interés práctico tienen un gran sesgo hacia una sola clase (clase de fondo)
+\item Si el 95% de las veces algo no ocurre, decir que nunca ocurrirá (¡un modelo que no es particularmente muy útil!) se equivocará sólo un 5% del tiempo
+\item Datos apartados (no entrenar y testear sobre los mismos datos)
+\item Los datos apartados tienen que ser representativos del problema y la población donde se utilizará el sistema
+\end{itemize}
 
-Métrica F Promedio entre precision / recall
 
-ROC
-Cuando se puede variar Precision/Recall con un parámetro, esto forma una curva
-El área bajo esa curva nos dá la idea de que tan bien funciona un sistema
-Un sistema que funciona todo el tiempo con muy buena precision y recall, tendrá un área muy grande
-Un sistema que tiene gran precision pero clasifica pocas instancias y muy poca precision cuando clasifica muchas tendrá muy poca área
-Promediado micro y macro
-Cuando el sistema se ejecuta sobre varios conjuntos de testeo
+\paragraph {Precision/Recall}
+\begin{itemize}
+ 
+\item TP: true positives, los elementos anotados correctos
+\item FP: false positives, elementos anotados incorrectos
+\item FN: false negatives, elementos no anotados correctos
+
 ¿Cómo definimos precision/recall?
 Dos opciones:
 Acumulamos los TP/FP/FN sobre los distintos conjuntos: promediado micro (micro-averaging)
 Promediamos los resultados de precision/recall calculado en cada conjunto por separado: promediado macro (macro-averaging)
-Trampas de evaluación
-Errores comunes de evaluación
-Testear donde se entrenó
-Target leak: una de las features contiene la clase objetivo
-En general, si algo no concuerda, no tiene sentido, hay que investigar
-Posible error de programación en el sistema de testeo
-No quedarse sólo con los números, hacer análisis de errors viendo casos concretos
-Fácil detectar errores de código en el sistema
 
-Overfitting
+\end{itemize}
+
+\paragraph {Métrica F }
+Promedio entre precision / recall
+
+\paragraph {ROC}
+\begin{itemize}
+\item Cuando se puede variar Precision/Recall con un parámetro, esto forma una curva
+\item El área bajo esa curva nos dá la idea de que tan bien funciona un sistema
+\item Un sistema que funciona todo el tiempo con muy buena precision y recall, tendrá un área muy grande
+\item Un sistema que tiene gran precision pero clasifica pocas instancias y muy poca precision cuando clasifica muchas tendrá muy poca área
+\item Promediado micro y macro
+\item Cuando el sistema se ejecuta sobre varios conjuntos de testeo
+\end{itemize}
+
+\paragraph {Trampas de evaluación}
+Errores comunes de evaluación:
+\begin{itemize}
+\item Testear donde se entrenó
+\item Target leak: una de las features contiene la clase objetivo
+\item En general, si algo no concuerda, no tiene sentido, hay que investigar
+\item Posible error de programación en el sistema de testeo
+\item No quedarse sólo con los números, hacer análisis de errors viendo casos concretos
+\item Fácil detectar errores de código en el sistema
+\end{itemize}
+
+\paragraph {Overfitting}
 Cuando el sesgo estadísitico disminuye demasiado y la varianza empieza a dispararse
 
-Cros-validación
+\paragraph {Cros-validación}
 Prácticamente como entrenar y testear en los mismo datos
 datos = {A,B,C}
-entrenar en A,B, testear en C
-entrenar en A,C, testear en B
-entrenar en B,C, testear en A
+\begin{itemize}
+\item entrenar en A,B, testear en C
+\item entrenar en A,C, testear en B
+\item entrenar en B,C, testear en A
+\end{itemize}
 Útil cuando se tienen pocos datos
 
+\subsection{Clasificacion de algoritmos de aprendizaje automático}
+Dentro del aprendizaje automático, los algoritmos se pueden clasificar segun la forma en la que aprenden de sus datos:
 
-Image Classification
-Motivation. In this section we will introduce the Image Classification problem, which is the task of assigning an input image one label from a fixed set of categories. 
-This is one of the core problems in Computer Vision that, despite its simplicity, has a large variety of practical applications. Moreover, as we will see later in the course, 
-many other seemingly distinct Computer Vision tasks (such as object detection, segmentation) can be reduced to image classification.
-Challenges. 
-Since this task of recognizing a visual concept (e.g. cat) is relatively trivial for a human to perform, it is worth considering the challenges involved from the perspective of a 
-Computer Vision algorithm. As we present (an inexhaustive) list of challenges below, keep in mind the raw representation of images as a 3-D array of brightness values:
-Viewpoint variation. A single instance of an object can be oriented in many ways with respect to the camera.
-Scale variation. Visual classes often exhibit variation in their size (size in the real world, not only in terms of their extent in the image).
-Deformation. Many objects of interest are not rigid bodies and can be deformed in extreme ways.
-Occlusion. The objects of interest can be occluded. Sometimes only a small portion of an object (as little as few pixels) could be visible.
-Illumination conditions. The effects of illumination are drastic on the pixel level.
-Background clutter. The objects of interest may blend into their environment, making them hard to identify.
-Intra-class variation. The classes of interest can often be relatively broad, such as chair. There are many different types of these objects, each with their own appearance.
-A good image classification model must be invariant to the cross product of all these variations, while simultaneously retaining sensitivity to the inter-class variations.
+\subsubsection{Aprendizaje No supervisado} 
+\begin{itemize}
+  \item La caracteristica principal de este tipo de algoritmos es que los datos de entrenamiento no estan etiquetados
+  \item El principal algoritmo de aprendizaje no supervisado es el de Clustering(agrupamiento)
+\end{itemize}
+\paragraph {Clustering}
+\begin{itemize}
+  \item Consiste en agrupar objetos, de forma tal que los objetos pertenecientes a un mismo grupo son en algun sentido mas similares entre ellos que a los objetos que pertenecen a otro grupo.
+  \item El objetivo de los métodos de clustering es descubrir grupos significativos presentes en los datos.
+  \item El concepto central en clustering es la definición de una función de distancia entre instancias
+  \item Cada definición de distancias induce un agrupamiento de los datos, basado en esa métrica
+  \item La distancia es donde se incorpora la información humana
+\end{itemize}
 
-Data-driven approach. 
-How might we go about writing an algorithm that can classify images into distinct categories? Unlike writing an algorithm for, for example, sorting a list of numbers, 
-it is not obvious how one might write an algorithm for identifying cats in images. Therefore, instead of trying to specify what every one of the categories of interest look like directly in code, the approach that we will take is not unlike one you would take with a child: we’re going to provide the computer with many examples of each class and then develop learning algorithms that look at these examples and learn about the visual appearance of each class. 
-This approach is referred to as a data-driven approach, since it relies on first accumulating a training dataset of labeled images. 
+\subsubsection{Aprendizaje semi supervisado}
+
+Estos algoritmos se caracterizan por utilizar una pequeña cantidad de datos etiquetados y otro gran conjunto de datos no etiquetados
+Principal problema atacado:
+\paragraph {Recomendación}
+\begin{itemize}
+  \item Un problema en el medio entre supervisado y no supervisado
+  \item Dado un conjunto de personas y objetos, recomendar nuevos objetos similares a los que la persona elige, pero que no conoce
+  \item Amplia utilidad práctica
+  \item Collaborative Filtering
+  \item Filtrar información usando comunidades de personas
+  \item Usuarios, ítems y preferencias
+\end{itemize}
+\paragraph {Recomendación basada en Usuarios}
+  \begin{itemize}
+    \item para cada ítem i para el cual el usuario u no tiene preferencia:
+    \item para cada otro usuario v que tiene preferencia por i:
+    \item calcular la similitud s entre u y v
+    \item acumular la preferencia de v por i, pesada por s
+    \item devolver los ítems con mayor preferencia pesada
+  \end{itemize}
+\paragraph {Recomendación basada en Ítems}
+  \begin{itemize}
+    \item para cada ítem i para el cual el usuario u no tiene preferencia:
+    \item para cada ítem j que u tiene una preferencia:
+    \item calcular la similitud s entre i y j
+    \item acumular la preferencia de u por j, pesada por s
+    \item devolver los ítems con mayor preferencia pesada
+  \end{itemize}
+
+\subsubsection{Aprendizaje supervisado}
+Los algoritmos de aprendizaje supervisado, consisten en aprender una funcion, a partir de datos de entrenamiento etiquetados. Cada ejemplo del conjunto de entrenamiento suele ser un par
+compuesto de un objeto de entrenamiento(representado por un vector de caracteristicas) y una etiqueta, que seria el valor de salida deseado.
+El problema tipico que se ataca con estos algoritmos es el de clasificación. Clasificacion se define como el problema de identificar a que categoria pertenece una nueva observacion,
+basada en el conjunto de datos de entrenamiento, que contiene observaciones a las cuales se les conoce si categoria.
+Otra opcion es la regresion que en lugar de determinar a que categoria pertenece, define un puntaje de pertenencia a cada categoria.
+El Aprendizaje Automático sin calificar
+  \begin{itemize}
+    \item Aprender lo que uno ya sabe
+    \item Tratar de aprender una función f(x1, …, xn) → y donde
+    \item xi son las caracterísita de aprendizaje (features) de entrada
+    \item y es la clase objetivo
+    \item La clave es extrapolación, queremos que la función generalize a entradas nunca vistas.
+    \item Interpolación lineal es en sí una forma de hacer Aprendizaje Automático supervisado.
+    \item Una visión como desarrolladores
+    \item Entrenamiento/Estimación/“compilación”:
+    \item Entrada: vectores de features, incluyendo la clase objetivo
+    \item Salida: un modelo entrenado
+    \item Ejecución/Predicción/“interpretado”:
+    \item Entrada: vectores de features, sin la clase objetivo, más el modelo entrenado
+    \item Salida: la clase objetivo predicha
+  \end{itemize}
+
+Ejemplos de algoritmos de clasificacion son Clasificacion lineal, regresion logistica, SVM que luego se detallaran en base a un problema concreto
+
+\subsubsection{Aprendizaje por refuerzo}
+El sistema interactua en un ambiente dinamico en el cual debe cumplir un objetivo determinado, el programa va recibiendo retroalimentacion en terminos de premios y castigos mientras 
+recorre el espacio del problema y de esta forma aprende.
+
+\pagebreak
+
+A continuacion abordaremos un problema, el cual servira de motivacion para luego explicar el uso de las redes neuronales convolucionales
+
+\subsubsection{Clasificacion de imagenes }
+Es un problema de asginar a una imagen de entrada una etiqueta de categoria a partir de un conjunto prefijado de categorias.
+Es uno de los principales problemas del area de vision por computadoras, que a pesar de su simplicidad tiene una gran cantidad y variedad de aplicaciones practicas, 
+al punto de que otros problemas provenientes del area de vision por computadores pueden ser como detección de objetos o segmentacion pueden ser reducidos a clasificacion de imagenes.
+
+\paragraph {Desafios}
+Debido a que la tarea de reconocer un concepto visual es relativamente trivial para que lo realice una persona, vale la pena considerar los desafios involucrados desde la perspectiva de
+un algoritmo de Vision por computadoras, teniendo en cuenta que la representacion pura de una imagen es un arreglo de 3 dimensiones que contiene valores de brillo. A continuacion de mencionan
+algunos de los principales desafios
+\begin{itemize}
+\item Variacion del punto de vista: Una simple instancia de un objeto puede estar orientada de muchas formas frente a la camara que toma la imagen.
+\item Variacion de escala: Las clases visuales suelen exhibir variaciones en su tamaño en el mundo real y no solo en lo referido a la imagen.
+\item Deformacion: Muchos objetos de interes no tienen un cuerpo rigido y pueden ser deformados de muchas formas
+\item Oclusion: Los objetos de interes pueden estar ocluidos y solo una pequeña porcion del objeto puede ser visible.
+\item Condiciones de iluminacion: Los efectos de la iluminacion pueden influir de forma drastica a nivel de pixeles.
+\item Influencia del fondo: los objetos de interes pueden estar inmersos en un ambiente en el cual sean dificiles de identificar.
+\item Variaciones intra clase: Existen muchos instancias completamente distinta de una misma categoria de objetos.
+\end{itemize}
+Un buen modelo de clasificacion de imagenes debe ser tolerante a todos estos desafios presentados.
+
+\paragraph {Ciclo de Clasificacion de Imágenes}
+\begin{itemize}
+\item Conjunto de datos de entrada: El conjunto de datos de entrada es un conjunto de N imágenes, cada una etiquetada con una de las K diferentes categorias.  
+\item Aprendizaje: En base al conjunto de datos de entrenamiento, el sistema debe aprender como identificar las caracteristicas de cada categoria para asi establecer un modelo clasificador.
+\item Evaluación: Finalmente se evalua la calidad del modelo clasificador haciendo que prediga las etiquetas para un conjunto (de prueba) nuevo de imagenes que no habia visto antes, comparando las 
+etiquetas correctas con las etiquetas predecidas por el clasificador se puede establecer una metrica de calidad, intuitivamente se espera que las etiquetas predecidas coincidan en la mayoria
+de los casos con las etiquetas correctas.
+\end{itemize}
+\subsubsection{CLASIFICACION LINEAL}
+Este enfoque tiene 2 componentes principales que luego seran extendidos a las Redes Neuronales: Una funcion de puntuación que asigna un puntaje de pertenencia de cada instancia a cada categoria, 
+y una función de pérdida que cuantifica la coincidencia entre los puntajes predecidos con los puntajes correctos.
+Este problema se reduce a un problema de optimización donde se requiere minimizar la función de pérdida con respecto a la función de puntuación.
 
 
-CLASIFICACION LINEAL
-Overview. We are now going to develop a more powerful approach to image classification that we will eventually naturally extend to entire Neural Networks and 
-Convolutional Neural Networks. The approach will have two major components: a score function that maps the raw data to class scores, and a loss function that quantifies 
-the agreement between the predicted scores and the ground truth labels. We will then cast this as an optimization problem in which we will minimize the loss function 
-with respect to the parameters of the score function.
+\subsubsection{FUNCION DE PUNTUACION}
+El primer componente desde este enfoque es definir una función de pérdida que mapee el valor de los pixeles de una imagen a un puntaje de confianza para cada categoría.
+Asumiendo que la entrada de la funcion son imagenes, cada una con una etiqueta de categoria dentro de las K categorias, la salida debe ser un valor de confianza de esa imagen 
+para cada una de las K categorias.
+Por ejemplo si tenemos 100 imagenes de 3 canales, de 32*32 pixeles y 10 categorias, definimos una funcion de puntuacion que toma entradas..
 
+\paragraph{Funcion Lineal:} 
+f(xi,W,b)=Wxi+b
+xi es una imagen representada por sus pixeles, W es un vector de pesos y b es un termino de regularizacion
 
-SCORE FUNCTION Parameterized mapping from images to label scores
-The first component of this approach is to define the score function that maps the pixel values of an image to confidence scores for each class.
-We will develop the approach with a concrete example. As before, let’s assume a training dataset of images xi∈RDxi∈RD, each associated with a label yiyi. 
-Here i=1…Ni=1…N and yi∈1…Kyi∈1…K. That is, we have N examples (each with a dimensionality D) and K distinct categories. 
-For example, in CIFAR-10 we have a training set of N = 50,000 images, each with D = 32 x 32 x 3 = 3072 pixels, and K = 10, since there are 10 distinct classes (dog, cat, car, etc).
-We will now define the score function f:RD↦RKf:RD↦RK that maps the raw image pixels to class scores.
+\subsubsection{FUNCION DE PERDIDA}
+En la funcion lineal se puede observar que esta parametrizada por un conjunto de pesos.
+No se tiene control sobre los valores de los pixeles pero si se puede controlar el vector de pesos, de forma tal que el valor predecido sea consistente con el valor correcto. 
+La funcion de perdida pretende medir el error entre el valor predecido y el valor correcto, intutivamente la perdida sera mayor si el clasificador predice de forma erronea y 
+menor si lo hace de forma correcta.
+La idea es minimizar la funcion de perdida adaptando los valores de los pesos.
 
-LOSS FUNCTION
-In the previous section we defined a function from the pixel values to class scores, which was parameterized by a set of weights WW. 
-Moreover, we saw that we don’t have control over the data (xi,yi)(xi,yi) (it is fixed and given), but we do have control over these weights and we want to set 
-them so that the predicted class scores are consistent with the ground truth labels in the training data.
-For example, going back to the example image of a cat and its scores for the classes “cat”, “dog” and “ship”, we saw that the particular set of weights in that example 
-was not very good at all: We fed in the pixels that depict a cat but the cat score came out very low (-96.8) compared to the other classes (dog score 437.9 and ship score 61.95).
-We are going to measure our unhappiness with outcomes such as this one with a loss function (or sometimes also referred to as the cost function or the objective). 
-Intuitively, the loss will be high if we’re doing a poor job of classifying the training data, and it will be low if we’re doing well.
+\subsubsection{OPTIMIZACION}
+El objetivo de la optimización es encontrar el vector de pesos W que minimice la funcion de perdida.
 
+\subsubsection{GRADIENTE} 
+La estrategia de optimización mas utilizada para este tipo de problemas es la de seguir la dirección del gradiente (también llamado derivadas) de la función de pérdida.
+En este caso que la función toma como entrada un vector de números, se aplican las derivadas parciales y el gradiente es el vector resultante de calcular las derivadas parciales
+en cada dimensión
 
-OPTIMIZATION
-To reiterate, the loss function lets us quantify the quality of any particular set of weights W. The goal of optimization is to find W that minimizes the loss function.
-We will now motivate and slowly develop an approach to optimizing the loss function. 
-For those of you coming to this class with previous experience, this section might seem odd since the working example we’ll use (the SVM loss) is a convex problem,
-but keep in mind that our goal is to eventually optimize Neural Networks where we can’t easily use any of the tools developed in the Convex Optimization literature.
+\paragraph{Descenso por el gradiente}
+La idea de principal de este metodo es el refinamiento iterativo, se evalua el resultado del calculo del gradiente y se actualizan los parámetros repetidamente, 
+toma un hiperparametro llamado tasa de aprendizaje que define el tamaño de cada paso en la iteración.
+Este es el método mas utilizado para optimizar funciones de pérdida en las Redes Neuronales. 
 
+\paragraph{Descenso por el gradiente en lotes:} 
+En aplicaciones de gran escala, el conjunto de entrenamiento puede ser del orden de los millones de ejemplos, por lo que computar la funcion de 
+pérdida completa sobre todo el conjunto para actualizar un solo parámetro seria algo impracticable.
+Un enfoque común que se aplica a este problema es computar el gradiente sobre lotes del conjunto de entrenamiento, que permite lograr una buena aproximación al objetivo completo con
+una convergencia mucho mas rapida.
 
-GRADIENTE Following the Gradient
-In the previous section we tried to find a direction in the weight-space that would improve our weight vector (and give us a lower loss). 
-It turns out that there is no need to randomly search for a good direction: we can compute the best direction along which we should change our weight vector 
-that is mathematically guaranteed to be the direction of the steepest descend (at least in the limit as the step size goes towards zero). 
-This direction will be related to the gradient of the loss function. In our hiking analogy, this approach roughly corresponds to feeling the slope of the hill below our feet 
-and stepping down the direction that feels steepest.
-In one-dimensional functions, the slope is the instantaneous rate of change of the function at any point you might be interested in. 
-The gradient is a generalization of slope for functions that don’t take a single number but a vector of numbers. 
-Additionally, the gradient is just a vector of slopes (more commonly referred to as derivatives) for each dimension in the input space. 
-The mathematical expression for the derivative of a 1-D function with respect its input is:
-df(x)dx=limh →0f(x+h)−f(x)h
-df(x)dx=limh →0f(x+h)−f(x)h
-When the functions of interest take a vector of numbers instead of a single number, we call the derivatives partial derivatives, 
-and the gradient is simply the vector of partial derivatives in each dimension.
+\paragraph{Descenso por el gradiente estocástico:} 
+Es el caso extremo de la aproximación anterior donde el lote tiene solo un elemento.
 
-Computing the gradient
-There are two ways to compute the gradient: A slow, approximate but easy way (numerical gradient), and a fast, exact but more error-prone way that requires calculus 
-(analytic gradient). We will now present both.
-Gradient Descent
-Now that we can compute the gradient of the loss function, the procedure of repeatedly evaluating the gradient and then performing a parameter update is called Gradient Descent. 
-This simple loop is at the core of all Neural Network libraries. There are other ways of performing the optimization (e.g. LBFGS),
-but Gradient Descent is currently by far the most common and established way of optimizing Neural Network loss functions. 
-Throughout the class we will put some bells and whistles on the details of this loop (e.g. the exact details of the update equation), 
-but the core idea of following the gradient until we’re happy with the results will remain the same.
-Mini-batch gradient descent. In large-scale applications (such as the ILSVRC challenge), the training data can have on order of millions of examples. 
-Hence, it seems wasteful to compute the full loss function over the entire training set in order to perform only a single parameter update. 
-A very common approach to addressing this challenge is to compute the gradient over batches of the training data. For example, in current state of the art ConvNets, 
-a typical batch contains 256 examples from the entire training set of 1.2 million.
-
-This process is called Stochastic Gradient Descent (SGD) (or also sometimes on-line gradient descent). 
-This is relatively less common to see because in practice due to vectorized code optimizations it can be computationally much more efficient to evaluate the gradient for 100 examples,
-than the gradient for one example 100 times. Even though SGD technically refers to using a single example at a time to evaluate the gradient, 
-you will hear people use the term SGD even when referring to mini-batch gradient descent (i.e. mentions of MGD for “Minibatch Gradient Descent”, 
-or BGD for “Batch gradient descent” are rare to see), where it is usually assumed that mini-batches are used. 
-The size of the mini-batch is a hyperparameter but it is not very common to cross-validate it. 
-It is usually based on memory constraints (if any), or set to some value, e.g. 32, 64 or 128. We use powers of 2 in practice because many vectorized operation implementations work 
-faster when their inputs are sized in powers of 2.
-
-
-BACKPROPAGATION
+\subsubsection{RETROPROPAGACION BACKPROPAGATION}
 http://cs231n.github.io/optimization-2/
-backpropagation, which is a way of computing gradients of expressions through recursive application of chain rule. 
-Understanding of this process and its subtleties is critical for you to understand, and effectively develop, design and debug Neural Networks.
+Es una forma  de computar los gradientes de expresiones mediante la aplicacion recursiva de la regla de la cadena.
+El ciclo consta de 2 fases, propagación y luego actualizacion de parámetros. Cuando ingresan los parámetro a la función se calcula el resultado final, y se lo compara con el resultado 
+deseado, aplicando la función de pérdida se calcula el error, mediante el metodo de optimizacion se define el gradiente para luego realizar la retropropagación en la función hasta 
+actualizar los parametros.
 
+\subsection{REDES NEURONALES ARTIFICIALES}
 ARTIFICIAL NEURAL NETWORK
+Combinacion lineal de funciones no lineales
 An artificial neural network (ANN) learning algorithm, usually called "neural network" (NN), is a learning algorithm that is inspired by the structure and functional aspects 
 of biological neural networks. Computations are structured in terms of an interconnected group of artificial neurons, processing information using a connectionist approach 
 to computation. Modern neural networks are non-linear statistical data modeling tools. They are usually used to model complex relationships between inputs and outputs, 
 to find patterns in data, or to capture the statistical structure in an unknown joint probability distribution between observed variables.
+\paragraph {Ventajas}
+\begin{itemize}
+ \item Bueno para variables de entrada continuas
+ \item Aproximadores generales de funciones continuas
+ \item Altamente no lineales
+ \item Aprende funciones caracteristicas
+ \item Bueno para usar en dominios continuos con poco conocimiento:
+  \subitem Cuando no se conocen buenas caracteristicas
+  \subitem No se conoce la forma de un buen modelo funcional
+\end{itemize}
+\paragraph {Desventajas}
+  \begin{itemize}
+  \item Los resultados intermedios no son interpretables, al resultado final se los considera como proveniente de una caja negra.
+  \item El aprendizaje es lento
+  \item Para lograr una buena generalizacion puede requerir muchos datos
+  \end{itemize}
 
-Pros
-• Good for continuous input variables.
-• General continuous function approximators.
-• Highly non-linear.
-• Learn feature functions.
-• Good to use in continuous domains with little knowledge:
-• When you don’t know good features.
-• You don’t know the form of a good functional model.
-Cons
-• Not interpretable, “black box”.
-• Learning is slow.
-• Good generalization can require many datapoints.
+\paragraph {Motivación biológica} 
+El area de las redes neuronales artificiales fue originalmente insipirada por el objetivo de modelar los sistemas neuronales biológicos, 
+pero luego fue divergiendo
+y convirtiendose en una tarea de Ingenieria para obtener buenos resultados dentro del area de Aprendizaje automatico.
+Dendritas, input axones, sinapsis y output.
+IMAGEN DE ANALOGIA
 
-DEEP LEARNING
+\paragraph {Neurona artificialUnidad}
+Consta de un vector de entrada, un vector de pesos y una función de activación no lineal
+En una neurona se realiza el producto punto entre el vector de entrada, y su vector de pesos, le suma el sesgo y aplica la funcion de no linearidad.
+Una unica neurona puede ser utilizada para implementar un clasificador binario.
+
+\paragraph {Funciones de Activacion comunmente utilizadas}
+Toda funcion de activacion toma un unico numero como entrada, realiza un operacion matematica predefinida, no lineal y devuelve el resultado obtenido.
+Algunos ejemplos de funciones que se utilizan:
+  \begin{itemize}
+  \item Sigmoid:
+  \item Tangente hiperbolica
+  \item ReLU:max(0,x)
+  \end{itemize}
+
+\subsubsection {Arquitectura de las Redes Neuronales}
+Organización por capas: Las redes neuronales se pueden modelar como un conjunto de neuronas conectadas en un grafo aciclico, que se suelen organizar por capas, las neuronas de una capa
+se conectan con neuronas de sus capas adjacentes pero nunca se conectan 2 neuronas de una misma capa.
+Toda red neuronal tiene una capa de entrada, una capa de salida y un numero determinado de capas ocultas, que pueden ser de distintos tipos.
+Una de las principales razones por la cual las redes neuronales estan organizadas en capas, es que este tipo de estructura permite evaluar una red, muy simple y eficientemente realizando
+operaciones matriciales vectoriales, una red neuronal puede ser pensada como una serie de multiplicaciones de matrices entrelazadas con funciones de activaciones no lineales.
+Las redes neuronales utilizadas en la actualidad tienen alrededor de 100 millones de parametros distribuidos entre 10-20 capas.
+Al definir la arquitectura de la red, se forma lo que seria una funcion de puntuacion, una red neuronal realiza una combinacion lineal de funciones no lineales. 
+
+\paragraph {Preprocesamiento de datos}
+Restarle la media a cada caracteristica
+Normalizacion
+PCA
+
+\paragraph {Inicializacion de los pesos}
+Error comun: Iniciar en 0.
+Inicializar con valores aleatorios cercanos a 0 
+
+\paragraph {Regularizacion: Dropout}
+
+
+\subsubsection {Entrenamiento}
+Consiste de 2 pasos: Paso hacia adelante, y paso de retroalimentacion
+  \begin{enumerate}
+  \item En el paso hacia adelante se evalua la red y se obtiene el resultado de salida, el cual se mide el error, se calcula el gradiente para luego aplicar el paso de retroalimentacion
+    \item En el paso de retroalimentacion se ajustan los pesos internos de la red en base al resultado del gradiente.
+  \end{enumerate}
+Esto se realiza iterativamente una cantidad predefinida de veces.
+
+\subsection {FEED FORWARD NETWORK}
+
+
+\subsection {DEEP LEARNING}
 Falling hardware prices and the development of GPUs for personal use in the last few years have contributed to the development of the concept of Deep learning which consists 
 of multiple hidden layers in an artificial neural network. This approach tries to model the way the human brain processes light and sound into vision and hearing. 
 Some successful applications of deep learning are computer vision and speech recognition.[23]
 
 
+\subsection {REDES NEURONALES CONVOLUCIONALES}
+Las redes neuronales convolucionales son muy similares a las redes neuronales antes vista, con la diferencia en que la arquitectura de una red neuronal convolucional asume explicitamente
+que el conjunto de entrada son imagenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura.
 
-MULTI LAYER PERCEPTRON / FEED FORWARD NETWORK
+\subsubsection {Arquitectura de una red neuronal convolucional}
+Las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad.
+Cada capa acepta un volumen de 3 dimensiones como entrada y lo transforma en un volumen de salida de 3 dimensiones a traves de una funcion diferenciable.
+Algunas capas pueden tener o no parametros, al igual que hiperparametros.
 
-CONVOLUTIONAL NEURAL NETWORK
+En el caso mas simple de arquitectura, la red transforma el volumen de una imagen de entrada en un volumen de salida (conteniendo los puntajes de cada clase para el problema de clasificacion)
+
+\subsubsection {TIPOS DE CAPAS}
+\paragraph{CAPA CONVOLUCIONAL} 
+Los parametros consisten en un conjunto de filtros aprendibles. Cada filtro el pequeño espacialmente(alto y ancho) pero se extiende sobre toda la profundidad del volumen de entrada.
+Durante el paso hacia adelante, se desliza o convoluciona el filtro atraves del alto y ancho del volumen de entrada y se computa el producto punto entre los valores del filtro y los valores
+del volumen de entrada. A medida que se va deslizando el filtro sobre el ancho y el alto del volumen de entrada, se va generando un mapa de activacion de 2 dimensiones que contiene los 
+valores de respuesta de ese filtro en cada posicion espacial.
+Intuitivamente, la red aprenderá los filtros que se activan cuando ven algún tipo de característica visual como un borde de cierta orientación o una mancha de algún color en la 
+primera capa, o eventualmente panal entero o patrones de rueda en las capas más altas de la red. Dado que tendremos un conjunto de filtros en cada capa Convolucional, 
+y cada uno de ellos producirá un mapa de activación bidimensional separado, estos se apilaran a lo largo de la dimensión de profundidad para producir el volumen de salida.
+
+Backpropagation. The backward pass for a convolution operation (for both the data and the weights) is also a convolution (but with spatially-flipped filters)
+
+\paragraph{CAPA DE AGRUPAMIENTO} 
+Su función es reducir progresivamente el tamaño espacial de la representación para reducir la cantidad de parámetros y de cálculo en la red, y por lo tanto también para controlar
+el Overfitting. La capa de agrupamiento funciona independientemente en cada segmento de profundidad de la entrada y la redimensiona espacialmente, utilizando la operación de máximo, 
+tambien se suele utilizar la operacion de promedio o la norma L2.
+
+Retroalimentacion
+el paso hacia atrás para una operación maximo tiene una interpretación sencilla, ya que sólo encamina el gradiente a la entrada que tenía el valor más alto en el paso hacia
+adelante. Por lo tanto, durante el paso hacia adelante de una capa de agrupamiento es común realizar un seguimiento del índice de la activación máxima de manera que 
+el enrutamiento de gradiente es eficiente durante la retropropagación.
+
+\paragraph{CAPA COMPLETAMENTE CONECTADA} 
+Las neuronas entre dos capas adyacentes están completamente conectadas de a pares, pero las neuronas dentro de una sola capa no comparten conexiones.
+
+\subsubsection {Consideraciones computacionales}
+El cuello de botella más grande a tener en cuenta al construir arquitecturas ConvNet es el cuello de botella de memoria. 
+Muchas GPUs modernas tienen un límite de memoria de 3/4 / 6GB, con las mejores GPUs que tienen cerca de 12GB de memoria. 
+Hay tres fuentes principales de memoria para realizar un seguimiento:
+
+A partir de los tamaños de volumen intermedios: Éstos son el número crudo de activaciones en cada capa de la ConvNet, y también sus gradientes (de igual tamaño). Normalmente, la mayoría de las activaciones se encuentran en las capas anteriores de una ConvNet (es decir, primeras capas de convección). Estos se mantienen alrededor porque son necesarios para backpropagation, pero una implementación inteligente que ejecuta un ConvNet sólo en tiempo de prueba podría en principio reducir esto en una cantidad enorme, sólo almacenando las activaciones actuales en cualquier capa y descartando las activaciones anteriores en las capas de abajo .
+A partir de los tamaños de parámetro: Estos son los números que contienen los parámetros de red, sus gradientes durante la retropropagación y, comúnmente, también un caché de pasos si la optimización utiliza impulso, Adagrad o RMSProp. Por lo tanto, la memoria para almacenar el vector de parámetros solo debe ser multiplicada por un factor de al menos 3 o más.
+Cada implementación de ConvNet tiene que mantener la memoria miscelánea, como los lotes de datos de imagen, tal vez sus versiones aumentadas, etc.
+Una vez que tenga una estimación aproximada del número total de valores (para activaciones, gradientes y misc), el número debe convertirse a tamaño en GB. Tome el número de valores, multiplique por 4 para obtener el número bruto de bytes (ya que cada punto flotante es 4 bytes, o tal vez por 8 para doble precisión), y luego dividir por 1024 varias veces para obtener la cantidad de memoria en KB, MB, y finalmente GB. Si su red no encaja, una heurística común para "hacerla encajar" es disminuir el tamaño del lote, ya que la mayor parte de la memoria suele ser consumida por las activaciones.
+
+\subsubsection {Casos de estudio de redes convolucionales famosas}
+\begin{itemize}
+ \item VGG
+ \item Inception
+ \item Resnet
+\end{itemize}
+
+\subsection {FINETUNING}
+Finetuning toma un modelo ya entrenado, adapta la arquitectura y retoma el entrenamiento partiendo desde los pesos del modelo ya entrenado.
+\paragraph{Modelos preentrenados}
+Debido a que una red neuronal convolucional moderna requiere entre 2 y 3 semanas para entrenarse, utilizando multiples GPUs para el conjunto de datos ImageNet, es comun ver que gente
+publica sus Redes ya entrenadas para el beneficio de otras personas que lo pueden usar para hacer finetuning.
+\paragraph{Como y cuando hacer Finetuning}
+ ¿Cómo decide qué tipo de transferencia de aprendizaje debe realizar en un nuevo conjunto de datos? Esta es una función de varios factores, pero los dos más importantes son el 
+ tamaño del nuevo conjunto de datos (pequeño o grande), y su similitud con el conjunto de datos original (por ejemplo ImageNet-como en términos de contenido de imágenes y las clases,
+ O muy diferentes, tales como imágenes de microscopio). Teniendo en cuenta que las características de ConvNet son más genéricas en capas tempranas y más específicas del conjunto de datos
+ originales en capas posteriores, aquí hay algunas reglas comunes para navegar por los 4 escenarios principales:
+\begin{itemize}
+ \item El nuevo conjunto de datos es pequeño y similar al conjunto de datos original. Dado que los datos son pequeños, no es una buena idea afinar la red convolucional debido a las 
+ preocupaciones excesivas. Dado que los datos son similares a los datos originales, esperamos que las características de mayor nivel en la red convolucional sean relevantes para este
+ conjunto de datos. Por lo tanto, la mejor idea podría ser la de formar un clasificador lineal utilizando las caracteristicas extraidas en la ultima capa de la red.
+ \item El nuevo conjunto de datos es grande y similar al conjunto de datos original. Dado que tenemos más datos, podemos tener más confianza de que no superaremos si intentáramos 
+ ajustar a través de la red completa.
+ \item El nuevo conjunto de datos es pequeño pero muy diferente del conjunto de datos original. Dado que los datos son pequeños, lo más probable es que sólo entrenen un clasificador 
+ lineal. Dado que el conjunto de datos es muy diferente, puede que no sea mejor entrenar al clasificador en la parte superior de la red, que contiene más características específicas
+ de conjunto de datos. En su lugar, podría funcionar mejor para entrenar el clasificador SVM de las activaciones en algún lugar anterior en la red.
+ \item El nuevo conjunto de datos es grande y muy diferente del conjunto de datos original. Dado que el conjunto de datos es muy grande, podemos esperar que podamos permitirnos 
+ entrenar a una red convolucional desde cero. Sin embargo, en la práctica es muy a menudo todavía beneficioso para inicializar con pesos de un modelo pre-entrenado. 
+ En este caso, tendríamos suficientes datos y confianza para afinar a través de toda la red.
+\end{itemize}
+
+
+\end{document}
