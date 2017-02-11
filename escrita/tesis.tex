@@ -604,20 +604,22 @@ standing of how humans create and perceive artistic imagery.
 
     \subsubsection {Casos de estudio de redes convolucionales famosas}
       \begin{itemize}
+	\item AlexNet
 	\item VGG
 	\item Inception
 	\item Resnet
       \end{itemize}
 
     \subsection {FINETUNING}
+    STANFORD
       Finetuning toma un modelo ya entrenado, adapta la arquitectura y retoma el entrenamiento partiendo desde los pesos del modelo ya entrenado.
       \paragraph{Modelos preentrenados}
 	Debido a que una red neuronal convolucional moderna requiere entre 2 y 3 semanas para entrenarse, utilizando multiples GPUs para el conjunto de datos ImageNet, es comun ver que gente
 	publica sus Redes ya entrenadas para el beneficio de otras personas que lo pueden usar para hacer finetuning.
       \paragraph{Como y cuando hacer Finetuning}
-	¿Cómo decide qué tipo de transferencia de aprendizaje debe realizar en un nuevo conjunto de datos? Esta es una función de varios factores, pero los dos más importantes son el 
+	¿Cómo decidir qué tipo de transferencia de aprendizaje debe realizar en un nuevo conjunto de datos? Esta es una función de varios factores, pero los dos más importantes son el 
 	tamaño del nuevo conjunto de datos (pequeño o grande), y su similitud con el conjunto de datos original (por ejemplo ImageNet-como en términos de contenido de imágenes y las clases,
-	O muy diferentes, tales como imágenes de microscopio). Teniendo en cuenta que las características de ConvNet son más genéricas en capas tempranas y más específicas del conjunto de datos
+	O muy diferentes, tales como imágenes de microscopio). Teniendo en cuenta que las características de CNN son más genéricas en capas tempranas y más específicas del conjunto de datos
 	originales en capas posteriores, aquí hay algunas reglas comunes para navegar por los 4 escenarios principales:
 	\begin{itemize}
 	  \item El nuevo conjunto de datos es pequeño y similar al conjunto de datos original. Dado que los datos son pequeños, no es una buena idea afinar la red convolucional debido a las 
@@ -632,39 +634,77 @@ standing of how humans create and perceive artistic imagery.
 	  entrenar a una red convolucional desde cero. Sin embargo, en la práctica es muy a menudo todavía beneficioso para inicializar con pesos de un modelo pre-entrenado. 
 	  En este caso, tendríamos suficientes datos y confianza para afinar a través de toda la red.
 	\end{itemize}
-
+     \subsection {Otros conceptos relevantes}
+     MATRIZ DE GRAM
+     
 \section{Trabajo propuesto}
   \subsection{Algoritmo de Transferencia de estilo}
     \subsubsection{Introduccion}
     Ver Introduccion 
     \subsubsection{Sintesis}
-      Cuando las Redes Neuronales Convolucionales son entrenadas para reconocimiento de objetos, desarrollan una representacion de la imagen que hace que la información 
+      Cuando las Redes Neuronales Convolucionales (CNN) son entrenadas para reconocimiento de objetos, desarrollan una representacion de la imagen que hace que la información 
       del objeto sea cada vez más explícita a lo largo de la jerarquia de las capas de la red.Por lo tanto, a lo largo de la jerarquía de procesamiento de la red, 
       la imagen de entrada se transforma en representaciones que cada vez más se preocupan por el contenido real de la imagen en lugar del valor de sus píxeles detallados. 
       Podemos visualizar directamente la información que cada capa contiene sobre la imagen de entrada, reconstruyendo la imagen solo a partir de los mapas de caracteristicas
       de esa capa. Las capas más altas de la red capturan el contenido de alto nivel en términos de objetos y su ordenamiento en la imagen pero no se limitan a los valores de cada 
       pixel. En  cambio, las reconstrucciones de las capas inferiores simplemente pretenden reproducir los valores exactos de píxeles de la imagen original y algunas formas
       basicas como lineas o curvas. Por lo tanto, tomaremos a los mapas de características en las capas superiores de la red como el contenido representado.
-      To obtain a representation of the style of an input image, we use a feature space originally
-designed to capture texture information. 8 This feature space is built on top of the filter responses
-in each layer of the network. It consists of the correlations between the different filter responses
-over the spatial extent of the feature maps (see Methods for details). By including the feature
-correlations of multiple layers, we obtain a stationary, multi-scale representation of the input
-image, which captures its texture information but not the global arrangement.
-Again, we can visualise the information captured by these style feature spaces built on
-different layers of the network by constructing an image that matches the style representation
-of a given input image (Fig 1, style reconstructions). 10, 11 Indeed reconstructions from the style
-features produce texturised versions of the input image that capture its general appearance in
-terms of colour and localised structures. Moreover, the size and complexity of local image
-structures from the input image increases along the hierarchy, a result that can be explained
-by the increasing receptive field sizes and feature complexity. We refer to this multi-scale
-representation as style representation.
-The key finding of this paper is that the representations of content and style in the Convo-
-lutional Neural Network are separable. That is, we can manipulate both representations inde-
-pendently to produce new, perceptually meaningful images. To demonstrate this finding, we
-generate images that mix the content and style representation from two different source images.
+      Para obtener la representacion del estilo de la imagen de entrada, se usa un espacio de caracteristicas originalmente diseñado para capturar información de texturas.
+      Este espacio de caracteristicas esta construido sobre las respuestas de los filtros de cada capa de la red. Consiste en la correlación entre diferentes respuestas de los filtros.
+      Incluyendo las correlaciones de multiples capas, se obtiene una representacion que captura información de la textura pero no del ordenamiento global de la imagen.
+      Al reconstruir las imagenes a partir de las representaciones obtenidas, se puede observar que producen una version texturizada de la imagen que captura su 
+      apariencia general en terminos de colores y estructuras localizadas, a estas representaciones las llamaremos representaciones de estilo.
+      El principal descubrimiento de este articulo es que la representacion del estilo y el contenido de una imagen pueden ser separables con una Red Neuronal Convolucional entrenada 
+      para el reconocimiento de objetos. De esta forma, al manipularse independientemente se pueden generar una nueva imagen desde 2 imagenes de entradas distintas, simultaneamente se corresponda con la representacion
+      del contenido de una imagen y la respresentacion del estilo de la otra.
+
     \subsubsection{Metodos}
+      Los resultados exhibidos fueron obtenidos utilizando la red VGG-19, de disponibilidad publica.
+      Generalmente, cada capa de la red define un banco de filtros no lineal cuya complejidad aumenta con la posición de la capa en la red.
+      Para visualizar la información de la imagen codificada en diferentes capas de la jerarquía se realiza descenso gradiente en una imagen de ruido blanco 
+      para encontrar otra imagen que coincida con las características de respuesta de la imagen original.
+      Funcion Perdida del Contenido ...
+      Sobre las respuestas de la CNN en cada capa de la red construimos una representación de estilo que calcula las correlaciones entre las diferentes respuestas de los filtros.
+      Estas correlaciones de las caracteristicas estan dadas por la matriz de Gram ...
+      Para generar una textura que coincida con el estilo de una imagen dada, utilizamos el descenso de gradiente de una imagen de ruido blanco para encontrar otra imagen que coincida 
+      con la representación de estilo de la imagen original. Esto se hace minimizando la distancia media cuadrada entre las entradas de la matriz de Gram de la imagen 
+      original y la matriz de Gram de la imagen a generar.
+      Funcion de Perdida del Estilo ...
+      Para generar las imágenes que mezclan el contenido de una fotografía con el estilo de una obra de arte conjuntamente minimizamos la distancia de una imagen de ruido blanco 
+      de la representación de contenido de la fotografía en una capa de la red y la representación de estilo de la obra de arte en un número de capas de la CNN.
+      Funcion de Perdida total ...
     
   \subsection{Algoritmo de Reconocimiento de estilo}
+    \subsubsection{Introduccion}
+      Las imagenes pintadas por humanos suelen tener un significado y el estilo visual de la misma tiene un papel significativo en cómo se ve, por lo que comprender
+      el estilo es crucial para poder comprender el significado que la imagen intenta transmitir, sin embargo el estilo no ha recibido  mucha atención en el area de investigación de visión por computadoras. 
+      Aunque es simple para los observadores humanos, el estilo visual es un concepto difícil de definir rigurosamente ya que involucra el contexto historico del arte en ese momento.
+      Encontramos que las características aprendidas en una CNN funcionan muy bien para esta tarea. Esto es sorprendente por varias razones: Las caracteristicas aprendidas
+      fueron entrenadas en categorias de clases de objetos (Imagenet), y muchos estilos parecieran ser principalmente definidos por las elecciones de colores, aunque
+      las caracteristicas de las CNN, superan comodamente a las caracteristicas de los histogramas de colores. Esto lleva a unas de las conclusiones de este trabajo:
+      Las caracteristicas de nivel medio para los conjuntos de datos de objetos son genericos para el reconocimiento de estilo, y las de nivel superior para las caracteristicas
+      mas manuales.
+      Se compararon los predictores obtenidos con observadores humanos y esencialmente se obtuvieron niveles de precision similares.
+    \subsubsection{Algoritmo de Aprendizaje}
+      El algoritmo aprende a clasificar las imágenes nuevas según su estilo, utilizando las etiquetas provistas en el conjunto de entrenamient.
+      Debido a que los conjuntos de datos que tratamos son bastante grandes y algunas de las características son de grandes dimensiónes, consideramos sólo clasificadores lineales, 
+      dependiendo de características sofisticadas para proporcionar robustez. Utilizamos una implementación de fuente abierta de Descenso de Gradiente Estocástico con adaptación
+      del Subgradiente. El proceso de aprendizaje optimiza la función ...
+    \subsubsection{Caracteristicas de las imagenes}
+	Para clasificar estilos, debemos elegir características de imagen apropiadas. Nosotros hipotetizamos que el estilo de imagen puede estar relacionado con muchas características diferentes, 
+	incluyendo estadísticas de bajo nivel, las opciones de color, la composición y el contenido. Por lo tanto, probamos características que incorporan estos diferentes elementos, incluyendo características de la 
+	literatura de reconocimiento de objetos. Evaluamos el rendimiento de una sola función, así como la segunda etapa de fusión de múltiples características.
+	Las principales caracteristicas evaluadas fueron:
+	\begin{itemize}
+	 \item Histogramas de colores
+	 \item Descriptores GIST
+	 \item Caracteristicas extraidas de una CNN
+	\end{itemize}
+	Se encontro que las caracteristicas extraidas de una CNN son las que mejor precisión proveen a la hora de reconocer estilos.
+
+  \subsection{Finetuning para reconocimiento de estilos}
+    Basado en los resultados propuestos en el articulo antes mencionado, se realizo un finetuning sobre la red AlexNet, por cuestiones de simplicidad, utilizando
+    el conjunto de datos Wikipaintings, para los 10 estilos que mas datos provee.
+
 
 \end{document}
