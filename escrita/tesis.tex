@@ -80,6 +80,7 @@
 A continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artistico a fotografias:
 ADJUNTAR EJEMPLOS
 
+\iffalse
 Tener en cuenta:
 In fine art, especially painting, humans have mastered the skill to create unique
 visual experiences through composing a complex interplay between the con-
@@ -95,6 +96,7 @@ algorithm for the creation of artistic images. Moreover, in light of the strik-
 ing similarities between performance-optimised artificial neural networks and
 biological vision, 3–7 our work offers a path forward to an algorithmic under-
 standing of how humans create and perceive artistic imagery.
+\fi
 
 \section{MARCO TEORICO}
 
@@ -468,6 +470,9 @@ standing of how humans create and perceive artistic imagery.
       \paragraph{Descenso por el gradiente estocástico:} 
 	Es el caso extremo de la aproximación anterior donde el lote tiene solo un elemento.
 
+      \paragraph{Otras formas de optimizacion}
+	Existen otros metodos de optimizacion que trabajan de forma similar ADAM, LBFGS,RMSProp etc. DETALLAR.
+	
     \subsubsection{RETROPROPAGACION BACKPROPAGATION}
       http://cs231n.github.io/optimization-2/
       Es una forma  de computar los gradientes de expresiones mediante la aplicacion recursiva de la regla de la cadena.
@@ -635,7 +640,8 @@ standing of how humans create and perceive artistic imagery.
 	  En este caso, tendríamos suficientes datos y confianza para afinar a través de toda la red.
 	\end{itemize}
      \subsection {Otros conceptos relevantes}
-     MATRIZ DE GRAM
+	\paragraph{MATRIZ DE GRAM}
+     
      
 \section{Trabajo propuesto}
   \subsection{Algoritmo de Transferencia de estilo}
@@ -709,9 +715,27 @@ standing of how humans create and perceive artistic imagery.
     
   \subsection{Descripcion del problema}
     Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes, sin embargo es necesario definir una serie de hiperparametros,
-    que necesita el algoritmo para poder ejecutarse. El criterio de elección de estos hiperparametros termina siendo muy influyente en el resultado final, por ejemplo
-    si se comienza partiendo de una imagen de ruido blanco o se comienza a partir de la imagen de contenido; el numero de iteraciones que el algoritmo minimiza la funcion
-    de perdida.
+    que necesita el algoritmo para poder ejecutarse. El criterio de elección de estos hiperparámetros termina siendo muy influyente en el resultado final. 
+    Los principales hiperparametros a definir son:
+    \begin{itemize}
+      \item Numero de iteraciones que se ejecutará el optimizador.
+      \item Modelo de Red Neuronal Convolucional preentrenada que se utilizará (existen una variedad de CNN presentadas anteriormente) junto con las capas que se utilizaran de la 
+      respectiva red tanto para calcular el estilo como el contenido.
+      \item Imagen desde la cual comenzar la optimización, es posible comenzar desde una imagen de ruido, desde la imagen de contenido.
+      \item Método de optimización a utilizar.
+    \end{itemize}
+
+    Para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica.
   \subsection{Solucion propuesta}
+    En la solución propuesta en este trabajo se plantea poder definir automáticamente el numero de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado.
+    El resto de los hiperparámetros permanecen predefinidos a mano, excepto la imagen de la cual comenzar que influye notablemente en la cantidad de iteraciones que debe realizar el 
+    algoritmo para obtener un resultado aceptable.
+    Existen una gran variedad de implementaciónes de código abierto que implementan este algoritmo. La que se decidió utilizar fue la de Justin Jhonson (\url{https://github.com/jcjohnson/neural-style}).
+    Que es la opción de mayor aceptación en la industria.
+    Para poder establecer una métrica de comparación, se realizó finetuning sobre AlexNet, con el conjunto de datos de Wikipaintings, para que la red reentrenada aprenda a reconocer
+    el estilo de una obra de arte para los 10 estilos que mas datos provee, obteniendo una precision del 92%.
+    De esta forma se van realizando evaluaciones del resultado obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
+    
+    
 
 \end{document}
