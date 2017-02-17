@@ -85,35 +85,37 @@
 
 \chapter{INTRODUCCION}
   \paragraph{Contexto}
-  En los ultimos años las fotografias estan cada vez mas pasando a ser un virtual en lugar de fisico, de la mano del gran aumento en el uso de los dispositivos moviles 
-  cualquier persona puede tomar miles fotografias en un instante de tiempo, y compartirla en las redes sociales.
-  A partir de esto, se han desarrollado muchas aplicaciones entorno a las fotografias, ya sea desde redes sociales masivamente utilizadas, hasta aplicaciones que aplican efectos o filtros 
-  a la fotografia para transformarla en un retrato en blanco y negro o sepia por ejemplo.
-  Muy recientemente se han comenzado a desarrollar aplicaciones que logran transferir el estilo de una obra de arte a una fotografia. Esto es posible gracias al incremento 
-  del poder de cómputo y al decrecimiento del precio de los nuevos dispositivos, ya que las técnicas computacionales empleadas para esto, requieren un cómputo mucho mas complejo.
-  Las principal herramienta utilizada para poder llevar esta tarea a cabo son Redes Neuronales Convolucionales, provenientes del area de  
-  Inteligencia Artificial y Aprendizaje Automatico, que al aplicarse al area de Vision por Computadoras han logrado resultados absolutamente disruptivos, 
-  comparado a los ultimos avances que se venian obteniendo en el area, principalmente para la clasificacion de imagenes, detección y reconocimiento de objetos.
-  Por mencionar otro ejemplo de gran investigacion en la actualidad, los autos que se conducen por si solos, emplean estas tecnicas para lograrlo.
+    En los ultimos años las fotografias estan cada vez mas pasando a ser un virtual en lugar de fisico, de la mano del gran aumento en el uso de los dispositivos moviles 
+    cualquier persona puede tomar miles fotografias en un instante de tiempo, y compartirla en las redes sociales.
+    A partir de esto, se han desarrollado muchas aplicaciones entorno a las fotografias, ya sea desde redes sociales masivamente utilizadas, hasta aplicaciones que aplican efectos o filtros 
+    a la fotografia para transformarla en un retrato en blanco y negro o sepia por ejemplo.
+    Muy recientemente se han comenzado a desarrollar aplicaciones que logran transferir el estilo de una obra de arte a una fotografia. Esto es posible gracias al incremento 
+    del poder de cómputo y al decrecimiento del precio de los nuevos dispositivos, ya que las técnicas computacionales empleadas para esto, requieren un cómputo mucho mas complejo.
+    Las principal herramienta utilizada para poder llevar esta tarea a cabo son Redes Neuronales Convolucionales, provenientes del area de  
+    Inteligencia Artificial y Aprendizaje Automatico, que al aplicarse al area de Vision por Computadoras han logrado resultados absolutamente disruptivos, 
+    comparado a los ultimos avances que se venian obteniendo en el area, principalmente para la clasificacion de imagenes, detección y reconocimiento de objetos.
+    Por mencionar otro ejemplo de gran investigacion en la actualidad, los autos que se conducen por si solos, emplean estas tecnicas para lograrlo.
   \paragraph{Motivación}
-  Computacionalmente una imagen es representada por un vector de 2 dimensiones en los que cada elemento contiene el valor de brillo de un pixel.
-  Existen articulos de investigación en los cuales se definen algoritmos para la transferencia de estilos artisticos en fotografias, que se basan en modelos estocasticos, 
-  los cuales requieren una gran cantidad de hiper parametros predefinidos empiricamente, es decir parametros que deben ser fijados previo a la ejecución del algoritmo que dependen 
-  de la elección propia del usuario, pero que influyen en gran manera sobre el resultado.
-  El principal objetivo de este trabajo es poder realizar una elección inteligente de uno de los principales hiper parametros como lo es el numero de iteraciones 
-  que debe realizar el algoritmo hasta obtener un resultado interesante.
-  Debido a que las obras de arte, sueles calificadas con metricas cualitativas y no tanto cuantitativas, se decidió utilizar otra red neuronal convolucional, 
-  entrenada especialmente para reconocer estilos artisticos y en base a los resultados que arroja se define si el numero de iteraciones es suficiente para generar el resultado final 
-  o es necesario continuar iterando.
+    En lo que respecta al área de visión por computadoras, una imagen es representada por un vector de 2 dimensiones donde cada valor representa la intensidad captada por un sensor 
+    de un determinado punto espacial, representados como píxeles. La representación de los píxeles es muy sensible a cambios en la iluminación, ángulo, contraste y tamaño que pueda existir.
+    Existen articulos de investigación en los cuales se definen algoritmos para la transferencia de estilos artisticos en fotografias, que se basan en modelos estocasticos, 
+    los cuales requieren una gran cantidad de hiperparámetros predefinidos empiricamente, es decir parámetros que deben ser fijados previo a la ejecución del algoritmo que dependen 
+    de la elección propia del usuario, pero que influyen en gran manera sobre el resultado.
+    El principal objetivo de este trabajo es poder realizar una elección inteligente de uno de los principales hiperparámetros como lo es el número de iteraciones 
+    que debe realizar el algoritmo hasta obtener un resultado interesante.
+    Para poder determinar cuando un resultado logra ser aceptable es necesario definir una métrica para esto.
+    Debido a que las obras de arte, sueles calificadas con metricas cualitativas y no tanto cuantitativas, se decidió utilizar otra red neuronal convolucional, 
+    entrenada especialmente para reconocer estilos artisticos y en base a los resultados que arroja se define si el numero de iteraciones es suficiente para generar el resultado final 
+    o es necesario continuar iterando.
   \paragraph{Estructura del trabajo}
-  A lo largo de este trabajo se hará un recorrido por los principales conceptos para comprender tanto el problema como la solución y las tecnicas empleadas.
-  El capitulo 2 contendrá el marco teorico y cuestiones formales requeridas, principalmente orientado al aprendizaje Automatico y a las redes neuronales.
-  En el capitulo 3 se hara un recorrido por los principales articulos de investigación y los algoritmos alli definidos para las tecnicas de transferencia y reconocimiento de estilos artisticos.
-  Para luego abordar en detalle la solución propuesta, junto con un analisis y evaluacion empirica de la misma.
-  En el capitulo 4 será quien contenga los experimentos realizado y los resultados obtenidos, para finalmente en el capitulo 5 establecer una conclusión acerca del trabajo realizado, 
-  junto con las perspectivas y posibles tareas a futuro.
+    A lo largo de este trabajo se hará un recorrido por los principales conceptos para comprender tanto el problema como la solución y las tecnicas empleadas.
+    El capitulo 2 contendrá el marco teorico y cuestiones formales requeridas, principalmente orientado al aprendizaje Automatico y a las redes neuronales.
+    En el capitulo 3 se hara un recorrido por los principales articulos de investigación y los algoritmos alli definidos para las tecnicas de transferencia y reconocimiento de estilos artisticos.
+    Para luego abordar en detalle la solución propuesta, junto con un analisis y evaluacion empirica de la misma.
+    En el capitulo 4 será quien contenga los experimentos realizado y los resultados obtenidos, para finalmente en el capitulo 5 establecer una conclusión acerca del trabajo realizado, 
+    junto con las perspectivas y posibles tareas a futuro.
 
-A continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artistico a fotografias:
+Para introducir al lector en el tema, a continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artistico a fotografias:
 ADJUNTAR EJEMPLOS
 
 \iffalse
@@ -194,30 +196,44 @@ standing of how humans create and perceive artistic imagery.
 
 
     \subsection{Características para el Aprendizaje}
-      Para que un modelo pueda aprender, es necesario definir las caracteristicas que este deberá aprender a partir de las instancias de entrenamiento, segun el tipo de dato, estas
+      Para que un modelo pueda aprender, es necesario definir las caracteristicas (features en inglés) que este deberá aprender a partir de las instancias de entrenamiento, segun el tipo de dato, estas
       caracteristicas iran variando.
-      \begin{itemize}
-	\item Representando una instancia
-	  Representaciones planas
-	  Nuevos sistemas permiten representar árboles o grafos
-	  Tipos de features: booleanas (true, false), numéricas (4, 1, -5), de punto flotante (0.5, 1, 9.2), enumeraciones (rojo,azul,verde,amarillo)
-	  Representando valores complejos
-	  Conjuntos
-	  Features binarios por la presencia de cada elemento
-	Clase objetivo de conjuntos: entrenar un sistema independiente por cada elemento
-	\item Representando un texto
-	  \subitem Bag of words
-	  \subitem Una feature por palabra, indicando si la palabra aparece en el texto o no (binaria) o cuantas veces aparece (numérico)
-	  \subitem Puede extenderse a pares de palabras (bigram model) o más
-	  \subitem Sólo se pueden usar palabras vistas durante el entrenamiento
-	\item Representando imágenes
-	  \subitem Campo de investigación muy activa
-	  \subitem Método más sencillo: usar el valor de los píxeles directamente
-	  \subitem No generaliza muy bien
-	  \subitem Pero puede mejorar utilizando transformaciones algorítmicas del conjunto de entrenamiento
-	  \subitem Siguiente paso: tomar el promedio sobre pequeños cuadrados de la imágen
-	  \subitem Métodos más complejos relativos al area de vision por computadoras (SIFT/SURF)
-      \end{itemize}
+      \subsubsection{Representando una instancia}
+	\begin{itemize}
+	  \item Representaciones planas
+	  \item Nuevos sistemas permiten representar árboles o grafos
+	  \item Tipos de features: booleanas (true, false), numéricas (4, 1, -5), de punto flotante (0.5, 1, 9.2), enumeraciones (rojo,azul,verde,amarillo)
+	  \item Representando valores complejos
+	  \item Conjuntos
+	    \subitem Features binarios por la presencia de cada elemento
+	    \subitem Clase objetivo de conjuntos: entrenar un sistema independiente por cada elemento
+	\end{itemize}
+      \subsubsection{Representando un texto}
+	\begin{itemize}
+	  \item Bag of words
+	  \item Una feature por palabra, indicando si la palabra aparece en el texto o no (binaria) o cuantas veces aparece (numérico)
+	  \item Puede extenderse a pares de palabras (bigram model) o más
+	  \item Sólo se pueden usar palabras vistas durante el entrenamiento
+	\end{itemize}
+	\subsubsection{Representando imágenes}
+	  Es un campo de investigación que en la actualidad se encuentra muy activo. El método más sencillo es usar el valor de los píxeles directamente, aunque este no generaliza muy bien
+	  Pero puede mejorar utilizando transformaciones algorítmicas del conjunto de entrenamiento el siguiente paso seria tomar el promedio sobre pequeños cuadrados de la imágen.
+	  Necesitamos de alguna funcion compleja que comprenda el significado de la imágen más allá de la representación numérica de la misma.
+	  A lo largo del desarrollo de la visión por computadora se distinguen dos enfoques para la generacion de descriptores capaces de reconocer caracteristicas de una imagen: 
+	  El enfoque basado en técnicas superficiales (o “shallow” en inglés) y el enfoque de aprendizaje no-supervisado.
+	  \paragraph{Enfoque Superficial}
+	    El enfoque superficial responde a la manera tradicional de hacer visión por computadoras. Se busca generar una representación invariante a la posición, iluminación, fondo,
+	    etc. utilizando principalmente técnicas estadísticas a partir de conocimiento anterior del objeto y del contexto. Los descriptores superficiales son diseñados a mano a 
+	    partir de características físicas, hipótesis y observaciones. El enfoque entonces no aprende features de los objetos sino que se procesa la imágen de interés con un 
+	    extractor de features prefijadas y luego se pasa la nueva representación a un clasificador entrenable. Los métodos más utilizadas que generan este tipo de descriptores son SIFT, SURF y Vectores Fisher.
+	  \paragraph{Enfoque de Aprendizaje No Supervisado} 
+	    La filosofía de estas técnicas se basa en la hipótesis de “un único algoritmo de aprendizaje”: El cerebro usa esencialmente el mismo algoritmo para comprender diferentes formas de entrada. 
+	    Es entonces que en este enfoque se contempla que la complejidad de la percepción no está en el algoritmo ni en las estructuras de aprendizaje, sino en los datos. 
+	    El enfoque no supervisado consiste de técnicas, algoritmos y estructuras inspiradas en el cerebro que son capaces de aprender features por sí mismas, 
+	    en lugar de que sean diseñadas a mano y prefijadas en el detector. El problema asociado a esto es que no sabemos qué features el modelo aprende durante el entrenamiento.
+	    Las estructuras de aprendizaje no-supervisado de features contemplan el concepto heredado de la neurobiología de que las features son jerárquicas: 
+	    desde features de bajo nivel como bordes y contornos, hasta estructuras y objetos. Las Redes Neuronales Convolucionales soportan el aprendizaje de este tipo features 
+	    y es el modelo que analizaremos posteriormente en este trabajo.
 
 
       \subsubsection{Normalización}
@@ -233,9 +249,6 @@ standing of how humans create and perceive artistic imagery.
 	Véase http://infolab.stanford.edu/~ullman/mmds/ch11.pdf
 
 
-	\paragraph{Information Gain}
-	  Podemos definir Information Gain a partir de la entropía (qué tan "ruidosa" es la partición)
-
       \subsection{Modelos}
 
 	¿Qué es un modelo?
@@ -245,56 +258,12 @@ standing of how humans create and perceive artistic imagery.
 	predicciones con precision sobre un ejemplo nuevo no visto antes, luego de aprender sobre el conjunto de entrenamiento. Los ejemplos de entrenamiento provienen de un espacio 
 	con probabilidad de distribución desconocida del cual es considerado representativo. El sistema de aprendizaje debe construir un modelo sobre el espacio total que le permite realizar
 	predicciones lo suficientemente precisas sobre nuevos ejemplos.
-	Los modelos capturan la información en los datos de entrada (o en los datos en general, en aprendizaje no supervisado)
-	Representan la forma de ver el mundo que permite extrapolar cuando se observan nuevos datos (nunca vistos)
-	Los modelos pueden ser matemáticamente bien formados (estadísticos) o simplemente algoritmicos (cascadas de if-then-else)
-	El modelo como código objeto: Diferenciamos el modelo del algoritmo usado para obtener el modelo
-
-	\paragraph{Propiedades de los modelos}
-	  \begin{itemize}
-	    \item Sesgo inductivo
-	    \item El dilema del sesgo vs. varianza (bias–variance dilemma)
-	    \item Para modelos estadísticos: Modelos generativos, Modelos discriminantes
-	    \item Teorema no-free lunch (NFL)
-	  \end{itemize}
-
-	\paragraph{Sesgo inductivo}
-	  Distintos modelos asumen distintas cosas sobre la población de elementos a predecir
-	  Es importante entender este sesgo inductivo para comprender el comportamiento del modelo sobre una población dada
-	  %http://en.wikipedia.org/wiki/Inductive_bias
-
-	\paragraph{Modelos Generativos vs. Discriminantes}
-	  \begin{itemize}
-	    \item Para modelos estadísticos
-	    \item Calcular la probablidad de la clase objetivo dada las features de entrada
-	    \item Podemos realizar este cálculo si tenemos un modelado probabilístico de la probabilidad conjunta de entradas y la clase objetivo
-	    \item Sin embargo, no es un requerimiento el modelado de la probabilidad conjunta
-	    \item Simulación vs. emulación
-	  \end{itemize}
-
-	\paragraph{Modelos Generativos}
-	  \begin{itemize}
-	    \item Calcular P(y|x1, …, xn) via P(x1, …, xn, y)
-	    \item El cálculo de la probabilidad conjunta habilita sistemas reversibles
-	    \item Cualquier variable puede ser una clase objetivo
-	    \item Requiere un “historia generativa” de como los datos existen y se interrelacionan
-	    \item Dependencia entre variables
-	    \item Necesitan más datos y/o hacen uso menos eficiente de los mismos
-	    \item Si sólo nos interesa la clase objetivo, estamos modelando de más
-	  \end{itemize}
-
-	\paragraph{Modelos Discriminantes}
-	  \begin{itemize}
-	    \item Sólo se centran en modelar P(y|x1, …, xn)
-	    \item Muchas veces ni siquiera modelan la probabilidad pero probabilidades sin normalizar
-	    \item Likelihoods
-	    \item Son suficientes para decidir entre distintos valores posibles de la clase objetivo
-	    \item Suelen ofrecer mejores resultados en la práctica
-	    \item Tienen menos ventajas teóricas
-	  \end{itemize}
-
-	\paragraph{Teorema del No Free Lunch}
-	  El teorema No Free Lunch dice que, dado una distribución de funciones objetivos que sea completamente al azar, no puede haber un algoritmo que funcione mejor sobre todas las funciones objetivo.
+	\begin{itemize}
+	  \item Los modelos capturan la información en los datos de entrada (o en los datos en general, en aprendizaje no supervisado)
+	  \item Representan la forma de ver el mundo que permite extrapolar cuando se observan nuevos datos (nunca vistos).
+	  \item Los modelos pueden ser matemáticamente bien formados (estadísticos) o simplemente algoritmicos (cascadas de if-then-else).
+	  \item El modelo como código objeto: Diferenciamos el modelo del algoritmo usado para obtener el modelo.
+	\end{itemize}
 
       \subsection{Evaluación}
 
@@ -465,12 +434,12 @@ standing of how humans create and perceive artistic imagery.
 	    de los casos con las etiquetas correctas.
 	  \end{itemize}
       
-      \subsubsection{CLASIFICACION LINEAL}
+      \subsubsection{Clasificación Lineal}
 	Este enfoque tiene 2 componentes principales que luego seran extendidos a las Redes Neuronales: Una funcion de puntuación que asigna un puntaje de pertenencia de cada instancia a cada categoria, 
 	y una función de pérdida que cuantifica la coincidencia entre los puntajes predecidos con los puntajes correctos.
 	Este problema se reduce a un problema de optimización donde se requiere minimizar la función de pérdida con respecto a la función de puntuación.
 
-    \subsection{FUNCION DE PUNTUACION}
+    \subsection{Función de Puntuación}
       El primer componente desde este enfoque es definir una función de pérdida que mapee el valor de los pixeles de una imagen a un puntaje de confianza para cada categoría.
       Asumiendo que la entrada de la funcion son imagenes, cada una con una etiqueta de categoria dentro de las K categorias, la salida debe ser un valor de confianza de esa imagen 
       para cada una de las K categorias.
@@ -480,17 +449,17 @@ standing of how humans create and perceive artistic imagery.
 	f(xi,W,b)=Wxi+b
 	xi es una imagen representada por sus pixeles, W es un vector de pesos y b es un termino de regularizacion
 
-    \subsection{FUNCION DE PERDIDA}
+    \subsection{Función de Pérdida}
       En la funcion lineal se puede observar que esta parametrizada por un conjunto de pesos.
       No se tiene control sobre los valores de los pixeles pero si se puede controlar el vector de pesos, de forma tal que el valor predecido sea consistente con el valor correcto. 
       La funcion de perdida pretende medir el error entre el valor predecido y el valor correcto, intutivamente la perdida sera mayor si el clasificador predice de forma erronea y 
       menor si lo hace de forma correcta.
       La idea es minimizar la funcion de perdida adaptando los valores de los pesos.
 
-    \subsection{OPTIMIZACION}
+    \subsection{Optimización}
       El objetivo de la optimización es encontrar el vector de pesos W que minimice la funcion de perdida.
 
-    \subsection{GRADIENTE} 
+    \subsection{Gradiente} 
       La estrategia de optimización mas utilizada para este tipo de problemas es la de seguir la dirección del gradiente (también llamado derivadas) de la función de pérdida.
       En este caso que la función toma como entrada un vector de números, se aplican las derivadas parciales y el gradiente es el vector resultante de calcular las derivadas parciales
       en cada dimensión.
@@ -512,15 +481,14 @@ standing of how humans create and perceive artistic imagery.
       \paragraph{Otras formas de optimizacion}
 	Existen otros metodos de optimizacion que trabajan de forma similar ADAM, LBFGS,RMSProp etc. DETALLAR.
 	
-    \subsection{RETROPROPAGACION BACKPROPAGATION}
+    \subsection{Retropropagación}
       http://cs231n.github.io/optimization-2/
-      Es una forma  de computar los gradientes de expresiones mediante la aplicacion recursiva de la regla de la cadena.
+      Retropropagación (en inglés Backpropagation) una forma  de computar los gradientes de expresiones mediante la aplicacion recursiva de la regla de la cadena.
       El ciclo consta de 2 fases, propagación y luego actualizacion de parámetros. Cuando ingresan los parámetro a la función se calcula el resultado final, y se lo compara con el resultado 
       deseado, aplicando la función de pérdida se calcula el error, mediante el metodo de optimizacion se define el gradiente para luego realizar la retropropagación en la función hasta 
       actualizar los parametros.
 
-    \section{REDES NEURONALES ARTIFICIALES}
-      ARTIFICIAL NEURAL NETWORK
+    \section{Redes Neuronales Artificiales}
       Combinacion lineal de funciones no lineales
       An artificial neural network (ANN) learning algorithm, usually called "neural network" (NN), is a learning algorithm that is inspired by the structure and functional aspects 
       of biological neural networks. Computations are structured in terms of an interconnected group of artificial neurons, processing information using a connectionist approach 
@@ -593,14 +561,15 @@ standing of how humans create and perceive artistic imagery.
       \end{enumerate}
       Esto se realiza iterativamente una cantidad predefinida de veces.
 
-  \section {DEEP LEARNING}
+  \section {Deep Learning}
     La caída de los precios de hardware y el desarrollo de GPUs para uso personal en los últimos años han contribuido al desarrollo del concepto de aprendizaje profundo que consiste
     de múltiples capas ocultas en una red neuronal artificial. Este enfoque trata de modelar la forma en que el cerebro humano procesa luz y sonido en visión y audición.
     Algunas aplicaciones exitosas del aprendizaje profundo son la visión por computadora y el reconocimiento del habla.
 
-  \section {REDES NEURONALES CONVOLUCIONALES}
+  \section {Redes Neuronales Convolucionales}
     Las redes neuronales convolucionales son muy similares a las redes neuronales antes vista, con la diferencia en que la arquitectura de una red neuronal convolucional asume explicitamente
-    que el conjunto de entrada son imagenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura.
+    que el conjunto de entrada son imagenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura. 
+    Estan inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes.
 
     \subsection {Arquitectura de una red neuronal convolucional}
       Las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad.
@@ -609,8 +578,8 @@ standing of how humans create and perceive artistic imagery.
 
       En el caso mas simple de arquitectura, la red transforma el volumen de una imagen de entrada en un volumen de salida (conteniendo los puntajes de cada clase para el problema de clasificacion)
 
-    \subsection {TIPOS DE CAPAS}
-      \subsubsection{CAPA CONVOLUCIONAL} 
+    \subsection {Tipos de Capas}
+      \subsubsection{Capa Convolucional} 
 	Los parametros consisten en un conjunto de filtros aprendibles. Cada filtro el pequeño espacialmente(alto y ancho) pero se extiende sobre toda la profundidad del volumen de entrada.
 	Durante el paso hacia adelante, se desliza o convoluciona el filtro atraves del alto y ancho del volumen de entrada y se computa el producto punto entre los valores del filtro y los valores
 	del volumen de entrada. A medida que se va deslizando el filtro sobre el ancho y el alto del volumen de entrada, se va generando un mapa de activacion de 2 dimensiones que contiene los 
@@ -621,7 +590,7 @@ standing of how humans create and perceive artistic imagery.
 
 	Backpropagation. The backward pass for a convolution operation (for both the data and the weights) is also a convolution (but with spatially-flipped filters)
 
-      \subsubsection{CAPA DE AGRUPAMIENTO} 
+      \subsubsection{Capa de Agrupamiento} 
 	Su función es reducir progresivamente el tamaño espacial de la representación para reducir la cantidad de parámetros y de cálculo en la red, y por lo tanto también para controlar
 	el Overfitting. La capa de agrupamiento funciona independientemente en cada segmento de profundidad de la entrada y la redimensiona espacialmente, utilizando la operación de máximo, 
 	tambien se suele utilizar la operacion de promedio o la norma L2.
@@ -631,7 +600,7 @@ standing of how humans create and perceive artistic imagery.
 	adelante. Por lo tanto, durante el paso hacia adelante de una capa de agrupamiento es común realizar un seguimiento del índice de la activación máxima de manera que 
 	el enrutamiento de gradiente es eficiente durante la retropropagación.
 
-      \subsubsection{CAPA COMPLETAMENTE CONECTADA} 
+      \subsubsection{Capa Completamente Conectada} 
 	Las neuronas entre dos capas adyacentes están completamente conectadas de a pares, pero las neuronas dentro de una sola capa no comparten conexiones.
 
     \subsection {Consideraciones computacionales}
@@ -654,13 +623,13 @@ standing of how humans create and perceive artistic imagery.
 	\item Resnet
       \end{itemize}
 
-    \section {FINETUNING}
+    \section {Reentrenamiento}
     STANFORD
-      Finetuning toma un modelo ya entrenado, adapta la arquitectura y retoma el entrenamiento partiendo desde los pesos del modelo ya entrenado.
+      El reentranmiento (Finetuning en inglés) toma un modelo ya entrenado, adapta la arquitectura y retoma el entrenamiento partiendo desde los pesos del modelo ya entrenado.
       \paragraph{Modelos preentrenados}
 	Debido a que una red neuronal convolucional moderna requiere entre 2 y 3 semanas para entrenarse, utilizando multiples GPUs para el conjunto de datos ImageNet, es comun ver que gente
 	publica sus Redes ya entrenadas para el beneficio de otras personas que lo pueden usar para hacer finetuning.
-      \paragraph{Como y cuando hacer Finetuning}
+      \paragraph{Como y cuando hacer Reentrenamiento}
 	¿Cómo decidir qué tipo de transferencia de aprendizaje debe realizar en un nuevo conjunto de datos? Esta es una función de varios factores, pero los dos más importantes son el 
 	tamaño del nuevo conjunto de datos (pequeño o grande), y su similitud con el conjunto de datos original (por ejemplo ImageNet-como en términos de contenido de imágenes y las clases,
 	O muy diferentes, tales como imágenes de microscopio). Teniendo en cuenta que las características de CNN son más genéricas en capas tempranas y más específicas del conjunto de datos
@@ -679,7 +648,7 @@ standing of how humans create and perceive artistic imagery.
 	  En este caso, tendríamos suficientes datos y confianza para afinar a través de toda la red.
 	\end{itemize}
      \section {Otros conceptos relevantes}
-	\subsubsection{MATRIZ DE GRAM}
+	\subsubsection{Matriz de Gramm}
      
      
 \chapter{Trabajo propuesto}
