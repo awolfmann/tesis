@@ -85,12 +85,12 @@
 
 \chapter{INTRODUCCION}
   \paragraph{Contexto}
-    En los ultimos años las fotografias estan cada vez mas pasando a ser un virtual en lugar de fisico, de la mano del gran aumento en el uso de los dispositivos moviles 
+    En los ultimos años las fotografias estan cada vez mas pasando a ser un objeto virtual en lugar de fisico, de la mano del gran aumento en el uso de los dispositivos moviles 
     cualquier persona puede tomar miles fotografias en un instante de tiempo, y compartirla en las redes sociales.
     A partir de esto, se han desarrollado muchas aplicaciones entorno a las fotografias, ya sea desde redes sociales masivamente utilizadas, hasta aplicaciones que aplican efectos o filtros 
     a la fotografia para transformarla en un retrato en blanco y negro o sepia por ejemplo.
     Muy recientemente se han comenzado a desarrollar aplicaciones que logran transferir el estilo de una obra de arte a una fotografia. Esto es posible gracias al incremento 
-    del poder de cómputo y al decrecimiento del precio de los nuevos dispositivos, ya que las técnicas computacionales empleadas para esto, requieren un cómputo mucho mas complejo.
+    del poder de cómputo y al descenso del precio de los nuevos dispositivos, ya que las técnicas computacionales empleadas para esto, requieren un cómputo mucho mas complejo.
     Las principal herramienta utilizada para poder llevar esta tarea a cabo son Redes Neuronales Convolucionales, provenientes del area de  
     Inteligencia Artificial y Aprendizaje Automatico, que al aplicarse al area de Vision por Computadoras han logrado resultados absolutamente disruptivos, 
     comparado a los ultimos avances que se venian obteniendo en el area, principalmente para la clasificacion de imagenes, detección y reconocimiento de objetos.
@@ -117,24 +117,9 @@
 
 Para introducir al lector en el tema, a continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artistico a fotografias:
 ADJUNTAR EJEMPLOS
+VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
 
-\iffalse
-Tener en cuenta:
-In fine art, especially painting, humans have mastered the skill to create unique
-visual experiences through composing a complex interplay between the con-
-tent and style of an image. Thus far the algorithmic basis of this process is
-unknown and there exists no artificial system with similar capabilities. How-
-ever, in other key areas of visual perception such as object and face recognition
-near-human performance was recently demonstrated by a class of biologically
-inspired vision models called Deep Neural Networks. 1, 2 Here we introduce an
-artificial system based on a Deep Neural Network that creates artistic images
-of high perceptual quality. The system uses neural representations to sepa-
-rate and recombine content and style of arbitrary images, providing a neural
-algorithm for the creation of artistic images. Moreover, in light of the strik-
-ing similarities between performance-optimised artificial neural networks and
-biological vision, 3–7 our work offers a path forward to an algorithmic under-
-standing of how humans create and perceive artistic imagery.
-\fi
+
 
 \chapter{MARCO TEORICO}
 
@@ -490,40 +475,51 @@ standing of how humans create and perceive artistic imagery.
 
     \section{Redes Neuronales Artificiales}
       Combinacion lineal de funciones no lineales
+ \iffalse
       An artificial neural network (ANN) learning algorithm, usually called "neural network" (NN), is a learning algorithm that is inspired by the structure and functional aspects 
       of biological neural networks. Computations are structured in terms of an interconnected group of artificial neurons, processing information using a connectionist approach 
       to computation. Modern neural networks are non-linear statistical data modeling tools. They are usually used to model complex relationships between inputs and outputs, 
       to find patterns in data, or to capture the statistical structure in an unknown joint probability distribution between observed variables.
-      \paragraph {Ventajas}
-	\begin{itemize}
-	  \item Bueno para variables de entrada continuas
-	  \item Aproximadores generales de funciones continuas
-	  \item Altamente no lineales
-	  \item Aprende funciones caracteristicas
-	  \item Bueno para usar en dominios continuos con poco conocimiento:
-	    \subitem Cuando no se conocen buenas caracteristicas
-	    \subitem No se conoce la forma de un buen modelo funcional
-	\end{itemize}
-      \paragraph {Desventajas}
-	\begin{itemize}
-	  \item Los resultados intermedios no son interpretables, al resultado final se los considera como proveniente de una caja negra.
-	  \item El aprendizaje es lento
-	  \item Para lograr una buena generalizacion puede requerir muchos datos
-	\end{itemize}
+      
+ \fi
+      Un algoritmo de aprendizaje de red neuronal artificial (ANN), usualmente llamado "red neuronal" (NN), es un algoritmo de aprendizaje que se inspira en la estructura y aspectos funcionales
+      De redes neuronales biológicas. Los cálculos se estructuran en términos de un grupo interconectado de neuronas artificiales, procesando la información utilizando un enfoque conexionista
+      A la computación. Las redes neuronales modernas son herramientas no lineales de modelado de datos estadísticos. Usualmente se usan para modelar relaciones complejas entre entradas y salidas,
+      Para encontrar patrones en los datos, o para capturar la estructura estadística en una distribución de probabilidad conjunta desconocida entre las variables observadas.
+      
+      \subsection{Analisis comparativo con otras técnicas de Aprendizaje Automático}
+	\paragraph {Ventajas}
+	  \begin{itemize}
+	    \item Bueno para variables de entrada continuas
+	    \item Aproximadores generales de funciones continuas
+	    \item Altamente no lineales
+	    \item Aprende funciones caracteristicas
+	    \item Bueno para usar en dominios continuos con poco conocimiento:
+	      \subitem Cuando no se conocen buenas caracteristicas
+	      \subitem No se conoce la forma de un buen modelo funcional
+	  \end{itemize}
+	\paragraph {Desventajas}
+	  \begin{itemize}
+	    \item Los resultados intermedios no son interpretables, al resultado final se los considera como proveniente de una caja negra.
+	    \item El aprendizaje es lento
+	    \item Para lograr una buena generalizacion puede requerir muchos datos
+	  \end{itemize}
 
-      \paragraph {Motivación biológica} 
+      \subsection {Historia de las Redes Neuronales Artificiales}
+      
+      \subsection {Motivación biológica} 
 	El area de las redes neuronales artificiales fue originalmente insipirada por el objetivo de modelar los sistemas neuronales biológicos, 
 	pero luego fue divergiendo
 	y convirtiendose en una tarea de Ingenieria para obtener buenos resultados dentro del area de Aprendizaje automatico.
 	Dendritas, input axones, sinapsis y output.
 	IMAGEN DE ANALOGIA
 
-      \paragraph {Neurona artificialUnidad}
+      \subsection {Neurona artificial Unidad}
 	Consta de un vector de entrada, un vector de pesos y una función de activación no lineal
 	En una neurona se realiza el producto punto entre el vector de entrada, y su vector de pesos, le suma el sesgo y aplica la funcion de no linearidad.
 	Una unica neurona puede ser utilizada para implementar un clasificador binario.
 
-      \paragraph {Funciones de Activacion comunmente utilizadas}
+      \subsection {Funciones de Activacion comunmente utilizadas}
 	Toda funcion de activacion toma un unico numero como entrada, realiza un operacion matematica predefinida, no lineal y devuelve el resultado obtenido.
 	Algunos ejemplos de funciones que se utilizan:
 	\begin{itemize}
@@ -571,6 +567,8 @@ standing of how humans create and perceive artistic imagery.
     que el conjunto de entrada son imagenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura. 
     Estan inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes.
 
+    \subsection {Historia de las Redes Neuronales Convolucionales}
+
     \subsection {Arquitectura de una red neuronal convolucional}
       Las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad.
       Cada capa acepta un volumen de 3 dimensiones como entrada y lo transforma en un volumen de salida de 3 dimensiones a traves de una funcion diferenciable.
@@ -610,8 +608,8 @@ standing of how humans create and perceive artistic imagery.
       \begin{itemize}
 	\item A partir de los tamaños de volumen intermedios: Éstos son el número crudo de activaciones en cada capa de la ConvNet, y también sus gradientes (de igual tamaño). Normalmente, la mayoría de las activaciones se encuentran en las capas anteriores de una ConvNet (es decir, primeras capas de convección). Estos se mantienen alrededor porque son necesarios para backpropagation, pero una implementación inteligente que ejecuta un ConvNet sólo en tiempo de prueba podría en principio reducir esto en una cantidad enorme, sólo almacenando las activaciones actuales en cualquier capa y descartando las activaciones anteriores en las capas de abajo .
 	\item A partir de los tamaños de parámetro: Estos son los números que contienen los parámetros de red, sus gradientes durante la retropropagación y, comúnmente, también un caché de pasos si la optimización utiliza impulso, Adagrad o RMSProp. Por lo tanto, la memoria para almacenar el vector de parámetros solo debe ser multiplicada por un factor de al menos 3 o más.
-	\item Cada implementación de ConvNet tiene que mantener la memoria miscelánea, como los lotes de datos de imagen, tal vez sus versiones aumentadas, etc.
-	Una vez que tenga una estimación aproximada del número total de valores (para activaciones, gradientes y misc), el número debe convertirse a tamaño en GB. Tome el número de valores, multiplique por 4 para obtener el número bruto de bytes (ya que cada punto flotante es 4 bytes, o tal vez por 8 para doble precisión), y luego dividir por 1024 varias veces para obtener la cantidad de memoria en KB, MB, y finalmente GB. Si su red no encaja, una heurística común para "hacerla encajar" es disminuir el tamaño del lote, ya que la mayor parte de la memoria suele ser consumida por las activaciones.
+	\item Cada implementación de CNN tiene que mantener memoria datos extras, como los lotes de datos de imagen, tal vez sus versiones aumentadas, etc.
+	Una vez que tenga una estimación aproximada del número total de valores (para activaciones, gradientes y extra), el número debe convertirse a tamaño en GB. Tome el número de valores, multiplique por 4 para obtener el número bruto de bytes (ya que cada punto flotante es 4 bytes, o tal vez por 8 para doble precisión), y luego dividir por 1024 varias veces para obtener la cantidad de memoria en KB, MB, y finalmente GB. Si su red no encaja, una heurística común para "hacerla encajar" es disminuir el tamaño del lote, ya que la mayor parte de la memoria suele ser consumida por las activaciones.
       \end{itemize}
 
 
@@ -654,9 +652,14 @@ standing of how humans create and perceive artistic imagery.
 \chapter{Trabajo propuesto}
   \section{Algoritmo de Transferencia de estilo}
     \subsection{Introduccion}
-    Ver Introduccion 
+      En lo que al arte respecta, los humanos han desarrollado la capacidad de crear experiencias visuales únicas componiendo una compleja interacción entre el contenido y el estilo de una imagen.
+    Sin ir mas lejos, las bases algoritmicas de este proceso se desconocen y no existen sistemas artificiales que con capacidades similares. Sin embargo, en otras areas fundamentales
+    de la percepcion visual como el reconocimiento de objetos y rostros recientemente se ha alcanzado precisión cercana a la de un humano, utilizando modelos de redes neuronales profundas. 
+    Aquí presentamos un sistema artificial basado en una Red Neural Profunda que crea imágenes artísticas de alta calidad perceptiva. El sistema utiliza representaciones neuronales 
+    para separar y recombinar el contenido y el estilo de imágenes arbitrarias, proporcionando un algoritmo para la creación de imágenes artísticas.
+
     \subsection{Sintesis}
-      Cuando las Redes Neuronales Convolucionales (CNN) son entrenadas para reconocimiento de objetos, desarrollan una representacion de la imagen que hace que la información 
+      Cuando las Redes Neuronales Convolucionales (CNNs) son entrenadas para reconocimiento de objetos, desarrollan una representacion de la imagen que hace que la información 
       del objeto sea cada vez más explícita a lo largo de la jerarquia de las capas de la red.Por lo tanto, a lo largo de la jerarquía de procesamiento de la red, 
       la imagen de entrada se transforma en representaciones que cada vez más se preocupan por el contenido real de la imagen en lugar del valor de sus píxeles detallados. 
       Podemos visualizar directamente la información que cada capa contiene sobre la imagen de entrada, reconstruyendo la imagen solo a partir de los mapas de caracteristicas
@@ -700,7 +703,7 @@ standing of how humans create and perceive artistic imagery.
       mas manuales.
       Se compararon los predictores obtenidos con observadores humanos y esencialmente se obtuvieron niveles de precision similares.
     \subsection{Algoritmo de Aprendizaje}
-      El algoritmo aprende a clasificar las imágenes nuevas según su estilo, utilizando las etiquetas provistas en el conjunto de entrenamient.
+      El algoritmo aprende a clasificar las imágenes nuevas según su estilo, utilizando las etiquetas provistas en el conjunto de entrenamiento.
       Debido a que los conjuntos de datos que tratamos son bastante grandes y algunas de las características son de grandes dimensiónes, consideramos sólo clasificadores lineales, 
       dependiendo de características sofisticadas para proporcionar robustez. Utilizamos una implementación de fuente abierta de Descenso de Gradiente Estocástico con adaptación
       del Subgradiente. El proceso de aprendizaje optimiza la función ...
@@ -721,7 +724,7 @@ standing of how humans create and perceive artistic imagery.
     el conjunto de datos Wikipaintings, para los 10 estilos que mas datos provee.
 
     
-  \section{Descripcion del problema}
+  \section{Descripción del problema}
     Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes, sin embargo es necesario definir una serie de hiperparametros,
     que necesita el algoritmo para poder ejecutarse. El criterio de elección de estos hiperparámetros termina siendo muy influyente en el resultado final. 
     Los principales hiperparametros a definir son:
@@ -733,20 +736,37 @@ standing of how humans create and perceive artistic imagery.
       \item Método de optimización a utilizar.
     \end{itemize}
 
-    Para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica.
-  \section{Solucion propuesta}
-    En la solución propuesta en este trabajo se plantea poder definir automáticamente el numero de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado.
+    Además, para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica.
+  \section{Solución propuesta}
+    En la solución propuesta en este trabajo se plantea poder definir automáticamente el número de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado.
     El resto de los hiperparámetros permanecen predefinidos a mano, excepto la imagen de la cual comenzar que influye notablemente en la cantidad de iteraciones que debe realizar el 
     algoritmo para obtener un resultado aceptable.
-    Existen una gran variedad de implementaciónes de código abierto que implementan este algoritmo. La que se decidió utilizar fue la de Justin Jhonson (\url{https://github.com/jcjohnson/neural-style}).
-    Que es la opción de mayor aceptación en la industria.
-    Para poder establecer una métrica de comparación, se realizó finetuning sobre AlexNet, con el conjunto de datos de Wikipaintings, para que la red reentrenada aprenda a reconocer
-    el estilo de una obra de arte para los 10 estilos que mas datos provee, obteniendo una precision del 92%.
-    De esta forma se van realizando evaluaciones del resultado obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
+    La solución consta de 2 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo) y otro módulo encargado de 
+    evaluar.
+    \subsection{Módulo de generación de imagenes}
+      Existen una gran variedad de implementaciónes de código abierto que implementan el algoritmo de transferencia de estilo. La que se decidió utilizar fue la de Justin Jhonson (\url{https://github.com/jcjohnson/neural-style}),
+      la cual posee el mayor grado de aceptación en la industria.
+      La principal tecnología utilizada en esta implementación es el Framework Torch, que utiliza como lenguaje de programación a Lua.
+    \subsection{Módulo de evaluación de imagenes}
+      Para poder establecer una métrica de comparación, se realizó finetuning sobre AlexNet, con el conjunto de datos de Wikipaintings, para que la red reentrenada aprenda a reconocer
+      el estilo de una obra de arte para los 10 estilos que mas datos provee, obteniendo una precision del 92%.
+      De esta forma se van realizando evaluaciones del resultado obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
+      La implementación de este módulo fue realizada principalmente en Python, utilizando el Framework Caffe y la libreria OpenCV.
+    \subsection{Criterio de Selección}
+      El criterio de selección para elegir la imagen óptima fue el siguiente:
+      Dado que el estilo de la imagen resultante no siempre termina siendo el mismo estilo de la imagen provista para transferir el estilo, el estilo objetivo se definió como el estilo
+      que tiene asignada una mayor probabilidad de reconocimiento luego de 1000 iteraciones.
+      Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo supera al puntaje del resto de los estilos y se toma el punto medio.
+
+    \subsection{Conjunto de datos}
+      El conjunto de datos utilizado para en este trabajo es el de Wikipaintings
     
-  \printindex
+      
 \chapter{Experimentos}
 \chapter{Conclusiones, Perspectivas y trabajos a futuro}
   \section{Conclusiones}
   \section{Trabajos a futuro}
+    Se podría realizar una especie de predefinición del numero de iteraciones que requiere cada estilo, ejecutando el algoritmo una gran cantidad de veces y definiendo este valor 
+    estadisticamente, aunque esto puede llegar a no funcionar correctamente en todos los casos ya que dependiendo de la imagen de contenido, el estilo objetivo podria variar.
+\printindex
 \end{document}
