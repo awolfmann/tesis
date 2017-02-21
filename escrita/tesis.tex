@@ -83,7 +83,7 @@
 
 \tableofcontents 
 
-\chapter{INTRODUCCION}
+\chapter{Introducción}
   \paragraph{Contexto}
     En los ultimos años las fotografias estan cada vez mas pasando a ser un objeto virtual en lugar de fisico, de la mano del gran aumento en el uso de los dispositivos moviles 
     cualquier persona puede tomar miles fotografias en un instante de tiempo, y compartirla en las redes sociales.
@@ -109,10 +109,10 @@
     o es necesario continuar iterando.
   \paragraph{Estructura del trabajo}
     A lo largo de este trabajo se hará un recorrido por los principales conceptos para comprender tanto el problema como la solución y las tecnicas empleadas.
-    El capitulo 2 contendrá el marco teorico y cuestiones formales requeridas, principalmente orientado al aprendizaje Automatico y a las redes neuronales.
+    El capítulo 2 contendrá el marco teórico y cuestiones formales requeridas, principalmente orientado al aprendizaje Automatico y a las redes neuronales.
     En el capitulo 3 se hara un recorrido por los principales articulos de investigación y los algoritmos alli definidos para las tecnicas de transferencia y reconocimiento de estilos artisticos.
-    Para luego abordar en detalle la solución propuesta, junto con un analisis y evaluacion empirica de la misma.
-    En el capitulo 4 será quien contenga los experimentos realizado y los resultados obtenidos, para finalmente en el capitulo 5 establecer una conclusión acerca del trabajo realizado, 
+    Para luego abordar en detalle la solución propuesta, junto con un análisis y evaluación empírica de la misma.
+    En el capítulo 4 será quien contenga los experimentos realizado y los resultados obtenidos, para finalmente en el capitulo 5 establecer una conclusión acerca del trabajo realizado, 
     junto con las perspectivas y posibles tareas a futuro.
 
 Para introducir al lector en el tema, a continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artistico a fotografias:
@@ -121,7 +121,7 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
 
 
 
-\chapter{MARCO TEORICO}
+\chapter{Marco Teórico}
 
 %Material para revisar
 %http://cs231n.github.io/
@@ -144,50 +144,48 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
 
   \section{Aprendizaje Automatico}
 %https://en.wikipedia.org/wiki/Machine_learning
-    \subsection{Introduccion}
-      El Aprendizaje Automatico (o machine learning, por su denominación en inglés) es un subcampo de las ciencias de la computacion que le otorga a las computadoras la habilidad de aprender o inferir reglas que no fueron explicitamente programadas.
+    \subsection{Introducción}
+      El Aprendizaje Automático (o machine learning, por su denominación en inglés) es un subcampo de las ciencias de la computacion que le otorga a las computadoras la habilidad de aprender o inferir reglas que no fueron explicitamente programadas.
       Surge desde el estudio de reconocimiento de patrones, y el aprendizaje computacional, provenientes de la Inteligencia aritificial, este campo explora el estudio y la construccion de algoritmos
       que pueden aprender y realizar predicciones a partir de datos. En base a las reglas determinadas explicitamente en el programa y los datos de ejemplo, se crea un modelo que intenta predecir
       características de un dato nuevo. Este tipo de algoritmos tienen su enfoque basado en los datos.\\
       Tom M. Mitchell elaboró una definición más formal de este concepto de aprendizaje: “se dice que un programa de computadora aprende de una experiencia E con respecto a una clase 
       de tarea T y medición de desempeño P, si su desempeño en la tarea T, medido por P, mejora con la experiencia E” [Mitchell,1997].\\
-      Algoritmos con error intrínseco
-      ¿Qué hacer con un programa que falla aún habiendo sido programado correctamente?
-      No todos los problemas pueden ser abordados vía Aprendizaje Automático
-      Incluir el error dentro del modelo de uso
+      El aprendizaje automático es esencialmente una forma de estadística aplicada con mayor énfasis en el uso de computadoras para estimar estadísticamente funciones complicadas 
+      y un menor énfasis en demostrar intervalos de confianza en torno a estas funciones.
 
     \subsection{Datos}
-      Al ser un area que tiene su enfoque basado en los datos de entrada, estos pasan a cumplir un rol fundamental en el desarrollo del algoritmo, por ello es necesario que 
-      esten los mas limpios y puros posible, es decir lograr obtener un conjunto de datos utiles a los que se le puedan aplicar algoritmos de aprendizaje automatico, 
+      Al ser un área que tiene su enfoque basado en los datos de entrada, estos pasan a cumplir un rol fundamental en el desarrollo del algoritmo, por ello es necesario que 
+      estén los mas limpios y puros posible, es decir lograr obtener un conjunto de datos útiles a los que se le puedan aplicar algoritmos de aprendizaje automático, 
       motivo por el cual en muchas ocasiones se realiza una fase de preprocesamiento de datos, la cual puede llegar a ser la etapa que mas trabajo requiera del proceso completo. 
 
 
     \subsection{Ciclo del Aprendizaje Automático}
       \begin{itemize}
-	\item Recopilación de datos
+	\item Recopilación de datos:
 	  El recopilado de datos es crucial, puede requerir mucho esfuerzo y cambio de procesos complejos, 
 	  Anotación, Muchas veces la clase objetivo tiene que ser calculada a mano por grupos de personas designadas para la tarea
-	\item Definicion de caracteristicas
+	\item Definicion de caracteristicas: Para definir las caracteristicas que el modelo debe aprender, en muchas ocasiones es necesario tener conocimiento del dominio a partir del cual provienen los datos. 
 	\item Entrenamiento
-	  Antes de comenzar el entrenamiento el conjunto de datos se divide en 2 subconjuntos, un conjunto de datos de entrenamiento y un conjunto de datos de prueba. 
-	  Para entrenar el modelo solo se utiliza el conjunto de datos de entrenamiento, el conjunto de datos de prueba se separa.
-	  Determinar la estructura del modelo de aprendizaje, en base al tipo de problema y a la forma en la que se representan las caracteristicas de los datos.
-	  En algunos modelos, a partir del conjunto de datos de entrenamiento, se realiza otra particion de un pequeño subconjunto llamado conjunto de datos de validacion, este conjunto sirve 
+	  \subitem Antes de comenzar el entrenamiento el conjunto de datos se divide en 2 subconjuntos, un conjunto de datos de entrenamiento y un conjunto de datos de prueba. 
+	  \subitem Para entrenar el modelo solo se utiliza el conjunto de datos de entrenamiento, el conjunto de datos de prueba se separa.
+	  \subitem Determinar la estructura del modelo de aprendizaje, en base al tipo de problema y a la forma en la que se representan las caracteristicas de los datos.
+	  \subitem En algunos modelos, a partir del conjunto de datos de entrenamiento, se realiza otra particion de un pequeño subconjunto llamado conjunto de datos de validacion, este conjunto sirve 
 	  para afinar ciertos hiperparametros del modelo.
-	  Entrenar el modelo elegido sobre el conjunto de datos de entrenamiento
+	  \subitem Entrenar el modelo elegido sobre el conjunto de datos de entrenamiento
 	\item Evaluacion
-	  Se aplica el modelo entrenado a los datos del conjunto de prueba, y se aplican metricas para poder establecer que tan bien predice el modelo entrenado para datos nunca antes vistos.
+	  Se aplica el modelo entrenado a los datos del conjunto de prueba, y se aplican métricas para poder establecer que tan bien predice el modelo entrenado para datos nunca antes vistos.
     \end{itemize}
 
 
     \subsection{Características para el Aprendizaje}
-      Para que un modelo pueda aprender, es necesario definir las caracteristicas (features en inglés) que este deberá aprender a partir de las instancias de entrenamiento, segun el tipo de dato, estas
-      caracteristicas iran variando.
+      Para que un modelo pueda aprender, es necesario definir las caracteristicas (features en inglés) que este deberá aprender a partir de las instancias de entrenamiento, 
+      segun el tipo de dato, estas caracteristicas iran variando. Algunos ejemplos: 
       \subsubsection{Representando una instancia}
 	\begin{itemize}
 	  \item Representaciones planas
 	  \item Nuevos sistemas permiten representar árboles o grafos
-	  \item Tipos de features: booleanas (true, false), numéricas (4, 1, -5), de punto flotante (0.5, 1, 9.2), enumeraciones (rojo,azul,verde,amarillo)
+	  \item Tipos de features: booleanas (true, false), numéricas (4, 1, -5), de punto flotante (0.5, 1, 9.2), enumeraciones/categoricas  (rojo,azul,verde,amarillo)
 	  \item Representando valores complejos
 	  \item Conjuntos
 	    \subitem Features binarios por la presencia de cada elemento
@@ -222,9 +220,9 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
 
 
       \subsubsection{Normalización}
-	Algunos algoritmos de aprendizaje funcionan mejor si los valores de las features de entrada tienen media cero y dispersión 1
+	Algunos algoritmos de aprendizaje funcionan mejor si los valores de las features de entrada tienen media 0 y dispersión 1.
 	Muchas veces se agrega la versión normalizada del feature como un feature extra y se deja al algoritmo de aprendizaje que decida qué feature es más útil.
-	El valor absoluto de un feature muchas veces contiene información relevante
+	El valor absoluto de un feature muchas veces contiene información relevante.
 
       \subsubsection{Reducción de dimensionalidad}
 	Selección de features es una técnica de reducción de dimensionalidad
@@ -296,18 +294,19 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
 	    \item Fácil detectar errores de código en el sistema
 	  \end{itemize}
 
-	\paragraph {Overfitting}
-	  Cuando el sesgo estadísitico disminuye demasiado y la varianza empieza a dispararse
+	\paragraph {Superposición}
+	  La superposición (Overfitting) ocurre cuando la brecha entre el error de entrenamiento y el error de prueba es demasiado grande
 
 	\paragraph {Cros-validación}
-	  Prácticamente como entrenar y testear en los mismo datos
-	  datos = {A,B,C}
+	  Dividir el conjunto de datos en un conjunto de entrenamiento fijo y un conjunto de prueba fijo puede ser problemático, lo que resulta en que el conjunto de prueba es pequeño. 
+	  Un pequeño conjunto de pruebas implica incertidumbre estadística alrededor del error de prueba promedio estimado, lo que hace difícil afirmar que el algoritmo A funciona mejor que el algoritmo B en la tarea dada.
+	  Este procedimiento se basa en la idea de repetir el cálculo del entrenamiento y la prueba en diferentes subgrupos seleccionados aleatoriamente o divididos del conjunto de datos original.
+	  Es prácticamente como entrenar y testear en los mismo datos, suponiendo que los datos estan partidos en 3 subconjuntos: datos = {A,B,C}, el procedimiento seria el siguiente:
 	  \begin{itemize}
 	    \item entrenar en A,B, testear en C
 	    \item entrenar en A,C, testear en B
 	    \item entrenar en B,C, testear en A
 	  \end{itemize}
-	  Útil cuando se tienen pocos datos
 
   \section{Clasificacion de algoritmos de aprendizaje automático}
     Dentro del aprendizaje automático, los algoritmos se pueden clasificar segun la forma en la que aprenden de sus datos:
@@ -361,9 +360,12 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
       recorre el espacio del problema y de esta forma aprende.
 
     \subsection{Aprendizaje supervisado}
-      Los algoritmos de aprendizaje supervisado, consisten en aprender una funcion, a partir de datos de entrenamiento etiquetados. Cada ejemplo del conjunto de entrenamiento suele ser un par
+      Los algoritmos de aprendizaje supervisado son, a groso modo, algoritmos de aprendizaje que aprenden a asociar alguna entrada con alguna salida, 
+      dado un conjunto de entrenamiento de ejemplos de entradas x y salidas y.
+      Consisten en aprender una función, a partir de datos de entrenamiento etiquetados. Cada ejemplo del conjunto de entrenamiento suele ser un par
       compuesto de un objeto de entrenamiento(representado por un vector de caracteristicas) y una etiqueta, que seria el valor de salida deseado.
-      El problema tipico que se ataca con estos algoritmos es el de clasificación. Clasificacion se define como el problema de identificar a que categoria pertenece una nueva observacion,
+      El problema tipico que se ataca con estos algoritmos es el de clasificación. \\
+      Clasificacion se define como el problema de identificar a que categoria pertenece una nueva observacion,
       basada en el conjunto de datos de entrenamiento, que contiene observaciones a las cuales se les conoce si categoria.
       Otra opcion es la regresion que en lugar de determinar a que categoria pertenece, define un puntaje de pertenencia a cada categoria.
       El Aprendizaje Automático sin calificar
@@ -388,7 +390,7 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
       Ejemplos de algoritmos de clasificacion son Clasificacion lineal, regresion logistica, SVM que luego se detallaran en base a un problema concreto
     \section{Clasificacion mediante Aprendizaje Supervisado}
       \subsubsection{Introduccion}
-	A continuacion abordaremos un problema, el cual servira de motivacion para luego explicar el uso de las redes neuronales convolucionales
+	A continuacion abordaremos un problema, el cual servirá de motivación para luego explicar el uso de las redes neuronales convolucionales
 
       \subsubsection{Clasificacion de imagenes}
 	Es un problema de asginar a una imagen de entrada una etiqueta de categoria a partir de un conjunto prefijado de categorias.
@@ -449,21 +451,21 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
       En este caso que la función toma como entrada un vector de números, se aplican las derivadas parciales y el gradiente es el vector resultante de calcular las derivadas parciales
       en cada dimensión.
 
-      \paragraph{Descenso por el gradiente}
+      \subsubsection{Descenso por el gradiente}
 	La idea de principal de este metodo es el refinamiento iterativo, se evalua el resultado del calculo del gradiente y se actualizan los parámetros repetidamente, 
 	toma un hiperparametro llamado tasa de aprendizaje que define el tamaño de cada paso en la iteración.
 	Este es el método mas utilizado para optimizar funciones de pérdida en las Redes Neuronales. 
 
-      \paragraph{Descenso por el gradiente en lotes:} 
+      \subsubsection{Descenso por el gradiente estocástico:}
+	Un problema recurrente en el aprendizaje automático es que grandes conjuntos de entrenamiento son necesarios para una buena generalización, 
+	pero grandes conjuntos de entrenamiento también son más costosos desde el punto de vista computacional.
 	En aplicaciones de gran escala, el conjunto de entrenamiento puede ser del orden de los millones de ejemplos, por lo que computar la funcion de 
 	pérdida completa sobre todo el conjunto para actualizar un solo parámetro seria algo impracticable.
-	Un enfoque común que se aplica a este problema es computar el gradiente sobre lotes del conjunto de entrenamiento, que permite lograr una buena aproximación al objetivo completo con
-	una convergencia mucho mas rapida.
+	Un enfoque común que se aplica a este problema es computar el gradiente sobre pequeños lotes del conjunto de entrenamiento, 
+	que permite lograr una buena aproximación al objetivo completo con una convergencia mucho mas rapida.
 
-      \paragraph{Descenso por el gradiente estocástico:} 
-	Es el caso extremo de la aproximación anterior donde el lote tiene solo un elemento.
 
-      \paragraph{Otras formas de optimizacion}
+      \subsubsection{Otras formas de optimizacion}
 	Existen otros metodos de optimizacion que trabajan de forma similar ADAM, LBFGS,RMSProp etc. DETALLAR.
 	
     \subsection{Retropropagación}
@@ -473,6 +475,15 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
       deseado, aplicando la función de pérdida se calcula el error, mediante el metodo de optimizacion se define el gradiente para luego realizar la retropropagación en la función hasta 
       actualizar los parametros.
 
+    \subsection{Construyendo un algoritmo de aprendizaje automático}
+      Casi todos los algoritmos de aprendizaje profundo pueden ser descritos como casos particulares de una receta bastante simple: 
+      combinar una especificación de un conjunto de datos, una función de costo, un procedimiento de optimización y un modelo.
+      Al darnos cuenta de que podemos reemplazar cualquiera de estos componentes en gran medida independientemente de los otros, podemos obtener una gran variedad de algoritmos.
+      La función de costos incluye típicamente al menos un término que hace que el proceso de aprendizaje realice una estimación estadística. También puede incluir términos adicionales, 
+      como los términos de regularización. Esto todavía permite la optimización de forma cerrada. 
+      Si cambiamos el modelo para que no sea lineal, entonces la mayoría de las funciones de coste ya no pueden ser optimizadas en forma cerrada. 
+      Esto nos obliga a elegir un procedimiento iterativo de optimización numérica, como el descenso por el gradiente.
+    
     \section{Redes Neuronales Artificiales}
       Combinacion lineal de funciones no lineales
  \iffalse
@@ -486,6 +497,13 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
       De redes neuronales biológicas. Los cálculos se estructuran en términos de un grupo interconectado de neuronas artificiales, procesando la información utilizando un enfoque conexionista
       A la computación. Las redes neuronales modernas son herramientas no lineales de modelado de datos estadísticos. Usualmente se usan para modelar relaciones complejas entre entradas y salidas,
       Para encontrar patrones en los datos, o para capturar la estructura estadística en una distribución de probabilidad conjunta desconocida entre las variables observadas.
+      
+      \subsection{Aprendizaje basado en el Gradiente}
+	El diseño y entrenamiento de una red neural no es muy diferente de la formación de cualquier otro modelo de aprendizaje automático con descenso por el gradiente.
+	La diferencia más grande entre los modelos lineales y las redes neuronales es que la no linealidad de una red neural hace que las funciones de pérdida 
+	más interesantes se vuelvan no convexas. Esto significa que las redes neuronales suelen ser entrenadas mediante el uso de optimizadores iterativos basados ​​en gradientes 
+	que simplemente minimizan la función de costo, en lugar de los solucionadores de ecuaciones lineales usados ​​para entrenar modelos de regresión lineal o los algoritmos de optimización 
+	convexa con garantías de convergencia global usadas para entrenar Regresión logística o SVMs.
       
       \subsection{Analisis comparativo con otras técnicas de Aprendizaje Automático}
 	\paragraph {Ventajas}
@@ -538,9 +556,9 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
       Al definir la arquitectura de la red, se forma lo que seria una funcion de puntuacion, una red neuronal realiza una combinacion lineal de funciones no lineales. 
 
     \subsection {Preprocesamiento de datos}
-	Restarle la media a cada caracteristica
-	Normalizacion
-	PCA
+	Restarle la media a cada caracteristica \\
+	Normalizacion \\
+	PCA: El algoritmo de análisis de componentes principales proporciona un medio de comprimir datos \\
 
     \paragraph {Inicializacion de los pesos}
       Error comun: Iniciar en 0.
@@ -557,24 +575,32 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
       \end{enumerate}
       Esto se realiza iterativamente una cantidad predefinida de veces.
 
-  \section {Deep Learning}
-    La caída de los precios de hardware y el desarrollo de GPUs para uso personal en los últimos años han contribuido al desarrollo del concepto de aprendizaje profundo que consiste
-    de múltiples capas ocultas en una red neuronal artificial. Este enfoque trata de modelar la forma en que el cerebro humano procesa luz y sonido en visión y audición.
+  \section {Aprendizaje Profundo}
+    La caída de los precios de hardware y el desarrollo de GPUs para uso personal en los últimos años han contribuido al desarrollo del concepto de aprendizaje profundo (Deep Learning en ingles)
+    que consiste de múltiples capas ocultas en una red neuronal artificial. Este enfoque trata de modelar la forma en que el cerebro humano procesa luz y sonido en visión y audición.
     Algunas aplicaciones exitosas del aprendizaje profundo son la visión por computadora y el reconocimiento del habla.
+    \subsection {Motivación}
+      Los algoritmos simples de aprendizaje automático funcionan muy bien en una amplia variedad de problemas importantes. 
+      Sin embargo, no han logrado resolver los problemas centrales de Inteligencia Artificial, como reconocer el habla o reconocer objetos. 
+      El desarrollo del aprendizaje profundo fue motivado en parte por el fracaso de los algoritmos tradicionales para generalizar bien en tales tareas de Inteligencia Artificial.
+      El desafío de generalizar a nuevos ejemplos se vuelve más difícil cuando se trabaja con datos de gran dimensión y los mecanismos utilizados para lograr la generalización 
+      en el aprendizaje  automático tradicional son insuficientes para aprender funciones complicadas en espacios de alta dimensión. 
+      Tales espacios también suelen imponer altos costos computacionales. El aprendizaje profundo fue diseñado para superar estos y otros obstáculos.
 
   \section {Redes Neuronales Convolucionales}
-    Las redes neuronales convolucionales son muy similares a las redes neuronales antes vista, con la diferencia en que la arquitectura de una red neuronal convolucional asume explicitamente
+    Las redes neuronales convolucionales (CNN) son muy similares a las redes neuronales antes vista, con la diferencia en que la arquitectura de una red neuronal convolucional asume explicitamente
     que el conjunto de entrada son imagenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura. 
     Estan inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes.
 
     \subsection {Historia de las Redes Neuronales Convolucionales}
 
     \subsection {Arquitectura de una red neuronal convolucional}
-      Las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad.
-      Cada capa acepta un volumen de 3 dimensiones como entrada y lo transforma en un volumen de salida de 3 dimensiones a traves de una funcion diferenciable.
-      Algunas capas pueden tener o no parametros, al igual que hiperparametros.
-
-      En el caso mas simple de arquitectura, la red transforma el volumen de una imagen de entrada en un volumen de salida (conteniendo los puntajes de cada clase para el problema de clasificacion)
+      En las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad.
+      Cada capa acepta un volumen de 3 dimensiones como entrada y lo transforma en un volumen de salida de 3 dimensiones a traves de una función diferenciable.
+      Algunas capas pueden tener o no parámetros, al igual que hiperparámetros. La entrada y salida de cada una de estas capas son conjuntos de arreglos llamados “mapas de features”.
+      En el caso mas simple de arquitectura, la red transforma el volumen de una imagen de entrada en un volumen de salida, conteniendo los puntajes de cada clase para el problema de clasificacion.
+      Tipicamente, las CNNs suelen además organizarse por etapas, cada etapa consiste de una capa convolucional, una no lineal y una de agrupamiento. 
+      A continuación se detallan estos tipos de capas.
 
     \subsection {Tipos de Capas}
       \subsubsection{Capa Convolucional} 
@@ -598,6 +624,22 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
 	adelante. Por lo tanto, durante el paso hacia adelante de una capa de agrupamiento es común realizar un seguimiento del índice de la activación máxima de manera que 
 	el enrutamiento de gradiente es eficiente durante la retropropagación.
 
+      \subsubsection{Capas No Lineales}
+	Estas capas son las encargadas de aplicar una función de activación no lineal, las principales son:
+	\paragraph{ReLU} Las unidades lineales rectificadas usan la función de activación g (z) = max {0, z}. 
+	Las unidades lineales rectificadas son fáciles de optimizar porque son tan similares a las unidades lineales. 
+	La única diferencia entre una unidad lineal y una unidad lineal rectificada es que una unidad lineal rectificada da salida a cero a través de la mitad de su dominio. 
+	Esto hace que las derivadas a través de una unidad lineal rectificada permanezcan grandes siempre que la unidad esté activa.
+	Los gradientes no sólo son grandes sino también consistentes.
+	Existen varias generalizaciones de unidades lineales rectificadas. La mayoría de estas generalizaciones se comportan de forma comparable a las unidades lineales rectificadas
+	y, en ocasiones, tienen un mejor desempeño. Un inconveniente para las unidades lineales rectificadas es que no pueden aprender a través de métodos basados ​​en 
+	gradiente en ejemplos para los cuales su activación es cero. Una variedad de generalizaciones de unidades lineales rectificadas garantizan que reciben gradiente en 
+	todas partes. Existen 3 generalizaciones sobre esta, que agregan un parámetro de regularización:
+	  \subparagraph{Rectificacion por Valor Absoluto}
+	  \subparagraph{Leaky ReLU} Agrega un parametro de regularizacion, fijandolo en un valor pequeño como por ejemplo 0.01.
+	  \subparagraph{Parametric ReLU} Trata el parámetro de regularizacion como un parámetro aprendible.
+	\paragraph{Maxout}
+      
       \subsubsection{Capa Completamente Conectada} 
 	Las neuronas entre dos capas adyacentes están completamente conectadas de a pares, pero las neuronas dentro de una sola capa no comparten conexiones.
 
