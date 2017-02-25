@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt,spanish]{book}
+\documentclass[a4paper,11pt,spanish]{book}
 %\usepackage[utf8]{inputenc}
 \usepackage[utf8x]{inputenc}
 \usepackage{url}
@@ -8,7 +8,7 @@
 \usepackage{graphicx} % graficos
 \usepackage[spanish]{babel}
 
-
+\newcommand*{\FIXME}[1]{{(\textbf{FIXME}) {#1}}}
 
 \iffalse
 \title{Transferencia de Estilo en Fotografias utilizando Redes Neuronales Convolucionales}   %note \\[1ex] is a line break in the title
@@ -91,33 +91,50 @@
     a la fotografia para transformarla en un retrato en blanco y negro o sepia por ejemplo.
     Muy recientemente se han comenzado a desarrollar aplicaciones que logran transferir el estilo de una obra de arte a una fotografia. Esto es posible gracias al incremento 
     del poder de cómputo y al descenso del precio de los nuevos dispositivos, ya que las técnicas computacionales empleadas para esto, requieren un cómputo mucho mas complejo.
-    Las principal herramienta utilizada para poder llevar esta tarea a cabo son Redes Neuronales Convolucionales, provenientes del area de  
-    Inteligencia Artificial y Aprendizaje Automatico, que al aplicarse al area de Vision por Computadoras han logrado resultados absolutamente disruptivos, 
-    comparado a los ultimos avances que se venian obteniendo en el area, principalmente para la clasificacion de imagenes, detección y reconocimiento de objetos.
-    Por mencionar otro ejemplo de gran investigacion en la actualidad, los autos que se conducen por si solos, emplean estas tecnicas para lograrlo.
+    Esta tarea requiere de la interacción de 2 de las principales areas de las Ciencias de la Computación y de gran auge en la actualidad: Visión por Computadoras y Aprendizaje Automático,
+    que hasta hace un tiempo, iban evolucionando completamente en paralelo, independientemente una de la otra. Hoy en día se han logrado resultados completamente disruptivos, al aplicar
+    Aprendizaje Automático para algunas de las principales tareas de Visión por Computadoras, como lo son la clasificacion de imagenes, detección y reconocimiento de objetos.
+    El area de Vision por Computadoras es el área de las Ciencias de la Computación que se encarga de cómo las computadoras pueden lograr obtener una comprensión de alto nivel de imágenes digitales o videos. 
+    Desde la perspectiva de la ingeniería, busca automatizar tareas que el sistema visual humano puede hacer. Incluye métodos para adquirir, procesar, analizar y comprender las imágenes del mundo real 
+    con el fin de producir información numérica o simbólica para que puedan ser tratados por una computadora.
+    El area de Aprendizaje Automático es el área de las Ciencias de la Computación que da a las computadoras la capacidad de aprender sin ser explícitamente programadas, explora el estudio 
+    y la construcción de algoritmos que pueden aprender y hacer predicciones sobre los datos. Tales algoritmos lo logran siguiendo las instrucciones estrictamente estáticas del programa 
+    mediante la fabricación de predicciones o decisiones impulsadas por datos​ a través de la construcción de un modelo generado con las muestras de entrada. El aprendizaje automático 
+    se emplea en una serie de tareas informáticas en las que el diseño y la programación de algoritmos explícitos son inviables, como por ejemplo para la detección de Spam, el reconocimiento
+    óptico de caracteres y los motores de búsqueda.
+    Dentro del Aprendizaje Automático, existe un subdominio llamado Aprendizaje Profundo, basado en un conjunto de algoritmos que intentan modelar abstracciones de alto nivel en los datos,
+    mediante Redes Neuronales Artificiales de gran profundidad.
+    La principal herramienta elegida para poder llevar a cabo la transferencia de estilo en fotografias son las Redes Neuronales Convolucionales, estas Redes Neuronales Artificiales asumen 
+    explicitamente que los elementos de  entrada del algoritmo serán imágenes, lo cual le permite implementar ciertas optimizaciónes dentro del algoritmo, luego
+    se irán explicando mas detalladamente todos estos conceptos en profundidad.
+    Otro ejemplo de amplia investigación y desarrollo en la actualidad son los autos que se conducen por si solos, los cuales emplean estas técnicas dentro de sus procesos para lograrlo.
+  \FIXME{TESIS SOBRE IMÁGENES $\Rightarrow$ PONER MUCHAS IMÁGENES. SIRVE PARA MOTIVAR Y FIJAR IDEAS AL MISMO TIEMPO QUE INCENTIVÁS AL LECTOR A SEGUIR LEYENDO}
+  
   \paragraph{Motivación}
-    En lo que respecta al área de visión por computadoras, una imagen es representada por un vector de 2 dimensiones donde cada valor representa la intensidad captada por un sensor 
+    En lo que respecta al área de visión por computadoras, una imagen es representada por un arreglo de 2 dimensiones donde cada valor representa la intensidad captada por un sensor 
     de un determinado punto espacial, representados como píxeles. La representación de los píxeles es muy sensible a cambios en la iluminación, ángulo, contraste y tamaño que pueda existir.
+    \FIXME{TENÉS QUE CONECTAR LO QUE VENIS DICIENDO CON EL PROBLEMA DE TRANSFERENCIA DE ESTILO}
     Existen articulos de investigación en los cuales se definen algoritmos para la transferencia de estilos artisticos en fotografias, que se basan en modelos estocasticos, 
     los cuales requieren una gran cantidad de hiperparámetros predefinidos empiricamente, es decir parámetros que deben ser fijados previo a la ejecución del algoritmo que dependen 
     de la elección propia del usuario, pero que influyen en gran manera sobre el resultado.
+    Al ser modelos estocásticos, se basan en la idea de iterativamente, minimizar una funcion de perdida hasta lograr el objetivo deseado. 
     El principal objetivo de este trabajo es poder realizar una elección inteligente de uno de los principales hiperparámetros como lo es el número de iteraciones 
     que debe realizar el algoritmo hasta obtener un resultado interesante.
     Para poder determinar cuando un resultado logra ser aceptable es necesario definir una métrica para esto.
     Debido a que las obras de arte, sueles calificadas con metricas cualitativas y no tanto cuantitativas, se decidió utilizar otra red neuronal convolucional, 
     entrenada especialmente para reconocer estilos artisticos y en base a los resultados que arroja se define si el numero de iteraciones es suficiente para generar el resultado final 
     o es necesario continuar iterando.
+  
   \paragraph{Estructura del trabajo}
-    A lo largo de este trabajo se hará un recorrido por los principales conceptos para comprender tanto el problema como la solución y las tecnicas empleadas.
-    El capítulo 2 contendrá el marco teórico y cuestiones formales requeridas, principalmente orientado al aprendizaje Automatico y a las redes neuronales.
-    En el capitulo 3 se hara un recorrido por los principales articulos de investigación y los algoritmos alli definidos para las tecnicas de transferencia y reconocimiento de estilos artisticos.
-    Para luego abordar en detalle la solución propuesta, junto con un análisis y evaluación empírica de la misma.
-    En el capítulo 4 será quien contenga los experimentos realizado y los resultados obtenidos, para finalmente en el capitulo 5 establecer una conclusión acerca del trabajo realizado, 
+    A lo largo de este trabajo se hará un recorrido por los principales conceptos para comprender tanto el problema como la solución y las técnicas empleadas.
+    El capítulo 2 se desarrolla el marco teórico y cuestiones formales requeridas, principalmente orientado al aprendizaje Automatico y a las redes neuronales.
+    En el capitulo 3 se hara un recorrido por los principales articulos de investigación y los algoritmos alli definidos para las tecnicas de transferencia estilos artisticos en fotografias.
+    Para luego, en el capítulo 4 abordar en detalle la solución propuesta, junto con un análisis y evaluación empírica de la misma.
+    En el capítulo 5 contiene los experimentos realizados y los resultados obtenidos, para finalmente en el capitulo 6 establecer una conclusión acerca del trabajo realizado, 
     junto con las perspectivas y posibles tareas a futuro.
 
 Para introducir al lector en el tema, a continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artistico a fotografias:
-ADJUNTAR EJEMPLOS
-VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
+\FIXME{TESIS SOBRE IMÁGENES $\Rightarrow$ PONER MUCHAS IMÁGENES. SIRVE PARA MOTIVAR Y FIJAR IDEAS AL MISMO TIEMPO QUE INCENTIVÁS AL LECTOR A SEGUIR LEYENDO, ADJUNTAR EJEMPLOS}
 
 
 
@@ -151,31 +168,28 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
       características de un dato nuevo. Este tipo de algoritmos tienen su enfoque basado en los datos.\\
       Tom M. Mitchell elaboró una definición más formal de este concepto de aprendizaje: “se dice que un programa de computadora aprende de una experiencia E con respecto a una clase 
       de tarea T y medición de desempeño P, si su desempeño en la tarea T, medido por P, mejora con la experiencia E” [Mitchell,1997].\\
-      El aprendizaje automático es esencialmente una forma de estadística aplicada con mayor énfasis en el uso de computadoras para estimar estadísticamente funciones complicadas 
-      y un menor énfasis en demostrar intervalos de confianza en torno a estas funciones.
+      El aprendizaje automático es esencialmente una forma de estadística aplicada con énfasis en el uso de computadoras para estimar estadísticamente funciones complicadas.
 
     \subsection{Datos}
       Al ser un área que tiene su enfoque basado en los datos de entrada, estos pasan a cumplir un rol fundamental en el desarrollo del algoritmo, por ello es necesario que 
       estén los mas limpios y puros posible, es decir lograr obtener un conjunto de datos útiles a los que se le puedan aplicar algoritmos de aprendizaje automático, 
       motivo por el cual en muchas ocasiones se realiza una fase de preprocesamiento de datos, la cual puede llegar a ser la etapa que mas trabajo requiera del proceso completo. 
 
+    \subsection{Modelos}
 
-    \subsection{Ciclo del Aprendizaje Automático}
+      ¿Qué es un modelo?
+      “Un ente que aprende que no asume nada acerca de la identidad del concepto objetivo no tiene ninguna base racional para clasificar cosas que nunca vio.”
+      Mitchel (1997)
+      El principal objetivo de un sistema de aprendizaje es generalizar desde su experiencia o conocimiento previo. Generalizar en este contexto es la habilidad del sistema de realizar
+      predicciones con precision sobre un ejemplo nuevo no visto antes, luego de aprender sobre el conjunto de entrenamiento. Los ejemplos de entrenamiento provienen de un espacio 
+      con probabilidad de distribución desconocida del cual es considerado representativo. El sistema de aprendizaje debe construir un modelo sobre el espacio total que le permite realizar
+      predicciones lo suficientemente precisas sobre nuevos ejemplos.
       \begin{itemize}
-	\item Recopilación de datos:
-	  El recopilado de datos es crucial, puede requerir mucho esfuerzo y cambio de procesos complejos, 
-	  Anotación, Muchas veces la clase objetivo tiene que ser calculada a mano por grupos de personas designadas para la tarea
-	\item Definicion de caracteristicas: Para definir las caracteristicas que el modelo debe aprender, en muchas ocasiones es necesario tener conocimiento del dominio a partir del cual provienen los datos. 
-	\item Entrenamiento
-	  \subitem Antes de comenzar el entrenamiento el conjunto de datos se divide en 2 subconjuntos, un conjunto de datos de entrenamiento y un conjunto de datos de prueba. 
-	  \subitem Para entrenar el modelo solo se utiliza el conjunto de datos de entrenamiento, el conjunto de datos de prueba se separa.
-	  \subitem Determinar la estructura del modelo de aprendizaje, en base al tipo de problema y a la forma en la que se representan las caracteristicas de los datos.
-	  \subitem En algunos modelos, a partir del conjunto de datos de entrenamiento, se realiza otra particion de un pequeño subconjunto llamado conjunto de datos de validacion, este conjunto sirve 
-	  para afinar ciertos hiperparametros del modelo.
-	  \subitem Entrenar el modelo elegido sobre el conjunto de datos de entrenamiento
-	\item Evaluacion
-	  Se aplica el modelo entrenado a los datos del conjunto de prueba, y se aplican métricas para poder establecer que tan bien predice el modelo entrenado para datos nunca antes vistos.
-    \end{itemize}
+	\item Los modelos capturan la información en los datos de entrada (o en los datos en general, en aprendizaje no supervisado)
+	\item Representan la forma de ver el mundo que permite extrapolar cuando se observan nuevos datos (nunca vistos).
+	\item Los modelos pueden ser matemáticamente bien formados (estadísticos) o simplemente algoritmicos (cascadas de if-then-else).
+	\item El modelo como código objeto: Diferenciamos el modelo del algoritmo usado para obtener el modelo.
+      \end{itemize}
 
 
     \subsection{Características para el Aprendizaje}
@@ -231,23 +245,6 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
 
 	Véase http://infolab.stanford.edu/~ullman/mmds/ch11.pdf
 
-
-      \subsection{Modelos}
-
-	¿Qué es un modelo?
-	“Un ente que aprende que no asume nada acerca de la identidad del concepto objetivo no tiene ninguna base racional para clasificar cosas que nunca vio.”
-	Mitchel (1997)
-	El principal objetivo de un sistema de aprendizaje es generalizar desde su experiencia o conocimiento previo. Generalizar en este contexto es la habilidad del sistema de realizar
-	predicciones con precision sobre un ejemplo nuevo no visto antes, luego de aprender sobre el conjunto de entrenamiento. Los ejemplos de entrenamiento provienen de un espacio 
-	con probabilidad de distribución desconocida del cual es considerado representativo. El sistema de aprendizaje debe construir un modelo sobre el espacio total que le permite realizar
-	predicciones lo suficientemente precisas sobre nuevos ejemplos.
-	\begin{itemize}
-	  \item Los modelos capturan la información en los datos de entrada (o en los datos en general, en aprendizaje no supervisado)
-	  \item Representan la forma de ver el mundo que permite extrapolar cuando se observan nuevos datos (nunca vistos).
-	  \item Los modelos pueden ser matemáticamente bien formados (estadísticos) o simplemente algoritmicos (cascadas de if-then-else).
-	  \item El modelo como código objeto: Diferenciamos el modelo del algoritmo usado para obtener el modelo.
-	\end{itemize}
-
       \subsection{Evaluación}
 
 	\subsubsection {Evaluando modelos}
@@ -293,9 +290,9 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
 	    \item No quedarse sólo con los números, hacer análisis de errors viendo casos concretos
 	    \item Fácil detectar errores de código en el sistema
 	  \end{itemize}
-
-	\paragraph {Superposición}
-	  La superposición (Overfitting) ocurre cuando la brecha entre el error de entrenamiento y el error de prueba es demasiado grande
+	
+	\paragraph {Sobreajuste}
+	  El sobreajuste (Overfitting) ocurre cuando la brecha entre el error de entrenamiento y el error de prueba es demasiado grande.
 
 	\paragraph {Cros-validación}
 	  Dividir el conjunto de datos en un conjunto de entrenamiento fijo y un conjunto de prueba fijo puede ser problemático, lo que resulta en que el conjunto de prueba es pequeño. 
@@ -308,9 +305,57 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
 	    \item entrenar en B,C, testear en A
 	  \end{itemize}
 
+    \subsection{Ciclo del Aprendizaje Automático}
+      \begin{itemize}
+	\item Recopilación de datos:
+	  El recopilado de datos es crucial, puede requerir mucho esfuerzo y cambio de procesos complejos, 
+	  Anotación, Muchas veces la clase objetivo tiene que ser calculada a mano por grupos de personas designadas para la tarea
+	\item Definicion de caracteristicas: Para definir las caracteristicas que el modelo debe aprender, en muchas ocasiones es necesario tener conocimiento del dominio a partir del cual provienen los datos. 
+	\item Entrenamiento
+	  \subitem Antes de comenzar el entrenamiento el conjunto de datos se divide en 2 subconjuntos, un conjunto de datos de entrenamiento y un conjunto de datos de prueba. 
+	  \subitem Para entrenar el modelo solo se utiliza el conjunto de datos de entrenamiento, el conjunto de datos de prueba se separa.
+	  \subitem Determinar la estructura del modelo de aprendizaje, en base al tipo de problema y a la forma en la que se representan las caracteristicas de los datos.
+	  \subitem En algunos modelos, a partir del conjunto de datos de entrenamiento, se realiza otra particion de un pequeño subconjunto llamado conjunto de datos de validacion, este conjunto sirve 
+	  para afinar ciertos hiperparametros del modelo.
+	  \subitem Entrenar el modelo elegido sobre el conjunto de datos de entrenamiento
+	\item Evaluacion
+	  Se aplica el modelo entrenado a los datos del conjunto de prueba, y se aplican métricas para poder establecer que tan bien predice el modelo entrenado para datos nunca antes vistos.
+      \end{itemize}
+    
+
   \section{Clasificacion de algoritmos de aprendizaje automático}
     Dentro del aprendizaje automático, los algoritmos se pueden clasificar segun la forma en la que aprenden de sus datos:
 
+    \subsection{Aprendizaje supervisado}
+      Los algoritmos de aprendizaje supervisado son, a groso modo, algoritmos de aprendizaje que aprenden a asociar alguna entrada con alguna salida, 
+      dado un conjunto de entrenamiento de ejemplos de entradas x y salidas y.
+      Consisten en aprender una función, a partir de datos de entrenamiento etiquetados. Cada ejemplo del conjunto de entrenamiento suele ser un par
+      compuesto de un objeto de entrenamiento(representado por un vector de caracteristicas) y una etiqueta, que seria el valor de salida deseado.
+      El problema tipico que se ataca con estos algoritmos es el de clasificación. \\
+      Clasificacion se define como el problema de identificar a que categoria pertenece una nueva observacion,
+      basada en el conjunto de datos de entrenamiento, que contiene observaciones a las cuales se les conoce si categoria.
+      Otra opcion es la regresion que en lugar de determinar a que categoria pertenece, define un puntaje de pertenencia a cada categoria.
+      El Aprendizaje Automático sin calificar
+      \begin{itemize}
+	\item Aprender lo que uno ya sabe
+	\item Tratar de aprender una función f(x1, …, xn) → y donde
+	\item xi son las caracterísita de aprendizaje (features) de entrada
+	\item y es la clase objetivo
+	\item La clave es extrapolación, queremos que la función generalize a entradas nunca vistas.
+	\item Interpolación lineal es en sí una forma de hacer Aprendizaje Automático supervisado.
+	\item Una visión como desarrolladores
+	\item Entrenamiento/Estimación/“compilación”:
+	\item Entrada: vectores de features, incluyendo la clase objetivo
+	\item Salida: un modelo entrenado
+	\item Ejecución/Predicción/“interpretado”:
+	\item Entrada: vectores de features, sin la clase objetivo, más el modelo entrenado
+	\item Salida: la clase objetivo predicha
+      \end{itemize}
+      
+      \subsubsection{Clasificacion}
+
+      Ejemplos de algoritmos de clasificacion son Clasificacion lineal, regresion logistica, SVM que luego se detallaran en base a un problema concreto.
+  
     \subsection{Aprendizaje No supervisado} 
       \begin{itemize}
 	\item La caracteristica principal de este tipo de algoritmos es que los datos de entrenamiento no estan etiquetados
@@ -359,35 +404,7 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
       El sistema interactua en un ambiente dinamico en el cual debe cumplir un objetivo determinado, el programa va recibiendo retroalimentacion en terminos de premios y castigos mientras 
       recorre el espacio del problema y de esta forma aprende.
 
-    \subsection{Aprendizaje supervisado}
-      Los algoritmos de aprendizaje supervisado son, a groso modo, algoritmos de aprendizaje que aprenden a asociar alguna entrada con alguna salida, 
-      dado un conjunto de entrenamiento de ejemplos de entradas x y salidas y.
-      Consisten en aprender una función, a partir de datos de entrenamiento etiquetados. Cada ejemplo del conjunto de entrenamiento suele ser un par
-      compuesto de un objeto de entrenamiento(representado por un vector de caracteristicas) y una etiqueta, que seria el valor de salida deseado.
-      El problema tipico que se ataca con estos algoritmos es el de clasificación. \\
-      Clasificacion se define como el problema de identificar a que categoria pertenece una nueva observacion,
-      basada en el conjunto de datos de entrenamiento, que contiene observaciones a las cuales se les conoce si categoria.
-      Otra opcion es la regresion que en lugar de determinar a que categoria pertenece, define un puntaje de pertenencia a cada categoria.
-      El Aprendizaje Automático sin calificar
-      \begin{itemize}
-	\item Aprender lo que uno ya sabe
-	\item Tratar de aprender una función f(x1, …, xn) → y donde
-	\item xi son las caracterísita de aprendizaje (features) de entrada
-	\item y es la clase objetivo
-	\item La clave es extrapolación, queremos que la función generalize a entradas nunca vistas.
-	\item Interpolación lineal es en sí una forma de hacer Aprendizaje Automático supervisado.
-	\item Una visión como desarrolladores
-	\item Entrenamiento/Estimación/“compilación”:
-	\item Entrada: vectores de features, incluyendo la clase objetivo
-	\item Salida: un modelo entrenado
-	\item Ejecución/Predicción/“interpretado”:
-	\item Entrada: vectores de features, sin la clase objetivo, más el modelo entrenado
-	\item Salida: la clase objetivo predicha
-      \end{itemize}
-      
-      \subsubsection{Clasificacion}
-
-      Ejemplos de algoritmos de clasificacion son Clasificacion lineal, regresion logistica, SVM que luego se detallaran en base a un problema concreto
+    
     \section{Clasificacion mediante Aprendizaje Supervisado}
       \subsubsection{Introduccion}
 	A continuacion abordaremos un problema, el cual servirá de motivación para luego explicar el uso de las redes neuronales convolucionales
@@ -689,18 +706,16 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
 	\end{itemize}
      \section {Otros conceptos relevantes}
 	\subsubsection{Matriz de Gramm}
-     
-     
-\chapter{Trabajo propuesto}
-  \section{Algoritmo de Transferencia de estilo}
-    \subsection{Introduccion}
+
+\chapter{Algoritmo de Transferencia de estilo}
+    \section{Introduccion}
       En lo que al arte respecta, los humanos han desarrollado la capacidad de crear experiencias visuales únicas componiendo una compleja interacción entre el contenido y el estilo de una imagen.
     Sin ir mas lejos, las bases algoritmicas de este proceso se desconocen y no existen sistemas artificiales que con capacidades similares. Sin embargo, en otras areas fundamentales
     de la percepcion visual como el reconocimiento de objetos y rostros recientemente se ha alcanzado precisión cercana a la de un humano, utilizando modelos de redes neuronales profundas. 
     Aquí presentamos un sistema artificial basado en una Red Neural Profunda que crea imágenes artísticas de alta calidad perceptiva. El sistema utiliza representaciones neuronales 
     para separar y recombinar el contenido y el estilo de imágenes arbitrarias, proporcionando un algoritmo para la creación de imágenes artísticas.
 
-    \subsection{Sintesis}
+    \section{Sintesis}
       Cuando las Redes Neuronales Convolucionales (CNNs) son entrenadas para reconocimiento de objetos, desarrollan una representacion de la imagen que hace que la información 
       del objeto sea cada vez más explícita a lo largo de la jerarquia de las capas de la red.Por lo tanto, a lo largo de la jerarquía de procesamiento de la red, 
       la imagen de entrada se transforma en representaciones que cada vez más se preocupan por el contenido real de la imagen en lugar del valor de sus píxeles detallados. 
@@ -717,7 +732,7 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
       para el reconocimiento de objetos. De esta forma, al manipularse independientemente se pueden generar una nueva imagen desde 2 imagenes de entradas distintas, simultaneamente se corresponda con la representacion
       del contenido de una imagen y la respresentacion del estilo de la otra.
 
-    \subsection{Metodos}
+    \section{Metodos}
       Los resultados exhibidos fueron obtenidos utilizando la red VGG-19, de disponibilidad publica.
       Generalmente, cada capa de la red define un banco de filtros no lineal cuya complejidad aumenta con la posición de la capa en la red.
       Para visualizar la información de la imagen codificada en diferentes capas de la jerarquía se realiza descenso gradiente en una imagen de ruido blanco 
@@ -733,6 +748,8 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
       de la representación de contenido de la fotografía en una capa de la red y la representación de estilo de la obra de arte en un número de capas de la CNN.
       Funcion de Perdida total ...
     
+     
+\chapter{Descripción del problema y solución propuesto}
   \section{Algoritmo de Reconocimiento de estilo}
     \subsection{Introduccion}
       Las imagenes pintadas por humanos suelen tener un significado y el estilo visual de la misma tiene un papel significativo en cómo se ve, por lo que comprender
@@ -779,6 +796,7 @@ VER DE AGREGAR ALGO DE LA INTRODUCCION DEL PAPER DE GATYS
     \end{itemize}
 
     Además, para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica.
+  
   \section{Solución propuesta}
     En la solución propuesta en este trabajo se plantea poder definir automáticamente el número de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado.
     El resto de los hiperparámetros permanecen predefinidos a mano, excepto la imagen de la cual comenzar que influye notablemente en la cantidad de iteraciones que debe realizar el 
