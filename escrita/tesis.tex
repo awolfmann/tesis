@@ -6,7 +6,10 @@
 \usepackage[procnames]{listings}
 \usepackage{color}
 \usepackage{graphicx} % graficos
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
 \usepackage[spanish]{babel}
+\usepackage{mathtools}
 
 \newcommand*{\FIXME}[1]{{(\textbf{FIXME}) {#1}}}
 
@@ -84,7 +87,7 @@
 \tableofcontents 
 
 \chapter{Introducción}
-  \paragraph{Contexto}
+  \section {Contexto}
     En los ultimos años las fotografias estan cada vez mas pasando a ser un objeto virtual en lugar de fisico, de la mano del gran aumento en el uso de los dispositivos moviles 
     cualquier persona puede tomar miles fotografias en un instante de tiempo, y compartirla en las redes sociales.
     A partir de esto, se han desarrollado muchas aplicaciones entorno a las fotografias, ya sea desde redes sociales masivamente utilizadas, hasta aplicaciones que aplican efectos o filtros 
@@ -107,10 +110,14 @@
     La principal herramienta elegida para poder llevar a cabo la transferencia de estilo en fotografias son las Redes Neuronales Convolucionales, estas Redes Neuronales Artificiales asumen 
     explicitamente que los elementos de  entrada del algoritmo serán imágenes, lo cual le permite implementar ciertas optimizaciónes dentro del algoritmo, luego
     se irán explicando mas detalladamente todos estos conceptos en profundidad.\\
-    Otro ejemplo de amplia investigación y desarrollo en la actualidad son los autos que se conducen por si solos, los cuales emplean estas técnicas dentro de sus procesos para lograrlo.
-  \FIXME{TESIS SOBRE IMÁGENES $\Rightarrow$ PONER MUCHAS IMÁGENES. SIRVE PARA MOTIVAR Y FIJAR IDEAS AL MISMO TIEMPO QUE INCENTIVÁS AL LECTOR A SEGUIR LEYENDO}
-  
-  \paragraph{Motivación}
+    Otro ejemplo de amplia investigación y desarrollo en la actualidad son los autos que se conducen por si solos, los cuales emplean estas técnicas dentro de sus procesos para lograrlo.\\
+    \begin{figure}[h]
+      \includegraphics[scale=0.5]{./img/nvidia_car_detection.png}\\
+      \caption{En la figura se puede observar la detección de objetos que hace el vehiculo, utilizando Redes Neuronales Convolucionales en tiempo real}
+      \label{fig:car_detection}
+    \end{figure}
+    
+  \section {Motivación}
     En lo que respecta al área de visión por computadoras, una imagen es representada por un arreglo de 2 dimensiones donde cada valor representa la intensidad captada por un sensor 
     de un determinado punto espacial, representados como píxeles. La representación de los píxeles es muy sensible a cambios en la iluminación, ángulo, contraste y tamaño que pueda existir.\\
     Además, este tipo de representación es insuficiente para proveerla como dato de entrada de un algoritmo que se encargue de realizar alguna de las tareas antes mencionadas, como la
@@ -126,20 +133,40 @@
     Para poder determinar cuando un resultado logra ser aceptable es necesario definir una métrica para esto.
     Debido a que las obras de arte, sueles calificadas con metricas cualitativas y no tanto cuantitativas, se decidió utilizar otra red neuronal convolucional, 
     entrenada especialmente para reconocer estilos artisticos y en base a los resultados que arroja se define si el numero de iteraciones es suficiente para generar el resultado final 
-    o es necesario continuar iterando.
+    o es necesario continuar iterando. \\
+    Para introducir al lector en el tema, a continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artistico a fotografias:\\
+    \FIXME{ACOMODAR IMAGENES Y AGREGAR PIE DE FOTO}
+    \begin{figure}[h]
+ 
+      \begin{subfigure}{0.5\textwidth}
+	\includegraphics[width=0.9\linewidth, height=5cm]{./img/jhonson_style_candy.jpg} 
+	\caption{Imagen de Estilo}
+	\label{fig:candy}
+      \end{subfigure}
+    
+      \begin{subfigure}{0.5\textwidth}
+	\includegraphics[width=0.9\linewidth, height=5cm]{./img/jhonson_content_tower.jpg}
+	\caption{Imagen de Contenido}
+	\label{fig:tower}
+      \end{subfigure}
+
+      \begin{subfigure}{0.5\textwidth}
+	\includegraphics[width=0.9\linewidth, height=5cm]{./img/jhonson_result_tower_candy.jpg}
+	\caption{Resultado obtenido transfiriendo el estilo de la obra de arte a la imagen de contenido}
+	\label{fig:candy_tower}
+      \end{subfigure}
+    \caption{En la figura se puede observar un ejemplo de como funciona la transferencia de estilo}
+    \label{fig:style_transfer_candy_tower}
+    \end{figure}
   
-  \paragraph{Estructura del trabajo}
-    A lo largo de este trabajo se hará un recorrido por los principales conceptos para comprender tanto el problema como la solución y las técnicas empleadas.\\
+  \section {Estructura del trabajo}
+    A lo largo de este trabajo se hará un recorrido por los principales conceptos para comprender tanto el problema como la solución y las técnicas empleadas para la transferencia
+    de estilos artisticos en fotografias.\\
     El capítulo 2 se desarrolla el marco teórico y cuestiones formales requeridas, principalmente orientado al aprendizaje Automatico y a las redes neuronales.\\
     En el capitulo 3 se hara un recorrido por los principales articulos de investigación y los algoritmos alli definidos para las tecnicas de transferencia estilos artisticos en fotografias.
     Para luego, en el capítulo 4 abordar en detalle la solución propuesta, junto con un análisis y evaluación empírica de la misma.\\
     En el capítulo 5 contiene los experimentos realizados y los resultados obtenidos, para finalmente en el capitulo 6 establecer una conclusión acerca del trabajo realizado, 
     junto con las perspectivas y posibles tareas a futuro.\\
-
-Para introducir al lector en el tema, a continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artistico a fotografias:
-\FIXME{TESIS SOBRE IMÁGENES $\Rightarrow$ PONER MUCHAS IMÁGENES. SIRVE PARA MOTIVAR Y FIJAR IDEAS AL MISMO TIEMPO QUE INCENTIVÁS AL LECTOR A SEGUIR LEYENDO, ADJUNTAR EJEMPLOS}
-
-
 
 \chapter{Marco Teórico}
 
@@ -162,7 +189,7 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 
 
 
-  \section{Aprendizaje Automatico}
+  \section{Aprendizaje Automático}
 %https://en.wikipedia.org/wiki/Machine_learning
     \subsection{Introducción}
       El Aprendizaje Automático (o machine learning, por su denominación en inglés) es un subcampo de las ciencias de la computacion que le otorga a las computadoras la habilidad de aprender o inferir reglas que no fueron explicitamente programadas.
@@ -187,26 +214,26 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
       El principal objetivo de un sistema de aprendizaje es generalizar desde su experiencia o conocimiento previo. Generalizar en este contexto es la habilidad del sistema de realizar
       predicciones con precision sobre un ejemplo nuevo no visto antes, luego de aprender sobre el conjunto de entrenamiento. Los ejemplos de entrenamiento provienen de un espacio 
       con probabilidad de distribución desconocida del cual es considerado representativo. El sistema de aprendizaje debe construir un modelo sobre el espacio total que le permite realizar
-      predicciones lo suficientemente precisas sobre nuevos ejemplos.
+      predicciones lo suficientemente precisas sobre nuevos ejemplos. A continuación se enumeran algunas propiedades de los modelos:
       \begin{itemize}
 	\item Los modelos capturan la información en los datos de entrada (o en los datos en general, en aprendizaje no supervisado)
 	\item Representan la forma de ver el mundo que permite extrapolar cuando se observan nuevos datos (nunca vistos).
 	\item Los modelos pueden ser matemáticamente bien formados (estadísticos) o simplemente algoritmicos (cascadas de if-then-else).
-	\item El modelo como código objeto: Diferenciamos el modelo del algoritmo usado para obtener el modelo.
+	\item El modelo como código objeto: diferenciamos el modelo del algoritmo usado para obtener el modelo.
       \end{itemize}
 
 
     \subsection{Características para el Aprendizaje}
-      \FIXME{REVISAR}
-      \FIXME{REFERENCIAS Y EXPLICACIÓN BREVE. ESTO VALE PARA TODOS LOS EJEMPLOS/MODELOS QUE SE MENCIONAN}
-      \FIXME{Posible Referencia \url{http://machinelearningmastery.com/discover-feature-engineering-how-to-engineer-features-and-how-to-get-good-at-it/}}
+      \FIXME{REVISAR}\\
+      \FIXME{REFERENCIAS Y EXPLICACIÓN BREVE. ESTO VALE PARA TODOS LOS EJEMPLOS/MODELOS QUE SE MENCIONAN}\\
+      \FIXME{Posible Referencia \url{http://machinelearningmastery.com/discover-feature-engineering-how-to-engineer-features-and-how-to-get-good-at-it/}}\\
       Para que un modelo pueda aprender, es necesario definir las caracteristicas (features en inglés) que este deberá aprender a partir de las instancias de entrenamiento.
       Una Feature es una pieza de información que podría ser útil para la predicción. Cualquier atributo podría ser una caracteristicas, siempre y cuando sea útil para el modelo.
       La ingeniería de caracteristicas (feature engineering en la literatura en ingles) es considerado un tema informal dentro del aprendizaje automático, sin embargo es sumamente
-      relevante a la hora de poner en practica los algoritmos de esta area.
+      relevante a la hora de poner en práctica los algoritmos de esta área.
       Segun el tipo de dato, las caracteristicas iran variando. \\
-      Por ejemplo para representar un documento de texto, el metodo mas utilizado es la bolsa de palabras.
-      Este metodo genera una caracteristica por cada palabra de su vocabulario, y cada documento es representado por un vector, cada posicion del vector se asocia a una palabra del 
+      Por ejemplo para representar un documento de texto, el método mas utilizado es la bolsa de palabras.
+      Este método genera una caracteristica por cada palabra de su vocabulario, y cada documento es representado por un vector, cada posicion del vector se asocia a una palabra del 
       vocabulario y el valor que posee esa posición es la cantidad de veces que aparece la palabra asociada.
 
       \subsubsection{Representando imágenes}
@@ -221,6 +248,18 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 	  partir de características físicas, hipótesis y observaciones. El enfoque entonces no aprende features de los objetos sino que se procesa la imágen de interés con un 
 	  extractor de features prefijadas y luego se pasa la nueva representación a un clasificador entrenable. Los métodos más utilizadas que generan este tipo de descriptores s
 	  on SIFT, SURF y Vectores Fisher.
+	  Otro ejemplo es el de la bolsa de palabras visuales, similar al metodo ejemplificado para texto, que se ilustra en la siguiente imagen:\\
+	  \begin{figure}[H]
+	    \includegraphics[scale=0.5]{./img/bag_of_visual_words.jpg}
+	    \caption{Ejemplo de Bolsa de Palabras visuales}
+	    \label{fig:figure2}
+	  \end{figure}
+	  
+	  Estas técnicas son utilizadas como paso de preprocesamiento de la imagen, ya que representación cruda en pixeles es insuficiente para proveerla como dato de entrada de un algoritmo 
+	  de aprendizaje automático ya que para estos, es necesario proveer una representación de mas alto nivel, que permita detectar caracteristicas de alto nivel,
+	  como formas, contornos, etc. Es decir que provean una especie de contenido semántico de la imagen.
+	  
+
 	\subsubsection{Enfoque de Aprendizaje Profundo} 
 	  La filosofía de estas técnicas se basa en la hipótesis de “un único algoritmo de aprendizaje”: El cerebro usa esencialmente el mismo algoritmo para comprender diferentes formas de entrada. 
 	  Es entonces que en este enfoque se contempla que la complejidad de la percepción no está en el algoritmo ni en las estructuras de aprendizaje, sino en los datos. 
@@ -228,24 +267,35 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 	  en lugar de que sean diseñadas a mano y prefijadas en el detector. El problema asociado a esto es que no sabemos qué features el modelo aprende durante el entrenamiento.
 	  Las estructuras de aprendizaje profundo de features contemplan el concepto heredado de la neurobiología de que las features son jerárquicas: 
 	  desde features de bajo nivel como bordes y contornos, hasta estructuras y objetos. Las Redes Neuronales Convolucionales soportan el aprendizaje de este tipo features 
-	  y es el modelo que analizaremos posteriormente en este trabajo.
+	  y es el modelo que analizaremos posteriormente en este trabajo.\\
 	 \FIXME{SHALLOW VS DEEP / HAND-CRAFTED VS LEARNED. VER SLIDES DE ANDREA VEDALDI
             \url{http://www.robots.ox.ac.uk/~vedaldi//assets/teach/vedaldi14bmvc-tutorial.pdf}.
             AL PLANTEAR EL PROBLEMA DE ML EN CV HACERLO DE TAL FORMA DE QUE QUEDE CLARO QUE HAY UNA REPRESENTACIÓN INTERMEDIA DE LAS IMAGENES.}
        
       \subsection{Entrenamiento}
 	\subsubsection{Función de Puntuación}
-	
+	  Una predicción puede tener un resultado binario (0 o 1) o puede devolver un puntaje por lo general con valores continuos entre 0 y 1, indicando un cierto valor de confianza 
+	  de la predicción. Para el caso de un problema de clasificación de imagenes, el modelo dado una imagen, puede otorgar un puntaje a cada una de las clases posibles, 
+	  y la que obtenga el mayor puntaje será la clase asignada para esa imagen.
+	  Un ejemplo de función de puntuación:
+	  Suponiendo que tenemos $x_{i}$  una imagen de entrada, que la queremos asociar a una clase $y_{j}$ de las $K$ clases posibles , sea $D$ la dimensionalidad de $x_{i}$, $x_{i} \in R^D$,
+	  $i \in 1..N$, $j \in 1..K$, entonces $f$ es una función: $f:R^D {\rightarrow} R^K$. El caso mas simple es el de una clasificador lineal:\\
+	  \begin{equation*}
+	    f(x_{i}, W, b) = W x_{i} + b
+	  \end{equation*}
+	  Donde $W \in R^{KxD}$, $b \in R^{Kx1}$ son los parámetros de la función. $W$ suele ser llamado los pesos y $b$ el sesgo.  
+	  
 	\subsubsection{Función de Pérdida}
-	  Una función de pérdida es una función real, no negativa L(ˆy , y), que mide cuán diferente es la predicción y ˆ obtenida por la hipótesis h θ , con respecto a la
+	  Una función de pérdida es una función real, no negativa $L(y , y)$, que mide cuán diferente es la predicción $y$ obtenida por la hipótesis $h$ , con respecto a la
 	  salida esperada y. Existen diversas funciones de pérdida que se utilizan en distintos contextos. A continuación se presentan algunas que se aplican usualmente:
-	  \paragraph{Función de Pérdida 0-1}
-	  \paragraph{Función de Pérdida Hinge}
-	  \paragraph{Función de Pérdida Logistica}
-	  \paragraph{Función de Pérdida de Entropia Cruzada}
+	  \paragraph{Función de Pérdida 0-1} \FIXME{AGREGAR FORMULA}
+	  \paragraph{Función de Pérdida Hinge} \FIXME{AGREGAR FORMULA}
+	  \paragraph{Función de Pérdida Logistica} \FIXME{AGREGAR FORMULA}
+	  \paragraph{Función de Pérdida de Entropia Cruzada} \FIXME{AGREGAR FORMULA}
 
 	\subsubsection {Seleccion del Modelo}
-	
+	  \FIXME{COMPLETAR}
+
 	\subsubsection {Fase de Aprendizaje}
 	  \begin{itemize}
 	    \item Antes de comenzar el entrenamiento el conjunto de datos se divide en 2 subconjuntos, un conjunto de datos de entrenamiento y un conjunto de datos de prueba. 
@@ -274,24 +324,16 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 	  Este procedimiento se basa en la idea de repetir el cálculo del entrenamiento y la prueba en diferentes subgrupos seleccionados aleatoriamente o divididos del conjunto de datos original.
 	  Es prácticamente como entrenar y testear en los mismo datos, suponiendo que los datos estan partidos en 3 subconjuntos: datos = {A,B,C}, el procedimiento seria el siguiente:
 	  \begin{itemize}
-	    \item entrenar en A,B, testear en C
-	    \item entrenar en A,C, testear en B
-	    \item entrenar en B,C, testear en A
+	    \item Entrenar en A,B, testear en C
+	    \item Entrenar en A,C, testear en B
+	    \item Entrenar en B,C, testear en A
 	  \end{itemize}
 
       \subsection{Evaluación}
-	Para poder determinar el grado confianza \FIXME{Revisar} de un modelo y ademas para poder compararlo con otros modelos, es necesario evaluarlo. 
-	A la hora de evaluar un modelo se utilizan diferentes tipos de metricas, en esta seccion se iran algunas de las principales metricas utilizadas.    
-	\subsubsection {Evaluando modelos}
-	  \begin{itemize}
-	    \item Medir cuantas veces un sistema devuelve la respuesta correcta (“exactitud/accuracy”) no es suficiente
-	    \item Muchos problemas de interés práctico tienen un gran sesgo hacia una sola clase (clase de fondo)
-	    \item Si el 95% de las veces algo no ocurre, decir que nunca ocurrirá (¡un modelo que no es particularmente muy útil!) se equivocará sólo un 5% del tiempo
-	    \item Datos apartados (no entrenar y testear sobre los mismos datos)
-	    \item Los datos apartados tienen que ser representativos del problema y la población donde se utilizará el sistema
-	  \end{itemize}
-	\subsubsection {Metricas}
-	\subsubsection {Precisión, exhaustividad y exactitud}
+	Para poder determinar el grado confianza o corrección \FIXME{REVISAR} de un modelo y ademas para poder compararlo con otros modelos, es necesario evaluarlo. 
+	A la hora de evaluar un modelo se utilizan diferentes tipos de metricas, en esta seccion se iran algunas de las principales métricas utilizadas.    
+
+	\subsubsection {Metricas: Precisión, exhaustividad y exactitud}
 	  Si se ejecuta un clasificador binario sobre un conjunto de evaluación, existen cuatro resultados posibles para cada elemento clasificado:
 	  \begin{itemize}	
 	    \item Verdadero Positivo: el elemento se clasificó como positivo, y su valor real es positivo.
@@ -299,7 +341,6 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 	    \item Falso Positivo: el elemento se clasificó como positivo, pero su valor real es negativo.
 	    \item Falso Negativo: el elemento se clasificó como negativo, pero su valor real es positivo.
 	  \end{itemize}
-	  \FIXME{Agregar cuadro}
 	  
 	  Considerando los resultados del clasificador ejecutado sobre todo el conjunto de evaluación, se definen:
 	  \begin{itemize}	
@@ -380,26 +421,10 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
       Clasificacion se define como el problema de identificar a que categoria pertenece una nueva observacion,
       basada en el conjunto de datos de entrenamiento, que contiene observaciones a las cuales se les conoce si categoria.
       Otra opcion es la regresion que en lugar de determinar a que categoria pertenece, define un puntaje de pertenencia a cada categoria.
-      El Aprendizaje Automático supervisado:
-      \begin{itemize}
-	\item Aprender lo que uno ya sabe
-	\item Tratar de aprender una función f(x1, …, xn) → y donde
-	\item xi son las caracterísita de aprendizaje (features) de entrada
-	\item y es la clase objetivo
-	\item La clave es extrapolación, queremos que la función generalize a entradas nunca vistas.
-	\item Interpolación lineal es en sí una forma de hacer Aprendizaje Automático supervisado.
-	\item Una visión como desarrolladores
-	\item Entrenamiento/Estimación/“compilación”:
-	\item Entrada: vectores de features, incluyendo la clase objetivo
-	\item Salida: un modelo entrenado
-	\item Ejecución/Predicción/“interpretado”:
-	\item Entrada: vectores de features, sin la clase objetivo, más el modelo entrenado
-	\item Salida: la clase objetivo predicha
-      \end{itemize}
       
       \subsubsection{Clasificacion}
 
-      Ejemplos de algoritmos de clasificacion son Clasificacion lineal, regresion logistica, SVM que luego se detallaran en base a un problema concreto.
+	Ejemplos de algoritmos de clasificacion son Clasificacion lineal, regresion logistica, SVM que luego se detallaran en base a un problema concreto.
   
     \subsection{Aprendizaje No Supervisado} 
       \begin{itemize}
@@ -451,11 +476,11 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
       \FIXME{AGREGAR EJEMPLO}
 
     
-    \section{Clasificacion mediante Aprendizaje Supervisado}
-      \subsection{Introduccion}
-	A continuacion abordaremos un problema, el cual servirá de motivación para luego explicar el uso de las redes neuronales convolucionales.
+    \section{Clasificación mediante Aprendizaje Supervisado}
+      \subsection{Introducción}
+	A continuación abordaremos un problema, el cual servirá de motivación para luego explicar el uso de las redes neuronales convolucionales.
 
-      \subsection{Clasificacion de imagenes}
+      \subsection{Clasificación de imágenes}
 	Es un problema de asginar a una imagen de entrada una etiqueta de categoria a partir de un conjunto prefijado de categorias.
 	Es uno de los principales problemas del area de vision por computadoras, que a pesar de su simplicidad tiene una gran cantidad y variedad de aplicaciones practicas, 
 	al punto de que otros problemas provenientes del area de vision por computadores pueden ser como detección de objetos o segmentacion pueden ser reducidos a clasificacion de imagenes.
@@ -474,8 +499,13 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 	    \item Variaciones intra clase: Existen muchos instancias completamente distinta de una misma categoria de objetos.
 	  \end{itemize}
 	  Un buen modelo de clasificacion de imagenes debe ser tolerante a todos estos desafios presentados.
+	  \begin{figure}[h]
+	    \includegraphics[scale=0.5]{./img/stanford_challenges.jpeg}
+	    \caption{Aqui se pueden observar graficamente los desafios enumerados anteriormente}
+	    \label{fig:stanford_challenges}
+	  \end{figure}
 
-	\subsubsection {Ciclo de Clasificacion de Imágenes}
+	\subsubsection {Ciclo de Clasificación de Imágenes}
 	  \begin{itemize}
 	    \item Conjunto de datos de entrada: El conjunto de datos de entrada es un conjunto de N imágenes, cada una etiquetada con una de las K diferentes categorias.  
 	    \item Aprendizaje: En base al conjunto de datos de entrenamiento, el sistema debe aprender como identificar las caracteristicas de cada categoria para asi establecer un modelo clasificador.
@@ -507,6 +537,7 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 	La idea es minimizar la funcion de perdida adaptando los valores de los pesos.
 
     \subsection{Optimización}
+      Minimizar la función de pérdida puede considerarse un problema de optimización, con lo cual se pueden aplicar las tecnicas empleadas en este tipo de problemas, para resolverlo.
       El objetivo de la optimización es encontrar el vector de pesos W que minimice la funcion de perdida.
 
     \subsection{Gradiente} 
@@ -528,8 +559,11 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 	que permite lograr una buena aproximación al objetivo completo con una convergencia mucho mas rapida.
 
 
-      \subsubsection{Otras formas de optimizacion}
+      \subsubsection{Otras formas de optimización}
 	Existen otros metodos de optimizacion que trabajan de forma similar al descenso por el gradiente, ADAM, LBFGS,RMSProp etc. 
+	\paragraph{ADAM}
+	\paragraph{LBFGS}
+	\paragraph{RMSProp}
 	\FIXME{DETALLAR} 
 	
     \subsection{Retropropagación del Error}
@@ -595,21 +629,19 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 	pero luego fue divergiendo
 	y convirtiendose en una tarea de Ingenieria para obtener buenos resultados dentro del area de Aprendizaje automatico.
 	Dendritas, input axones, sinapsis y output.
-	IMAGEN DE ANALOGIA
+	\FIXME {IMAGEN DE ANALOGIA}
 
       \subsection {Neurona artificial Unidad}
-	Consta de un vector de entrada, un vector de pesos y una función de activación no lineal
+	La unidad de procesamiento de una red neuronal es una neurona. La misma consta de un vector de entrada, un vector de pesos y una función de activación no lineal
 	En una neurona se realiza el producto punto entre el vector de entrada, y su vector de pesos, le suma el sesgo y aplica la funcion de no linearidad.
 	Una unica neurona puede ser utilizada para implementar un clasificador binario.
 
-      \subsection {Funciones de Activacion comunmente utilizadas}
+      \subsection {Funciones de Activación comunmente utilizadas}
 	Toda funcion de activacion toma un unico numero como entrada, realiza un operacion matematica predefinida, no lineal y devuelve el resultado obtenido.
 	Algunos ejemplos de funciones que se utilizan:
-	\begin{itemize}
-	  \item Sigmoid:
-	  \item Tangente hiperbolica
-	  \item ReLU:max(0,x)
-	\end{itemize}
+	  \subsubsection {Sigmoid:}
+	  \subsubsection {Tangente hiperbolica}
+	  \subsubsection {ReLU:max(0,x)}
 
     \subsection {Arquitectura de las Redes Neuronales}
       Organización por capas: Las redes neuronales se pueden modelar como un conjunto de neuronas conectadas en un grafo aciclico, que se suelen organizar por capas, las neuronas de una capa
@@ -625,7 +657,7 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 	Normalizacion \\
 	PCA: El algoritmo de análisis de componentes principales proporciona un medio de comprimir datos \\
 
-    \paragraph {Inicializacion de los pesos}
+    \paragraph {Inicializacin de los pesos}
       Error comun: Iniciar en 0.
       Inicializar con valores aleatorios cercanos a 0 
 
@@ -658,6 +690,7 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
     Estan inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes.
 
     \subsection {Historia de las Redes Neuronales Convolucionales}
+      \FIXME{Agregar Breve resena}
 
     \subsection {Arquitectura de una red neuronal convolucional}
       En las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad.
@@ -700,17 +733,18 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 	y, en ocasiones, tienen un mejor desempeño. Un inconveniente para las unidades lineales rectificadas es que no pueden aprender a través de métodos basados ​​en 
 	gradiente en ejemplos para los cuales su activación es cero. Una variedad de generalizaciones de unidades lineales rectificadas garantizan que reciben gradiente en 
 	todas partes. Existen 3 generalizaciones sobre esta, que agregan un parámetro de regularización:
-	  \subparagraph{Rectificacion por Valor Absoluto}
-	  \subparagraph{Leaky ReLU} Agrega un parametro de regularizacion, fijandolo en un valor pequeño como por ejemplo 0.01.
-	  \subparagraph{Parametric ReLU} Trata el parámetro de regularizacion como un parámetro aprendible.
-	\paragraph{Maxout}
+	  \subparagraph{Rectificacion por Valor Absoluto} \FIXME{AGREGAR FORMULA}
+	  \subparagraph{Leaky ReLU} Agrega un parametro de regularizacion, fijandolo en un valor pequeño como por ejemplo 0.01. \FIXME{AGREGAR FORMULA}
+	  \subparagraph{Parametric ReLU} Trata el parámetro de regularizacion como un parámetro aprendible. \FIXME{AGREGAR FORMULA}
+	\paragraph{Maxout} \FIXME{COMPLETAR}
+	
       
       \subsubsection{Capa Completamente Conectada} 
 	Las neuronas entre dos capas adyacentes están completamente conectadas de a pares, pero las neuronas dentro de una sola capa no comparten conexiones.
 
     \subsection {Consideraciones computacionales}
-      El cuello de botella más grande a tener en cuenta al construir arquitecturas ConvNet es el cuello de botella de memoria. 
-      Muchas GPUs modernas tienen un límite de memoria de 3/4 / 6GB, con las mejores GPUs que tienen cerca de 12GB de memoria. 
+      El cuello de botella más grande a tener en cuenta al construir arquitecturas de CNN es la limitacion de memoria. 
+      Muchas Placas graficas de procesamiento (GPUs en ingles) modernas tienen un límite de memoria de 3/4/6GB, las mejores GPUs que tienen cerca de 16GB de memoria. 
       Hay tres fuentes principales de memoria para realizar un seguimiento:
       \begin{itemize}
 	\item A partir de los tamaños de volumen intermedios: Éstos son el número crudo de activaciones en cada capa de la ConvNet, y también sus gradientes (de igual tamaño). Normalmente, la mayoría de las activaciones se encuentran en las capas anteriores de una ConvNet (es decir, primeras capas de convección). Estos se mantienen alrededor porque son necesarios para backpropagation, pero una implementación inteligente que ejecuta un ConvNet sólo en tiempo de prueba podría en principio reducir esto en una cantidad enorme, sólo almacenando las activaciones actuales en cualquier capa y descartando las activaciones anteriores en las capas de abajo .
@@ -721,12 +755,12 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 
 
     \subsection {Casos de estudio de redes convolucionales famosas}
-      \begin{itemize}
-	\item AlexNet
-	\item VGG
-	\item Inception
-	\item Resnet
-      \end{itemize}
+      \FIXME{COMPLETAR}
+      \subsection{AlexNet}
+      \subsection{VGG}
+      \subsection{Inception}
+      \subsection{Resnet}
+
 
     \section {Reentrenamiento}
     STANFORD
@@ -754,14 +788,29 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 	\end{itemize}
      \section {Otros conceptos relevantes}
 	\subsubsection{Matriz de Gramm}
+	  En el álgebra lineal, la matriz de Gram de un conjunto de vectores ${\ displaystyle v_ {1}, \ dots, v_ {n}} v_ {1}, \ dots, v_ {n}$ en un espacio de producto interno 
+	  es la matriz hermitiana de Los productos internos, cuyas entradas están dadas por ${\ displaystyle G_ {ij} = \ langle v_ {i}, v_ {j} \ rangle} G_ {ij} = \ langle v_ {i},
+	  v_ {j} \ rangle$
+	  Una aplicación importante es calcular la independencia lineal: un conjunto de vectores es linealmente independiente si y sólo si el determinante de Gram 
+	  (el determinante de la matriz de Gram) no es cero.
+	  \FIXME{REVISAR, AGREGAR RELACION CON CORRELACION}
 
 \chapter{Algoritmo de Transferencia de estilo}
-    \section{Introduccion}
+    \section{Contexto}
+      En este capitulo se desarrollan los contenidos específicos relativos al Algoritmo de Transferencia de Estilos artisticos a fotografias. El algoritmo elegido para tal fin es el que 
+      presenta Gatys en su articulo \FIXME{AGREGAR REFERENCIA}.
+      Inicialmente el autor publica un articulo para sintetizar texturas naturales utilizando Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, 
+      donde define a una textura como la correlación entre los distintos mapas de caracteristicas de cada una de las capas de la red.\FIXME{AGREGAR REFERENCIA}.
+      Esta misma idea luego la aplica para la Transferencia de Estilos.
+      La publicación de estos artículos, ha incentivado a muchos investigadores del area a continuar desarrollando estas ideas, a tal punto que hasta el dia de hoy se siguen publicando
+      avances el tema, a gran velocidad.
+
+    \section{Introduccion} 
       En lo que al arte respecta, los humanos han desarrollado la capacidad de crear experiencias visuales únicas componiendo una compleja interacción entre el contenido y el estilo de una imagen.
-    Sin ir mas lejos, las bases algoritmicas de este proceso se desconocen y no existen sistemas artificiales que con capacidades similares. Sin embargo, en otras areas fundamentales
-    de la percepcion visual como el reconocimiento de objetos y rostros recientemente se ha alcanzado precisión cercana a la de un humano, utilizando modelos de redes neuronales profundas. 
-    Aquí presentamos un sistema artificial basado en una Red Neural Profunda que crea imágenes artísticas de alta calidad perceptiva. El sistema utiliza representaciones neuronales 
-    para separar y recombinar el contenido y el estilo de imágenes arbitrarias, proporcionando un algoritmo para la creación de imágenes artísticas.
+      Sin ir mas lejos, las bases algoritmicas de este proceso se desconocen y no existen sistemas artificiales que con capacidades similares. Sin embargo, en otras areas fundamentales
+      de la percepcion visual como el reconocimiento de objetos y rostros recientemente se ha alcanzado precisión cercana a la de un humano, utilizando modelos de redes neuronales profundas. 
+      Aquí presentamos un sistema artificial basado en una Red Neural Profunda que crea imágenes artísticas de alta calidad perceptiva. El sistema utiliza representaciones neuronales 
+      para separar y recombinar el contenido y el estilo de imágenes arbitrarias, proporcionando un algoritmo para la creación de imágenes artísticas.
 
     \section{Sintesis}
       Cuando las Redes Neuronales Convolucionales (CNNs) son entrenadas para reconocimiento de objetos, desarrollan una representacion de la imagen que hace que la información 
@@ -778,8 +827,13 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
       apariencia general en terminos de colores y estructuras localizadas, a estas representaciones las llamaremos representaciones de estilo.
       El principal descubrimiento de este articulo es que la representacion del estilo y el contenido de una imagen pueden ser separables con una Red Neuronal Convolucional entrenada 
       para el reconocimiento de objetos. De esta forma, al manipularse independientemente se pueden generar una nueva imagen desde 2 imagenes de entradas distintas, simultaneamente se corresponda con la representacion
-      del contenido de una imagen y la respresentacion del estilo de la otra.
-
+      del contenido de una imagen y la respresentacion del estilo de la otra.\\
+      	  \begin{figure}[h]
+	    \includegraphics[scale=0.5]{./img/gatys_1.png}
+	    \caption{COMPLETAR}
+	    \label{fig:stanford_challenges}
+	  \end{figure}
+    
     \section{Metodos}
       Los resultados exhibidos fueron obtenidos utilizando la red VGG-19, de disponibilidad publica.
       Generalmente, cada capa de la red define un banco de filtros no lineal cuya complejidad aumenta con la posición de la capa en la red.
@@ -796,7 +850,12 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
       Para generar las imágenes que mezclan el contenido de una fotografía con el estilo de una obra de arte conjuntamente minimizamos la distancia de una imagen de ruido blanco 
       de la representación de contenido de la fotografía en una capa de la red y la representación de estilo de la obra de arte en un número de capas de la CNN.
       Funcion de Perdida total ...
-      \FIXME{AGREGAR FORMULA}
+      \FIXME{AGREGAR FORMULA}\\
+      \begin{figure}[h]
+	\includegraphics[scale=0.5]{./img/gatys_2.png}
+	\caption{COMPLETAR}
+	\label{fig:stanford_challenges}
+      \end{figure}
     
      
 \chapter{Descripción del problema y solución propuesto}
@@ -812,7 +871,8 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
       \item Método de optimización a utilizar.
     \end{itemize}
 
-    Además, para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica.
+    Además, para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica, que permita definir si un resultado 
+    obtenido es mejor que otro.
     
   \section{Algoritmo de Reconocimiento de estilo}
     \subsection{Introduccion}
@@ -842,9 +902,9 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
 	\end{itemize}
 	Se encontro que las caracteristicas extraidas de una CNN son las que mejor precisión proveen a la hora de reconocer estilos.
 
-  \section{Finetuning para reconocimiento de estilos}
-    Basado en los resultados propuestos en el articulo antes mencionado, se realizo un finetuning sobre la red AlexNet, por cuestiones de simplicidad, utilizando
-    el conjunto de datos Wikipaintings, para los 10 estilos que mas datos provee.
+    \subsection{Finetuning para reconocimiento de estilos}
+      Basado en los resultados propuestos en el articulo antes mencionado, se realizó un reentranmiento sobre la red AlexNet, por cuestiones de simplicidad, utilizando
+      el conjunto de datos Wikipaintings, para los 10 estilos que mayor cantidad de datos provee.
   
   \section{Solución propuesta}
     En la solución propuesta en este trabajo se plantea poder definir automáticamente el número de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado.
@@ -868,10 +928,13 @@ Para introducir al lector en el tema, a continuación se muestran algunos ejempl
       Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo supera al puntaje del resto de los estilos y se toma el punto medio.
 
     \subsection{Conjunto de datos}
-      El conjunto de datos utilizado para en este trabajo es el de Wikipaintings
-    
-      
+      El conjunto de datos utilizado para en este trabajo es el de Wikipaintings, de disponibilidad publica. \FIXME{AGREGAR REFERENCIA}
+
+    \subsection{Detalles de implementación}
+      \FIXME{COMPLETAR}
+
 \chapter{Experimentos}
+
 \chapter{Conclusiones, Perspectivas y trabajos a futuro}
   \section{Conclusiones}
   \section{Trabajos a futuro}
