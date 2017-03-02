@@ -88,25 +88,25 @@
 
 \chapter{Introducción}
   \section {Contexto}
-    En los ultimos años las fotografias estan cada vez mas pasando a ser un objeto virtual en lugar de físico, de la mano del gran aumento en el uso de los dispositivos móviles 
+    En los últimos años las fotografias estan cada vez más, pasando a ser un objeto virtual en lugar de físico, de la mano del gran aumento en el uso de los dispositivos móviles 
     cualquier persona puede tomar miles fotografias en un instante de tiempo, y compartirla en las redes sociales.
     A partir de esto, se han desarrollado muchas aplicaciones entorno a las fotografias, ya sea desde redes sociales masivamente utilizadas, hasta aplicaciones que aplican efectos o filtros 
     a la fotografía para transformarla en un retrato en blanco y negro o sepia por ejemplo. \\
     Muy recientemente se han comenzado a desarrollar aplicaciones que logran transferir el estilo de una obra de arte a una fotografía. Esto es posible gracias al incremento 
     del poder de cómputo y al descenso del precio de los nuevos dispositivos, ya que las técnicas computacionales empleadas para esto, requieren un cómputo mucho mas complejo.\\
-    Esta tarea requiere de la interacción de 2 de las principales areas de las Ciencias de la Computación y de gran auge en la actualidad: Visión por Computadoras y Aprendizaje Automático,
-    que hasta hace un tiempo, iban evolucionando completamente en paralelo, independientemente una de la otra. Hoy en día se han logrado resultados completamente disruptivos, al aplicar
+    La transferencia de estilo requiere de la interacción de 2 de las principales areas de las Ciencias de la Computación y de gran auge en la actualidad: Visión por Computadoras y Aprendizaje Automático,
+    que hasta hace un tiempo, fueron evolucionando en paralelo, independientemente una de la otra. Hoy en día se han logrado resultados completamente disruptivos, al aplicar
     Aprendizaje Automático para algunas de las principales tareas de Visión por Computadoras, como lo son la clasificación de imágenes, detección y reconocimiento de objetos.\\
     \paragraph{Visión por Computadoras}
-    El area de Visión por Computadoras es el área de las Ciencias de la Computación que se encarga de cómo las computadoras pueden lograr obtener una comprensión de alto nivel de imágenes digitales o videos. 
-    Desde la perspectiva de la ingeniería, busca automatizar tareas que el sistema visual humano puede hacer. Incluye métodos para adquirir, procesar, analizar y comprender las imágenes del mundo real 
-    con el fin de producir información numérica o simbólica para que puedan ser tratados por una computadora.\\
+      El área de Visión por Computadoras es el área de las Ciencias de la Computación que se encarga de cómo las computadoras pueden lograr obtener una comprensión de alto nivel de imágenes digitales o videos. 
+      Desde la perspectiva de la ingeniería, busca automatizar tareas que el sistema visual humano puede hacer. Incluye métodos para adquirir, procesar, analizar y comprender las imágenes del mundo real 
+      con el fin de producir información numérica o simbólica para que puedan ser tratados por una computadora.\\
     \paragraph{Aprendizaje Automático}
-    El area de Aprendizaje Automático es el área de las Ciencias de la Computación que da a las computadoras la capacidad de aprender sin ser explícitamente programadas, explora el estudio 
-    y la construcción de algoritmos que pueden aprender y hacer predicciones sobre los datos. Tales algoritmos lo logran siguiendo las instrucciones estrictamente estáticas del programa 
-    mediante la fabricación de predicciones o decisiones impulsadas por datos​ a través de la construcción de un modelo generado con las muestras de entrada. El aprendizaje automático 
-    se emplea en una serie de tareas informáticas en las que el diseño y la programación de algoritmos explícitos son inviables, como por ejemplo para la detección de Spam, el reconocimiento
-    óptico de caracteres y los motores de búsqueda.\\
+      El area de Aprendizaje Automático es el área de las Ciencias de la Computación que da a las computadoras la capacidad de aprender sin ser explícitamente programadas, explora el estudio 
+      y la construcción de algoritmos que pueden aprender y hacer predicciones sobre los datos. Tales algoritmos lo logran siguiendo las instrucciones estrictamente estáticas del programa 
+      mediante la fabricación de predicciones o decisiones impulsadas por datos​ a través de la construcción de un modelo generado con las muestras de entrada. El aprendizaje automático 
+      se emplea en una serie de tareas informáticas en las que el diseño y la programación de algoritmos explícitos son inviables, como por ejemplo para la detección de Spam, el reconocimiento
+      óptico de caracteres y los motores de búsqueda.\\
     Dentro del Aprendizaje Automático, existe un subdominio llamado Aprendizaje Profundo, basado en un conjunto de algoritmos que intentan modelar abstracciones de alto nivel en los datos,
     mediante Redes Neuronales Artificiales de gran profundidad.\\
     La principal herramienta elegida para poder llevar a cabo la transferencia de estilo en fotografías son las Redes Neuronales Convolucionales, estas Redes Neuronales Artificiales asumen 
@@ -204,7 +204,7 @@
       \FIXME{AGREGAR EJEMPLO, DETECCION DE NUMEROS EN IMAGENES O ALGUN OTRO?}
 
     \subsection{Clasificación de algoritmos de aprendizaje automático}
-      Dentro del aprendizaje automático, los algoritmos se pueden clasificar segun la forma en la que aprenden de sus datos, en algoritmos de aprendizaje supervisado, no supervisado, 
+      Dentro del aprendizaje automático, los algoritmos se pueden clasificar según la forma en la que aprenden de sus datos, en algoritmos de aprendizaje supervisado, no supervisado, 
       semi-supervisado o por refuerzo.
 
       \subsubsection{Aprendizaje Supervisado}
@@ -219,7 +219,7 @@
 	
 	\paragraph {Clasificación}
 
-	  Ejemplos de algoritmos de clasificación son Clasificación lineal, regresion logistica, SVM que luego se detallaran en base a un problema concreto.
+	  Ejemplos de algoritmos de clasificación son Clasificación lineal, regresion logistica, SVM que luego se detallarán en base a un problema concreto.
     
       \subsubsection{Aprendizaje No Supervisado} 
 	\begin{itemize}
@@ -234,6 +234,12 @@
 	    \item Cada definición de distancias induce un agrupamiento de los datos, basado en esa métrica
 	    \item La distancia es donde se incorpora la información humana
 	  \end{itemize}
+
+	  \begin{figure}[h]
+	    \includegraphics[scale=0.5]{./img/stackoverflow_clustering.png}\\
+	    \caption{En la primer figura se puede observar los datos distribuidos en el espacio, que luego son agrupados por colores}
+	    \label{fig:car_detection}
+	  \end{figure}
 
       \subsubsection{Aprendizaje Semi-Supervisado}
 
@@ -267,8 +273,11 @@
       
       \subsubsection{Aprendizaje por Refuerzo}
 	El sistema interactua en un ambiente dinamico en el cual debe cumplir un objetivo determinado, el programa va recibiendo retroalimentacion en terminos de premios y castigos mientras 
-	recorre el espacio del problema y de esta forma aprende.
-	\FIXME{AGREGAR EJEMPLO}
+	recorre el espacio del problema y de esta forma aprende.\\
+	El aprendizaje de refuerzo difiere del aprendizaje supervisado en que nunca se presentan pares de entrada/salida correctos, ni acciones subóptimas corregidas explícitamente. 
+	Además, se hace hincapié en el rendimiento en tiempo real, que consiste en encontrar un equilibrio entre la exploración (del territorio desconocido) y la explotación 
+	(del conocimiento actual).
+	Por ejemplo, mediante aprendizaje por refuerzo una computadora puede aprender a jugar al Backgammon o al Ajedrez a niveles profesionales.
 
     \subsection{Datos}
       Al ser un área que tiene su enfoque basado en los datos de entrada, estos pasan a cumplir un rol fundamental en el desarrollo del algoritmo, por ello es necesario que 
@@ -347,6 +356,13 @@
 	 \FIXME{SHALLOW VS DEEP / HAND-CRAFTED VS LEARNED. VER SLIDES DE ANDREA VEDALDI
             \url{http://www.robots.ox.ac.uk/~vedaldi//assets/teach/vedaldi14bmvc-tutorial.pdf}.
             AL PLANTEAR EL PROBLEMA DE ML EN CV HACERLO DE TAL FORMA DE QUE QUEDE CLARO QUE HAY UNA REPRESENTACIÓN INTERMEDIA DE LAS IMAGENES.}
+	  \begin{figure}[h]
+	    \includegraphics[scale=0.5]{./img/vedaldi_shallow_deep.pdf}
+	    \caption{En las 3 primeras opciones del diagrama se pueden observar las distintas formas de representar imagenes mediante tecnicas de aprendizaje automático tradicional,
+	    donde las caracteristicas deben estar predefinidas a mano, en cambio para las tecnicas de aprendizaje profundo, las representaciones son aprendidas durante el entrenamiento
+	    del modelo.}
+	    \label{fig:figure2}
+	  \end{figure}
        
       \subsection{Entrenamiento}
 	A continuación detallaremos algunos conceptos principales para el entrenamiento de un modelo y luego se explica como funciona la fase de aprendizaje.
@@ -357,9 +373,9 @@
 	  Un ejemplo de función de puntuación:
 	  Suponiendo que tenemos $x_{i}$  una imagen de entrada, que la queremos asociar a una clase $y_{j}$ de las $K$ clases posibles , sea $D$ la dimensionalidad de $x_{i}$, $x_{i} \in R^D$,
 	  $i \in 1..N$, $j \in 1..K$, entonces $f$ es una función: $f:R^D {\rightarrow} R^K$. El caso mas simple es el de una clasificador lineal:\\
-	  \begin{equation*}
+	  \begin{equation}
 	    f(x_{i}, W, b) = W x_{i} + b
-	  \end{equation*}
+	  \end{equation}
 	  Donde $W \in R^{KxD}$, $b \in R^{Kx1}$ son los parámetros de la función. $W$ suele ser llamado los pesos y $b$ el sesgo, ya que influye en el resultado de salida, pero sin 
 	  interactuar con el dato de entrada.
 	  Algunas cosas a tener en cuenta:
@@ -384,17 +400,30 @@
 	\subsubsection{Función de Pérdida}
 	  Una función de pérdida es una función real, no negativa $L({\widehat y}, y)$, que mide cuán diferente es la predicción ${\widehat y}$ obtenida, con respecto a la
 	  salida esperada $y$. Existen diversas funciónes de pérdida que se utilizan en distintos contextos. A continuación se presentan algunas que se aplican usualmente:
-	  \paragraph{Función de Pérdida 0-1} $L({\widehat y}, y) =  1$ si ${\widehat y} = y $ $0$ en caso contrario. 
-	  \paragraph{Función de Pérdida Hinge}  $L({\widehat y}, y) =  max(0, 1 - {\widehat y}y)$\\ 
+	  \paragraph{Función de Pérdida 0-1}
+	    \begin{equation}
+	      L({\widehat y}, y) =  1 si {\widehat y} = y 0 en caso contrario.
+	    \end{equation}
+	    
+	  \paragraph{Función de Pérdida Hinge}
+	    \begin{equation}
+	      L({\widehat y}, y) =  max(0, 1 - {\widehat y}y)
+	    \end{equation}
 	    Ampliamente utilizada para algoritmos de Maquina de Vector Soporte. 
 	    Es una función convexa y continua pero no es derivable por lo tanto no se puede utilizar en metodos como el Descenso por el Gradiente. 
-	  \paragraph{Función de Pérdida Logistica} $L({\widehat y}, y) =  {\log(1+ {\exp^{-{\widehat y}y}})}$\\
+	  \paragraph{Función de Pérdida Logistica} 
+	    \begin{equation}
+	      L({\widehat y}, y) =  {\log(1+ {\exp^{-{\widehat y}y}})}
+	    \end{equation}
 	    Similar a la Función Hinge, pero al ser derivable, puede utizarse para aplicar Descenso por el gradiente.
-	  \paragraph{Función de Pérdida de Entropia Cruzada} $L({\widehat y}, y) = -y{\log({\widehat y}}) - (1-y) {\log(1-{\widehat y})}$\\
+	  \paragraph{Función de Pérdida de Entropia Cruzada} 
+	     \begin{equation}
+	      L({\widehat y}, y) = -y{\log({\widehat y}}) - (1-y) {\log(1-{\widehat y})}
+	     \end{equation}
 	    Es una funcion continua, convexa y derivable que se adapta a metodos de Descenso por el gradiente, se utiliza en Redes Neuronales Profundas.
 
 	\subsubsection {Seleccion del Modelo}
-	  Selección de modelos es la tarea de seleccionar un modelo estadístico de un conjunto de modelos candidatos, dados datos de entrada. 
+	  La selección del modelo es la tarea que consiste en elegir un modelo estadístico de un conjunto de modelos candidatos, dados datos de entrada. 
 	  En los casos más simples, se considera un conjunto preexistente de datos. 
 	  Sin embargo, la tarea también puede implicar el diseño de experimentos de tal manera que los datos recogidos sean adecuados para el problema de la selección de modelos,
 	  se puede realizar tambien un analisis exploratorio de datos, para poder detectar algunas caracteristicas que debe tener el modelo, por ejemplo si es un problema de clasificación
@@ -421,10 +450,14 @@
 	\subsubsection {Regularización}
 	  Una técnica para evitar el sobre ajuste de modelos es utilizar regularización. Esencialmente, consiste en penalizar los parámetros del modelo para evitar su
 	  crecimiento desmedido, agregando un regularizador($R(W)$) a la Función de Pérdida. \\
-	  La función de regularización mas comunmente utilizada es la norma $L2$, definida como:\\
-	   $R(W) = {\sum_{k} {\sum_{l}} W_{k,l}^2}$\\
+	  La función de regularización mas comunmente utilizada es la norma $L2$, definida como:
+	   \begin{equation}
+	    R(W) = {\sum_{k} {\sum_{l}} W_{k,l}^2}
+	   \end{equation}
 	   De esta forma la función de pérdida queda compuesta por 2 terminos, uno respecto a los datos y otro respecto a la regularización:
-	   $L = {\frac{1}{N}} {\sum_{i} L_{i}} + {\lambda R(W)}$ \\
+	   \begin{equation}
+	    L = {\frac{1}{N}} {\sum_{i} L_{i}} + {\lambda R(W)}
+	   \end{equation}
 	   Donde $N$ es la cantidad de datos de entrenamiento, $L_{i}$ es la función de pérdida calculada para cada ejemplo y ${\lambda}$ es un hiperparámetro que define 
 	   cuanto influye la regularización sobre el resultado final. 
 	   
@@ -464,27 +497,34 @@
 	  
 	  \paragraph { Precisión }
 	    La precisión del clasificador se define como el número de Verdaderos Positivos (es decir, la cantidad de elementos clasificados correctamente en la clase positiva)
-	    dividido por el total de elementos clasificados en la clase positiva (esto es, la suma de los Verdaderos Positivos y los Falsos Positivos). Se puede expresar como:\\
-	    $ Precision = {\frac {VP}{VP+FP}}$\\
+	    dividido por el total de elementos clasificados en la clase positiva (esto es, la suma de los Verdaderos Positivos y los Falsos Positivos). Se puede expresar como:
+	    \begin{equation}
+	     Precision = {\frac {VP}{VP+FP}}
+	    \end{equation}
 	    Una precisión de 1.0 para un clasificador significa que todo elemento asignado a la clase positiva pertenece realmente a dicha clase, aunque no posee información
 	    de los elementos de la clase positiva que fueron asignados incorrectamente a la clase negativa.
 	  
 	  \paragraph { Exhaustividad }  
 	    La exhaustividad de un clasificador (recall en la literatura en inglés) se define como el número de Verdaderos Positivos dividido por el número total de elementos que 
-	    realmente pertenecen a la clase positiva (es decir, la suma de los Verdaderos Positivos y los Falsos Negativos). Se puede expresar de la siguiente manera:\\
-	    $ Exhaustividad = {\frac {VP}{VP+FN}}$\\
+	    realmente pertenecen a la clase positiva (es decir, la suma de los Verdaderos Positivos y los Falsos Negativos). Se puede expresar de la siguiente manera:
+	    \begin{equation}
+	     Exhaustividad = {\frac {VP}{VP+FN}}
+	    \end{equation}
 	    Un valor de 1.0 de exhaustividad indica que todos los elementos de la clase positiva fueron asignados a la clase positiva, aunque no dice nada acerca de cuántos elementos 
 	    fueron además incorrectamente asignados en dicha clase.
 	    
 	  \paragraph { Métrica F }
 	    Por lo general, las métricas de precisión y exhaustividad no se analizan por separado. Una forma de análisis es observar el valor de una, fijando un nivel en la otra 
-	    (por ejemplo, la precisión con un nivel de exhaustividad de 0.90). Además, existen métricas que combinan ambos valores, como es la Métrica F:\\
-	    $ F = 2 {\frac {Precision x Exhaustividad}{Precision + Exhaustividad}}$\\
-	  
+	    (por ejemplo, la precisión con un nivel de exhaustividad de 0.90). Además, existen métricas que combinan ambos valores, como es la Métrica F:
+	    \begin{equation}
+	      F = 2 {\frac {Precision x Exhaustividad}{Precision + Exhaustividad}}
+	    \end{equation}
 	  \paragraph { Exactitud }
 	    La exactitud (accuracy en la literatura en inglés) se define como la proporción de resultados verdaderos (Verdaderos Positivos y Verdaderos Negativos) entre el total 
 	    de elementos examinados (es decir, el tamaño del conjunto de evaluación). Expresado como una fórmula resulta:\\
-	    $ Exactitud = {\frac {VP+VN}{VP+VN+FP+FN}}$
+	    \begin{equation}
+	      Exactitud = {\frac {VP+VN}{VP+VN+FP+FN}}
+	    \end{equation}
 
 	  \paragraph {ROC}
 	    \FIXME{COMPLETAR}
@@ -691,10 +731,57 @@
       \subsection {Funciones de Activación comunmente utilizadas}
 	Toda función de activacion toma un unico número como entrada, realiza un operacion matematica predefinida, no lineal y devuelve el resultado obtenido.
 	Algunos ejemplos de funciónes que se utilizan:
-	  \subsubsection {Sigmoid:} \FIXME{AGREGAR FORMULA}
-	  \subsubsection {Tangente hiperbolica} \FIXME{AGREGAR FORMULA}
-	  \subsubsection {ReLU:}$max(0,x)$
+	  \subsubsection {Sigmoide} 
+	    \begin{figure}[h]
+	      \includegraphics[scale=0.5]{./img/sigmoid.png}
+	      \caption{Grafico de la funcion Sigmoide}
+	      \label{fig:sigmoid}
+	    \end{figure}
+	    Proyecta el dominio al rango (0,1). 
+	    \begin{equation}
+	     f(x) = \frac{1}{1+\exp{-x}}
+	    \end{equation}
+	    La función sigmoide ha tenido un uso frecuente desde el punto de vista histórico, ya que tiene una interpretación similar a la tasa de activación de una neurona: 
+	    de no activarse en absoluto (0) a activarse completamente a una frecuencia máxima asumida (1). En la práctica, la función sigmoide recientemente ha dejado de utilizarse, 
+	    ya  que tiene dos inconvenientes principales:
+	    \begin{itemize}
+	     \item Se satura y anula el gradiente. Una propiedad muy indeseable de la sigmoide es que cuando la activación de la neurona se satura en cualquiera de las dos puntas de 0 o 1, 
+	      el gradiente en estas regiones es casi cero.
+	     \item Las salidas no están centradas en cero. Esto es indeseable ya que las neuronas en capas posteriores de procesamiento en una Red Neuronal estarían recibiendo 
+	      datos que no están centrados en cero. Esto tiene implicaciones en la dinámica durante el descenso del gradiente, porque si los datos que llegan a una neurona 
+	      son siempre positivos, entonces el gradiente en los pesos durante la retropropagación o bien serán todos positivos o todos negativos.
+	    \end{itemize}
 
+	  \subsubsection {Tangente hiperbolica} 
+	    \begin{figure}[h]
+	      \includegraphics[scale=0.5]{./img/tanh.png}
+	      \caption{Grafico de la funcion Tangente hiperbolica}
+	      \label{fig:sigmoid}
+	    \end{figure}
+	    Proyecta el dominio al rango [-1,1]. Al igual que la neurona sigmoide, sus activaciones saturan, pero a diferencia de la neurona sigmoide su salida esta centrada en cero.
+	    Por lo tanto, en la práctica la tanh siempre es preferida sobre sigmoide.
+	    \begin{equation}
+	     f(x) = max(0,x)
+	    \end{equation}
+	 
+	  \subsubsection {ReLU}
+	    \begin{figure}[h]
+	      \includegraphics[scale=0.5]{./img/relu.jpeg}
+	      \caption{Grafico de la funcion ReLU}
+	      \label{fig:relu}
+	    \end{figure}
+	    La Unidad Rectificada Lineal (Rectified Linear Unit en la literatura en inglés) se ha vuelto muy popular en los últimos años. Toma el maximo entre el valor y cero, es decir 
+	    simplemente le agrega un umbral igual a 0.
+	    \begin{equation}
+	     f(x) = max(0,x)
+	    \end{equation}
+	    Algunas ventajas de utilizar ReLUs:
+	    \begin{itemize}
+	      \item Se encontró que aceleran en gran medida la convergencia del descenso del gradiente estocástico en comparación con las funciones sigmoides/tanh, esto se debe a su forma lineal, sin saturarse.
+	      \item En comparación con las funciones tanh/sigmoide que implican operaciones caras, la ReLU puede implementarse simplemente marcando una matriz de activaciones a cero.
+	    \end{itemize}
+
+	    
     \subsection {Arquitectura de las Redes Neuronales}
       Organización por capas: Las redes neuronales se pueden modelar como un conjunto de neuronas conectadas en un grafo aciclico, que se suelen organizar por capas, las neuronas de una capa
       se conectan con neuronas de sus capas adjacentes pero nunca se conectan 2 neuronas de una misma capa.
@@ -709,14 +796,16 @@
       \FIXME{COMPLETAR}
       \begin{itemize}
        \item Restarle la media a cada caracteristica 
-       \item Normalizacion
-       \item PCA: El algoritmo de análisis de componentes principales proporciona un medio de comprimir datos
+       \item Normalizar los datos
+       \item Reducir dimensionalidades utilizando por ejemplo PCA: El algoritmo de análisis de componentes principales proporciona un medio de comprimir datos.
       \end{itemize}
 
-    \paragraph {Inicializacin de los pesos}
+    \paragraph {Inicializacion de los pesos}
       Para inicializar los pesos de la red un error comun es iniciarlos en 0. Lo que se suele hacer es inicializar con valores aleatorios cercanos a 0. 
 
-    \paragraph {Regularizacion: Dropout}
+    \paragraph {Regularizacion: Marginacion}
+      La marginacion (Dropout en la literatura en ingles) es una técnica de regularización para reducir la saturación en redes neuronales al prevenir el sobreajuste. 
+      El término "marginacion" se refiere a dejar de lado algunas unidades (ocultas y visibles) en una red neuronal, a la hora de entrenar la red.
       \FIXME{COMPLETAR}
 
     \subsection {Entrenamiento}
@@ -772,14 +861,13 @@
 	el Overfitting. La capa de agrupamiento funcióna independientemente en cada segmento de profundidad de la entrada y la redimensiona espacialmente, utilizando la operación de máximo, 
 	tambien se suele utilizar la operacion de promedio o la norma L2.
 
-	Retroalimentacion
-	el paso hacia atrás para una operación maximo tiene una interpretación sencilla, ya que sólo encamina el gradiente a la entrada que tenía el valor más alto en el paso hacia
-	adelante. Por lo tanto, durante el paso hacia adelante de una capa de agrupamiento es común realizar un seguimiento del índice de la activación máxima de manera que 
-	el enrutamiento de gradiente es eficiente durante la retropropagación.
+	Retropropagación: el paso hacia atrás para una operación maximo tiene una interpretación sencilla, ya que sólo encamina el gradiente a la entrada que tenía el valor más alto
+	en el paso hacia adelante. Por lo tanto, durante el paso hacia adelante de una capa de agrupamiento es común realizar un seguimiento del índice de la activación máxima de 
+	manera que el enrutamiento de gradiente es eficiente durante la retropropagación.
 
       \subsubsection{Capas No Lineales}
 	Estas capas son las encargadas de aplicar una función de activación no lineal, las principales son:
-	\paragraph{ReLU} Las unidades lineales rectificadas usan la función de activación g (z) = max {0, z}. 
+	\paragraph{ReLU} Las unidades lineales rectificadas usan la función de activación $g(z) = max(0,z)$. 
 	Las unidades lineales rectificadas son fáciles de optimizar porque son tan similares a las unidades lineales. 
 	La única diferencia entre una unidad lineal y una unidad lineal rectificada es que una unidad lineal rectificada da salida a cero a través de la mitad de su dominio. 
 	Esto hace que las derivadas a través de una unidad lineal rectificada permanezcan grandes siempre que la unidad esté activa.
@@ -789,10 +877,21 @@
 	gradiente en ejemplos para los cuales su activación es cero. Una variedad de generalizaciones de unidades lineales rectificadas garantizan que reciben gradiente en 
 	todas partes. Existen 3 generalizaciones sobre esta, que agregan un parámetro de regularización:
 	  \subparagraph{Rectificacion por Valor Absoluto} \FIXME{AGREGAR FORMULA}
-	  \subparagraph{Leaky ReLU} Agrega un parámetro de regularizacion, fijandolo en un valor pequeño como por ejemplo 0.01. \FIXME{AGREGAR FORMULA}
-	  \subparagraph{Parametric ReLU} Trata el parámetro de regularizacion como un parámetro aprendible. \FIXME{AGREGAR FORMULA}
-	\paragraph{Maxout} \FIXME{COMPLETAR}
-	
+	  \subparagraph{Leaky ReLU} Agrega un parámetro de regularizacion $\alpha$, fijandolo en un valor pequeño como por ejemplo 0.01. 
+	    \begin{equation}
+	     f(x)=1(x<0)(\alpha x)+1(x>=0)(x) 
+	    \end{equation}
+
+	  \subparagraph{ReLU Parametrica} Trata el parámetro de regularizacion como un parámetro aprendible. \FIXME{AGREGAR FORMULA}
+	\paragraph{Maxout} 
+	  Se han propuesto otros tipos de unidades que no tienen la forma funcional $f(w^T x + b)$ donde se aplica una no linealidad sobre el producto punto entre los pesos y los datos. 
+	  Una opción relativamente popular es la función Maxout, que generaliza la ReLU.
+	  \begin{equation}
+	   f(x) = max(w_1^T x+b_1,w_2^T x+b_2)
+	  \end{equation}
+	  Notar que ReLU es un caso particular con $w_1, b_1 = 0$. Por lo tanto, la neurona Maxout disfruta de todos los beneficios de una unidad ReLU (régimen lineal de operación, sin saturación) 
+	  y no tiene sus inconvenientes (ReLU se puede morir). Sin embargo, a diferencia de las neuronas ReLU duplica el número de parámetros para cada neurona, 
+	  lo que lleva a un alto número total de parámetros. 
       
       \subsubsection{Capa Completamente Conectada} 
 	Las neuronas entre dos capas adyacentes están completamente conectadas de a pares, pero las neuronas dentro de una sola capa no comparten conexiones.
@@ -885,7 +984,7 @@
       	  \begin{figure}[h]
 	    \includegraphics[scale=0.8]{./img/gatys_1.png}
 	    \caption{COMPLETAR}
-	    \label{fig:stanford_challenges}
+	    \label{fig:gatys_1}
 	  \end{figure}
     
     \section{Métodos}
@@ -914,7 +1013,7 @@
       \begin{figure}[h]
 	\includegraphics[scale=0.8]{./img/gatys_2.png}
 	\caption{COMPLETAR}
-	\label{fig:stanford_challenges}
+	\label{fig:gatys_2}
       \end{figure}
     
      
