@@ -10,6 +10,9 @@
 \usepackage[export]{adjustbox}
 \usepackage[spanish]{babel}
 \usepackage{mathtools}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
 
 \newcommand*{\FIXME}[1]{{(\textbf{FIXME}) {#1}}}
 
@@ -84,7 +87,8 @@
 \end{romanpages}            % end roman page numbering
 \fi
 
-\tableofcontents 
+\tableofcontents
+\listoffigures 
 
 \chapter{Introducción}
   \section {Contexto}
@@ -100,7 +104,8 @@
     \paragraph{Visión por Computadoras}
       El área de Visión por Computadoras es el área de las Ciencias de la Computación que se encarga de cómo las computadoras pueden lograr obtener una comprensión de alto nivel de imágenes digitales o videos. 
       Desde la perspectiva de la ingeniería, busca automatizar tareas que el sistema visual humano puede hacer. Incluye métodos para adquirir, procesar, analizar y comprender las imágenes del mundo real 
-      con el fin de producir información numérica o simbólica para que puedan ser tratados por una computadora.\\
+      con el fin de producir información numérica o simbólica para que puedan ser tratados por una computadora. El objetivo principal de Visión por Computadoras es reducir la distancia
+      entre lo que un humano interpreta a partir de una imagen y la forma en la que las computadoras representan esa misma imagen.\\
     \paragraph{Aprendizaje Automático}
       El area de Aprendizaje Automático es el área de las Ciencias de la Computación que da a las computadoras la capacidad de aprender sin ser explícitamente programadas, explora el estudio 
       y la construcción de algoritmos que pueden aprender y hacer predicciones sobre los datos. Tales algoritmos lo logran siguiendo las instrucciones estrictamente estáticas del programa 
@@ -137,7 +142,7 @@
     entrenada especialmente para reconocer estilos artisticos y en base a los resultados que arroja se define si el número de iteraciones es suficiente para generar el resultado final 
     o es necesario continuar iterando. \\
     Para introducir al lector en el tema, a continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artistico a fotografías:\\
-    \FIXME{ACOMODAR IMAGENES Y COMPLETAR PIE DE FOTO, COMO SE ENUMERAN?}
+    \FIXME{ACOMODAR IMAGENES Y COMPLETAR PIE DE FOTO}
     \begin{figure}[h]
  
       \begin{subfigure}{0.7\textwidth}
@@ -201,7 +206,7 @@
       Tom M. Mitchell elaboró una definición más formal de este concepto de aprendizaje: “se dice que un programa de computadora aprende de una experiencia E con respecto a una clase 
       de tarea T y medición de desempeño P, si su desempeño en la tarea T, medido por P, mejora con la experiencia E” [Mitchell,1997].\\
       El aprendizaje automático es esencialmente una forma de estadística aplicada con énfasis en el uso de computadoras para estimar estadísticamente funciónes complicadas.
-      \FIXME{AGREGAR EJEMPLO, DETECCION DE NUMEROS EN IMAGENES O ALGUN OTRO?}
+      \FIXME{AGREGAR EJEMPLO, DETECCION DE NUMEROS EN IMAGENES, TEXTURAS O ALGUN OTRO?}
 
     \subsection{Clasificación de algoritmos de aprendizaje automático}
       Dentro del aprendizaje automático, los algoritmos se pueden clasificar según la forma en la que aprenden de sus datos, en algoritmos de aprendizaje supervisado, no supervisado, 
@@ -212,28 +217,27 @@
 	dado un conjunto de entrenamiento de ejemplos de entradas x y salidas y.
 	Consisten en aprender una función, a partir de datos de entrenamiento etiquetados. Cada ejemplo del conjunto de entrenamiento suele ser un par
 	compuesto de un objeto de entrenamiento(representado por un vector de caracteristicas) y una etiqueta, que seria el valor de salida deseado.
-	El problema tipico que se ataca con estos algoritmos es el de clasificación. \\
-	Clasificación se define como el problema de identificar a que categoría pertenece una nueva observacion,
-	basada en el conjunto de datos de entrenamiento, que contiene observaciones a las cuales se les conoce si categoría.
-	Otra opcion es la regresion que en lugar de determinar a que categoría pertenece, define un puntaje de pertenencia a cada categoría.
-	
+	Los problema tipicos que se atacan con estos algoritmos son la regresión y la clasificación, dependiendo si la variable a predecir es continua o discreta. \\
+	\paragraph {Regresión}  
+	  El objetivo de la regresión es predecir el valor de una o más de las variables (continuas) objetivo $t$, dado el valor de un vector $x$ de variables de entrada.
+	  Un ejemplo de un problema de regresión sería el de predecir el puntaje creditico que obtiene un cliente que solicita un prestamo en un banco, donde el vector de entrada 
+	  consistiria de información financiera, como sueldo, monto disponible en tarjetas de credito, etc.
 	\paragraph {Clasificación}
-
-	  Ejemplos de algoritmos de clasificación son Clasificación lineal, regresion logistica, SVM que luego se detallarán en base a un problema concreto.
-    
+	  Clasificación se define como el problema de identificar a que categoría (variable discreta) pertenece una nueva observación, basada en el conjunto de datos de entrenamiento, 
+	  que contiene observaciones a las cuales  si se les conoce categoría. En el escenario más común, las clases o categorias son disjuntas, 
+	  de modo que cada entrada es asignado a una y sólo una clase. El espacio de entrada es por lo tanto dividido en regiones de decisión, cuyos límites se denominan límites de decisión.
+	  Para problemas de regresión, la variable t es simplemente el vector de números reales cuyos valores queremos predecir. En el caso de la clasificación, 
+	  hay diversas maneras de usar los valores objetivo para representar las etiquetas de clase. En el caso de los dos clase de problemas, es la representación binaria 
+	  en la que hay un único destino la variable $t \in {0, 1}$ tal que $t = 1$ representa a una clase y $t = 0$ es a la otra.
+	  
       \subsubsection{Aprendizaje No Supervisado} 
-	\begin{itemize}
-	  \item La caracteristica principal de este tipo de algoritmos es que los datos de entrenamiento no estan etiquetados
-	  \item El principal algoritmo de aprendizaje no supervisado es el de Agrupamiento (Clustering en la literatura en inglés).
-	\end{itemize}
+	  Los algoritmos de aprendizaje No Supervisado se caracterizan por aplicarse a conjuntos de datos de entrenamiento a los cuales no se les conoce su etiqueta de salida, 
+	  para detectar patrones o similaridades entre los datos que eran desconocidas.
+	  El principal algoritmo de aprendizaje no supervisado es el de Agrupamiento (Clustering en la literatura en inglés).
 	\paragraph {Agrupamiento}
-	  \begin{itemize}
-	    \item Consiste en agrupar objetos, de forma tal que los objetos pertenecientes a un mismo grupo son en algun sentido mas similares entre ellos que a los objetos que pertenecen a otro grupo.
-	    \item El objetivo de los métodos de clustering es descubrir grupos significativos presentes en los datos.
-	    \item El concepto central en clustering es la definición de una función de distancia entre instancias
-	    \item Cada definición de distancias induce un agrupamiento de los datos, basado en esa métrica
-	    \item La distancia es donde se incorpora la información humana
-	  \end{itemize}
+	   El algoritmo de Agrupamiento consiste en reunir objetos en grupos, de forma tal que los objetos pertenecientes a un mismo grupo son en algun sentido mas similares 
+	   entre ellos que a los objetos que pertenecen a otro grupo. El objetivo de los métodos de agrupamiento es descubrir relaciones significativas presentes en los datos, por lo
+	   que el concepto central es la definición de una función de distancia entre las instancias. Cada definición de distancias induce un agrupamiento de los datos, basado en esa métrica.
 
 	  \begin{figure}[h]
 	    \includegraphics[scale=0.5]{./img/stackoverflow_clustering.png}\\
@@ -244,16 +248,15 @@
       \subsubsection{Aprendizaje Semi-Supervisado}
 
 	Estos algoritmos se caracterizan por utilizar una pequeña cantidad de datos etiquetados y otro gran conjunto de datos no etiquetados
-	Principal problema atacado:
+	El principal problema atacado es el de la recomendación.
 	\paragraph{Recomendación}
-	  \begin{itemize}
-	    \item Un problema en el medio entre supervisado y no supervisado
-	    \item Dado un conjunto de personas y objetos, recomendar nuevos objetos similares a los que la persona elige, pero que no conoce
-	    \item Amplia utilidad práctica
-	    \item Collaborative Filtering
-	    \item Filtrar información usando comunidades de personas
-	    \item Usuarios, ítems y preferencias
-	  \end{itemize}
+	  El problema de recomendación consiste en tratar de predecir la preferencia que un usuario podría hacer por un artículo. Los sistemas de recomendación se han convertido cada 
+	  vez más populares en los últimos años, y se pueden utilizar en una variedad de áreas, incluyendo películas, música, noticias, libros y productos en general.
+	  El enfoque mayormente utilizado es el de filtrado colaborativo, que se basa en la recolección y el análisis de una gran cantidad de información sobre los usuarios, 
+	  los comportamientos, actividades o preferencias y la predicción de lo que los usuarios tendrán como base en su similitud con otros usuarios. 
+	  Una ventaja clave es que no dependen de que el contenido sea analizable por una máquina  y por lo tanto es capaz de recomendar precisamente elementos complejos, 
+	  tales como las películas, sin necesidad de "comprender" el elemento.
+	  Dados usuarios, items y preferencias, la recomendacion puede ser basada en usuarios o en items:
 	\paragraph {Recomendación basada en Usuarios}
 	  \begin{itemize}
 	    \item para cada ítem i para el cual el usuario u no tiene preferencia:
@@ -262,6 +265,15 @@
 		\subsubitem acumular la preferencia de v por i, pesada por s
 		\subsubitem devolver los ítems con mayor preferencia pesada
 	  \end{itemize}
+	  \begin{algorithmic}
+	    \If {$i\geq maxval$}
+		\State $i\gets 0$
+	    \Else
+		\If {$i+k\leq maxval$}
+		    \State $i\gets i+k$
+		\EndIf
+	    \EndIf
+	  \end{algorithmic}
 	\paragraph {Recomendación basada en Items}
 	  \begin{itemize}
 	    \item para cada ítem i para el cual el usuario u no tiene preferencia:
@@ -270,7 +282,18 @@
 		\subsubitem acumular la preferencia de u por j, pesada por s
 		\subsubitem devolver los ítems con mayor preferencia pesada
 	  \end{itemize}
-      
+	  \begin{algorithmic}
+	    \If {$i\geq maxval$}
+		\State $i\gets 0$
+	    \Else
+		\If {$i+k\leq maxval$}
+		    \State $i\gets i+k$
+		\EndIf
+	    \EndIf
+	    \For{<condition>} <text> \EndFor
+	    \ForAll{<condition>} <text> \EndFor
+	  \end{algorithmic}
+	  
       \subsubsection{Aprendizaje por Refuerzo}
 	El sistema interactua en un ambiente dinamico en el cual debe cumplir un objetivo determinado, el programa va recibiendo retroalimentacion en terminos de premios y castigos mientras 
 	recorre el espacio del problema y de esta forma aprende.\\
@@ -328,6 +351,7 @@
 	Necesitamos de alguna función compleja que comprenda el significado de la imágen más allá de la representación numérica de la misma.
 	A lo largo del desarrollo de la visión por computadora se distinguen dos enfoques para la generacion de descriptores capaces de reconocer caracteristicas de una imagen: 
 	El enfoque basado en técnicas superficiales (o “shallow” en inglés) y el enfoque de aprendizaje profundo (o “deep” en inglés).
+	
 	\subsubsection{Enfoque Superficial}
 	  El enfoque superficial responde a la manera tradicional de hacer visión por computadoras. Se busca generar una representación invariante a la posición, iluminación, fondo,
 	  etc. utilizando principalmente técnicas estadísticas a partir de conocimiento anterior del objeto y del contexto. Los descriptores superficiales son diseñados a mano a 
@@ -471,7 +495,20 @@
 	    \item Entrenar en ${A,C}$ testear en ${B}$
 	    \item Entrenar en ${B,C}$ testear en ${A}$
 	  \end{itemize}
-
+	  \FIXME{PSEUDO CODIGO}
+	  	  \begin{algorithmic}
+	    \If {$i\geq maxval$}
+		\State $i\gets 0$
+	    \Else
+		\If {$i+k\leq maxval$}
+		    \State $i\gets i+k$
+		\EndIf
+	    \EndIf
+	    \For{<condition>} <text> \EndFor
+	    \ForAll{<condition>} <text> \EndFor
+	  \end{algorithmic}
+	  
+	  
       \subsection{Evaluación}
 	Para poder determinar el grado confianza o corrección \FIXME{REVISAR} de un modelo y ademas para poder compararlo con otros modelos, es necesario evaluarlo. 
 	A la hora de evaluar un modelo se utilizan diferentes tipos de metricas, en esta seccion se iran algunas de las principales métricas utilizadas.    
@@ -528,12 +565,8 @@
 
 	  \paragraph {ROC}
 	    \FIXME{COMPLETAR}
-	    \begin{itemize}
-	      \item Cuando se puede variar Precision/Recall con un parámetro, esto forma una curva
-	      \item El área bajo esa curva nos dá la idea de que tan bien funcióna un sistema
-	      \item Un sistema que funcióna todo el tiempo con muy buena precision y recall, tendrá un área muy grande
-	      \item Un sistema que tiene gran precision pero clasifica pocas instancias y muy poca precision cuando clasifica muchas tendrá muy poca área
-	    \end{itemize}
+	    La curva de ROC (Receiver Operating Characteristic Curve en la literatura en ingles), es un grafico que se genera por el trazado de la tasa Verdaderos Positivos (TPR),
+	    contra de la tasa de falsos positivos (FPR). Se suele utilizar para ilustrar el rendimiento de un clasificador binario.
 
     \subsection{Ciclo del Aprendizaje Automático}
       Luego de explicar todos los conceptos relevantes al Aprendizaje automático, podemos resumir al ciclo común a todos los algoritmos de Aprendizaje automático a lo siguiente: 
@@ -557,14 +590,12 @@
       \end{itemize}
 
     
-    \section{Clasificación mediante Aprendizaje Supervisado}
+    \section{Clasificación de imágenes mediante Aprendizaje Supervisado}
       \subsection{Introducción}
-	A continuación abordaremos un problema, el cual servirá de motivación para luego explicar el uso de las redes neuronales convolucionales.
-
-      \subsection{Clasificación de imágenes}
-	Es un problema de asginar a una imagen de entrada una etiqueta de categoría a partir de un conjunto prefijado de categorias.
-	Es uno de los principales problemas del area de visión por computadoras, que a pesar de su simplicidad tiene una gran cantidad y variedad de aplicaciones practicas, 
+	La clasificación de imágenes es un problema que consiste en asignar a una imagen de entrada, una etiqueta de categoría a partir de un conjunto prefijado de categorias.
+	Es uno de los principales problemas del area de visión por computadoras, pero que a pesar de su simplicidad tiene una gran cantidad y variedad de aplicaciones practicas, 
 	al punto de que otros problemas provenientes del area de visión por computadores pueden ser como detección de objetos o segmentacion pueden ser reducidos a clasificación de imágenes.
+	El objetivo de presentar este problema es motivar el uso de las redes neuronales convolucionales en las siguientes secciones.
 	\begin{figure}[h]
 	  \includegraphics[scale=0.5]{./img/stanford_img_class.jpg}
 	  \caption{Clasificación de imagenes en categorias: Perros, Gatos, Tazas y Gorros}
@@ -601,9 +632,9 @@
 	  \end{itemize}
       
     \subsection{Clasificación Lineal}
-      Este enfoque tiene 2 componentes principales que luego seran extendidos a las Redes Neuronales: Una función de puntuación que asigna un puntaje de pertenencia de cada instancia a cada categoría, 
+      Este es el enfoque mas simple, pero tiene 2 componentes principales que luego seran extendidos a las Redes Neuronales: Una función de puntuación que asigna un puntaje de pertenencia de cada instancia a cada categoría, 
       y una función de pérdida que cuantifica la coincidencia entre los puntajes predecidos con los puntajes correctos.
-      Este problema se reduce a un problema de optimización donde se requiere minimizar la función de pérdida con respecto a la función de puntuación.
+      Utilizando estos conceptos, el problema se reduce a un problema de optimización donde se requiere minimizar la función de pérdida con respecto a la función de puntuación.
 
       \subsubsection{Función de Puntuación}
 	El primer componente desde este enfoque es definir una función de  puntuación que mapee el valor de los pixeles de una imagen a un puntaje de confianza para cada categoría.
@@ -637,14 +668,26 @@
 	toma un hiperparámetro llamado tasa de aprendizaje que define el tamaño de cada paso en la iteración.
 	Este es el método mas utilizado para optimizar funciónes de pérdida en las Redes Neuronales. 
 
-      \subsubsection{Descenso por el gradiente estocástico:}
-	Un problema recurrente en el aprendizaje automático es que grandes conjuntos de entrenamiento son necesarios para una buena generalización, 
+      \subsubsection{Descenso por el gradiente estocástico}
+	Un problema recurrente en el aprendizaje automático es que para una buena generalización, son necesarios grandes conjuntos de entrenamiento, 
 	pero grandes conjuntos de entrenamiento también son más costosos desde el punto de vista computacional.
 	En aplicaciones de gran escala, el conjunto de entrenamiento puede ser del orden de los millones de ejemplos, por lo que computar la función de 
 	pérdida completa sobre todo el conjunto para actualizar un solo parámetro seria algo impracticable.
 	Un enfoque común que se aplica a este problema es computar el gradiente sobre pequeños lotes del conjunto de entrenamiento, 
 	que permite lograr una buena aproximación al objetivo completo con una convergencia mucho mas rapida.
-
+	\FIXME{Agregar Algoritmo}
+		  \begin{algorithmic}
+	    \If {$i\geq maxval$}
+		\State $i\gets 0$
+	    \Else
+		\If {$i+k\leq maxval$}
+		    \State $i\gets i+k$
+		\EndIf
+	    \EndIf
+	    \For{<condition>} <text> \EndFor
+	    \ForAll{<condition>} <text> \EndFor
+	  \end{algorithmic}
+	  
 
       \subsubsection{Otras formas de optimización}
 	\FIXME{Es necesario mencionarlos ya que las implementaciones los utilizan pero no se cuanto detalle dar}
