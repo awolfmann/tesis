@@ -10,7 +10,7 @@
 \usepackage[export]{adjustbox}
 \usepackage[spanish]{babel}
 \usepackage{mathtools}
-\usepackage{algorithm}
+\usepackage[chapter]{algorithm}
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 
@@ -89,6 +89,7 @@
 
 \tableofcontents
 \listoffigures 
+\listofalgorithms
 
 \chapter{Introducción}
   \section {Contexto}
@@ -258,41 +259,34 @@
 	  tales como las películas, sin necesidad de "comprender" el elemento.
 	  Dados usuarios, items y preferencias, la recomendacion puede ser basada en usuarios o en items:
 	\paragraph {Recomendación basada en Usuarios}
-	  \begin{itemize}
-	    \item para cada ítem i para el cual el usuario u no tiene preferencia:
-	      \subitem para cada otro usuario v que tiene preferencia por i:
-		\subsubitem calcular la similitud s entre u y v
-		\subsubitem acumular la preferencia de v por i, pesada por s
-		\subsubitem devolver los ítems con mayor preferencia pesada
-	  \end{itemize}
-	  \begin{algorithmic}
-	    \If {$i\geq maxval$}
-		\State $i\gets 0$
-	    \Else
-		\If {$i+k\leq maxval$}
-		    \State $i\gets i+k$
-		\EndIf
-	    \EndIf
-	  \end{algorithmic}
+	  \begin{algorithm}[h]
+	    \caption{Recomendación basada en Usuarios}
+	    \label{reco_user}
+	    \begin{algorithmic}
+	      \ForAll{item $i$ para el cual el usuario $u$ no tiene preferencia} 
+		\ForAll{usuario $v$ que tiene preferencia por $i$} 
+		    \State calcular la similitud $s$ entre $u$ y $v$
+		    \State acumular la preferencia de $v$ por $i$, pesada por $s$
+		    \State devolver los ítems con mayor preferencia pesada
+		\EndFor
+	      \EndFor
+	    \end{algorithmic}
+	  \end{algorithm}
+
 	\paragraph {Recomendación basada en Items}
-	  \begin{itemize}
-	    \item para cada ítem i para el cual el usuario u no tiene preferencia:
-	      \subitem para cada ítem j que u tiene una preferencia:
-		\subsubitem calcular la similitud s entre i y j
-		\subsubitem acumular la preferencia de u por j, pesada por s
-		\subsubitem devolver los ítems con mayor preferencia pesada
-	  \end{itemize}
-	  \begin{algorithmic}
-	    \If {$i\geq maxval$}
-		\State $i\gets 0$
-	    \Else
-		\If {$i+k\leq maxval$}
-		    \State $i\gets i+k$
-		\EndIf
-	    \EndIf
-	    \For{<condition>} <text> \EndFor
-	    \ForAll{<condition>} <text> \EndFor
-	  \end{algorithmic}
+	  \begin{algorithm}[h]
+	    \caption{Recomendación basada en Items}
+	    \label{reco_user}
+	    \begin{algorithmic}
+	      \ForAll{item $i$ para el cual el usuario $u$ no tiene preferencia} 
+		\ForAll{item $j$ que $u$ tiene una preferencia} 
+		    \State calcular la similitud $s$ entre $i$ y $j$
+		    \State acumular la preferencia de $u$ por $j$, pesada por $s$
+		    \State devolver los ítems con mayor preferencia pesada
+		\EndFor
+	      \EndFor
+	    \end{algorithmic}
+	  \end{algorithm}
 	  
       \subsubsection{Aprendizaje por Refuerzo}
 	El sistema interactua en un ambiente dinamico en el cual debe cumplir un objetivo determinado, el programa va recibiendo retroalimentacion en terminos de premios y castigos mientras 
@@ -302,10 +296,17 @@
 	(del conocimiento actual).
 	Por ejemplo, mediante aprendizaje por refuerzo una computadora puede aprender a jugar al Backgammon o al Ajedrez a niveles profesionales.
 
-    \subsection{Datos}
+    \subsection{Preprocesamiento de Datos}
       Al ser un área que tiene su enfoque basado en los datos de entrada, estos pasan a cumplir un rol fundamental en el desarrollo del algoritmo, por ello es necesario que 
       estén los mas limpios y puros posible, es decir lograr obtener un conjunto de datos útiles a los que se le puedan aplicar algoritmos de aprendizaje automático, 
-      motivo por el cual en muchas ocasiones se realiza una fase de preprocesamiento de datos, la cual puede llegar a ser la etapa que mas trabajo requiera del proceso completo. 
+      motivo por el cual en muchas ocasiones se realiza una fase de preprocesamiento de datos, la cual puede llegar a ser la etapa que mas trabajo requiera del proceso completo.
+      Por ejemplo una etapa de preprocesamiento de datos podria consistir de: 
+      \begin{itemize}
+       \item Restarle la media a cada caracteristica. 
+       \item Normalizar los datos.
+       \item Reducir dimensionalidades del conjunto de caracteristicas, quedandose con las que mas información aportan, y de esta forma se reduce el nivel de computo necesario para 
+	ejecutar el algoritmo, sin perder.
+      \end{itemize}
 
     \subsection{Modelos}
       \FIXME{FALTAN AGREGAR FORMALIDADES, CUALES? REFERENCIAS?}
@@ -489,24 +490,17 @@
 	  Dividir el conjunto de datos en un conjunto de entrenamiento fijo y un conjunto de prueba fijo puede ser problemático, lo que resulta en que el conjunto de prueba es pequeño. 
 	  Un pequeño conjunto de pruebas implica incertidumbre estadística alrededor del error de prueba promedio estimado, lo que hace difícil afirmar que el algoritmo A funcióna mejor que el algoritmo B en la tarea dada.
 	  Este procedimiento se basa en la idea de repetir el cálculo del entrenamiento y la prueba en diferentes subgrupos seleccionados aleatoriamente o divididos del conjunto de datos original.
-	  Es prácticamente como entrenar y testear en los mismo datos, suponiendo que los datos estan partidos en 3 subconjuntos: datos = ${A,B,C}$, el procedimiento seria el siguiente:
-	  \begin{itemize}
-	    \item Entrenar en ${A,B}$ testear en ${C}$
-	    \item Entrenar en ${A,C}$ testear en ${B}$
-	    \item Entrenar en ${B,C}$ testear en ${A}$
-	  \end{itemize}
-	  \FIXME{PSEUDO CODIGO}
-	  	  \begin{algorithmic}
-	    \If {$i\geq maxval$}
-		\State $i\gets 0$
-	    \Else
-		\If {$i+k\leq maxval$}
-		    \State $i\gets i+k$
-		\EndIf
-	    \EndIf
-	    \For{<condition>} <text> \EndFor
-	    \ForAll{<condition>} <text> \EndFor
-	  \end{algorithmic}
+	  Es prácticamente como entrenar y testear en los mismo datos, suponiendo que los datos estan partidos en 3 subconjuntos: datos = ${A,B,C}$, el procedimiento se detalla en el pseudo codigo:
+
+	  \begin{algorithm}[h]
+	    \caption{Cros - Validacion}
+	    \label{crossvalid}
+	    \begin{algorithmic}
+	      \State Entrenar en ${A,B}$ testear en ${C}$
+	      \State Entrenar en ${A,C}$ testear en ${B}$
+	      \State Entrenar en ${B,C}$ testear en ${A}$
+	    \end{algorithmic}
+	  \end{algorithm}
 	  
 	  
       \subsection{Evaluación}
@@ -656,17 +650,20 @@
 
     \subsection{Optimización}
       Minimizar la función de pérdida puede considerarse un problema de optimización, con lo cual se pueden aplicar las tecnicas empleadas en este tipo de problemas, para resolverlo.
-      El objetivo de la optimización es encontrar el vector de pesos W que minimice la función de pérdida.
+      El objetivo de la optimización es encontrar el vector de pesos $W$ que minimice la función de pérdida.
 
     \subsection{Gradiente} 
-      La estrategia de optimización mas utilizada para este tipo de problemas es la de seguir la dirección del gradiente (también llamado derivadas) de la función de pérdida.
+      La estrategia de optimización mas utilizada para este tipo de problemas es la de seguir la dirección del gradiente (también llamado derivada) de la función de pérdida.
       En este caso que la función toma como entrada un vector de números, se aplican las derivadas parciales y el gradiente es el vector resultante de calcular las derivadas parciales
       en cada dimensión.
 
       \subsubsection{Descenso por el gradiente}
 	La idea de principal de este metodo es el refinamiento iterativo, se evalua el resultado del calculo del gradiente y se actualizan los parámetros repetidamente, 
-	toma un hiperparámetro llamado tasa de aprendizaje que define el tamaño de cada paso en la iteración.
-	Este es el método mas utilizado para optimizar funciónes de pérdida en las Redes Neuronales. 
+	toma un hiperparámetro $\eta$ llamado tasa de aprendizaje que define el tamaño de cada paso en la iteración.
+	Sea $F$ la función de pérdida, $w$ el vector de pesos, $N$ el numero de datos de entrenamiento, cada iteracion consiste de:  
+	\begin{equation}
+	 w_{n+1} = w_n - \eta \nabla F(w_n)  = w_n - \eta \sum_{i=1}^{N} \nabla F_i(w_n) 
+	\end{equation}
 
       \subsubsection{Descenso por el gradiente estocástico}
 	Un problema recurrente en el aprendizaje automático es que para una buena generalización, son necesarios grandes conjuntos de entrenamiento, 
@@ -674,24 +671,41 @@
 	En aplicaciones de gran escala, el conjunto de entrenamiento puede ser del orden de los millones de ejemplos, por lo que computar la función de 
 	pérdida completa sobre todo el conjunto para actualizar un solo parámetro seria algo impracticable.
 	Un enfoque común que se aplica a este problema es computar el gradiente sobre pequeños lotes del conjunto de entrenamiento, 
-	que permite lograr una buena aproximación al objetivo completo con una convergencia mucho mas rapida.
+	que permite lograr una buena aproximación al objetivo completo con una convergencia mucho mas rapida, es decir se reduce $N$ a un pequeño subconjunto, de esta forma se reduce el 
+	numero de calculos realizados en cada iteración.
+	Este es el método mas utilizado para optimizar funciónes de pérdida en las Redes Neuronales. 
 	\FIXME{Agregar Algoritmo}
-		  \begin{algorithmic}
-	    \If {$i\geq maxval$}
-		\State $i\gets 0$
-	    \Else
-		\If {$i+k\leq maxval$}
-		    \State $i\gets i+k$
-		\EndIf
-	    \EndIf
-	    \For{<condition>} <text> \EndFor
-	    \ForAll{<condition>} <text> \EndFor
-	  \end{algorithmic}
+	  \begin{algorithm}[h]
+	    \caption{Descenso por el gradiente estocástico}
+	    \label{SGD}
+	    \begin{algorithmic}
+	      \State Elegir una tasa de aprendizaje $\eta$
+	      \State Elegir un vector de pesos inicial $w_0$
+	      \State Ordenar aleatoriamente
+	      \State $w \gets w_0$
+	      \Repeat
+		\ForAll {$i=1,..,N$}
+		  $sum_{gradiente} \gets sum_{gradiente} + \nabla F_i(w_n)$ 
+		\EndFor
+		\State $w \gets w - \eta sum_{gradiente}$
+	      \Until {Se encuentra un mínimo aproximado}
+	    \end{algorithmic}
+	  \end{algorithm}
 	  
 
       \subsubsection{Otras formas de optimización}
 	\FIXME{Es necesario mencionarlos ya que las implementaciones los utilizan pero no se cuanto detalle dar}
-	Existen otros metodos de optimizacion que trabajan de forma similar al descenso por el gradiente, ADAM, LBFGS,RMSProp etc. 
+	Existen otros metodos de optimizacion que trabajan de forma similar al descenso por el gradiente estocástico, ADAM, LBFGS,RMSProp que se aprovechan de utilizar el Momentum, a continuación definido:
+	\paragraph{Momentum} El Descenso por el gradiente estocástico con Momentum recuerda la actualización $\delta w$ en cada iteración, y se determina de la siguiente actualización 
+	como una combinación convexa de la pendiente y la actualización anterior:
+	  \begin{equation}
+	   \delta w_{n+1} = \eta \nabla F_i(w_n) + \alpha \delta w_n
+	  \end{equation}
+	  De esta forma el gradiente se calcula como:
+	  \begin{equation}
+	    w_{n+1} = w_n - \eta \nabla F(w_n)  + \alpha \delta w_n
+	  \end{equation}
+
 	\paragraph{LBFGS} Broyden–Fletcher–Goldfarb–Shanno de memoria limitada (Limited-memory  Broyden–Fletcher–Goldfarb–Shanno en ingles) Es un método iterativo para resolver problemas de optimización 
 	no lineal sin restricciones. Se aproxima al método de Newton,  busca un punto estacionario de una función (preferiblemente que tenga derivada de segundo orden). 
 	\paragraph{RMSProp} Propagación cuadrática media de la raíz (Root Mean Square Propagation en inglés) Es un método en el que la tasa de aprendizaje se adapta para cada uno de los parámetros. 
@@ -701,7 +715,7 @@
 	  En este promedio se utilizan tanto de los gradientes y sus magnitudes . \FIXME{AGREGAR FORMULA?}
 	
     \subsection{Retropropagación del Error}
-      \FIXME{\url{http://cs231n.github.io/optimization-2/}}
+      \FIXME{\url{http://cs231n.github.io/optimization-2/} AGREGAR FORMALIDADES REGLA DE LA CADENA}
       Retropropagación (en inglés Backpropagation) una forma  de computar los gradientes de expresiones mediante la aplicacion recursiva de la regla de la cadena.
       El ciclo consta de 2 fases, propagación y luego actualizacion de parámetros. Cuando ingresan los parámetro a la función se calcula el resultado final, y se lo compara con el resultado 
       deseado, aplicando la función de pérdida se calcula el error, mediante el metodo de optimizacion se define el gradiente para luego realizar la retropropagación en la función hasta 
@@ -718,19 +732,31 @@
     
     \section{Redes Neuronales Artificiales}
       
- \iffalse
-      An artificial neural network (ANN) learning algorithm, usually called "neural network" (NN), is a learning algorithm that is inspired by the structure and functional aspects 
-      of biological neural networks. Computations are structured in terms of an interconnected group of artificial neurons, processing information using a connectionist approach 
-      to computation. Modern neural networks are non-linear statistical data modeling tools. They are usually used to model complex relationships between inputs and outputs, 
-      to find patterns in data, or to capture the statistical structure in an unknown joint probability distribution between observed variables.
-      
- \fi
-      \FIXME{Ver Bishop Cap 5 pag 242}\\
-      Las Redes Neuronales Artificiales basicamente son una combinacion lineal de funciónes no lineales.
-      Un algoritmo de aprendizaje de red neuronal artificial (ANN), usualmente llamado "red neuronal" (NN), es un algoritmo de aprendizaje que se inspira en la estructura y aspectos funciónales
-      De redes neuronales biológicas. Los cálculos se estructuran en términos de un grupo interconectado de neuronas artificiales, procesando la información utilizando un enfoque conexionista
-      A la computación. Las redes neuronales modernas son herramientas no lineales de modelado de datos estadísticos. Usualmente se usan para modelar relaciones complejas entre entradas y salidas,
-      Para encontrar patrones en los datos, o para capturar la estructura estadística en una distribución de probabilidad conjunta desconocida entre las variables observadas.
+      \subsection{Introducción}
+	Las Redes Neuronales Artificiales basicamente son una combinacion lineal de funciónes no lineales.
+	Un algoritmo de aprendizaje de red neuronal artificial (ANN), usualmente llamado "red neuronal" (NN), es un algoritmo de aprendizaje que se inspira en la estructura y aspectos funciónales
+	de la redes neuronales biológicas. Los cálculos se estructuran en términos de un grupo interconectado de neuronas artificiales, procesando la información utilizando un enfoque de grafos
+	a la computación. Las redes neuronales modernas son herramientas no lineales de modelado de datos estadísticos. Usualmente se usan para modelar relaciones complejas entre entradas y salidas,
+	para encontrar patrones en los datos, o para capturar la estructura estadística en una distribución de probabilidad conjunta desconocida entre las variables observadas. \\
+	\begin{figure}[h]
+	  \includegraphics[scale=0.5]{./img/stanford_neural_net.jpeg}
+	  \caption{Red Neuronal Artificial}
+	  \label{fig:neural_network}
+	\end{figure}
+
+      \subsection {Motivación biológica} 
+	El area de las redes neuronales artificiales fue originalmente insipirada por el objetivo de modelar los sistemas neuronales biológicos, 
+	pero luego fue divergiendo y convirtiendose en una tarea de Ingenieria para obtener buenos resultados dentro del area de Aprendizaje automatico.
+	\FIXME{COMPLETAR}
+	\begin{figure}[h]
+	  \includegraphics[scale=0.5]{./img/analogy_neural_net.png}
+	  \caption{Analogia Red Neuronal}
+	  \label{fig:analogy_neural_net}
+	\end{figure}
+	
+	
+      \subsection{Definicion Formal}
+	\FIXME{COMPLETAR}
       
       \subsection{Aprendizaje basado en el Gradiente}
 	El diseño y entrenamiento de una red neural no es muy diferente de la formación de cualquier otro modelo de aprendizaje automático con descenso por el gradiente.
@@ -757,19 +783,16 @@
 	    \item Para lograr una buena generalizacion puede requerir muchos datos
 	  \end{itemize}
 
-      \subsection {Historia de las Redes Neuronales Artificiales}
-      
-      \subsection {Motivación biológica} 
-	El area de las redes neuronales artificiales fue originalmente insipirada por el objetivo de modelar los sistemas neuronales biológicos, 
-	pero luego fue divergiendo
-	y convirtiendose en una tarea de Ingenieria para obtener buenos resultados dentro del area de Aprendizaje automatico.
-	Dendritas, input axones, sinapsis y output.
-	\FIXME {IMAGEN DE ANALOGIA}
-
-      \subsection {Neurona artificial Unidad}
+      \subsection {Neurona artificial}
 	La unidad de procesamiento de una red neuronal es una neurona. La misma consta de un vector de entrada, un vector de pesos y una función de activación no lineal
-	En una neurona se realiza el producto punto entre el vector de entrada, y su vector de pesos, le suma el sesgo y aplica la función de no linearidad.
+	En una neurona se realiza el producto punto entre el vector de entrada, y su vector de pesos, le suma el sesgo y aplica la función no lineal.
 	Una unica neurona puede ser utilizada para implementar un clasificador binario.
+	\begin{figure}[h]
+	  \includegraphics[scale=0.5]{./img/neuron.jpg}
+	  \caption{Neurona artificial}
+	  \label{fig:sigmoid}
+	\end{figure}
+	
 
       \subsection {Funciones de Activación comunmente utilizadas}
 	Toda función de activacion toma un unico número como entrada, realiza un operacion matematica predefinida, no lineal y devuelve el resultado obtenido.
@@ -834,6 +857,21 @@
       Las redes neuronales utilizadas en la actualidad tienen alrededor de 100 millones de parámetros distribuidos entre 10-20 capas.
       Al definir la arquitectura de la red, se forma lo que seria una función de puntuacion, una red neuronal realiza una combinacion lineal de funciónes no lineales. 
 
+      \subsubsection {Arquitectura "Feed Forward"}
+	Son la estructura mas simple de redes neuronales. La caracteristica que define a esta categoria es que las conexiones siempreocurren de capa inferior a capa superior, 
+	desde la capa de entrada hasta la de salida. 
+	\FIXME{taggear con \label{fig:neural_network} }
+      \subsubsection {Arquitectura de Red Recurrente}
+	Las redes recurrentes son mucho mas poderosas que las Feed Forward. Si se las representa graficamente, cuentan con ciclos dirigidos. Por lo general, estas redes cuentan 
+	con una dinamica muy compleja, lo que hace que el entrenamiento sea dificil, sin embargo, proveen una forma muy natural de modelar datos secuenciales. Sus aplicaciones practicas
+	principales se relacionan con problemas de Procesamiento de Lenguaje Natural.
+	\begin{figure}[h]
+	  \includegraphics[scale=0.5]{./img/rnn.png}
+	  \caption{Red Neuronal Recurrente}
+	  \label{fig:rnn}
+	\end{figure}
+	
+    
     \subsection {Preprocesamiento de datos}
       El preprocesamiento usual que se suele aplicar a los datos antes de pasarlos como entrada para una red neuronal es el siguiente: 
       \FIXME{COMPLETAR}
@@ -842,14 +880,27 @@
        \item Normalizar los datos
        \item Reducir dimensionalidades utilizando por ejemplo PCA: El algoritmo de análisis de componentes principales proporciona un medio de comprimir datos.
       \end{itemize}
+      \begin{figure}[h]
+	\includegraphics[scale=0.5]{./img/stanford_prepro.jpeg}
+	\caption{Fase de preprocesamiento de datos. A la izquierda: Datos de entrada originales en 2 dimensiones. Medio: Los datos centrados en cero, restando la media de cada dimensión. 
+	  A la derecha: Cada una de las dimensiones es, reescalada por su desviación estándar. Las líneas rojas indican la extension de los datos, que son de longitud desigual en el 
+	  medio, pero de igual longitud a la derecha}
+	\label{fig:preproc}
+      \end{figure}
 
     \paragraph {Inicializacion de los pesos}
       Para inicializar los pesos de la red un error comun es iniciarlos en 0. Lo que se suele hacer es inicializar con valores aleatorios cercanos a 0. 
 
     \paragraph {Regularizacion: Marginacion}
-      La marginacion (Dropout en la literatura en ingles) es una técnica de regularización para reducir la saturación en redes neuronales al prevenir el sobreajuste. 
+      La marginacion (Dropout en la literatura en ingles) es una técnica de regularización para reducir la saturación en redes neuronales preveniendo el sobreajuste. 
       El término "marginacion" se refiere a dejar de lado algunas unidades (ocultas y visibles) en una red neuronal, a la hora de entrenar la red.
-      \FIXME{COMPLETAR}
+       \begin{figure}[h]
+	\includegraphics[scale=0.5]{./img/dropout.jpeg}
+	\caption{Durante el entrenamiento, la Marginacion puede ser interpretada como tomar una subred Neuronal dentro de toda la Red Neuronal, y sólo actualizar los parámetros 
+	de las subred basado en los datos de entrada.}
+	\label{fig:backprop}
+      \end{figure}
+      \FIXME{Referencia: Dropout: A Simple Way to Prevent Neural Networks from Overfitting}
 
     \subsection {Entrenamiento}
       Consiste de 2 pasos: Paso hacia adelante, y paso de retropropagación del error
@@ -858,11 +909,21 @@
 	\item En el paso de retropropagación del error se ajustan los pesos internos de la red en base al resultado del gradiente, desde las capas finales de la red hasta las capas iniciales.
       \end{enumerate}
       Esto se realiza iterativamente una cantidad predefinida de veces.
+      \begin{figure}[h]
+	\includegraphics[scale=0.5]{./img/backprop.png}
+	\caption{ Descripción de la retropropagación. (a) El entrenamiento es alimentado hacia delante, generando de salida correspondiente. (b) Error entre la salida real y la salida deseada 
+	se calcula. (c) El error se propaga hacia atrás, a través de actualizaciones donde una proporción del gradiente ($ \frac{\partial E}{\partial w_i}$ ) es la resta de cada peso. $x_i$, $w_i$, $\phi$ son las entradas, 
+	la entrada de pesos, y la función de activación de una neurona. Error $E$ se calcula a partir de la salida $y$ de salida deseado $t$. $\eta$ es la tasa de aprendizaje.}
+	\label{fig:backprop}
+      \end{figure}
+      \FIXME{Referencia: Automatic differentiation in machine learning: a survey}
 
   \section {Aprendizaje Profundo}
     La caída de los precios de hardware y el desarrollo de GPUs para uso personal en los últimos años han contribuido al desarrollo del concepto de aprendizaje profundo (Deep Learning en ingles)
-    que consiste de múltiples capas ocultas en una red neuronal artificial. Este enfoque trata de modelar la forma en que el cerebro humano procesa luz y sonido en visión y audición.
+    que consiste de redes neuronales artificiales, que poseen mas de una capa oculta (se considera capa oculta a toda capa que no sea la de entrada ni salida). Este enfoque trata de 
+    modelar la forma en que el cerebro humano procesa luz y sonido en visión y audición.
     Algunas aplicaciones exitosas del aprendizaje profundo son la visión por computadora y el reconocimiento del habla.
+    
     \subsection {Motivación}
       Los algoritmos simples de aprendizaje automático funciónan muy bien en una amplia variedad de problemas importantes. 
       Sin embargo, no han logrado resolver los problemas centrales de Inteligencia Artificial, como reconocer el habla o reconocer objetos. 
@@ -874,10 +935,16 @@
   \section {Redes Neuronales Convolucionales}
     Las redes neuronales convolucionales (CNN) son muy similares a las redes neuronales antes vista, con la diferencia en que la arquitectura de una red neuronal convolucional asume explicitamente
     que el conjunto de entrada son imágenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura. 
-    Estan inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes.
-
-    \subsection {Historia de las Redes Neuronales Convolucionales}
-      \FIXME{Agregar Breve resena}
+    Estan inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes, suelen tener un gran numero de capas ocultas, por lo que
+    son consideras parte del Aprendizaje Profundo.
+    \begin{figure}[h]
+      \includegraphics[scale=0.5]{./img/stanford_cnn.jpeg}
+      \caption{A la izquierda: Red Neuronal regular de 3 capas. A la derecha: Una CNN ordena a sus neuronas en tres dimensiones (ancho, alto, profundidad), como se visualiza en una de
+	las capas. Cada capa de una CNN transforma un volumen 3D de entrada a un volumen 3D de salida. En este ejemplo, en la capa de entrada se encuentra la imagen, por lo que su ancho y su altura 
+	serían las dimensiones de la imagen, y la profundidad sería 3 (los canales Rojo, Verde, Azul).}
+      \label{fig:cnn}
+    \end{figure}
+    
 
     \subsection {Arquitectura de una red neuronal convolucional}
       En las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad.
@@ -892,29 +959,47 @@
 	Los parámetros consisten en un conjunto de filtros aprendibles. Cada filtro el pequeño espacialmente(alto y ancho) pero se extiende sobre toda la profundidad del volumen de entrada.
 	Durante el paso hacia adelante, se desliza o convoluciona el filtro atraves del alto y ancho del volumen de entrada y se computa el producto punto entre los valores del filtro y los valores
 	del volumen de entrada. A medida que se va deslizando el filtro sobre el ancho y el alto del volumen de entrada, se va generando un mapa de activacion de 2 dimensiones que contiene los 
-	valores de respuesta de ese filtro en cada posicion espacial.
+	valores de respuesta de ese filtro en cada posicion espacial.\\
 	Intuitivamente, la red aprenderá los filtros que se activan cuando ven algún tipo de característica visual como un borde de cierta orientación o una mancha de algún color en la 
 	primera capa, o eventualmente panal entero o patrones de rueda en las capas más altas de la red. Dado que tendremos un conjunto de filtros en cada capa Convolucional, 
-	y cada uno de ellos producirá un mapa de activación bidimensional separado, estos se apilaran a lo largo de la dimensión de profundidad para producir el volumen de salida.
+	y cada uno de ellos producirá un mapa de activación bidimensional separado, estos se apilaran a lo largo de la dimensión de profundidad para producir el volumen de salida.\\
 
 	Retropropagación: El paso hacia atrás para una operación de convolución (tanto para los datos como para los pesos) es también una convolución (pero con filtros espacialmente invertidos).
-
-      \subsubsection{Capa de Agrupamiento} 
+	\begin{figure}[h]
+	  \includegraphics[scale=0.5]{./img/stanford_conv_layer.jpeg}
+	  \caption{Un ejemplo del volumen de entrada (por ejemplo, un volumen de 32x32x3), y un ejemplo de volumen de neuronas en la primer capa Convolucional. 
+	    Cada neurona de la capa convolucional está conectada sólo a una región local en el volumen de entrada espacialmente, pero a la profundidad total (es decir, todos 
+	    los canales de color). Notar que hay múltiples neuronas (5 en este ejemplo) a lo largo de la profundidad, todos mirando en la misma región en la entrada.
+	    A la derecha: Las neuronas de la Red Neuronal se mantienen sin cambios: Se calcula un producto punto de su peso con el de entrada seguido de una no-linealidad, 
+	    pero su conectividad está ahora restringida a ser local en el espacio.}
+	  \label{fig:conv_layer}
+	\end{figure}
+	
+      \subsubsection{Capa de Agrupación} 
 	Su función es reducir progresivamente el tamaño espacial de la representación para reducir la cantidad de parámetros y de cálculo en la red, y por lo tanto también para controlar
-	el Overfitting. La capa de agrupamiento funcióna independientemente en cada segmento de profundidad de la entrada y la redimensiona espacialmente, utilizando la operación de máximo, 
-	tambien se suele utilizar la operacion de promedio o la norma L2.
+	el sobreajuste. La capa de Agrupación (Pooling en la literatura en ingles) funcióna independientemente en cada segmento de profundidad de la entrada y la redimensiona espacialmente, utilizando la operación de máximo, 
+	tambien se suele utilizar la operacion de promedio o la norma L2.\\
 
 	Retropropagación: el paso hacia atrás para una operación maximo tiene una interpretación sencilla, ya que sólo encamina el gradiente a la entrada que tenía el valor más alto
-	en el paso hacia adelante. Por lo tanto, durante el paso hacia adelante de una capa de agrupamiento es común realizar un seguimiento del índice de la activación máxima de 
+	en el paso hacia adelante. Por lo tanto, durante el paso hacia adelante de una capa de agrupación es común realizar un seguimiento del índice de la activación máxima de 
 	manera que el enrutamiento de gradiente es eficiente durante la retropropagación.
 
+	\begin{figure}[h]
+	  \includegraphics[scale=0.5]{./img/stanford_maxpool.jpeg}
+	  \caption{La capa agrupación reduce el volumen espacialmente, de forma independiente en cada una profundidad de la entrada de volumen. 
+	    A la izquierda: En este ejemplo, el volumen de entrada de tamaño [224x224x64] es agrupado con un filtro de tamaño 2 y salto 2 en un volumen de salida de tamaño [112x112x64]. 
+	    Observe que la profundidad del volumen se conserva. A la Derecha: la forma más común de reducción de tamaño de la operación de máximo, dando lugar agrupación por maximo,
+	    que aquí se muestra, con un salto de 2. Es decir, cada operación se toma con 4 números (pequeño cuadrado de 2x2).}
+	  \label{fig:maxpool_layer}
+	\end{figure}
+	
       \subsubsection{Capas No Lineales}
 	Estas capas son las encargadas de aplicar una función de activación no lineal, las principales son:
 	\paragraph{ReLU} Las unidades lineales rectificadas usan la función de activación $g(z) = max(0,z)$. 
 	Las unidades lineales rectificadas son fáciles de optimizar porque son tan similares a las unidades lineales. 
 	La única diferencia entre una unidad lineal y una unidad lineal rectificada es que una unidad lineal rectificada da salida a cero a través de la mitad de su dominio. 
 	Esto hace que las derivadas a través de una unidad lineal rectificada permanezcan grandes siempre que la unidad esté activa.
-	Los gradientes no sólo son grandes sino también consistentes.
+	Los gradientes no sólo son grandes sino también consistentes.\\
 	Existen varias generalizaciones de unidades lineales rectificadas. La mayoría de estas generalizaciones se comportan de forma comparable a las unidades lineales rectificadas
 	y, en ocasiones, tienen un mejor desempeño. Un inconveniente para las unidades lineales rectificadas es que no pueden aprender a través de métodos basados ​​en 
 	gradiente en ejemplos para los cuales su activación es cero. Una variedad de generalizaciones de unidades lineales rectificadas garantizan que reciben gradiente en 
@@ -952,19 +1037,44 @@
 
 
     \subsection {Casos de estudio de redes convolucionales famosas}
-      \FIXME{COMPLETAR}
+      
+      \subsection{LeNet}
+	 El primer éxito en las aplicaciones de Redes Neuronales Convolucionales, fue desarrollado por Yann LeCun en la década de 1990. La aplicacion mas conocida que utiliza la arquitectura
+	 LeNet es para leer los códigos postales, números, etc.
+      
       \subsection{AlexNet}
+	La primera obra que popularizó las Redes Neuronales Convolucionales en Visión por Computadoras fue el AlexNet, desarrollada por Alex Krizhevsky, Ilya Sutskever y Geoff Hinton. 
+	El AlexNet fue presentado al desafío ImageNet ILSVRC  en 2012 y obteniendo el primer puesto superando significativamente al segundo (top 5 de error de 16\% en comparación con el
+	subcampeón con el 26\% de error). La Red tenía una muy arquitectura similar a LeNet, pero era más profundo, más grande, y capas convolucionales apiladas una encima de la otra 
+	(anteriormente era común tener solo capa convolucional siempre seguida inmediatamente por una capa de agrupación).
+      
+      \subsection{GoogLeNet}
+	El ganador de ILSVRC 2014 fue la Red Convolucional de Szegedy, proveniente de Google. Su contribución principal fue el desarrollo de un Módulo de "Inception" que reduce drásticamente
+	el número de parámetros de la red (4M, en comparación con AlexNet con 60M). Además, en este documento se utiliza la agrupación por promedio en lugar de capas totalmente conectadas 
+	en la parte superior de la CNN, eliminando una gran cantidad de parámetros que no parecen influir mucho en el rendimiento.
+      
       \subsection{VGG}
-      \subsection{Inception}
+	El segundo puesto en ILSVRC 2014 fue la red de Karen Simonyan y Andrew Zisserman que llegó a ser conocido como VGG. Su contribución principal fue demostrar que la profundidad de
+	la red es un componente crítico para el buen desempeño. Su version final contiene 16 capas convolucionales, que ofrece una arquitectura muy homogénea, sólo 
+	realiza convoluciones de 3x3 y agrupaciónes de 2x2 desde el principio hasta el final. Su modelo preentrenado está disponible para publicamente. 
+	Una desventaja de la VGG es que es más caro para evaluar y consume mucha más memoria y parámetros (140M). La mayoría de estos parámetros se encuentran en la primera 
+	capa totalmente conectada, y desde entonces se ha encontrado que estos capas pueden ser removidos con ningúna disminucion de rendimiento, reduciendo significativamente el 
+	número de parámetros necesarios.
+      
       \subsection{Resnet}
-
+	Las Redes Residuales fueron desarrolladas por Kaiming He, que fue el ganador de ILSVRC 2015. La caracteristica particular de este tipo de redes es que  utilizan conexiones salteadas
+	y hacen uso intensivo de la normalización por lotes. 
+	Esta arquitectura también solo tiene una capa completamente conectada en el extremo final de la red. ResNets actualmente son, por lejos, el estado del arte de las
+	Redes Neuronales Convolucionales.
 
     \section {Reentrenamiento}
       %STANFORD
       El reentranmiento (Finetuning en inglés) toma un modelo ya entrenado, adapta la arquitectura y retoma el entrenamiento partiendo desde los pesos del modelo ya entrenado.
+      
       \paragraph{Modelos preentrenados}
 	Debido a que una red neuronal convolucional moderna requiere entre 2 y 3 semanas para entrenarse, utilizando multiples GPUs para el conjunto de datos ImageNet, es comun ver que gente
 	publica sus Redes ya entrenadas para el beneficio de otras personas que lo pueden usar para hacer finetuning.
+      
       \paragraph{Como y cuando hacer Reentrenamiento}
 	¿Cómo decidir qué tipo de transferencia de aprendizaje debe realizar en un nuevo conjunto de datos? Esta es una función de varios factores, pero los dos más importantes son el 
 	tamaño del nuevo conjunto de datos (pequeño o grande), y su similitud con el conjunto de datos original (por ejemplo ImageNet-como en términos de contenido de imágenes y las clases,
@@ -983,7 +1093,9 @@
 	  entrenar a una red convolucional desde cero. Sin embargo, en la práctica es muy a menudo todavía beneficioso para inicializar con pesos de un modelo pre-entrenado. 
 	  En este caso, tendríamos suficientes datos y confianza para afinar a través de toda la red.
 	\end{itemize}
+     
      \section {Otros conceptos relevantes}
+	
 	\subsubsection{Matriz de Gramm}
 	  En el álgebra lineal, la matriz de Gram de un conjunto de vectores $v_{1}, .., v_{n} $ en un espacio de producto interno 
 	  es la matriz hermitiana de Los productos internos, cuyas entradas están dadas por $G_{ij} = <v_{i}, v_{j}>$
@@ -992,6 +1104,7 @@
 	  \FIXME{REVISAR, AGREGAR RELACION CON CORRELACION}
 
 \chapter{Algoritmo de Transferencia de estilo}
+    
     \section{Contexto}
       En este capitulo se desarrollan los contenidos específicos relativos al Algoritmo de Transferencia de Estilos artisticos a fotografías. El algoritmo elegido para tal fin es el que 
       presenta Gatys en su articulo \FIXME{AGREGAR REFERENCIA}.
