@@ -787,7 +787,7 @@
 	La unidad de procesamiento de una red neuronal es una neurona. La misma consta de un vector de entrada, un vector de pesos y una función de activación no lineal
 	En una neurona se realiza el producto punto entre el vector de entrada, y su vector de pesos, le suma el sesgo y aplica la función no lineal.
 	Una unica neurona puede ser utilizada para implementar un clasificador binario.
-	\begin{figure}[h]
+	\begin{figure}[H]
 	  \includegraphics[scale=0.5]{./img/neuron.jpg}
 	  \caption{Neurona artificial}
 	  \label{fig:sigmoid}
@@ -798,7 +798,7 @@
 	Toda función de activacion toma un unico número como entrada, realiza un operacion matematica predefinida, no lineal y devuelve el resultado obtenido.
 	Algunos ejemplos de funciónes que se utilizan:
 	  \subsubsection {Sigmoide} 
-	    \begin{figure}[h]
+	    \begin{figure}[H]
 	      \includegraphics[scale=0.5]{./img/sigmoid.png}
 	      \caption{Grafico de la funcion Sigmoide}
 	      \label{fig:sigmoid}
@@ -819,7 +819,7 @@
 	    \end{itemize}
 
 	  \subsubsection {Tangente hiperbolica} 
-	    \begin{figure}[h]
+	    \begin{figure}[H]
 	      \includegraphics[scale=0.5]{./img/tanh.png}
 	      \caption{Grafico de la funcion Tangente hiperbolica}
 	      \label{fig:sigmoid}
@@ -831,7 +831,7 @@
 	    \end{equation}
 	 
 	  \subsubsection {ReLU}
-	    \begin{figure}[h]
+	    \begin{figure}[H]
 	      \includegraphics[scale=0.5]{./img/relu.jpeg}
 	      \caption{Grafico de la funcion ReLU}
 	      \label{fig:relu}
@@ -865,12 +865,11 @@
 	Las redes recurrentes son mucho mas poderosas que las Feed Forward. Si se las representa graficamente, cuentan con ciclos dirigidos. Por lo general, estas redes cuentan 
 	con una dinamica muy compleja, lo que hace que el entrenamiento sea dificil, sin embargo, proveen una forma muy natural de modelar datos secuenciales. Sus aplicaciones practicas
 	principales se relacionan con problemas de Procesamiento de Lenguaje Natural.
-	\begin{figure}[h]
+	\begin{figure}[H]
 	  \includegraphics[scale=0.5]{./img/rnn.png}
 	  \caption{Red Neuronal Recurrente}
 	  \label{fig:rnn}
 	\end{figure}
-	
     
     \subsection {Preprocesamiento de datos}
       El preprocesamiento usual que se suele aplicar a los datos antes de pasarlos como entrada para una red neuronal es el siguiente: 
@@ -880,7 +879,7 @@
        \item Normalizar los datos
        \item Reducir dimensionalidades utilizando por ejemplo PCA: El algoritmo de análisis de componentes principales proporciona un medio de comprimir datos.
       \end{itemize}
-      \begin{figure}[h]
+      \begin{figure}[H]
 	\includegraphics[scale=0.5]{./img/stanford_prepro.jpeg}
 	\caption{Fase de preprocesamiento de datos. A la izquierda: Datos de entrada originales en 2 dimensiones. Medio: Los datos centrados en cero, restando la media de cada dimensión. 
 	  A la derecha: Cada una de las dimensiones es, reescalada por su desviación estándar. Las líneas rojas indican la extension de los datos, que son de longitud desigual en el 
@@ -894,7 +893,7 @@
     \paragraph {Regularizacion: Marginacion}
       La marginacion (Dropout en la literatura en ingles) es una técnica de regularización para reducir la saturación en redes neuronales preveniendo el sobreajuste. 
       El término "marginacion" se refiere a dejar de lado algunas unidades (ocultas y visibles) en una red neuronal, a la hora de entrenar la red.
-       \begin{figure}[h]
+      \begin{figure}[H]
 	\includegraphics[scale=0.5]{./img/dropout.jpeg}
 	\caption{Durante el entrenamiento, la Marginacion puede ser interpretada como tomar una subred Neuronal dentro de toda la Red Neuronal, y sólo actualizar los parámetros 
 	de las subred basado en los datos de entrada.}
@@ -909,7 +908,7 @@
 	\item En el paso de retropropagación del error se ajustan los pesos internos de la red en base al resultado del gradiente, desde las capas finales de la red hasta las capas iniciales.
       \end{enumerate}
       Esto se realiza iterativamente una cantidad predefinida de veces.
-      \begin{figure}[h]
+      \begin{figure}[H]
 	\includegraphics[scale=0.5]{./img/backprop.png}
 	\caption{ Descripción de la retropropagación. (a) El entrenamiento es alimentado hacia delante, generando de salida correspondiente. (b) Error entre la salida real y la salida deseada 
 	se calcula. (c) El error se propaga hacia atrás, a través de actualizaciones donde una proporción del gradiente ($ \frac{\partial E}{\partial w_i}$ ) es la resta de cada peso. $x_i$, $w_i$, $\phi$ son las entradas, 
@@ -937,14 +936,13 @@
     que el conjunto de entrada son imágenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura. 
     Estan inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes, suelen tener un gran numero de capas ocultas, por lo que
     son consideras parte del Aprendizaje Profundo.
-    \begin{figure}[h]
+    \begin{figure}[H]
       \includegraphics[scale=0.5]{./img/stanford_cnn.jpeg}
       \caption{A la izquierda: Red Neuronal regular de 3 capas. A la derecha: Una CNN ordena a sus neuronas en tres dimensiones (ancho, alto, profundidad), como se visualiza en una de
 	las capas. Cada capa de una CNN transforma un volumen 3D de entrada a un volumen 3D de salida. En este ejemplo, en la capa de entrada se encuentra la imagen, por lo que su ancho y su altura 
 	serían las dimensiones de la imagen, y la profundidad sería 3 (los canales Rojo, Verde, Azul).}
       \label{fig:cnn}
     \end{figure}
-    
 
     \subsection {Arquitectura de una red neuronal convolucional}
       En las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad.
@@ -965,7 +963,7 @@
 	y cada uno de ellos producirá un mapa de activación bidimensional separado, estos se apilaran a lo largo de la dimensión de profundidad para producir el volumen de salida.\\
 
 	Retropropagación: El paso hacia atrás para una operación de convolución (tanto para los datos como para los pesos) es también una convolución (pero con filtros espacialmente invertidos).
-	\begin{figure}[h]
+	\begin{figure}[H]
 	  \includegraphics[scale=0.5]{./img/stanford_conv_layer.jpeg}
 	  \caption{Un ejemplo del volumen de entrada (por ejemplo, un volumen de 32x32x3), y un ejemplo de volumen de neuronas en la primer capa Convolucional. 
 	    Cada neurona de la capa convolucional está conectada sólo a una región local en el volumen de entrada espacialmente, pero a la profundidad total (es decir, todos 
@@ -984,7 +982,7 @@
 	en el paso hacia adelante. Por lo tanto, durante el paso hacia adelante de una capa de agrupación es común realizar un seguimiento del índice de la activación máxima de 
 	manera que el enrutamiento de gradiente es eficiente durante la retropropagación.
 
-	\begin{figure}[h]
+	\begin{figure}[H]
 	  \includegraphics[scale=0.5]{./img/stanford_maxpool.jpeg}
 	  \caption{La capa agrupación reduce el volumen espacialmente, de forma independiente en cada una profundidad de la entrada de volumen. 
 	    A la izquierda: En este ejemplo, el volumen de entrada de tamaño [224x224x64] es agrupado con un filtro de tamaño 2 y salto 2 en un volumen de salida de tamaño [112x112x64]. 
