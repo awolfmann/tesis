@@ -13,8 +13,16 @@
 \usepackage[chapter]{algorithm}
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
+%\usepackage[options]{natbib}
 
 \newcommand*{\FIXME}[1]{{(\textbf{FIXME}) {#1}}}
+
+\iffalse
+\let\mylistof\listof
+\renewcommand\listof[2]{%
+  \mylistof{algorithm}{Lista de Algortimos}%
+}
+\fi
 
 \iffalse
 \title{Transferencia de Estilo en Fotografias utilizando Redes Neuronales Convolucionales}   %note \\[1ex] is a line break in the title
@@ -243,7 +251,7 @@
 	  \begin{figure}[h]
 	    \includegraphics[scale=0.5]{./img/stackoverflow_clustering.png}\\
 	    \caption{En la primer figura se puede observar los datos distribuidos en el espacio, que luego son agrupados por colores}
-	    \label{fig:car_detection}
+	    \label{fig:clustering}
 	  \end{figure}
 
       \subsubsection{Aprendizaje Semi-Supervisado}
@@ -276,7 +284,7 @@
 	\paragraph {Recomendación basada en Items}
 	  \begin{algorithm}[h]
 	    \caption{Recomendación basada en Items}
-	    \label{reco_user}
+	    \label{reco_items}
 	    \begin{algorithmic}
 	      \ForAll{item $i$ para el cual el usuario $u$ no tiene preferencia} 
 		\ForAll{item $j$ que $u$ tiene una preferencia} 
@@ -363,7 +371,7 @@
 	  \begin{figure}[h]
 	    \includegraphics[scale=0.5]{./img/bag_of_visual_words.jpg}
 	    \caption{Ejemplo de Bolsa de Palabras visuales}
-	    \label{fig:figure2}
+	    \label{fig:bovw}
 	  \end{figure}
 	  
 	  Estas técnicas son utilizadas como paso de preprocesamiento de la imagen, ya que representación cruda en pixeles es insuficiente para proveerla como dato de entrada de un algoritmo 
@@ -386,7 +394,7 @@
 	    \caption{En las 3 primeras opciones del diagrama se pueden observar las distintas formas de representar imagenes mediante tecnicas de aprendizaje automático tradicional,
 	    donde las caracteristicas deben estar predefinidas a mano, en cambio para las tecnicas de aprendizaje profundo, las representaciones son aprendidas durante el entrenamiento
 	    del modelo.}
-	    \label{fig:figure2}
+	    \label{fig:shallow_deep}
 	  \end{figure}
        
       \subsection{Entrenamiento}
@@ -790,7 +798,7 @@
 	\begin{figure}[H]
 	  \includegraphics[scale=0.5]{./img/neuron.jpg}
 	  \caption{Neurona artificial}
-	  \label{fig:sigmoid}
+	  \label{fig:neuron}
 	\end{figure}
 	
 
@@ -1151,18 +1159,39 @@
       Por lo tanto las respues de una capa $l$ pueden ser alojadas en una matriz $F^l \in R^{N_l * M_l}$, donde $F_{i,j}^l$ es la respuesta del $i$-esimo filtro en la posición $j$.
       Entonces sean $\overrightarrow{p}$ y $\overrightarrow{x}$ la imagen original y la imagen generada, y sean $P^l$ y $F^l$ las respectivas representaciones en la capa $l$.
       Funcion Pérdida del Contenido se define como:
-      $L_{contenido}(\overrightarrow{p},\overrightarrow{x}, l) = \frac{1}{2} \sum_{i,j} (F_{i,j}^l - P_{i,j}^l)^2$
+      \begin{equation}
+       L_{contenido}(\overrightarrow{p},\overrightarrow{x}, l) = \frac{1}{2} \sum_{i,j} (F_{i,j}^l - P_{i,j}^l)^2
+      \end{equation}
       \FIXME{AGREGAR FORMULA}
+      El gradiente con respecto a la imagen $\overrightarrow{x}$ puede ser fácilmente calculado utilizando la retropropagación.
       Sobre las respuestas de la CNN en cada capa de la red construimos una representación de estilo que calcula las correlaciones entre las diferentes respuestas de los filtros.
-      Estas correlaciones de las caracteristicas estan dadas por la matriz de Gram ...
+      Estas correlaciones de las caracteristicas estan dadas por la matriz de Gram $G^l \in R^{N_l * N_l}$, donde $G_{i,j}^l$ es el producto punto entre los vectores de los mapas de 
+      caracteristicas $i$ y $j$ en la capa $l$:
+      \begin{equation}
+	G_{i,j}^l = \sum_{k} F_{i,k}^l F_{j,k}^l
+      \end{equation}
+
       Para generar una textura que coincida con el estilo de una imagen dada, utilizamos el descenso de gradiente de una imagen de ruido blanco para encontrar otra imagen que coincida 
       con la representación de estilo de la imagen original. Esto se hace minimizando la distancia media cuadrada entre las entradas de la matriz de Gram de la imagen 
-      original y la matriz de Gram de la imagen a generar.
-      Funcion de Pérdida del Estilo ...
+      original y la matriz de Gram de la imagen a generar. Sean $\overrightarrow{a}$ y $\overrightarrow{x}$ la imagen original y la imagen generada, y sean $A^l$ y $G^l$ 
+      las respectivas representaciones de estilo en la capa $l$, la contribución de esa capa a la función de perdida total del estilo es:
+      \begin{equation}
+       E_l = \frac{1}{4 N_l^2 M_l^2} \sum_{i,j} (G_{i,j}^l - A_{i,j}^l)^2
+      \end{equation}
+      La función de Pérdida del Estilo total queda definida: 
+      \begin{equation}
+       L_{estilo}(\overrightarrow{a},\overrightarrow{x}) = \sum_{l=0}{L} w_l E_l
+      \end{equation}
+      donde $w_l$ son los factores de peso que tiene cada capa sobre el resultado final. Los gradientes de $E_l$ con respecto a las activaciones de las capas de la red puede ser fácilmente
+      calculado utilizando la retropropagación.
       \FIXME{AGREGAR FORMULA}
       Para generar las imágenes que mezclan el contenido de una fotografía con el estilo de una obra de arte conjuntamente minimizamos la distancia de una imagen de ruido blanco 
       de la representación de contenido de la fotografía en una capa de la red y la representación de estilo de la obra de arte en un número de capas de la CNN.
-      Funcion de Pérdida total ...
+      Funcion de Pérdida total:
+      \begin{equation}
+       L_{total}(\overrightarrow{p},\overrightarrow{a},\overrightarrow{x}) = \alpha L_{contenido}(\overrightarrow{p},\overrightarrow{x}) + \beta L_{estilo}(\overrightarrow{a},\overrightarrow{x})
+      \end{equation}
+      Donde $\alpha$ y $\beta$ son los factores de peso para el contenido y el estilo respectivamente.
       \FIXME{AGREGAR FORMULA}\\
       \begin{figure}[h]
 	\includegraphics[scale=0.8]{./img/gatys_2.png}
@@ -1257,4 +1286,6 @@
     Se podría realizar una especie de predefinición del número de iteraciones que requiere cada estilo, ejecutando el algoritmo una gran cantidad de veces y definiendo este valor 
     estadisticamente, aunque esto puede llegar a no funciónar correctamente en todos los casos ya que dependiendo de la imagen de contenido, el estilo objetivo podria variar.
 \printindex
+%\bibliography{./tex/biblio}        %use a bibtex bibliography file refs.bib
+%\bibliographystyle{plainnat}
 \end{document}
