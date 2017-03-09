@@ -591,7 +591,7 @@
 	que simplemente minimizan la función de costo, en lugar de los solucionadores de ecuaciones lineales usados ​​para entrenar modelos de regresión lineal. Para el caso de las 
 	redes neuronales, la técnica ampliamente utilizada es la de retropropagación del error:
 
-	\subsection{Retropropagación del Error}
+	\subsubsection{Retropropagación del Error}
 	  \FIXME{\url{http://cs231n.github.io/optimization-2/} AGREGAR FORMALIDADES REGLA DE LA CADENA}
 	  Retropropagación (en inglés Backpropagation) una forma  de computar los gradientes de expresiones mediante la aplicacion recursiva de la regla de la cadena.
 	  El ciclo consta de 2 fases, propagación y luego actualizacion de parámetros. Cuando ingresan los parámetro a la función se calcula el resultado final, y se lo compara con el resultado
@@ -616,7 +616,9 @@
 	Algunos ejemplos de funciónes que se utilizan:
 	  \subsubsection {Sigmoide}
 	    \begin{figure}[H]
-	      \includegraphics[scale=0.5]{./img/sigmoid.png}
+	      \begin{center}
+	       \includegraphics[width=0.4\linewidth]{./img/sigmoid.png}
+	      \end{center}
 	      \caption{Grafico de la funcion Sigmoide}
 	      \label{fig:sigmoid}
 	    \end{figure}
@@ -637,7 +639,9 @@
 
 	  \subsubsection {Tangente hiperbolica}
 	    \begin{figure}[H]
-	      \includegraphics[scale=0.5]{./img/tanh.png}
+	      \begin{center}
+	       \includegraphics[width=0.4\linewidth]{./img/tanh.png}
+	      \end{center}
 	      \caption{Grafico de la funcion Tangente hiperbolica}
 	      \label{fig:sigmoid}
 	    \end{figure}
@@ -649,7 +653,9 @@
 
 	  \subsubsection {ReLU}
 	    \begin{figure}[H]
-	      \includegraphics[scale=0.5]{./img/relu.jpeg}
+	      \begin{center}
+	       \includegraphics[width=0.4\linewidth]{./img/relu.jpeg}
+	      \end{center}
 	      \caption{Grafico de la funcion ReLU}
 	      \label{fig:relu}
 	    \end{figure}
@@ -690,15 +696,16 @@
       Al definir la arquitectura de la red, se forma lo que seria una función de puntuacion, una red neuronal realiza una combinacion lineal de funciónes no lineales.
 
       \subsubsection {Arquitectura "Feed Forward"}
-	Son la estructura mas simple de redes neuronales. La caracteristica que define a esta categoria es que las conexiones siempreocurren de capa inferior a capa superior,
-	desde la capa de entrada hasta la de salida.
-	\FIXME{taggear con \label{fig:neural_network} }
+	Son la estructura mas simple de redes neuronales. La caracteristica que define a esta categoria es que las conexiones siempre ocurren de capa inferior a capa superior,
+	desde la capa de entrada hasta la de salida, un ejemplo de esto es la figura \ref{fig:neural_network}.
       \subsubsection {Arquitectura de Red Recurrente}
 	Las redes recurrentes son mucho mas poderosas que las Feed Forward. Si se las representa graficamente, cuentan con ciclos dirigidos. Por lo general, estas redes cuentan
 	con una dinamica muy compleja, lo que hace que el entrenamiento sea dificil, sin embargo, proveen una forma muy natural de modelar datos secuenciales. Sus aplicaciones practicas
 	principales se relacionan con problemas de Procesamiento de Lenguaje Natural.
 	\begin{figure}[H]
-	  \includegraphics[scale=0.5]{./img/rnn.png}
+	  \begin{center}
+	   \includegraphics[width=0.6\linewidth]{./img/rnn.png}
+	  \end{center}
 	  \caption{Red Neuronal Recurrente}
 	  \label{fig:rnn}
 	\end{figure}
@@ -711,20 +718,23 @@
       \end{enumerate}
       Esto se realiza iterativamente una cantidad predefinida de veces.
       \begin{figure}[H]
-	\includegraphics[scale=0.5]{./img/backprop.png}
+	\begin{center}
+	 \includegraphics[width=\linewidth]{./img/backprop.png}
+	\end{center}
 	\caption{ Descripción de la retropropagación. (a) El entrenamiento es alimentado hacia delante, generando de salida correspondiente. (b) Error entre la salida real y la salida deseada
 	se calcula. (c) El error se propaga hacia atrás, a través de actualizaciones donde una proporción del gradiente ($ \frac{\partial E}{\partial w_i}$ ) es la resta de cada peso. $x_i$, $w_i$, $\phi$ son las entradas,
 	la entrada de pesos, y la función de activación de una neurona. Error $E$ se calcula a partir de la salida $y$ de salida deseado $t$. $\eta$ es la tasa de aprendizaje. 
 	\cite{Automatic_differentiation_ML} }
 	\label{fig:backprop}
       \end{figure}
-      \FIXME{Referencia: Automatic differentiation in machine learning: a survey}
 
-      \subsection {Regularizacion: Marginacion}
-	La marginacion (Dropout en la literatura en ingles) es una técnica de regularización para reducir la saturación en redes neuronales preveniendo el sobreajuste.
-	El término "marginacion" se refiere a dejar de lado algunas unidades (ocultas y visibles) en una red neuronal, a la hora de entrenar la red.
+      \subsection {Regularización: Marginación}
+	La marginación (Dropout en la literatura en ingles) es una técnica de regularización para reducir la saturación en redes neuronales preveniendo el sobreajuste.
+	El término "marginación" se refiere a dejar de lado algunas unidades (ocultas y visibles) en una red neuronal, a la hora de entrenar la red.
 	\begin{figure}[H]
-	  \includegraphics[scale=0.5]{./img/dropout.jpeg}
+	  \begin{center}
+	   \includegraphics[width=0.6\linewidth]{./img/dropout.jpeg}
+	  \end{center}
 	  \caption{Durante el entrenamiento, la Marginacion puede ser interpretada como tomar una subred Neuronal dentro de toda la Red Neuronal, y sólo actualizar los parámetros
 	  de las subred basado en los datos de entrada. \cite{Srivastava:Dropout} }
 	  \label{fig:dropout}
@@ -750,7 +760,9 @@
     Estan inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes, suelen tener un gran numero de capas ocultas, por lo que
     son consideras parte del Aprendizaje Profundo.
     \begin{figure}[H]
-      \includegraphics[scale=0.5]{./img/stanford_cnn.jpeg}
+      \begin{center}
+       \includegraphics[width=0.8\linewidth]{./img/stanford_cnn.jpeg}
+      \end{center}
       \caption{A la izquierda: Red Neuronal regular de 3 capas. A la derecha: Una CNN ordena a sus neuronas en tres dimensiones (ancho, alto, profundidad), como se visualiza en una de
 	las capas. Cada capa de una CNN transforma un volumen 3D de entrada a un volumen 3D de salida. En este ejemplo, en la capa de entrada se encuentra la imagen, por lo que su ancho y su altura
 	serían las dimensiones de la imagen, y la profundidad sería 3 (los canales Rojo, Verde, Azul). \cite{Stanford}}
@@ -775,9 +787,11 @@
 	primera capa, o eventualmente panal entero o patrones de rueda en las capas más altas de la red. Dado que tendremos un conjunto de filtros en cada capa Convolucional,
 	y cada uno de ellos producirá un mapa de activación bidimensional separado, estos se apilaran a lo largo de la dimensión de profundidad para producir el volumen de salida.\\
 
-	Retropropagación: El paso hacia atrás para una operación de convolución (tanto para los datos como para los pesos) es también una convolución (pero con filtros espacialmente invertidos).
+	\emph{Retropropagación}: El paso hacia atrás para una operación de convolución (tanto para los datos como para los pesos) es también una convolución (pero con filtros espacialmente invertidos).
 	\begin{figure}[H]
-	  \includegraphics[scale=0.5]{./img/stanford_conv_layer.jpeg}
+	  \begin{center}
+	   \includegraphics[width=0.8\linewidth]{./img/stanford_conv_layer.jpeg}
+	  \end{center}
 	  \caption{Un ejemplo del volumen de entrada (por ejemplo, un volumen de 32x32x3), y un ejemplo de volumen de neuronas en la primer capa Convolucional.
 	    Cada neurona de la capa convolucional está conectada sólo a una región local en el volumen de entrada espacialmente, pero a la profundidad total (es decir, todos
 	    los canales de color). Notar que hay múltiples neuronas (5 en este ejemplo) a lo largo de la profundidad, todos mirando en la misma región en la entrada.
@@ -791,12 +805,14 @@
 	el sobreajuste. La capa de Agrupación (Pooling en la literatura en ingles) funcióna independientemente en cada segmento de profundidad de la entrada y la redimensiona espacialmente, utilizando la operación de máximo,
 	tambien se suele utilizar la operacion de promedio o la norma L2.\\
 
-	Retropropagación: el paso hacia atrás para una operación maximo tiene una interpretación sencilla, ya que sólo encamina el gradiente a la entrada que tenía el valor más alto
+	\emph{Retropropagación}: el paso hacia atrás para una operación maximo tiene una interpretación sencilla, ya que sólo encamina el gradiente a la entrada que tenía el valor más alto
 	en el paso hacia adelante. Por lo tanto, durante el paso hacia adelante de una capa de agrupación es común realizar un seguimiento del índice de la activación máxima de
 	manera que el enrutamiento de gradiente es eficiente durante la retropropagación.
 
 	\begin{figure}[H]
-	  \includegraphics[scale=0.5]{./img/stanford_maxpool.jpeg}
+	  \begin{center}
+	   \includegraphics[width=0.8\linewidth]{./img/stanford_maxpool.jpeg}
+	  \end{center}
 	  \caption{La capa agrupación reduce el volumen espacialmente, de forma independiente en cada una profundidad de la entrada de volumen.
 	    A la izquierda: En este ejemplo, el volumen de entrada de tamaño [224x224x64] es agrupado con un filtro de tamaño 2 y salto 2 en un volumen de salida de tamaño [112x112x64].
 	    Observe que la profundidad del volumen se conserva. A la Derecha: la forma más común de reducción de tamaño de la operación de máximo, dando lugar agrupación por maximo,
@@ -832,18 +848,18 @@
 
       \subsubsection{LeNet}
 	 El primer éxito en las aplicaciones de Redes Neuronales Convolucionales, fue desarrollado por Yann LeCun en la década de 1990. La aplicacion mas conocida que utiliza la arquitectura
-	 LeNet es para leer los códigos postales, números, etc.
+	 LeNet es para leer los códigos postales, números, etc \cite{Lecun:LeNet}.
 
       \subsubsection{AlexNet}
 	La primera obra que popularizó las Redes Neuronales Convolucionales en Visión por Computadoras fue el AlexNet, desarrollada por Alex Krizhevsky, Ilya Sutskever y Geoff Hinton.
 	El AlexNet fue presentado al desafío ImageNet ILSVRC  en 2012 y obteniendo el primer puesto superando significativamente al segundo (top 5 de error de 16\% en comparación con el
 	subcampeón con el 26\% de error). La Red tenía una muy arquitectura similar a LeNet, pero era más profundo, más grande, y capas convolucionales apiladas una encima de la otra
-	(anteriormente era común tener solo capa convolucional siempre seguida inmediatamente por una capa de agrupación).
+	(anteriormente era común tener solo capa convolucional siempre seguida inmediatamente por una capa de agrupación) \cite{AlexNet} .
 
       \subsubsection{GoogLeNet}
 	El ganador de ILSVRC 2014 fue la Red Convolucional de Szegedy, proveniente de Google. Su contribución principal fue el desarrollo de un Módulo de "Inception" que reduce drásticamente
 	el número de parámetros de la red (4M, en comparación con AlexNet con 60M). Además, en este documento se utiliza la agrupación por promedio en lugar de capas totalmente conectadas
-	en la parte superior de la CNN, eliminando una gran cantidad de parámetros que no parecen influir mucho en el rendimiento.
+	en la parte superior de la CNN, eliminando una gran cantidad de parámetros que no parecen influir mucho en el rendimiento \cite{Szegedy:Convolutions}.
 
       \subsubsection{VGG}
 	El segundo puesto en ILSVRC 2014 fue la red de Karen Simonyan y Andrew Zisserman que llegó a ser conocido como VGG. Su contribución principal fue demostrar que la profundidad de
@@ -851,13 +867,13 @@
 	realiza convoluciones de 3x3 y agrupaciónes de 2x2 desde el principio hasta el final. Su modelo preentrenado está disponible para publicamente.
 	Una desventaja de la VGG es que es más caro para evaluar y consume mucha más memoria y parámetros (140M). La mayoría de estos parámetros se encuentran en la primera
 	capa totalmente conectada, y desde entonces se ha encontrado que estos capas pueden ser removidos con ningúna disminucion de rendimiento, reduciendo significativamente el
-	número de parámetros necesarios.
+	número de parámetros necesarios \cite{SimonyanVGG} .
 
       \subsubsection{Resnet}
 	Las Redes Residuales fueron desarrolladas por Kaiming He, que fue el ganador de ILSVRC 2015. La caracteristica particular de este tipo de redes es que  utilizan conexiones salteadas
 	y hacen uso intensivo de la normalización por lotes.
 	Esta arquitectura también solo tiene una capa completamente conectada en el extremo final de la red. ResNets actualmente son, por lejos, el estado del arte de las
-	Redes Neuronales Convolucionales.
+	Redes Neuronales Convolucionales \cite{Kaiming:ResNet} .
 
     \section {Reentrenamiento}
       %STANFORD
@@ -903,7 +919,11 @@
       presenta Gatys en su articulo \cite{Gatys:Neural_Style}.
       Inicialmente el autor publica un articulo para sintetizar texturas naturales utilizando Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos,
       donde define a una textura como la correlación entre los distintos mapas de caracteristicas de cada una de las capas de la red.\cite{Gatys:Texture_Synthesis}
-      Esta misma idea luego la aplica para la Transferencia de Estilos.
+      Esta misma idea luego la aplica para la Transferencia de Estilos, problema que normalmente se encaraba en una rama de la visión de computadoras llamada representación 
+      no fotorrealista \cite{Kyprianidis:ArtisticStylization}. Conceptualmente más relacionado con los métodos de uso de la textura de transferencia para lograr 
+      el estilo artístico de transferencia \FIXME{Agregar Referencias Image Analogies etc}. Sin Embargo, estos enfoques anteriores se basan principalmente en técnicas no paramétricas 
+      para manipular directamente el píxel de la representación de una imagen. En cambio, mediante Redes Neuronales Convolucionales entrenadas en el reconocimiento de objetos,  se puede
+      llevar a cabo manipulaciones de caracteristicas de alto nivel que representan explícitamente el contenido de una imagen.
       La publicación de estos artículos, ha incentivado a muchos investigadores del area a continuar desarrollando estas ideas, a tal punto que hasta el dia de hoy se siguen publicando
       avances el tema, a gran velocidad.
 
@@ -931,7 +951,7 @@
       para el reconocimiento de objetos. De esta forma, al manipularse independientemente se pueden generar una nueva imagen desde 2 imágenes de entradas distintas, simultaneamente se corresponda con la representacion
       del contenido de una imagen y la respresentacion del estilo de la otra.\\
       	  \begin{figure}[h]
-	    \includegraphics[scale=0.8]{./img/gatys_1.png}
+	    \includegraphics[width=\linewidth]{./img/gatys_1.png}
 	    \caption{COMPLETAR}
 	    \label{fig:gatys_1}
 	  \end{figure}
@@ -981,7 +1001,7 @@
       Donde $\alpha$ y $\beta$ son los factores de peso para el contenido y el estilo respectivamente.
 
       \begin{figure}[h]
-	\includegraphics[scale=0.8]{./img/gatys_2.png}
+	\includegraphics[width=\linewidth]{./img/gatys_2.png}
 	\caption{COMPLETAR}
 	\label{fig:gatys_2}
       \end{figure}
