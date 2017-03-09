@@ -406,30 +406,31 @@
 	\subsubsection{Funciónes de Pérdida}
 	  El problema de estimar los parámetros de un modelo, se resuelve optimizando una función de costo que se puede expresar como:
           \begin{equation}
-	    \mathcal{L} = \frac{1}{N}\sum_n L(y_n, f(x_n; W)) + \lambda \Omega(W)
+	    L = \frac{1}{N}\sum{i}{N} L_i(y_n, f(x_n; W)) + \lambda \Omega(W)
           \end{equation}
-          con $L:\mathcal{Y}\times \mathcal{Y}\rightarrow\mathbb{R}_+$, que contiene 2 partes: Una función de pérdida y un coeficiente de regularización que penaliza a los modelos complejos.
-	  Una función de pérdida es una función real, no negativa $L({\widehat y}, y)$, que mide cuán diferente es la predicción ${\widehat y}$ obtenida, con respecto a la
+          con $L:\mathcal{Y}\times \mathcal{Y}\rightarrow\mathbb{R}_+$, que contiene 2 partes: Una función de pérdida y un coeficiente de regularización que penaliza a los modelos complejos, 
+          $\lambda$ es un hiperparámetro que define cuanto influye la regularización sobre el resultado final y $N$ es la cantidad de datos de entrenamiento.
+	  Una función de pérdida es una función real, no negativa $L_i({\widehat y}, y)$, que mide cuán diferente es la predicción ${\widehat y}$ obtenida, con respecto a la
 	  salida esperada $y$. Existen diversas funciónes de pérdida que se utilizan en distintos contextos. A continuación se presentan algunas que se aplican usualmente:
 	  \begin{itemize}
 	    \item Función de Pérdida 0-1:
 	      \begin{equation}
-		L({\widehat y}, y) =  1 si {\widehat y} = y 0 en caso contrario.
+		L_i({\widehat y}, y) =  1 si {\widehat y} = y 0 en caso contrario.
 	      \end{equation}
 	    \item Función de Pérdida Hinge:
 	      \begin{equation}
-		L({\widehat y}, y) =  max(0, 1 - {\widehat y}y)
+		L_i({\widehat y}, y) =  max(0, 1 - {\widehat y}y)
 	      \end{equation}
 	      Ampliamente utilizada para algoritmos de Maquina de Vector Soporte.
 	      Es una función convexa y continua pero no es derivable por lo tanto no se puede utilizar en métodos como el Descenso por el Gradiente.
 	    \item Función de Pérdida Logistica:
 	      \begin{equation}
-		L({\widehat y}, y) =  {\log(1+ {\exp^{-{\widehat y}y}})}
+		L_i({\widehat y}, y) =  {\log(1+ {\exp^{-{\widehat y}y}})}
 	      \end{equation}
 	      Similar a la función Hinge, pero al ser derivable, puede utizarse para aplicar Descenso por el gradiente.
 	    \item Función de Pérdida de Entropia Cruzada
 	      \begin{equation}
-		L({\widehat y}, y) = -y{\log({\widehat y}}) - (1-y) {\log(1-{\widehat y})}
+		L_i({\widehat y}, y) = -y{\log({\widehat y}}) - (1-y) {\log(1-{\widehat y})}
 	      \end{equation}
 	      Es una función continua, convexa y derivable que se adapta a métodos de Descenso por el gradiente, se utiliza en Redes Neuronales Profundas.
 
@@ -444,20 +445,13 @@
 
 	\subsubsection {Regularización}
 	  Una técnica para evitar el sobre ajuste de modelos es utilizar regularización. Esencialmente, consiste en penalizar los parámetros del modelo para evitar su
-	  crecimiento desmedido, agregando un regularizador($R(W)$) a la Función de Pérdida. \\
+	  crecimiento desmedido, agregando un regularizador($\Omega(W)$) a la Función de Pérdida. \\
 	  La función de regularización mas comunmente utilizada es la norma $L2$, definida como:
 	   \begin{equation}
-	    R(W) = {\sum_{k} {\sum_{l}} W_{k,l}^2}
+	    \Omega(W) = {\sum_{k} {\sum_{l}} W_{k,l}^2}
 	   \end{equation}
-	   De esta forma la función de pérdida queda compuesta por 2 terminos, uno respecto a los datos y otro respecto a la regularización:
-	   \begin{equation}
-	    L = {\frac{1}{N}} {\sum_{i} L_{i}} + {\lambda R(W)}
-	   \end{equation}
-	   Donde $N$ es la cantidad de datos de entrenamiento, $L_{i}$ es la función de pérdida calculada para cada ejemplo y ${\lambda}$ es un hiperparámetro que define
-	   cuanto influye la regularización sobre el resultado final.
 
-    \subsubsection{Optimización} \FIXME{PONER DESPUÉS DE LO DE REGULARIZACIÓN. QUE
-      QUEDE ATADO A LO DE FUNCIÓN DE PÉRDIDA}
+    \subsubsection{Optimización}
       Minimizar la función de pérdida puede considerarse un problema de optimización, con lo cual se pueden aplicar las tecnicas empleadas en este tipo de problemas, para resolverlo.
       El objetivo de la optimización es encontrar el vector de pesos $W$ que minimice la función de pérdida.
 
@@ -471,7 +465,7 @@
       toma un hiperparámetro $\eta$ llamado tasa de aprendizaje que define el tamaño de cada paso en la iteración.
       Sea $F$ la función de pérdida, $w$ el vector de pesos, $N$ el numero de datos de entrenamiento, cada iteracion consiste de:
       \begin{equation}
-	w_{n+1} = w_n - \eta \nabla F(w_n)  = w_n - \eta \sum_{i=1}^{N} \nabla F_i(w_n)
+	w_{n+1} = w_n - \eta \nabla L(w_n)  = w_n - \eta \sum_{i=1}^{N} \nabla L_i(w_n)
       \end{equation}
 
     \subsubsection{Descenso por el gradiente estocástico}
@@ -483,7 +477,7 @@
       que permite lograr una buena aproximación al objetivo completo con una convergencia mucho mas rapida, es decir se reduce $N$ a un pequeño subconjunto, de esta forma se reduce el
       numero de calculos realizados en cada iteración.
       Este es el método mas utilizado para optimizar funciónes de pérdida en las Redes Neuronales.
-      \FIXME{Agregar Algoritmo}
+
 	\begin{algorithm}[h]
 	  \caption{Descenso por el gradiente estocástico}
 	  \label{SGD}
@@ -494,7 +488,7 @@
 	    \State $w \gets w_0$
 	    \Repeat
 	      \ForAll {$i=1,..,N$}
-		$sum_{gradiente} \gets sum_{gradiente} + \nabla F_i(w_n)$
+		$sum_{gradiente} \gets sum_{gradiente} + \nabla L_i(w_n)$
 	      \EndFor
 	      \State $w \gets w - \eta sum_{gradiente}$
 	    \Until {Se encuentra un mínimo aproximado}
