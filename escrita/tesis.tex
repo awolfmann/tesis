@@ -920,8 +920,9 @@
       Inicialmente el autor publica un articulo para sintetizar texturas naturales utilizando Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos,
       donde define a una textura como la correlación entre los distintos mapas de caracteristicas de cada una de las capas de la red.\cite{Gatys:Texture_Synthesis}
       Esta misma idea luego la aplica para la Transferencia de Estilos, problema que normalmente se encaraba en una rama de la visión de computadoras llamada representación 
-      no fotorrealista \cite{Kyprianidis:ArtisticStylization}. Conceptualmente más relacionado con los métodos de uso de la textura de transferencia para lograr 
-      el estilo artístico de transferencia \FIXME{Agregar Referencias Image Analogies etc}. Sin Embargo, estos enfoques anteriores se basan principalmente en técnicas no paramétricas 
+      no fotorrealista \cite{Kyprianidis:ArtisticStylization}. También hay otros conceptualmente más relacionado con los métodos de uso de la textura de transferencia para lograr 
+      el estilo artístico de transferencia: \cite{Hertzmann:ImageAnalogies}, \cite{Ashikhmin:FastTextureTransfer}, \cite{Efros:ImageQuilting}, \cite{Lee:DirectionalTextureTransfer}, 
+      \cite{Xie:FGTS}. Sin Embargo, estos enfoques anteriores se basan principalmente en técnicas no paramétricas 
       para manipular directamente el píxel de la representación de una imagen. En cambio, mediante Redes Neuronales Convolucionales entrenadas en el reconocimiento de objetos,  se puede
       llevar a cabo manipulaciones de caracteristicas de alto nivel que representan explícitamente el contenido de una imagen.
       La publicación de estos artículos, ha incentivado a muchos investigadores del area a continuar desarrollando estas ideas, a tal punto que hasta el dia de hoy se siguen publicando
@@ -969,7 +970,6 @@
       \begin{equation}
        L_{contenido}(\overrightarrow{p},\overrightarrow{x}, l) = \frac{1}{2} \sum_{i,j} (F_{i,j}^l - P_{i,j}^l)^2
       \end{equation}
-      \FIXME{AGREGAR FORMULA}
       El gradiente con respecto a la imagen $\overrightarrow{x}$ puede ser fácilmente calculado utilizando la retropropagación.
       Sobre las respuestas de la CNN en cada capa de la red construimos una representación de estilo que calcula las correlaciones entre las diferentes respuestas de los filtros.
       Estas correlaciones de las caracteristicas estan dadas por la matriz de Gram $G^l \in R^{N_l * N_l}$, donde $G_{i,j}^l$ es el producto punto entre los vectores de los mapas de
@@ -991,7 +991,6 @@
       \end{equation}
       donde $w_l$ son los factores de peso que tiene cada capa sobre el resultado final. Los gradientes de $E_l$ con respecto a las activaciones de las capas de la red puede ser fácilmente
       calculado utilizando la retropropagación.
-      \FIXME{AGREGAR FORMULA}
       Para generar las imágenes que mezclan el contenido de una fotografía con el estilo de una obra de arte conjuntamente minimizamos la distancia de una imagen de ruido blanco
       de la representación de contenido de la fotografía en una capa de la red y la representación de estilo de la obra de arte en un número de capas de la CNN.
       Funcion de Pérdida total:
@@ -1013,16 +1012,17 @@
     que necesita el algoritmo para poder ejecutarse. El criterio de elección de estos hiperparámetros termina siendo muy influyente en el resultado final.
     Los principales hiperparámetros a definir son:
     \begin{itemize}
-      \item Numero de iteraciones que se ejecutará el optimizador.
-      \item Modelo de Red Neuronal Convolucional preentrenada que se utilizará (existen una variedad de CNN presentadas anteriormente) junto con las capas que se utilizaran de la
+      \item Número de iteraciones que se ejecutará el optimizador.
+      \item Modelo de Red Neuronal Convolucional preentrenada que se utilizará (existen una variedad de CNN presentadas anteriormente) junto con las capas que se utilizarán de la
       respectiva red tanto para calcular el estilo como el contenido.
       \item Imagen desde la cual comenzar la optimización, es posible comenzar desde una imagen de ruido, desde la imagen de contenido.
       \item Método de optimización a utilizar.
     \end{itemize}
 
-    Además, para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica, que permita definir si un resultado
-    obtenido es mejor que otro, debido a que en lo que respecta a las obras de arte, las evaluaciones suelen ser cualitativas en lugar de cuantitativas. Por ello es que se debe
-    buscar una forma de cuantificar estos aspectos cualitativos.
+    \subsection{Evaluación}
+      Además, para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica, que permita definir si un resultado
+      obtenido es mejor que otro, debido a que en lo que respecta a las obras de arte, las evaluaciones suelen ser cualitativas en lugar de cuantitativas. Por ello es que se debe
+      buscar una forma de cuantificar estos aspectos cualitativos.
 
   \section{Algoritmo de Reconocimiento de estilo}
     \FIXME{VER COMO ACOPLAR ESTO AL RESTO, UNIFICARLO A LA SECCION DEL MODULO DE EVALUACION? EL PAPER SIRVE COMO PUNTAPIE QUE JUSTIFICA EL FINETUNING PERO NO SE APLICA EL ALGORITMO DEL PAPER}
@@ -1053,10 +1053,6 @@
 	\end{itemize}
 	Se encontro que las caracteristicas extraidas de una CNN son las que mejor precisión proveen a la hora de reconocer estilos.
 
-    \subsection{Finetuning para reconocimiento de estilos}
-      Basado en los resultados propuestos en el articulo antes mencionado, se realizó un reentranmiento sobre la red AlexNet \cite{AlexNet} , por cuestiones de simplicidad, utilizando
-      el conjunto de datos Wikipaintings, para los 10 estilos que mayor cantidad de datos provee.
-
   \section{Solución propuesta}
     En la solución propuesta en este trabajo se plantea poder definir automáticamente el número de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado.
     El resto de los hiperparámetros permanecen predefinidos a mano, excepto la imagen de la cual comenzar que influye notablemente en la cantidad de iteraciones que debe realizar el
@@ -1064,15 +1060,19 @@
     La solución consta de 2 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo) y otro módulo encargado de
     evaluar.
     \subsection{Módulo de generación de imágenes}
-      Existen una gran variedad de implementaciónes de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
-      La que se decidió utilizar fue la de Justin Jhonson \cite{Johnson:Neural_Style}, la cual posee el mayor grado de aceptación en la industria.
-      La principal tecnología utilizada en esta implementación es el Framework Torch, que utiliza como lenguaje de programación a Lua.
+
     \subsection{Módulo de evaluación de imágenes}
-      Como se mencionó anteriormente, para lo que respecta a las obras de arte, la evaluación suele ser cualitativa.
-      Para poder establecer una métrica de comparación cuantitativa, se realizó finetuning sobre AlexNet, con el conjunto de datos de Wikipaintings, para que la red reentrenada aprenda a reconocer
-      el estilo de una obra de arte para los 10 estilos que mas datos provee, obteniendo una precisión del 92%.
+      Como se mencionó anteriormente, para lo que respecta a las obras de arte, la evaluación suele ser cualitativa. Por lo que para poder establecer una métrica de comparación cuantitativa
+      que permita evaluar el resultado generado, la idea que planteamos es implementar un modulo que reconozca el estilo de una imagen.
+      A partir de esta idea se realizó una investigación de los posibles metodos para lograr esto. Decidimos basarnos en el algortimo presentado en \cite{Karayev:Style_Recognition}.
+      Este articulo plantea que los vectores de caracteristicas obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy utiles a la hora de
+      reconocer estilos, aunque muchos estilos parecieran ser principalmente definidos por las elecciones de colores, los vectores de caracteristicas de las CNN, proveen mucha mas información
+      que los vectores obtenidos a partir de histogramas de colores por ejemplo. 
+      Basado en esta idea, decidimos implementar una version simplificada que consiste en reentrenar una Red Neuronal Convolucional preentrenda para el reconocimiento de objetos. 
+      Se realizó reentranmiento sobre AlexNet, con el un subconjunto del conjunto de datos de Wikipaintings, para que la red reentrenada aprenda a reconocer
+      el estilo de una obra de arte para los 10 estilos que mas datos provee, obteniendo una precisión del 92\%.
       De esta forma se van realizando evaluaciones del resultado obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
-      La implementación de este módulo fue realizada principalmente en Python, utilizando el Framework Caffe y la libreria OpenCV.
+      
     \subsection{Criterio de Selección}
       El criterio de selección para elegir la imagen óptima fue el siguiente:
       Dado que el estilo de la imagen resultante no siempre termina siendo el mismo estilo de la imagen provista para transferir el estilo, el estilo objetivo se definió como el estilo
@@ -1080,10 +1080,22 @@
       Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo supera al puntaje del resto de los estilos y se toma el punto medio.
 
     \subsection{Conjunto de datos}
-      El conjunto de datos utilizado para en este trabajo es el de Wikipaintings, de disponibilidad publica.\url{https://www.wikiart.org/} \FIXME{AGREGAR REFERENCIA}
+      El conjunto de datos utilizado para en este trabajo es el de Wikipaintings, de disponibilidad publica.\url{https://www.wikiart.org/}. Para la implementación de la solución, 
+      se utilizo un subconjunto de los 
+      
 
     \subsection{Detalles de implementación}
-      \FIXME{COMPLETAR}
+      \subsubsection{Módulo de generación de imágenes}
+	Existen una gran variedad de implementaciónes de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
+	La que se decidió utilizar fue la de Justin Jhonson \cite{Johnson:Neural_Style}, la cual posee el mayor grado de aceptación en la industria.
+	La principal tecnología utilizada en esta implementación es el Framework Torch, que utiliza como lenguaje de programación a Lua.
+	La red elegida para ejecutar este modulo fue la Network in Network (NIN) \cite{NIN}, debido a que tiene una performance similar a AlexNet, pero requiere de mucha menor cantidad 
+	de memoria.
+      \subsubsection{Módulo de evaluación de imágenes}
+	La implementación del módulo de evaluación fue realizada principalmente en Python, utilizando el Framework Caffe y la libreria OpenCV.
+      \subsection{Criterio de Selección}
+	Implementado en Python
+
 
 \chapter{Experimentos}
 
