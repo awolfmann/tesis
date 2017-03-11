@@ -1006,7 +1006,7 @@
       \end{figure}
 
 
-\chapter{Descripción del problema y solución propuesto}
+\chapter{Elección Automatica de hiperparámetros para Transferencia de estilo}
   \section{Descripción del problema}
     Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes, sin embargo es necesario definir una serie de hiperparámetros,
     que necesita el algoritmo para poder ejecutarse. El criterio de elección de estos hiperparámetros termina siendo muy influyente en el resultado final.
@@ -1023,7 +1023,7 @@
       Además, para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica, que permita definir si un resultado
       obtenido es mejor que otro, debido a que en lo que respecta a las obras de arte, las evaluaciones suelen ser cualitativas en lugar de cuantitativas. Por ello es que se debe
       buscar una forma de cuantificar estos aspectos cualitativos.
-
+\iffalse
   \section{Algoritmo de Reconocimiento de estilo}
     \FIXME{VER COMO ACOPLAR ESTO AL RESTO, UNIFICARLO A LA SECCION DEL MODULO DE EVALUACION? EL PAPER SIRVE COMO PUNTAPIE QUE JUSTIFICA EL FINETUNING PERO NO SE APLICA EL ALGORITMO DEL PAPER}
     \subsection{Introducción}
@@ -1052,7 +1052,7 @@
 	 \item Caracteristicas extraidas de una CNN
 	\end{itemize}
 	Se encontro que las caracteristicas extraidas de una CNN son las que mejor precisión proveen a la hora de reconocer estilos.
-
+\fi
   \section{Solución propuesta}
     En la solución propuesta en este trabajo se plantea poder definir automáticamente el número de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado.
     El resto de los hiperparámetros permanecen predefinidos a mano, excepto la imagen de la cual comenzar que influye notablemente en la cantidad de iteraciones que debe realizar el
@@ -1060,18 +1060,18 @@
     La solución consta de 2 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo) y otro módulo encargado de
     evaluar.
     \subsection{Módulo de generación de imágenes}
-
+      En este modulo se implementa el algoritmo propuesto por Gatys, para la transferencia 
     \subsection{Módulo de evaluación de imágenes}
       Como se mencionó anteriormente, para lo que respecta a las obras de arte, la evaluación suele ser cualitativa. Por lo que para poder establecer una métrica de comparación cuantitativa
       que permita evaluar el resultado generado, la idea que planteamos es implementar un modulo que reconozca el estilo de una imagen.
-      A partir de esta idea se realizó una investigación de los posibles metodos para lograr esto. Decidimos basarnos en el algortimo presentado en \cite{Karayev:Style_Recognition}.
-      Este articulo plantea que los vectores de caracteristicas obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy utiles a la hora de
-      reconocer estilos, aunque muchos estilos parecieran ser principalmente definidos por las elecciones de colores, los vectores de caracteristicas de las CNN, proveen mucha mas información
-      que los vectores obtenidos a partir de histogramas de colores por ejemplo. 
-      Basado en esta idea, decidimos implementar una version simplificada que consiste en reentrenar una Red Neuronal Convolucional preentrenda para el reconocimiento de objetos. 
-      Se realizó reentranmiento sobre AlexNet, con el un subconjunto del conjunto de datos de Wikipaintings, para que la red reentrenada aprenda a reconocer
-      el estilo de una obra de arte para los 10 estilos que mas datos provee, obteniendo una precisión del 92\%.
-      De esta forma se van realizando evaluaciones del resultado obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
+      \subsubsection{Reconocimiento de estilo}
+	A partir de esta idea se realizó una investigación de los posibles metodos para lograr esto. Decidimos basarnos en el algortimo presentado en \cite{Karayev:Style_Recognition}.
+	Este articulo plantea que los vectores de caracteristicas obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy utiles a la hora de
+	reconocer estilos, aunque muchos estilos parecieran ser principalmente definidos por las elecciones de colores, los vectores de caracteristicas de las CNN, proveen mucha mas información
+	que los vectores obtenidos a partir de histogramas de colores por ejemplo. 
+	Basado en esta idea, decidimos implementar una version simplificada que consiste en reentrenar una Red Neuronal Convolucional preentrenda para el reconocimiento de objetos. 
+
+	De esta forma se van realizando evaluaciones del resultado obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
       
     \subsection{Criterio de Selección}
       El criterio de selección para elegir la imagen óptima fue el siguiente:
@@ -1079,19 +1079,34 @@
       que tiene asignada una mayor probabilidad de reconocimiento luego de 1000 iteraciones.
       Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo supera al puntaje del resto de los estilos y se toma el punto medio.
 
-    \subsection{Conjunto de datos}
-      El conjunto de datos utilizado para en este trabajo es el de Wikipaintings, de disponibilidad publica.\url{https://www.wikiart.org/}. Para la implementación de la solución, 
-      se utilizo un subconjunto de los 
-      
-
     \subsection{Detalles de implementación}
+      \subsubsection{Conjunto de datos}
+	El conjunto de datos utilizado para en este trabajo es el de Wikipaintings, de disponibilidad publica.\url{https://www.wikiart.org/}. Para la implementación de la solución, 
+	se utilizo un subconjunto, tomando los 10 estilos que mayor cantidad de obras de arte disponen. A continuacion se enumeran los estilos contemplados:
+	\begin{itemize}
+	 \item Art Noveau
+	 \item Impresionismo
+	 \item Surrealismo
+	 \item Barroco
+	 \item Simbolismo
+	 \item Post Impresionismo
+	 \item Neo Clasisimo
+	 \item Romanticismo
+	 \item Surrealismo
+	 \item Realismo
+	\end{itemize}
+
+      
       \subsubsection{Módulo de generación de imágenes}
 	Existen una gran variedad de implementaciónes de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
 	La que se decidió utilizar fue la de Justin Jhonson \cite{Johnson:Neural_Style}, la cual posee el mayor grado de aceptación en la industria.
 	La principal tecnología utilizada en esta implementación es el Framework Torch, que utiliza como lenguaje de programación a Lua.
 	La red elegida para ejecutar este modulo fue la Network in Network (NIN) \cite{NIN}, debido a que tiene una performance similar a AlexNet, pero requiere de mucha menor cantidad 
 	de memoria.
+	Algunas diferencias entre la implementacion y el algoritmo orginial consisten en definir si comenzar la optimizacion desde ruido blanco o desde la imagen de contenido.
       \subsubsection{Módulo de evaluación de imágenes}
+	Se realizó reentranmiento sobre AlexNet, con el un subconjunto del conjunto de datos de Wikipaintings, para que la red reentrenada aprenda a reconocer
+	el estilo de una obra de arte para los 10 estilos que mas datos provee, obteniendo una precisión del 92\%.
 	La implementación del módulo de evaluación fue realizada principalmente en Python, utilizando el Framework Caffe y la libreria OpenCV.
       \subsection{Criterio de Selección}
 	Implementado en Python
@@ -1102,9 +1117,14 @@
 \chapter{Conclusiones, Perspectivas y trabajos a futuro}
   \section{Conclusiones}
   \section{Trabajos a futuro}
-    Se podría realizar una especie de predefinición del número de iteraciones que requiere cada estilo, ejecutando el algoritmo una gran cantidad de veces y definiendo este valor
-    estadisticamente, aunque esto puede llegar a no funciónar correctamente en todos los casos ya que dependiendo de la imagen de contenido, el estilo objetivo podria variar.
+    \subsection{Automatizacion de hiperparámetros}
+      Se podría realizar una especie de predefinición del número de iteraciones que requiere cada estilo, ejecutando el algoritmo una gran cantidad de veces y definiendo este valor
+      estadisticamente, aunque esto puede llegar a no funciónar correctamente en todos los casos ya que dependiendo de la imagen de contenido, el estilo objetivo podria variar.
+    \subsection{Compresion de CNN}
+      A partir del articulo presentado por Gatys, se fueron publicando una serie de articulos que presentaban mejoras u optimizaciones al algortimo, ademas de buscar comprimir la red,
+      para que una vez entrenada en un dispositivo de gran capacidad de computo, luego pueda ser insertado y ejecutado para transferir estilo en dispositivo menor como lo son los smartphones.
+      Por ejemplo se lograron entrenar modelos que transfieran el estilo de una obra de arte en particular, que puede ser ejecutado en un smartphone
 \printindex
 \bibliography{./tex/biblio}        %use a bibtex bibliography file refs.bib
-\bibliographystyle{plainnat}
+\bibliographystyle{unsrt}
 \end{document}
