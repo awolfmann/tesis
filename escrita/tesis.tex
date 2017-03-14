@@ -118,13 +118,13 @@
     \paragraph{Aprendizaje Automático}
       El area de Aprendizaje Automático es el área de las Ciencias de la Computación que da a las computadoras la capacidad de aprender sin ser explícitamente programadas, explora el estudio
       y la construcción de algoritmos que pueden aprender y hacer predicciones sobre los datos. Tales algoritmos lo logran siguiendo las instrucciones estrictamente estáticas del programa
-      mediante la fabricación de predicciones o decisiones impulsadas por datos​ a través de la construcción de un modelo generado con las muestras de entrada. 
+      mediante la fabricación de predicciones o decisiones impulsadas por datos​ a través de la construcción de un modelo generado con las muestras de entrada.
       El principal objetivo de un sistema de aprendizaje es generalizar desde su experiencia o conocimiento previo. Generalizar en este contexto es la habilidad del sistema de realizar
       predicciones con precision sobre un ejemplo nuevo no visto antes, luego de aprender sobre el conjunto de entrenamiento. Los ejemplos de entrenamiento provienen de un espacio
       con probabilidad de distribución desconocida del cual es considerado representativo. El sistema de aprendizaje debe construir un modelo o función sobre el espacio total que le permite realizar
       predicciones lo suficientemente precisas sobre nuevos ejemplos. Este modelo aprende una función de predicción $F$, a partir del conjunto de datos de entrenamiento que se le provee.
-      Cada una de las instancias del conjunto de datos de entrenamiento es representado por un vector caracteristicas, a partir de los cuales la función de predicción 
-      se va ajustando durante el entrenamiento o aprendizaje. 
+      Cada una de las instancias del conjunto de datos de entrenamiento es representado por un vector caracteristicas, a partir de los cuales la función de predicción
+      se va ajustando durante el entrenamiento o aprendizaje.
       “Un modelo que aprende que no asume nada acerca de la identidad del concepto objetivo, no tiene ninguna base racional para clasificar cosas que nunca vio.” \cite{Mitchell:1997:ML:541177}
 
       El aprendizaje automático se emplea en una serie de tareas informáticas en las que el diseño y la programación de algoritmos explícitos son inviables, como por ejemplo para la detección de Spam, el reconocimiento
@@ -135,7 +135,7 @@
       explicitamente que los elementos de  entrada del algoritmo serán imágenes, lo cual le permite implementar ciertas optimizaciónes dentro del algoritmo, luego
       se irán explicando mas detalladamente todos estos conceptos en profundidad.\\
       Otro ejemplo de amplia investigación y desarrollo en la actualidad son los autos que se conducen por si solos, los cuales emplean estas técnicas dentro de sus procesos para lograrlo.\\
-    
+
     \begin{figure}[h]
       \includegraphics[width=0.9\linewidth]{./img/nvidia_car_detection.png}\\
       \caption{En la figura se puede observar la detección de objetos que hace el vehiculo, utilizando Redes Neuronales Convolucionales en tiempo real}
@@ -146,7 +146,7 @@
       Desde la perspectiva de la ingeniería, busca automatizar tareas que el sistema visual humano puede hacer. Incluye métodos para adquirir, procesar, analizar y comprender las imágenes del mundo real
       con el fin de producir información numérica o simbólica para que puedan ser tratados por una computadora. El objetivo principal de Visión por Computadoras es reducir la distancia
       entre lo que un humano interpreta a partir de una imagen y la forma en la que las computadoras representan esa misma imagen.\\
-  
+
   \section {Motivación}
     En lo que respecta al área de visión por computadoras, una imagen es representada por un arreglo de 2 dimensiones donde cada valor representa la intensidad captada por un sensor
     de un determinado punto espacial, representados como píxeles. La representación de los píxeles es muy sensible a cambios en la iluminación, ángulo, contraste y tamaño que pueda existir.\\
@@ -242,12 +242,12 @@
 	compuesto de un objeto de entrenamiento (representado por un vector de caracteristicas) y una etiqueta, que seria el valor de salida deseado.
 	A partir de los vectores de caracteristicas y etiquetas con las que se entrenó, aprende a predecir la etiqueta de un nuevo vector de caracteristicas nunca antes visto.
 	Los problema tipicos que se atacan con estos algoritmos son la regresión y la clasificación, dependiendo si la variable a predecir es continua o discreta.
-	
+
 	\paragraph {Regresión}
 	  El objetivo de la regresión es predecir el valor de una o más de las variables (continuas) objetivo $t$, dado el valor de un vector $x$ de variables de entrada.
 	  Un ejemplo de un problema de regresión sería el de predecir el puntaje creditico que obtiene un cliente que solicita un prestamo en un banco, donde el vector de entrada
 	  consistiria de información financiera, como sueldo, monto disponible en tarjetas de credito, etc.
-	
+
 	\paragraph {Clasificación}
 	  Clasificación se define como el problema de identificar a que categoría (variable discreta) pertenece una nueva observación, basada en el conjunto de datos de entrenamiento,
 	  que contiene observaciones a las cuales  si se les conoce categoría. En el escenario más común, las clases o categorias son disjuntas,
@@ -257,11 +257,11 @@
 	  en la que hay un único destino la variable $t \in {0, 1}$ tal que $t = 1$ representa a una clase y $t = 0$ es a la otra.
 
       \subsubsection{Aprendizaje No Supervisado}
-	  Los algoritmos de aprendizaje No Supervisado se caracterizan por aplicarse a conjuntos de datos a los cuales, durante la etapa de entrenamiento no se les conoce su etiqueta 
-	  de salida, es decir, a diferencia de los algoritmos de aprendizaje supervisado, estos solo disponen del vector de caracteristicas para el entrenamiento, en lugar de disponer 
+	  Los algoritmos de aprendizaje No Supervisado se caracterizan por aplicarse a conjuntos de datos a los cuales, durante la etapa de entrenamiento no se les conoce su etiqueta
+	  de salida, es decir, a diferencia de los algoritmos de aprendizaje supervisado, estos solo disponen del vector de caracteristicas para el entrenamiento, en lugar de disponer
 	  de vectores y etiquetas. Estos algoritmos se emplean para detectar patrones o similaridades entre los datos que eran desconocidas.
 	  El principal algoritmo de aprendizaje no supervisado es el de Agrupamiento (Clustering en la literatura en inglés).
-	
+
 	\paragraph {Agrupamiento}
 	   El algoritmo de Agrupamiento consiste en reunir objetos en grupos, de forma tal que los objetos pertenecientes a un mismo grupo son en algun sentido mas similares
 	   entre ellos que a los objetos que pertenecen a otro grupo. El objetivo de los métodos de agrupamiento es descubrir relaciones significativas presentes en los datos, por lo
@@ -281,7 +281,7 @@
 	  vez más populares en los últimos años, y se pueden utilizar en una variedad de áreas, incluyendo películas, música, noticias, libros y productos en general.
 	  El enfoque mayormente utilizado es el de filtrado colaborativo, que se basa en la recolección y el análisis de una gran cantidad de información sobre los usuarios,
 	  los comportamientos, actividades o preferencias y la predicción de lo que los usuarios tendrán como base en su similitud con otros usuarios.
-	  
+
       \subsubsection{Aprendizaje por Refuerzo}
 	El sistema interactua en un ambiente dinamico en el cual debe cumplir un objetivo determinado, el programa va recibiendo retroalimentacion en terminos de premios y castigos mientras
 	recorre el espacio del problema y de esta forma aprende.\\
@@ -373,8 +373,8 @@
 	\subsubsection{Función de Predicción}
 	  Una predicción puede tener un resultado binario (0 o 1) o puede devolver un puntaje por lo general con valores continuos entre 0 y 1, indicando un cierto valor de confianza
 	  de la predicción. Para el caso de un problema de clasificación de imágenes, el modelo dado una imagen, puede otorgar un puntaje a cada una de las clases posibles,
-	  y la que obtenga el mayor puntaje será la clase asignada para esa imagen. Para poder realizar una predicción es necesaria una función de puntuación $f:R^D {\rightarrow} R^K$ 
-	  y una funcion de decisión $H$, por ejemplo para el caso de clasificación $H:R^K{\rightarrow}K$ que toma el resultado de $f$ y decide a cual de las $K$ clases pertenece y para 
+	  y la que obtenga el mayor puntaje será la clase asignada para esa imagen. Para poder realizar una predicción es necesaria una función de puntuación $f:R^D {\rightarrow} R^K$
+	  y una funcion de decisión $H$, por ejemplo para el caso de clasificación $H:R^K{\rightarrow}K$ que toma el resultado de $f$ y decide a cual de las $K$ clases pertenece y para
 	  el caso de la regresión es la funcion identidad $H(f(x))=f(x)$.
 	  Un ejemplo de función de puntuación:
 	  Suponiendo que tenemos $x_{i}$  una imagen de entrada, que la queremos asociar a una clase $y_{j}$ de las $K$ clases posibles , sea $D$ la dimensionalidad de $x_{i}$, $x_{i} \in R^D$,
@@ -408,7 +408,7 @@
           \begin{equation}
 	    L = \frac{1}{N}\sum{i}{N} L_i(y_n, f(x_n; W)) + \lambda \Omega(W)
           \end{equation}
-          con $L:\mathcal{Y}\times \mathcal{Y}\rightarrow\mathbb{R}_+$, que contiene 2 partes: Una función de pérdida y un coeficiente de regularización que penaliza a los modelos complejos, 
+          con $L:\mathcal{Y}\times \mathcal{Y}\rightarrow\mathbb{R}_+$, que contiene 2 partes: Una función de pérdida y un coeficiente de regularización que penaliza a los modelos complejos,
           $\lambda$ es un hiperparámetro que define cuanto influye la regularización sobre el resultado final y $N$ es la cantidad de datos de entrenamiento.
 	  Una función de pérdida es una función real, no negativa $L_i({\widehat y}, y)$, que mide cuán diferente es la predicción ${\widehat y}$ obtenida, con respecto a la
 	  salida esperada $y$. Existen diversas funciónes de pérdida que se utilizan en distintos contextos. A continuación se presentan algunas que se aplican usualmente:
@@ -494,7 +494,7 @@
 	    \Until {Se encuentra un mínimo aproximado}
 	  \end{algorithmic}
 	\end{algorithm}
-    
+
     \subsection{Ciclo del Aprendizaje Automático}
       Luego de explicar todos los conceptos relevantes al Aprendizaje automático, podemos resumir al ciclo común a todos los algoritmos de Aprendizaje automático a lo siguiente:
       \begin{enumerate}
@@ -558,7 +558,7 @@
 	    etiquetas correctas con las etiquetas predecidas por el clasificador se puede establecer una metrica de calidad, intuitivamente se espera que las etiquetas predecidas coincidan en la mayoria
 	    de los casos con las etiquetas correctas.
 	  \end{itemize}
-\fi 
+\fi
 
 
     \subsection{Construyendo un algoritmo de aprendizaje automático}
@@ -588,7 +588,7 @@
 	El diseño y entrenamiento de una red neural no es muy diferente de la formación de cualquier otro modelo de aprendizaje automático con descenso por el gradiente.
 	La diferencia más grande entre los modelos lineales y las redes neuronales es que la no linealidad de una red neural hace que las funciónes de pérdida
 	más interesantes se vuelvan no convexas. Esto significa que las redes neuronales suelen ser entrenadas mediante el uso de optimizadores iterativos basados ​​en gradientes
-	que simplemente minimizan la función de costo, en lugar de los solucionadores de ecuaciones lineales usados ​​para entrenar modelos de regresión lineal. Para el caso de las 
+	que simplemente minimizan la función de costo, en lugar de los solucionadores de ecuaciones lineales usados ​​para entrenar modelos de regresión lineal. Para el caso de las
 	redes neuronales, la técnica ampliamente utilizada es la de retropropagación del error:
 
 	\subsubsection{Retropropagación del Error}
@@ -673,7 +673,7 @@
 	      \item Se encontró que aceleran en gran medida la convergencia del descenso del gradiente estocástico en comparación con las funciones sigmoides/tanh, esto se debe a su forma lineal, sin saturarse.
 	      \item En comparación con las funciones tanh/sigmoide que implican operaciones caras, la ReLU puede implementarse simplemente marcando una matriz de activaciones a cero.
 	    \end{itemize}
-            
+
 	    Existen varias generalizaciones de unidades lineales rectificadas. La mayoría de estas generalizaciones se comportan de forma comparable a las unidades lineales rectificadas
 	    y, en ocasiones, tienen un mejor desempeño. Un inconveniente para las unidades lineales rectificadas es que no pueden aprender a través de métodos basados ​​en
 	    gradiente en ejemplos para los cuales su activación es cero. Una variedad de generalizaciones de unidades lineales rectificadas garantizan que reciben gradiente en
@@ -723,7 +723,7 @@
 	\end{center}
 	\caption{ Descripción de la retropropagación. (a) El entrenamiento es alimentado hacia delante, generando de salida correspondiente. (b) Error entre la salida real y la salida deseada
 	se calcula. (c) El error se propaga hacia atrás, a través de actualizaciones donde una proporción del gradiente ($ \frac{\partial E}{\partial w_i}$ ) es la resta de cada peso. $x_i$, $w_i$, $\phi$ son las entradas,
-	la entrada de pesos, y la función de activación de una neurona. Error $E$ se calcula a partir de la salida $y$ de salida deseado $t$. $\eta$ es la tasa de aprendizaje. 
+	la entrada de pesos, y la función de activación de una neurona. Error $E$ se calcula a partir de la salida $y$ de salida deseado $t$. $\eta$ es la tasa de aprendizaje.
 	\cite{Automatic_differentiation_ML} }
 	\label{fig:backprop}
       \end{figure}
@@ -831,12 +831,12 @@
       Muchas placas graficas de procesamiento (GPUs en ingles) modernas tienen un límite de memoria de 3/4/6GB, las mejores GPUs que tienen cerca de 16GB de memoria.
       Hay tres fuentes principales de memoria para realizar un seguimiento:
       \begin{itemize}
-	\item A partir de los tamaños de volumen intermedios: Éstos son el número crudo de activaciones en cada capa de la CNN, y también sus gradientes (de igual tamaño). 
-	  Normalmente, la mayoría de las activaciones se encuentran en las capas anteriores de una ConvNet (es decir, primeras capas de convolucion). 
-	  Estos se mantienen ya que son necesarios para la retropropagación, pero una implementación inteligente que ejecuta una CNN sólo en la fase de prueba podría 
-	  en principio reducir esto en una cantidad enorme, sólo almacenando las activaciones actuales en cualquier capa y descartando las activaciones anteriores 
+	\item A partir de los tamaños de volumen intermedios: Éstos son el número crudo de activaciones en cada capa de la CNN, y también sus gradientes (de igual tamaño).
+	  Normalmente, la mayoría de las activaciones se encuentran en las capas anteriores de una ConvNet (es decir, primeras capas de convolucion).
+	  Estos se mantienen ya que son necesarios para la retropropagación, pero una implementación inteligente que ejecuta una CNN sólo en la fase de prueba podría
+	  en principio reducir esto en una cantidad enorme, sólo almacenando las activaciones actuales en cualquier capa y descartando las activaciones anteriores
 	  en las capas de abajo.
-	\item A partir de los tamaños de parámetro: Estos son los números que contienen los parámetros de red y sus gradientes durante la retropropagación. 
+	\item A partir de los tamaños de parámetro: Estos son los números que contienen los parámetros de red y sus gradientes durante la retropropagación.
 	  Por lo tanto, la memoria para almacenar el vector de parámetros debe ser multiplicada por un factor de al menos 2 o más.
 	\item Cada implementación de CNN tiene que mantener memoria datos extras, como los lotes de datos de imagen, tal vez sus versiones aumentadas, etc.
 	\item Una vez que tenga una estimación aproximada del número total de valores (para activaciones, gradientes y extra). Si la red no entra en memoria, una heurística común
@@ -919,10 +919,10 @@
       presenta Gatys en su articulo \cite{Gatys:Neural_Style}.
       Inicialmente el autor publica un articulo para sintetizar texturas naturales utilizando Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos,
       donde define a una textura como la correlación entre los distintos mapas de caracteristicas de cada una de las capas de la red.\cite{Gatys:Texture_Synthesis}
-      Esta misma idea luego la aplica para la Transferencia de Estilos, problema que normalmente se encaraba en una rama de la visión de computadoras llamada representación 
-      no fotorrealista \cite{Kyprianidis:ArtisticStylization}. También hay otros conceptualmente más relacionado con los métodos de uso de la textura de transferencia para lograr 
-      el estilo artístico de transferencia: \cite{Hertzmann:ImageAnalogies}, \cite{Ashikhmin:FastTextureTransfer}, \cite{Efros:ImageQuilting}, \cite{Lee:DirectionalTextureTransfer}, 
-      \cite{Xie:FGTS}. Sin Embargo, estos enfoques anteriores se basan principalmente en técnicas no paramétricas 
+      Esta misma idea luego la aplica para la Transferencia de Estilos, problema que normalmente se encaraba en una rama de la visión de computadoras llamada representación
+      no fotorrealista \cite{Kyprianidis:ArtisticStylization}. También hay otros conceptualmente más relacionado con los métodos de uso de la textura de transferencia para lograr
+      el estilo artístico de transferencia: \cite{Hertzmann:ImageAnalogies}, \cite{Ashikhmin:FastTextureTransfer}, \cite{Efros:ImageQuilting}, \cite{Lee:DirectionalTextureTransfer},
+      \cite{Xie:FGTS}. Sin Embargo, estos enfoques anteriores se basan principalmente en técnicas no paramétricas
       para manipular directamente el píxel de la representación de una imagen. En cambio, mediante Redes Neuronales Convolucionales entrenadas en el reconocimiento de objetos,  se puede
       llevar a cabo manipulaciones de caracteristicas de alto nivel que representan explícitamente el contenido de una imagen.
       La publicación de estos artículos, ha incentivado a muchos investigadores del area a continuar desarrollando estas ideas, a tal punto que hasta el dia de hoy se siguen publicando
@@ -1053,26 +1053,32 @@
 	\end{itemize}
 	Se encontro que las caracteristicas extraidas de una CNN son las que mejor precisión proveen a la hora de reconocer estilos.
 \fi
-  \section{Solución propuesta}
+  \section{Solución propuesta\label{sec:solucion}}
     En la solución propuesta en este trabajo se plantea poder definir automáticamente el número de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado.
     El resto de los hiperparámetros permanecen predefinidos a mano, excepto la imagen de la cual comenzar que influye notablemente en la cantidad de iteraciones que debe realizar el
     algoritmo para obtener un resultado aceptable.
     La solución consta de 2 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo) y otro módulo encargado de
     evaluar.
     \subsection{Módulo de generación de imágenes}
-      En este modulo se implementa el algoritmo propuesto por Gatys, para la transferencia 
+      En este modulo se implementa el algoritmo propuesto por Gatys, para la transferencia
     \subsection{Módulo de evaluación de imágenes}
-      Como se mencionó anteriormente, para lo que respecta a las obras de arte, la evaluación suele ser cualitativa. Por lo que para poder establecer una métrica de comparación cuantitativa
-      que permita evaluar el resultado generado, la idea que planteamos es implementar un modulo que reconozca el estilo de una imagen.
+      %% Como se mencionó anteriormente, para lo que respecta a las obras de arte, la evaluación suele ser cualitativa. Por lo que para poder establecer una métrica de comparación cuantitativa
+      %% que permita evaluar el resultado generado, la idea que planteamos es implementar un modulo que reconozca el estilo de una imagen.
+      Como se mencionó en Sec.~\ref{seccion_en_cap_anterior}, una de las
+      limiatciones del proceso de transferencia de estilo es que la evaluación de
+      la imagen resultante es de carácter cualitativo. A fin de establecer una
+      medida cuantitativa y así controlar el resultado de la generación de
+      manera más objetiva, se
+      propone ....
       \subsubsection{Reconocimiento de estilo}
 	A partir de esta idea se realizó una investigación de los posibles metodos para lograr esto. Decidimos basarnos en el algortimo presentado en \cite{Karayev:Style_Recognition}.
 	Este articulo plantea que los vectores de caracteristicas obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy utiles a la hora de
 	reconocer estilos, aunque muchos estilos parecieran ser principalmente definidos por las elecciones de colores, los vectores de caracteristicas de las CNN, proveen mucha mas información
-	que los vectores obtenidos a partir de histogramas de colores por ejemplo. 
-	Basado en esta idea, decidimos implementar una version simplificada que consiste en reentrenar una Red Neuronal Convolucional preentrenda para el reconocimiento de objetos. 
+	que los vectores obtenidos a partir de histogramas de colores por ejemplo.
+	Basado en esta idea, decidimos implementar una version simplificada que consiste en reentrenar una Red Neuronal Convolucional preentrenda para el reconocimiento de objetos.
 
 	De esta forma se van realizando evaluaciones del resultado obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
-      
+
     \subsection{Criterio de Selección}
       El criterio de selección para elegir la imagen óptima fue el siguiente:
       Dado que el estilo de la imagen resultante no siempre termina siendo el mismo estilo de la imagen provista para transferir el estilo, el estilo objetivo se definió como el estilo
@@ -1081,7 +1087,7 @@
 
     \subsection{Detalles de implementación}
       \subsubsection{Conjunto de datos}
-	El conjunto de datos utilizado para en este trabajo es el de Wikipaintings, de disponibilidad publica.\url{https://www.wikiart.org/}. Para la implementación de la solución, 
+	El conjunto de datos utilizado para en este trabajo es el de Wikipaintings, de disponibilidad publica.\url{https://www.wikiart.org/}. Para la implementación de la solución,
 	se utilizo un subconjunto, tomando los 10 estilos que mayor cantidad de obras de arte disponen. A continuacion se enumeran los estilos contemplados:
 	\begin{itemize}
 	 \item Art Noveau
@@ -1095,13 +1101,13 @@
 	 \item Surrealismo
 	 \item Realismo
 	\end{itemize}
+        mostrar como un mosaico 5x2 de imágenes
 
-      
       \subsubsection{Módulo de generación de imágenes}
 	Existen una gran variedad de implementaciónes de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
 	La que se decidió utilizar fue la de Justin Jhonson \cite{Johnson:Neural_Style}, la cual posee el mayor grado de aceptación en la industria.
 	La principal tecnología utilizada en esta implementación es el Framework Torch, que utiliza como lenguaje de programación a Lua.
-	La red elegida para ejecutar este modulo fue la Network in Network (NIN) \cite{NIN}, debido a que tiene una performance similar a AlexNet, pero requiere de mucha menor cantidad 
+	La red elegida para ejecutar este modulo fue la Network in Network (NIN) \cite{NIN}, debido a que tiene una performance similar a AlexNet, pero requiere de mucha menor cantidad
 	de memoria.
 	Algunas diferencias entre la implementacion y el algoritmo orginial consisten en definir si comenzar la optimizacion desde ruido blanco o desde la imagen de contenido.
       \subsubsection{Módulo de evaluación de imágenes}
@@ -1113,6 +1119,30 @@
 
 
 \chapter{Experimentos}
+
+descripción del contenido del capítulo (muy importante)
+
+\section{Módulo de reconocimiento}
+
+\subsection{Dataset}
+describir proceso de recolección de datos
+\subsection{Detalles de implementación}
+arquitectura de red + detalles de entrenamiento (fine-tunning / splits)
+\subsection{Resultados de clasificación}
+¿?
+
+\section{Elección del número de iteraciones empleando el módulo de
+  reconocimiento}
+\subsection{Dataset}
+\subsection{Detalles de implementación}
+\subsection{Número de iteraciones vs. score de clasificación}
+
+presentar y discutir experimentos y resultados
+
+concluir con un criterio de parada (RESALTARLO)
+
+mostrar imágenes. muchos casos
+
 
 \chapter{Conclusiones, Perspectivas y trabajos a futuro}
   \section{Conclusiones}
