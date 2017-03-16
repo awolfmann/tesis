@@ -289,33 +289,6 @@
 	Además, se hace hincapié en el rendimiento en tiempo real, que consiste en encontrar un equilibrio entre la exploración (del territorio desconocido) y la explotación
 	(del conocimiento actual).
 	Por ejemplo, mediante aprendizaje por refuerzo una computadora puede aprender a jugar al Backgammon o al Ajedrez a niveles profesionales.
-\iffalse
-        \subsection{Preprocesamiento de Datos}
-        \FIXME{A ESTO HABRÍA QUE CONECTARLO CON LO QUE VIENE DE ANTES. UNA
-          ALTERNATIVA ES MENCIONARLO EN LA INTRODUCCIÓN A MANERA DE PRESENTACIÓN
-        DEL CAPÍTULO. OTRA ALTERNATIVA ES SACARLO Y HABLAR DEL PRE-PROCESAMIENTO
-        CUANDO LOS CONCEPTOS MAS GENERALES YA ESTÉN PRESENTADOS. ME INCLINO MÁS
-        POR LA SEGUNDA.}
-      Al ser un área que tiene su enfoque basado en los datos de entrada, estos pasan a cumplir un rol fundamental en el desarrollo del algoritmo, por ello es necesario que
-      estén los mas limpios y puros posible, es decir lograr obtener un conjunto de datos útiles a los que se le puedan aplicar algoritmos de aprendizaje automático,
-      motivo por el cual en muchas ocasiones se realiza una fase de preprocesamiento de datos, la cual puede llegar a ser la etapa que mas trabajo requiera del proceso completo.
-      Por ejemplo una etapa de preprocesamiento de datos podria consistir de:
-      \begin{itemize}
-       \item Restarle la media a cada caracteristica.
-       \item Normalizar los datos.
-       \item Reducir dimensionalidades del conjunto de caracteristicas, quedandose con las que mas información aportan, y de esta forma se reduce el nivel de computo necesario para
-	ejecutar el algoritmo, sin perder.
-      \end{itemize}
-
-    \subsection{Modelos}
-    \FIXME{FALTAN AGREGAR FORMALIDADES, CUALES? REFERENCIAS?}
-
-    \FIXME{MODELOS-TIPOS DE APRENDIZAJE O TIPOS DE APRENDIZAJE-MODELOS ? ...HMMM
-      ... ALTERNATIVA. HABLAR DE MODELOS PRIMERO (SIN QUE TENGA QUE SER UNA
-      SECCIÓN APARTE) Y SACAR LO DE GERERATIVO VS. DISCRIMINATIVO}
-      \subsubsection{¿Qué es un modelo?}
-
-\fi
 
     \subsection{Vectores de Características para el Aprendizaje}
       \FIXME{Posible Referencia \url{http://machinelearningmastery.com/discover-feature-engineering-how-to-engineer-features-and-how-to-get-good-at-it/}}\\
@@ -333,16 +306,18 @@
 	A lo largo del desarrollo de la visión por computadora se distinguen dos enfoques para la generacion de descriptores capaces de reconocer caracteristicas de una imagen:
 	El enfoque basado en técnicas superficiales (o “shallow” en inglés) y el enfoque de aprendizaje profundo (o “deep” en inglés).
 
-      \subsubsection{Enfoque Superficial\FIXME{MODELOS \emph{SHALLOW}}}
-	El enfoque superficial responde a la manera tradicional de hacer visión por computadoras. Se busca generar una representación invariante a la posición, iluminación, fondo,
-	etc. utilizando principalmente técnicas estadísticas a partir de conocimiento anterior del objeto y del contexto. Los descriptores superficiales son diseñados a mano a
-	partir de características físicas, hipótesis y observaciones. El enfoque entonces no aprende features de los objetos sino que se procesa la imágen de interés con un
-	extractor de features prefijadas y luego se pasa la nueva representación a un clasificador entrenable. Los métodos más utilizadas que generan este tipo de descriptores s
-	on SIFT, SURF y Vectores Fisher.
+      \subsubsection{Enfoque Clasico \FIXME{MODELOS \emph{SHALLOW}}}
+	El enfoque clasico (Shallow en la literatura en ingles) responde a la manera tradicional de hacer visión por computadoras. Se busca generar una representación invariante 
+	a la posición, iluminación, fondo, etc. utilizando principalmente técnicas estadísticas a partir de conocimiento anterior del objeto y del contexto. 
+	Los descriptores son diseñados a mano a partir de características físicas, hipótesis y observaciones. Con este enfoque no se aprenden caracteristicas de los objetos sino que 
+	se procesa la imágen de interés con un extractor de features prefijadas y luego se pasa la nueva representación a un clasificador entrenable. 
+	Los métodos más utilizadas que generan este tipo de descriptores son SIFT, SURF y Vectores Fisher.
 	Otro ejemplo es el de la bolsa de palabras visuales, similar al metodo ejemplificado para texto, que se ilustra en la siguiente imagen:\\
 	\begin{figure}[h]
-	  \includegraphics[scale=0.5]{./img/bag_of_visual_words.jpg}
-	  \caption{Ejemplo de Bolsa de Palabras visuales}
+	  \begin{center}
+	    \includegraphics[scale=0.5]{./img/bag_of_visual_words.jpg}
+	    \caption{Ejemplo de Bolsa de Palabras visuales}
+	  \end{center}
 	  \label{fig:bovw}
 	\end{figure}
 
@@ -351,13 +326,13 @@
 	como formas, contornos, etc. Es decir que provean una especie de contenido semántico de la imagen.
 
       \subsubsection{Enfoque de Aprendizaje Profundo}
-	La filosofía de estas técnicas se basa en la hipótesis de “un único algoritmo de aprendizaje”: El cerebro usa esencialmente el mismo algoritmo para comprender diferentes formas de entrada.
-	Es entonces que en este enfoque se contempla que la complejidad de la percepción no está en el algoritmo ni en las estructuras de aprendizaje, sino en los datos.
-	El enfoque de aprendizaje profundo consiste de técnicas, algoritmos y estructuras inspiradas en el cerebro que son capaces de aprender features por sí mismas,
-	en lugar de que sean diseñadas a mano y prefijadas en el detector. El problema asociado a esto es que no sabemos qué features el modelo aprende durante el entrenamiento.
-	Las estructuras de aprendizaje profundo de features contemplan el concepto heredado de la neurobiología de que las features son jerárquicas:
-	desde features de bajo nivel como bordes y contornos, hasta estructuras y objetos. Las Redes Neuronales Convolucionales soportan el aprendizaje de este tipo features
-	y es el modelo que analizaremos posteriormente en este trabajo.\\
+	En este enfoque tiene como objetivo lograr representar el contenido semantico de una imagen mediante un unico algoritmo que aprenda a representarlo por si mismo, 
+	a partir de los datos, 	en lugar de que sean diseñadas a mano y prefijadas en el detector. 
+	El problema asociado a esto es que no sabemos cuales seran las features que el modelo aprende durante el entrenamienton y tampoco se logran comprender claramente.
+	Lo que si se conoce es que las features aprendidas tienen en cierto modo una especie de jerarquia, es decir que las features de bajo nivel aprendidas desde los pixeles
+	alimentan el aprendizaje de otras features que aprenden a reconocer contornos y bordes, y asi sucesivamente hasta llegar a las features de mas alto nivel que logran reconocer
+	estructuras y objetos. Debido a esto, las estructuras de aprendizaje profundo contemplan esta particularidad organizandose en diferentes capas, donde la salida de una capa
+	es la entrada a la capa siguiente. Las Redes Neuronales Convolucionales soportan el aprendizaje de este tipo features y es el modelo que analizaremos posteriormente en este trabajo.\\
 	\begin{figure}[h!]
 	  \begin{center}
 		  \includegraphics[width=0.9\linewidth]{./img/vedaldi_shallow_deep.pdf}
@@ -370,35 +345,34 @@
 
       \subsection{Entrenamiento}
 	A continuación detallaremos algunos conceptos principales para el entrenamiento de un modelo y luego se explica como funciona la fase de aprendizaje.
-	\subsubsection{Función de Predicción}
+	\subsubsection{Función de Predicción \label{sec:prediccion}}
 	  Una predicción puede tener un resultado binario (0 o 1) o puede devolver un puntaje por lo general con valores continuos entre 0 y 1, indicando un cierto valor de confianza
-	  de la predicción. Para el caso de un problema de clasificación de imágenes, el modelo dado una imagen, puede otorgar un puntaje a cada una de las clases posibles,
+	  de la predicción. Para el caso de un problema de clasificación de imágenes, el modelo dado una imagen, puede otorgar un puntaje a cada una de las $K$ clases posibles,
 	  y la que obtenga el mayor puntaje será la clase asignada para esa imagen. Para poder realizar una predicción es necesaria una función de puntuación $f:R^D {\rightarrow} R^K$
-	  y una funcion de decisión $H$, por ejemplo para el caso de clasificación $H:R^K{\rightarrow}K$ que toma el resultado de $f$ y decide a cual de las $K$ clases pertenece y para
-	  el caso de la regresión es la funcion identidad $H(f(x))=f(x)$.
+	  donde $D$ es la dimensionalidad del vector de entrada que toma $f$. \\
+	  Ademas, es necesario una funcion de decisión $H$, por ejemplo para el caso de clasificación $H:R^K{\rightarrow}{1,..,K}$ 
+	  que toma el resultado de $f$ y decide a cual de las $K$ clases pertenece y para el caso de la regresión es la funcion identidad $H(f(x))=f(x)$.
 	  Un ejemplo de función de puntuación:
-	  Suponiendo que tenemos $x_{i}$  una imagen de entrada, que la queremos asociar a una clase $y_{j}$ de las $K$ clases posibles , sea $D$ la dimensionalidad de $x_{i}$, $x_{i} \in R^D$,
-	  $i \in 1..N$, $j \in 1..K$, entonces $f$ es una función: $f:R^D {\rightarrow} R^K$. El caso mas simple es el de una clasificador lineal:\\
+	  Suponiendo que tenemos $x$ una imagen de entrada, que la queremos asociar a una clase $y_{j}$ de las $K$ clases posibles , sea $D$ la dimensionalidad de $x$, $x \in R^D$,
+	  $j \in 1..K$, entonces $f$ es una función: $f:R^D {\rightarrow} {1,..,K}$. El caso mas simple es el de una clasificador lineal:\\
 	  \begin{equation}
-	    f(x_{i}, W, b) = W x_{i} + b
+	    f(x, W, b) = W x + b
 	  \end{equation}
-	  Donde $W \in R^{KxD}$, $b \in R^{Kx1}$ son los parámetros de la función. $W$ suele ser llamado los pesos y $b$ el sesgo, ya que influye en el resultado de salida, pero sin
+	  Donde $W \in R^{K \times D}$, $b \in R^{K \times 1}$ son los parámetros de la función. $W$ suele ser llamado los pesos y $b$ el sesgo, ya que influye en el resultado de salida, pero sin
 	  interactuar con el dato de entrada.
 	  Algunas cosas a tener en cuenta:
 	  \begin{itemize}
-	   \item En primer lugar, tenga en cuenta que en una sola multiplicación de matrices $Wx_{i}$ está evaluando efectivamente 10 clasificadores separados en paralelo (uno para cada clase),
-	      donde cada clasificador es una fila de $W$.
-	   \item Observar también que consideramos los datos de entrada $(x_{i}, y_{i})$  prefijados, pero tenemos control sobre el ajuste de los parámetros $W$ y $b$.
+	   \item Observar también que consideramos los datos de entrada $(x, y_{j})$  prefijados, pero tenemos control sobre el ajuste de los parámetros $W$ y $b$.
 		 Nuestro objetivo será establecerlos de tal manera que las puntuaciones computadas coincidan con las etiquetas correctas sobre todo conjunto de entrenamiento.
 		 Intuitivamente deseamos que la clase correcta tenga una puntuación más alta que las puntuaciones de las clases incorrectas.
 	   \item Una ventaja de este enfoque es que los datos de entrenamiento se utilizan para aprender los parámetros $W$ y $b$, pero una vez que el aprendizaje es completo,
 		podemos descartar el conjunto de entrenamiento completo y sólo mantener los parámetros aprendidos. Esto se debe a que una nueva imagen nunca vista puede ser
 		simplemente reenviada a través de la función y clasificada en base a las puntuaciones computadas.
-	  \item Por último, notar que la clasificación de una imagen implica una sola multiplicación y adición matricial, lo cual es significativamente más rápida que la comparación
-		de una imagen de prueba contra todas las imágenes de entrenamiento, como ocurre con otros algoritmos mas simples de aprendizaje automático aplicados a clasificación.
 	  \end{itemize}
-	  \begin{figure}[h]
-	    \includegraphics[scale=0.5]{./img/stanford_linear_class.jpeg}
+	  \begin{figure}[h!]
+	    \begin{center}
+	     \includegraphics[scale=0.5]{./img/stanford_linear_class.jpeg}
+	    \end{center}
 	    \caption{Ejemplo de clasificador lineal que utiliza una función de puntuación lineal para clasificar entre autos, aviones y ciervos}
 	    \label{fig:figure2}
 	  \end{figure}
@@ -406,92 +380,88 @@
 	\subsubsection{Funciónes de Pérdida}
 	  El problema de estimar los parámetros de un modelo, se resuelve optimizando una función de costo que se puede expresar como:
           \begin{equation}
-	    L = \frac{1}{N}\sum{i}{N} L_i(y_n, f(x_n; W)) + \lambda \Omega(W)
+	    L = \frac{1}{N}\sum_{i=1}^{N} L_i(y_i, f(x_i, W, b)) + \lambda \Omega(W)
           \end{equation}
-          con $L:\mathcal{Y}\times \mathcal{Y}\rightarrow\mathbb{R}_+$, que contiene 2 partes: Una función de pérdida y un coeficiente de regularización que penaliza a los modelos complejos,
-          $\lambda$ es un hiperparámetro que define cuanto influye la regularización sobre el resultado final y $N$ es la cantidad de datos de entrenamiento.
+          Con $L:\mathcal{Y}\times \mathcal{Y}\rightarrow\mathbb{R}_+$, donde $\mathcal{Y}$ en el caso de la clasificación de la Sec.~\ref{sec:prediccion} seria ${1,..,K}$. 
+          Esta ecuacion contiene 2 partes: Una función de pérdida $L_i(y_i, f(x_i, W, b))$
+          y un coeficiente de regularización $\lambda \Omega(W)$ que penaliza a los modelos complejos, $\lambda$ es un hiperparámetro que define cuanto influye la regularización 
+          sobre el resultado final y $N$ es la cantidad de datos de entrenamiento.
 	  Una función de pérdida es una función real, no negativa $L_i({\widehat y}, y)$, que mide cuán diferente es la predicción ${\widehat y}$ obtenida, con respecto a la
 	  salida esperada $y$. Existen diversas funciónes de pérdida que se utilizan en distintos contextos. A continuación se presentan algunas que se aplican usualmente:
 	  \begin{itemize}
 	    \item Función de Pérdida 0-1:
-	      \begin{equation}
-		L_i({\widehat y}, y) =  1 si {\widehat y} = y 0 en caso contrario.
-	      \end{equation}
+	      \begin{equation*}
+		L({\widehat y}, y) =  1 si {\widehat y} = y 0 en caso contrario.
+	      \end{equation*}
 	    \item Función de Pérdida Hinge:
-	      \begin{equation}
-		L_i({\widehat y}, y) =  max(0, 1 - {\widehat y}y)
-	      \end{equation}
+	      \begin{equation*}
+		L({\widehat y}, y) =  max(0, 1 - {\widehat y}y)
+	      \end{equation*}
 	      Ampliamente utilizada para algoritmos de Maquina de Vector Soporte.
 	      Es una función convexa y continua pero no es derivable por lo tanto no se puede utilizar en métodos como el Descenso por el Gradiente.
 	    \item Función de Pérdida Logistica:
-	      \begin{equation}
-		L_i({\widehat y}, y) =  {\log(1+ {\exp^{-{\widehat y}y}})}
-	      \end{equation}
+	      \begin{equation*}
+		L({\widehat y}, y) =  {\log(1+ {\exp^{-{\widehat y}y}})}
+	      \end{equation*}
 	      Similar a la función Hinge, pero al ser derivable, puede utizarse para aplicar Descenso por el gradiente.
 	    \item Función de Pérdida de Entropia Cruzada
-	      \begin{equation}
-		L_i({\widehat y}, y) = -y{\log({\widehat y}}) - (1-y) {\log(1-{\widehat y})}
-	      \end{equation}
+	      \begin{equation*}
+		L({\widehat y}, y) = -y{\log({\widehat y}}) - (1-y) {\log(1-{\widehat y})}
+	      \end{equation*}
 	      Es una función continua, convexa y derivable que se adapta a métodos de Descenso por el gradiente, se utiliza en Redes Neuronales Profundas.
 
 	  \end{itemize}
 
-	\subsubsection {El problema del Sobreajuste}
+	\subsubsection {Sobreajuste y Regularización}
 	  Uno de los principales objetivos de los algoritmos de aprendizaje automático es su capacidad de generalizar a ejemplos nunca antes vistos. Sin embargo, si la fase
 	  de aprendizaje se realiza durante demasiado tiempo o si los ejemplos del conjunto de entrenamiento son raros, el modelo aprendido podría ajustarse específicamente
 	  a ciertas características aleatorias de estos datos, que en realidad no contribuyen a la generalización. Esto se conoce como sobreajuste (overfitting en la literatura en inglés),
 	  y es un problema importante y ampliamente discutido en el campo de aprendizaje automático. En el proceso de sobre ajuste, el desempeño del algoritmo en el
-	  conjunto de entrenamiento sigue mejorando, pero en el conjunto de evaluación empeora.
-
-	\subsubsection {Regularización}
+	  conjunto de entrenamiento sigue mejorando, pero en el conjunto de evaluación empeora.\\
 	  Una técnica para evitar el sobre ajuste de modelos es utilizar regularización. Esencialmente, consiste en penalizar los parámetros del modelo para evitar su
 	  crecimiento desmedido, agregando un regularizador($\Omega(W)$) a la Función de Pérdida. \\
 	  La función de regularización mas comunmente utilizada es la norma $L2$, definida como:
 	   \begin{equation}
-	    \Omega(W) = {\sum_{k} {\sum_{l}} W_{k,l}^2}
+	    \Omega(W) = \frac{1}{2} {\sum_{k} {\sum_{l}} W_{k,l}^2}
 	   \end{equation}
 
     \subsubsection{Optimización}
       Minimizar la función de pérdida puede considerarse un problema de optimización, con lo cual se pueden aplicar las tecnicas empleadas en este tipo de problemas, para resolverlo.
-      El objetivo de la optimización es encontrar el vector de pesos $W$ que minimice la función de pérdida.
-
-    \subsubsection{Gradiente}
+      El objetivo de la optimización es encontrar el vector de pesos $W$ que minimice la función de pérdida.\\
       La estrategia de optimización mas utilizada para este tipo de problemas es la de seguir la dirección del gradiente (también llamado derivada) de la función de pérdida.
       En este caso que la función toma como entrada un vector de números, se aplican las derivadas parciales y el gradiente es el vector resultante de calcular las derivadas parciales
-      en cada dimensión.
-
-    \subsubsection{Descenso por el gradiente}
-      La idea de principal de este metodo es el refinamiento iterativo, se evalua el resultado del calculo del gradiente y se actualizan los parámetros repetidamente,
+      en cada dimensión.La idea de principal de este metodo es el refinamiento iterativo, se evalua el resultado del calculo del gradiente y se actualizan los parámetros repetidamente,
       toma un hiperparámetro $\eta$ llamado tasa de aprendizaje que define el tamaño de cada paso en la iteración.
       Sea $F$ la función de pérdida, $w$ el vector de pesos, $N$ el numero de datos de entrenamiento, cada iteracion consiste de:
+      
       \begin{equation}
 	w_{n+1} = w_n - \eta \nabla L(w_n)  = w_n - \eta \sum_{i=1}^{N} \nabla L_i(w_n)
       \end{equation}
-
-    \subsubsection{Descenso por el gradiente estocástico}
+      
       Un problema recurrente en el aprendizaje automático es que para una buena generalización, son necesarios grandes conjuntos de entrenamiento,
       pero grandes conjuntos de entrenamiento también son más costosos desde el punto de vista computacional.
       En aplicaciones de gran escala, el conjunto de entrenamiento puede ser del orden de los millones de ejemplos, por lo que computar la función de
       pérdida completa sobre todo el conjunto para actualizar un solo parámetro seria algo impracticable.
       Un enfoque común que se aplica a este problema es computar el gradiente sobre pequeños lotes del conjunto de entrenamiento,
-      que permite lograr una buena aproximación al objetivo completo con una convergencia mucho mas rapida, es decir se reduce $N$ a un pequeño subconjunto, de esta forma se reduce el
-      numero de calculos realizados en cada iteración.
-      Este es el método mas utilizado para optimizar funciónes de pérdida en las Redes Neuronales.
+      que permite lograr una buena aproximación al objetivo completo con una convergencia mucho mas rapida, es decir se reduce $N$ a un pequeño subconjunto, de esta forma se
+      reduce el numero de calculos realizados en cada iteración. Este metodo se lo conoce como \emph{Descenso por el gradiente estocástico} y es el mas utilizado para optimizar 
+      funciones de pérdida en las Redes Neuronales.
 
-	\begin{algorithm}[h]
+	\begin{algorithm}[H]
 	  \caption{Descenso por el gradiente estocástico}
 	  \label{SGD}
 	  \begin{algorithmic}
 	    \State Elegir una tasa de aprendizaje $\eta$
 	    \State Elegir un vector de pesos inicial $w_0$
+	    \State Elegir un numero de iteraciones $J$
 	    \State Ordenar aleatoriamente
 	    \State $w \gets w_0$
-	    \Repeat
+	    \For{$j=1,..J$}
 	      \ForAll {$i=1,..,N$}
 		$sum_{gradiente} \gets sum_{gradiente} + \nabla L_i(w_n)$
 	      \EndFor
 	      \State $w \gets w - \eta sum_{gradiente}$
-	    \Until {Se encuentra un mínimo aproximado}
+	    \EndFor
 	  \end{algorithmic}
 	\end{algorithm}
 
@@ -578,15 +548,23 @@
 	de la redes neuronales biológicas. Los cálculos se estructuran en términos de un grupo interconectado de neuronas artificiales, procesando la información utilizando un enfoque de grafos
 	a la computación. Las redes neuronales modernas son herramientas no lineales de modelado de datos estadísticos. Usualmente se usan para modelar relaciones complejas entre entradas y salidas,
 	para encontrar patrones en los datos, o para capturar la estructura estadística en una distribución de probabilidad conjunta desconocida entre las variables observadas. \\
-	\begin{figure}[h]
-	  \includegraphics[scale=0.5]{./img/stanford_neural_net.jpeg}
+	Las redes neuronales se pueden modelar como un conjunto de neuronas conectadas en un grafo aciclico, que se suelen organizar por capas, las neuronas de una capa
+	se conectan con neuronas de sus capas adjacentes pero nunca se conectan 2 neuronas de una misma capa, como se puede observar en la figura \ref{fig:neural_network}.
+	Toda red neuronal tiene una capa de entrada, una capa de salida y un número determinado de capas ocultas, que pueden ser de distintos tipos.
+	Una de las principales razones por la cual las redes neuronales estan organizadas en capas, es que este tipo de estructura permite evaluar una red, muy simple y eficientemente realizando
+	operaciones matriciales vectoriales, una red neuronal puede ser pensada como una serie de multiplicaciones de matrices entrelazadas con funciónes de activaciones no lineales.
+	Las redes neuronales utilizadas en la actualidad tienen alrededor de 100 millones de parámetros distribuidos entre 10-20 capas.
+	\begin{figure}[H]
+	  \begin{center}
+	    \includegraphics[scale=0.5]{./img/stanford_neural_net.jpeg}
+	  \end{center}
 	  \caption{Red Neuronal Artificial}
 	  \label{fig:neural_network}
 	\end{figure}
-
+	
       \subsection{Aprendizaje basado en el Gradiente}
 	El diseño y entrenamiento de una red neural no es muy diferente de la formación de cualquier otro modelo de aprendizaje automático con descenso por el gradiente.
-	La diferencia más grande entre los modelos lineales y las redes neuronales es que la no linealidad de una red neural hace que las funciónes de pérdida
+	La diferencia más grande entre los modelos lineales y las redes neuronales es que la no linealidad de una red neuronal hace que las funciónes de pérdida
 	más interesantes se vuelvan no convexas. Esto significa que las redes neuronales suelen ser entrenadas mediante el uso de optimizadores iterativos basados ​​en gradientes
 	que simplemente minimizan la función de costo, en lugar de los solucionadores de ecuaciones lineales usados ​​para entrenar modelos de regresión lineal. Para el caso de las
 	redes neuronales, la técnica ampliamente utilizada es la de retropropagación del error:
@@ -597,9 +575,28 @@
 	  El ciclo consta de 2 fases, propagación y luego actualizacion de parámetros. Cuando ingresan los parámetro a la función se calcula el resultado final, y se lo compara con el resultado
 	  deseado, aplicando la función de pérdida se calcula el error, mediante el metodo de optimizacion se define el gradiente para luego realizar la retropropagación en la función hasta
 	  actualizar los parámetros.
-
+	\subsubsection {Entrenamiento}
+	  El entrenamiento de una red neuronal consiste de 2 pasos: paso hacia adelante, y paso de retropropagación del error
+	  \begin{enumerate}
+	    \item En el paso hacia adelante se evalua la red y se obtiene el resultado de salida, el cual se mide el error, se calcula el gradiente para luego aplicar el paso de retroalimentacion
+	    \item En el paso de retropropagación del error se ajustan los pesos internos de la red en base al resultado del gradiente, desde las capas finales de la red hasta las capas iniciales.
+	  \end{enumerate}
+	  \FIXME{VER EN BISHOP}
+	  \begin{figure}[H]
+	    \begin{center}
+	    \includegraphics[width=\linewidth]{./img/backprop.png}
+	    \end{center}
+	    \caption{ Descripción de la retropropagación. (a) El entrenamiento es alimentado hacia delante, generando de salida correspondiente. (b) Error entre la salida real y la salida deseada
+	    se calcula. (c) El error se propaga hacia atrás, a través de actualizaciones donde una proporción del gradiente ($ \frac{\partial E}{\partial w_i}$ ) es la resta de cada peso. $x_i$, $w_i$, $\phi$ son las entradas,
+	    la entrada de pesos, y la función de activación de una neurona. Error $E$ se calcula a partir de la salida $y$ de salida deseado $t$. $\eta$ es la tasa de aprendizaje.
+	    \cite{Automatic_differentiation_ML} }
+	    \label{fig:backprop}
+	  \end{figure}
+	  
+	  
       \subsection {Neurona artificial}
-	La unidad de procesamiento de una red neuronal es una neurona. La misma consta de un vector de entrada, un vector de pesos y una función de activación no lineal
+	La unidad de procesamiento de una red neuronal es una neurona. La misma consta de un vector de entrada, un vector de pesos y una función de activación no lineal, 
+	como se puede ver en la figura \ref{fig:neuron}.
 	En una neurona se realiza el producto punto entre el vector de entrada, y su vector de pesos, le suma el sesgo y aplica la función no lineal.
 	Una unica neurona puede ser utilizada para implementar un clasificador binario.
 	\begin{figure}[H]
@@ -610,24 +607,17 @@
           \label{fig:neuron}
 	\end{figure}
 
-
       \subsection {Funciones de Activación comunmente utilizadas}
 	Toda función de activacion toma un unico número como entrada, realiza un operacion matematica predefinida, no lineal y devuelve el resultado obtenido.
 	Algunos ejemplos de funciónes que se utilizan:
 	  \subsubsection {Sigmoide}
-	    \begin{figure}[H]
-	      \begin{center}
-	       \includegraphics[width=0.4\linewidth]{./img/sigmoid.png}
-	      \end{center}
-	      \caption{Grafico de la funcion Sigmoide}
-	      \label{fig:sigmoid}
-	    \end{figure}
-	    Proyecta el dominio al rango (0,1).
-	    \begin{equation}
+
+	    La función sigmoide proyecta el dominio al rango (0,1) y su ecuacion es:
+	    \begin{equation*}
 	     f(x) = \frac{1}{1+\exp{-x}}
-	    \end{equation}
-	    La función sigmoide ha tenido un uso frecuente desde el punto de vista histórico, ya que tiene una interpretación similar a la tasa de activación de una neurona:
-	    de no activarse en absoluto (0) a activarse completamente a una frecuencia máxima asumida (1). En la práctica, la función sigmoide recientemente ha dejado de utilizarse,
+	    \end{equation*}
+	    Ha tenido un uso frecuente desde el punto de vista histórico, ya que tiene una interpretación similar a la tasa de activación de una neurona:
+	    de no activarse en absoluto (0) a activarse completamente a una frecuencia máxima asumida (1), como puede observarse en la figura \ref{fig:sigmoid}. En la práctica, la función sigmoide recientemente ha dejado de utilizarse,
 	    ya  que tiene dos inconvenientes principales:
 	    \begin{itemize}
 	     \item Se satura y anula el gradiente. Una propiedad muy indeseable de la sigmoide es que cuando la activación de la neurona se satura en cualquiera de las dos puntas de 0 o 1,
@@ -636,22 +626,35 @@
 	      datos que no están centrados en cero. Esto tiene implicaciones en la dinámica durante el descenso del gradiente, porque si los datos que llegan a una neurona
 	      son siempre positivos, entonces el gradiente en los pesos durante la retropropagación o bien serán todos positivos o todos negativos.
 	    \end{itemize}
-
+	    \begin{figure}[H]
+	      \begin{center}
+	       \includegraphics[width=0.4\linewidth]{./img/sigmoid.png}
+	      \end{center}
+	      \caption{Grafico de la funcion Sigmoide}
+	      \label{fig:sigmoid}
+	    \end{figure}
+	
 	  \subsubsection {Tangente hiperbolica}
 	    \begin{figure}[H]
 	      \begin{center}
 	       \includegraphics[width=0.4\linewidth]{./img/tanh.png}
 	      \end{center}
 	      \caption{Grafico de la funcion Tangente hiperbolica}
-	      \label{fig:sigmoid}
+	      \label{fig:tanh}
 	    \end{figure}
-	    Proyecta el dominio al rango [-1,1]. Al igual que la neurona sigmoide, sus activaciones saturan, pero a diferencia de la neurona sigmoide su salida esta centrada en cero.
-	    Por lo tanto, en la práctica la tanh siempre es preferida sobre sigmoide.
+	    Proyecta el dominio al rango [-1,1], como se muestra en la figura \ref{fig:tanh}. Al igual que la neurona sigmoide, sus activaciones saturan, pero a diferencia 
+	    de la neurona sigmoide su salida esta centrada en cero. Por lo tanto, en la práctica la tanh siempre es preferida sobre sigmoide.
+	    \FIXME{CORREGIR}
+	    \begin{equation*}
+	     f(x) = max(0,x) 
+	    \end{equation*}
+
+	  \subsubsection {ReLU}
+	    La Unidad Rectificada Lineal (Rectified Linear Unit en la literatura en inglés) se ha vuelto muy popular en los últimos años. Toma el maximo entre el valor y cero, es decir
+	    simplemente le agrega un umbral igual a 0, su grafico se puede ver en la figura \ref{fig:relu}.
 	    \begin{equation}
 	     f(x) = max(0,x)
 	    \end{equation}
-
-	  \subsubsection {ReLU}
 	    \begin{figure}[H]
 	      \begin{center}
 	       \includegraphics[width=0.4\linewidth]{./img/relu.jpeg}
@@ -659,11 +662,7 @@
 	      \caption{Grafico de la funcion ReLU}
 	      \label{fig:relu}
 	    \end{figure}
-	    La Unidad Rectificada Lineal (Rectified Linear Unit en la literatura en inglés) se ha vuelto muy popular en los últimos años. Toma el maximo entre el valor y cero, es decir
-	    simplemente le agrega un umbral igual a 0.
-	    \begin{equation}
-	     f(x) = max(0,x)
-	    \end{equation}
+	    
 	    Las unidades lineales rectificadas son fáciles de optimizar porque son muy similares a las unidades lineales.
 	    La única diferencia entre una unidad lineal y una unidad lineal rectificada es que una unidad lineal rectificada da salida a cero a través de la mitad de su dominio.
 	    Esto hace que las derivadas a través de una unidad lineal rectificada permanezcan grandes siempre que la unidad esté activa.
@@ -679,56 +678,15 @@
 	    gradiente en ejemplos para los cuales su activación es cero. Una variedad de generalizaciones de unidades lineales rectificadas garantizan que reciben gradiente en
 	    todas partes. Existen generalizaciones sobre esta, que agregan un parámetro de regularización:
 	    \begin{itemize}
-	      \item Leaky ReLU: Agrega un parámetro de regularizacion $\alpha$, fijandolo en un valor pequeño como por ejemplo 0.01.
+	      \item Leaky ReLU: Agrega un parámetro de fuga $\alpha$, fijandolo en un valor pequeño como por ejemplo 0.01.
 		\begin{equation}
 		  f(x)=1(x<0)(\alpha x)+1(x>=0)(x)
 		\end{equation}
-	      \item ReLU Parametrica: Trata el parámetro de regularizacion como un parámetro aprendible. \FIXME{AGREGAR FORMULA}
+	      \item ReLU Parametrica: Trata el parámetro de fuga como un parámetro aprendible. \FIXME{AGREGAR FORMULA}
 	    \end{itemize}
 
-    \subsection {Arquitectura de las Redes Neuronales}
-      Organización por capas: Las redes neuronales se pueden modelar como un conjunto de neuronas conectadas en un grafo aciclico, que se suelen organizar por capas, las neuronas de una capa
-      se conectan con neuronas de sus capas adjacentes pero nunca se conectan 2 neuronas de una misma capa.
-      Toda red neuronal tiene una capa de entrada, una capa de salida y un número determinado de capas ocultas, que pueden ser de distintos tipos.
-      Una de las principales razones por la cual las redes neuronales estan organizadas en capas, es que este tipo de estructura permite evaluar una red, muy simple y eficientemente realizando
-      operaciones matriciales vectoriales, una red neuronal puede ser pensada como una serie de multiplicaciones de matrices entrelazadas con funciónes de activaciones no lineales.
-      Las redes neuronales utilizadas en la actualidad tienen alrededor de 100 millones de parámetros distribuidos entre 10-20 capas.
-      Al definir la arquitectura de la red, se forma lo que seria una función de puntuacion, una red neuronal realiza una combinacion lineal de funciónes no lineales.
-
-      \subsubsection {Arquitectura "Feed Forward"}
-	Son la estructura mas simple de redes neuronales. La caracteristica que define a esta categoria es que las conexiones siempre ocurren de capa inferior a capa superior,
-	desde la capa de entrada hasta la de salida, un ejemplo de esto es la figura \ref{fig:neural_network}.
-      \subsubsection {Arquitectura de Red Recurrente}
-	Las redes recurrentes son mucho mas poderosas que las Feed Forward. Si se las representa graficamente, cuentan con ciclos dirigidos. Por lo general, estas redes cuentan
-	con una dinamica muy compleja, lo que hace que el entrenamiento sea dificil, sin embargo, proveen una forma muy natural de modelar datos secuenciales. Sus aplicaciones practicas
-	principales se relacionan con problemas de Procesamiento de Lenguaje Natural.
-	\begin{figure}[H]
-	  \begin{center}
-	   \includegraphics[width=0.6\linewidth]{./img/rnn.png}
-	  \end{center}
-	  \caption{Red Neuronal Recurrente}
-	  \label{fig:rnn}
-	\end{figure}
-
-    \subsection {Entrenamiento}
-      Consiste de 2 pasos: Paso hacia adelante, y paso de retropropagación del error
-      \begin{enumerate}
-	\item En el paso hacia adelante se evalua la red y se obtiene el resultado de salida, el cual se mide el error, se calcula el gradiente para luego aplicar el paso de retroalimentacion
-	\item En el paso de retropropagación del error se ajustan los pesos internos de la red en base al resultado del gradiente, desde las capas finales de la red hasta las capas iniciales.
-      \end{enumerate}
-      Esto se realiza iterativamente una cantidad predefinida de veces.
-      \begin{figure}[H]
-	\begin{center}
-	 \includegraphics[width=\linewidth]{./img/backprop.png}
-	\end{center}
-	\caption{ Descripción de la retropropagación. (a) El entrenamiento es alimentado hacia delante, generando de salida correspondiente. (b) Error entre la salida real y la salida deseada
-	se calcula. (c) El error se propaga hacia atrás, a través de actualizaciones donde una proporción del gradiente ($ \frac{\partial E}{\partial w_i}$ ) es la resta de cada peso. $x_i$, $w_i$, $\phi$ son las entradas,
-	la entrada de pesos, y la función de activación de una neurona. Error $E$ se calcula a partir de la salida $y$ de salida deseado $t$. $\eta$ es la tasa de aprendizaje.
-	\cite{Automatic_differentiation_ML} }
-	\label{fig:backprop}
-      \end{figure}
-
       \subsection {Regularización: Marginación}
+	\FIXME{DESARROLLAR MAS, EXPLICAR COMO SE HACE, QUE EFECTO TIENE}
 	La marginación (Dropout en la literatura en ingles) es una técnica de regularización para reducir la saturación en redes neuronales preveniendo el sobreajuste.
 	El término "marginación" se refiere a dejar de lado algunas unidades (ocultas y visibles) en una red neuronal, a la hora de entrenar la red.
 	\begin{figure}[H]
@@ -741,7 +699,8 @@
 	\end{figure}
 
   \section {Aprendizaje Profundo}
-    La caída de los precios de hardware y el desarrollo de GPUs para uso personal en los últimos años han contribuido al desarrollo del concepto de aprendizaje profundo (Deep Learning en ingles)
+    La caída de los precios de hardware y el desarrollo de GPUs para uso personal en los últimos años y la gran disponibilidad de datos, han contribuido al desarrollo del 
+    concepto de aprendizaje profundo (Deep Learning en ingles)
     que consiste de redes neuronales artificiales, que poseen mas de una capa oculta (se considera capa oculta a toda capa que no sea la de entrada ni salida). Este enfoque trata de
     modelar la forma en que el cerebro humano procesa luz y sonido en visión y audición.
     Algunas aplicaciones exitosas del aprendizaje profundo son la visión por computadora y el reconocimiento del habla.
@@ -749,7 +708,6 @@
     \subsection {Motivación}
       Los algoritmos simples de aprendizaje automático funciónan muy bien en una amplia variedad de problemas importantes.
       Sin embargo, no han logrado resolver los problemas centrales de Inteligencia Artificial, como reconocer el habla o reconocer objetos.
-      El desarrollo del aprendizaje profundo fue motivado en parte por el fracaso de los algoritmos tradicionales para generalizar bien en tales tareas de Inteligencia Artificial.
       El desafío de generalizar a nuevos ejemplos se vuelve más difícil cuando se trabaja con datos de gran dimensión y los mecanismos utilizados para lograr la generalización
       en el aprendizaje  automático tradicional son insuficientes para aprender funciónes complicadas en espacios de alta dimensión.
       Tales espacios también suelen imponer altos costos computacionales. El aprendizaje profundo fue diseñado para superar estos y otros obstáculos.
@@ -765,7 +723,7 @@
       \end{center}
       \caption{A la izquierda: Red Neuronal regular de 3 capas. A la derecha: Una CNN ordena a sus neuronas en tres dimensiones (ancho, alto, profundidad), como se visualiza en una de
 	las capas. Cada capa de una CNN transforma un volumen 3D de entrada a un volumen 3D de salida. En este ejemplo, en la capa de entrada se encuentra la imagen, por lo que su ancho y su altura
-	serían las dimensiones de la imagen, y la profundidad sería 3 (los canales Rojo, Verde, Azul). \cite{Stanford}}
+	serían las dimensiones de la imagen, y la profundidad sería 3 (los canales Rojo, Verde, Azul). \cite{Karpathy:Stanford}}
       \label{fig:cnn}
     \end{figure}
 
@@ -796,7 +754,7 @@
 	    Cada neurona de la capa convolucional está conectada sólo a una región local en el volumen de entrada espacialmente, pero a la profundidad total (es decir, todos
 	    los canales de color). Notar que hay múltiples neuronas (5 en este ejemplo) a lo largo de la profundidad, todos mirando en la misma región en la entrada.
 	    A la derecha: Las neuronas de la Red Neuronal se mantienen sin cambios: Se calcula un producto punto de su peso con el de entrada seguido de una no-linealidad,
-	    pero su conectividad está ahora restringida a ser local en el espacio. \cite{Stanford}}
+	    pero su conectividad está ahora restringida a ser local en el espacio. \cite{Karpathy:Stanford}}
 	  \label{fig:conv_layer}
 	\end{figure}
 
@@ -816,7 +774,7 @@
 	  \caption{La capa agrupación reduce el volumen espacialmente, de forma independiente en cada una profundidad de la entrada de volumen.
 	    A la izquierda: En este ejemplo, el volumen de entrada de tamaño [224x224x64] es agrupado con un filtro de tamaño 2 y salto 2 en un volumen de salida de tamaño [112x112x64].
 	    Observe que la profundidad del volumen se conserva. A la Derecha: la forma más común de reducción de tamaño de la operación de máximo, dando lugar agrupación por maximo,
-	    que aquí se muestra, con un salto de 2. Es decir, cada operación se toma con 4 números (pequeño cuadrado de 2x2). \cite{Stanford}}
+	    que aquí se muestra, con un salto de 2. Es decir, cada operación se toma con 4 números (pequeño cuadrado de 2x2). \cite{Karpathy:Stanford}}
 	  \label{fig:maxpool_layer}
 	\end{figure}
 
@@ -903,15 +861,6 @@
 	  En este caso, tendríamos suficientes datos y confianza para afinar a través de toda la red.
 	\end{itemize}
 
-     \section {Otros conceptos relevantes}
-
-	\subsubsection{Matriz de Gramm}
-	  En el álgebra lineal, la matriz de Gram de un conjunto de vectores $v_{1}, .., v_{n} $ en un espacio de producto interno
-	  es la matriz hermitiana de Los productos internos, cuyas entradas están dadas por $G_{ij} = <v_{i}, v_{j}>$
-	  Una aplicación importante es calcular la independencia lineal: un conjunto de vectores es linealmente independiente si y sólo si el determinante de Gram
-	  (el determinante de la matriz de Gram) no es cero.
-	  \FIXME{REVISAR, AGREGAR RELACION CON CORRELACION}
-
 \chapter{Algoritmo de Transferencia de estilo}
 
     \section{Contexto}
@@ -987,7 +936,7 @@
       \end{equation}
       La función de Pérdida del Estilo total queda definida:
       \begin{equation}
-       L_{estilo}(\overrightarrow{a},\overrightarrow{x}) = \sum_{l=0}{L} w_l E_l
+       L_{estilo}(\overrightarrow{a},\overrightarrow{x}) = \sum_{l=0}^{L} w_l E_l
       \end{equation}
       donde $w_l$ son los factores de peso que tiene cada capa sobre el resultado final. Los gradientes de $E_l$ con respecto a las activaciones de las capas de la red puede ser fácilmente
       calculado utilizando la retropropagación.
@@ -1023,37 +972,8 @@
       Además, para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica, que permita definir si un resultado
       obtenido es mejor que otro, debido a que en lo que respecta a las obras de arte, las evaluaciones suelen ser cualitativas en lugar de cuantitativas. Por ello es que se debe
       buscar una forma de cuantificar estos aspectos cualitativos.
-\iffalse
-  \section{Algoritmo de Reconocimiento de estilo}
-    \FIXME{VER COMO ACOPLAR ESTO AL RESTO, UNIFICARLO A LA SECCION DEL MODULO DE EVALUACION? EL PAPER SIRVE COMO PUNTAPIE QUE JUSTIFICA EL FINETUNING PERO NO SE APLICA EL ALGORITMO DEL PAPER}
-    \subsection{Introducción}
-      Las imágenes pintadas por humanos suelen tener un significado y el estilo visual de la misma tiene un papel significativo en cómo se ve, por lo que comprender
-      el estilo es crucial para poder comprender el significado que la imagen intenta transmitir, sin embargo el estilo no ha recibido  mucha atención en el area de investigación de visión por computadoras.
-      Aunque es simple para los observadores humanos, el estilo visual es un concepto difícil de definir rigurosamente ya que involucra el contexto historico del arte en ese momento.
-      Encontramos que las características aprendidas en una CNN funciónan muy bien para esta tarea. Esto es sorprendente por varias razones: Las caracteristicas aprendidas
-      fueron entrenadas en categorias de clases de objetos (Imagenet), y muchos estilos parecieran ser principalmente definidos por las elecciones de colores, aunque
-      las caracteristicas de las CNN, superan comodamente a las caracteristicas de los histogramas de colores. Esto lleva a unas de las conclusiones de este trabajo:
-      Las caracteristicas de nivel medio para los conjuntos de datos de objetos son genericos para el reconocimiento de estilo, y las de nivel superior para las caracteristicas
-      mas manuales.
-      Se compararon los predictores obtenidos con observadores humanos y esencialmente se obtuvieron niveles de precision similares. \cite{Karayev:Style_Recognition}
-    \subsection{Algoritmo de Aprendizaje}
-      El algoritmo aprende a clasificar las imágenes nuevas según su estilo, utilizando las etiquetas provistas en el conjunto de entrenamiento.
-      Debido a que los conjuntos de datos que tratamos son bastante grandes y algunas de las características son de grandes dimensiónes, consideramos sólo clasificadores lineales,
-      dependiendo de características sofisticadas para proporcionar robustez. Utilizamos una implementación de fuente abierta de Descenso de Gradiente Estocástico con adaptación
-      del Subgradiente. El proceso de aprendizaje optimiza la función ...
-    \subsection{Caracteristicas de las imágenes}
-	Para clasificar estilos, debemos elegir características de imagen apropiadas. Nosotros hipotetizamos que el estilo de imagen puede estar relacionado con muchas características diferentes,
-	incluyendo estadísticas de bajo nivel, las opciones de color, la composición y el contenido. Por lo tanto, probamos características que incorporan estos diferentes elementos, incluyendo características de la
-	literatura de reconocimiento de objetos. Evaluamos el rendimiento de una sola función, así como la segunda etapa de fusión de múltiples características.
-	Las principales caracteristicas evaluadas fueron:
-	\begin{itemize}
-	 \item Histogramas de colores
-	 \item Descriptores GIST
-	 \item Caracteristicas extraidas de una CNN
-	\end{itemize}
-	Se encontro que las caracteristicas extraidas de una CNN son las que mejor precisión proveen a la hora de reconocer estilos.
-\fi
-  \section{Solución propuesta\label{sec:solucion}}
+
+  \section{Solución propuesta \label{sec:solucion}}
     En la solución propuesta en este trabajo se plantea poder definir automáticamente el número de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado.
     El resto de los hiperparámetros permanecen predefinidos a mano, excepto la imagen de la cual comenzar que influye notablemente en la cantidad de iteraciones que debe realizar el
     algoritmo para obtener un resultado aceptable.
@@ -1064,12 +984,9 @@
     \subsection{Módulo de evaluación de imágenes}
       %% Como se mencionó anteriormente, para lo que respecta a las obras de arte, la evaluación suele ser cualitativa. Por lo que para poder establecer una métrica de comparación cuantitativa
       %% que permita evaluar el resultado generado, la idea que planteamos es implementar un modulo que reconozca el estilo de una imagen.
-      Como se mencionó en Sec.~\ref{seccion_en_cap_anterior}, una de las
-      limiatciones del proceso de transferencia de estilo es que la evaluación de
-      la imagen resultante es de carácter cualitativo. A fin de establecer una
-      medida cuantitativa y así controlar el resultado de la generación de
-      manera más objetiva, se
-      propone ....
+      Como se mencionó en Sec.~\ref{sec:solucion}, una de las limitaciones del proceso de transferencia de estilo es que la evaluación de
+      la imagen resultante es de carácter cualitativo. A fin de establecer una medida cuantitativa y así controlar el resultado de la generación de
+      manera más objetiva, se propone ....
       \subsubsection{Reconocimiento de estilo}
 	A partir de esta idea se realizó una investigación de los posibles metodos para lograr esto. Decidimos basarnos en el algortimo presentado en \cite{Karayev:Style_Recognition}.
 	Este articulo plantea que los vectores de caracteristicas obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy utiles a la hora de
@@ -1085,23 +1002,7 @@
       que tiene asignada una mayor probabilidad de reconocimiento luego de 1000 iteraciones.
       Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo supera al puntaje del resto de los estilos y se toma el punto medio.
 
-    \subsection{Detalles de implementación}
-      \subsubsection{Conjunto de datos}
-	El conjunto de datos utilizado para en este trabajo es el de Wikipaintings, de disponibilidad publica.\url{https://www.wikiart.org/}. Para la implementación de la solución,
-	se utilizo un subconjunto, tomando los 10 estilos que mayor cantidad de obras de arte disponen. A continuacion se enumeran los estilos contemplados:
-	\begin{itemize}
-	 \item Art Noveau
-	 \item Impresionismo
-	 \item Surrealismo
-	 \item Barroco
-	 \item Simbolismo
-	 \item Post Impresionismo
-	 \item Neo Clasisimo
-	 \item Romanticismo
-	 \item Surrealismo
-	 \item Realismo
-	\end{itemize}
-        mostrar como un mosaico 5x2 de imágenes
+
 
       \subsubsection{Módulo de generación de imágenes}
 	Existen una gran variedad de implementaciónes de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
@@ -1124,8 +1025,23 @@ descripción del contenido del capítulo (muy importante)
 
 \section{Módulo de reconocimiento}
 
-\subsection{Dataset}
-describir proceso de recolección de datos
+\subsection{Conjunto de datos}
+	El conjunto de datos utilizado para en este trabajo es el de Wikipaintings, de disponibilidad publica.\url{https://www.wikiart.org/}. Para la implementación de la solución,
+	se utilizo un subconjunto, tomando los 10 estilos que mayor cantidad de obras de arte disponen. A continuacion se enumeran los estilos contemplados:
+	\begin{itemize}
+	 \item Art Noveau
+	 \item Impresionismo
+	 \item Surrealismo
+	 \item Barroco
+	 \item Simbolismo
+	 \item Post Impresionismo
+	 \item Neo Clasisimo
+	 \item Romanticismo
+	 \item Surrealismo
+	 \item Realismo
+	\end{itemize}
+        mostrar como un mosaico 5x2 de imágenes
+\FIXME{describir proceso de recolección de datos}
 \subsection{Detalles de implementación}
 arquitectura de red + detalles de entrenamiento (fine-tunning / splits)
 \subsection{Resultados de clasificación}
