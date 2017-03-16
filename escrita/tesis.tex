@@ -6,7 +6,10 @@
 \usepackage[procnames]{listings}
 \usepackage{color}
 \usepackage{graphicx} % graficos
+\usepackage{subfig}
+\usepackage{tabularx}
 \usepackage{subcaption}
+\captionsetup{compatibility=false}
 \usepackage[export]{adjustbox}
 \usepackage[spanish]{babel}
 \usepackage{mathtools}
@@ -168,23 +171,13 @@
     \FIXME{ACOMODAR IMAGENES Y COMPLETAR PIE DE FOTO}
     \begin{figure}[h]
 
-      \begin{subfigure}{0.7\textwidth}
-	\includegraphics[width=0.9\linewidth, height=5cm]{./img/jhonson_style_candy.jpg}
-	\caption{Imagen de Estilo}
-	\label{fig:candy}
-      \end{subfigure}
+      \subfloat[Imagen de Estilo]{\includegraphics[width=0.9\linewidth, height=5cm]{./img/jhonson_style_candy.jpg}\label{fig:candy}}
 
-      \begin{subfigure}{0.7\textwidth}
-	\includegraphics[width=0.9\linewidth, height=5cm]{./img/jhonson_content_tower.jpg}
-	\caption{Imagen de Contenido}
-	\label{fig:tower}
-      \end{subfigure}
+      \subfloat[Imagen de Contenido]{\includegraphics[width=0.9\linewidth, height=5cm]{./img/jhonson_content_tower.jpg}\label{fig:tower}}
 
-      \begin{subfigure}{0.7\textwidth}
-	\includegraphics[width=0.9\linewidth, height=5cm]{./img/jhonson_result_tower_candy.jpg}
-	\caption{Resultado obtenido transfiriendo el estilo de la obra de arte a la imagen de contenido}
-	\label{fig:candy_tower}
-      \end{subfigure}
+      \subfloat[Resultado obtenido transfiriendo el estilo de la obra de arte a la imagen de contenido]
+      {\includegraphics[width=0.9\linewidth, height=5cm]{./img/jhonson_result_tower_candy.jpg}\label{fig:candy_tower}}
+
     \caption{En la figura se puede observar un ejemplo de como funcióna la transferencia de estilo}
     \label{fig:style_transfer_candy_tower}
     \end{figure}
@@ -1025,34 +1018,84 @@ descripción del contenido del capítulo (muy importante)
 
 \section{Módulo de reconocimiento}
 
-\subsection{Conjunto de datos}
-	El conjunto de datos utilizado para en este trabajo es el de Wikipaintings, de disponibilidad publica.\url{https://www.wikiart.org/}. Para la implementación de la solución,
-	se utilizo un subconjunto, tomando los 10 estilos que mayor cantidad de obras de arte disponen. A continuacion se enumeran los estilos contemplados:
-	\begin{itemize}
-	 \item Art Noveau
-	 \item Impresionismo
-	 \item Surrealismo
-	 \item Barroco
-	 \item Simbolismo
-	 \item Post Impresionismo
-	 \item Neo Clasisimo
-	 \item Romanticismo
-	 \item Surrealismo
-	 \item Realismo
-	\end{itemize}
-        mostrar como un mosaico 5x2 de imágenes
-\FIXME{describir proceso de recolección de datos}
-\subsection{Detalles de implementación}
-arquitectura de red + detalles de entrenamiento (fine-tunning / splits)
+  \subsection{Conjunto de datos}
+    El conjunto de datos utilizado para en este trabajo es el de WikiArt.\url{https://www.wikiart.org/}.  
+    Este conjunto de datos proviene de un proyecto de disponibilidad publica que tiene como objetivo principal hacer accesible el mundo del arte a cualquier persona y en cualquier lugar. 
+    WikiArt cuenta con una 150.000 obras de arte, de 2.500 artistas. Estas obras se encuentran en museos, universidades y otros edificios civiles de más de 70 países. Aunque la mayoría de estas obras de arte no está en la vista pública. 
+    Para la implementación de la solución, se utilizo un subconjunto, tomando los 10 estilos que mayor cantidad de obras de arte disponen. A continuacion se enumeran los estilos contemplados:
+    \begin{enumerate}
+      \item Impresionismo  (14433 obras de arte disponibles)
+      \item Realismo (13595 obras de arte disponibles)
+      \item Romanticismo (10563 obras de arte disponibles)
+      \item Expresionismo (9747 obras de arte disponibles)
+      \item Post Impresionismo (7226 obras de arte disponibles)
+      \item Surrealismo (6636 obras de arte disponibles)
+      \item Modernismo (5969 obras de arte disponibles)
+      \item Barroco (5156 obras de arte disponibles)
+      \item Simbolismo (4689 obras de arte disponibles)
+      \item Neo Clasisimo (3306 obras de arte disponibles)
+    \end{enumerate}
+      A modo de ejemplo, en la figura \ref{mosaico_estilos} se muestra una imagen correspondiente a cada uno de los estilos elegidos. 
+	\FIXME{REVISAR MOSAICO}
+	\begin{figure}
+	  \def\tabularxcolumn#1{m{#1}}
+	  \begin{tabularx}{\textwidth}{@{}cXX@{}}
+	  %
+	  \begin{tabular}{cc}
+	    \subfloat[Modernismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/frida_kahlo.jpg}} 
+	    & \subfloat[Impresionismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/cezanne.jpg}}\\    
+	    \subfloat[Surrealismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/jhonson_style_candy.jpg}} 
+	    & \subfloat[Post Impresionismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/starry_night.jpg}}\\    
+	    \subfloat[Simbolismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/nicholas-roerich_chiktan-citadel-in-himalayas.jpg}} 
+	    & \subfloat[Neo Clasisimo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/pierre-narcisse-guerin_not-detected.jpg}}\\    
+	    \subfloat[Romanticismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/shipwreck.jpg}} 
+	    & \subfloat[Barroco]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/rembrandt_bathsheba-bathing.jpg}}\\
+	    \subfloat[Realismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/vincent-van-gogh_cart-with-red-and-white-ox.jpg}} 
+	    & \subfloat[Expresionismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/picasso_selfport.jpg}}\\ 
+	  \end{tabular}
+
+	  \end{tabularx}
+
+	  \caption{Many figures}\label{mosaico_estilos}
+	\end{figure}
+
+      \subsubsection{Recoleccion de datos}
+	El proceso de recolección de datos consistio en distintas etapas:
+	\begin{enumerate}
+	 \item Definir los 10 principales estilos de los que se dispongan mayor cantidad de obras.
+	 \item Descargar cada una de las obras de arte de todos los estilos seleccionados
+	 \item Verificar que la descarga haya sido exitosa y el archivo obtenido este en condiciones
+	 \item Ordenar los archivos segun el estilo al que pertenecen.
+	\end{enumerate}
+
+    \subsection{Detalles de implementación}
+      Para realizar el ajuste fino, sobre este conjunto de datos generado, se utilizo la arquitectura de la red AlexNet, reemplazando la ultima capa por una capa que 
+      aprenda a reconocer entre los posibles estilos. Los valores con los que se inicializo la red, eran los valores obtenidos al entrenar AlexNet para el reconocimiento de objetos de ImageNet.
+      Para reentrenar la red ajustando los valores para el reconocimiento de estilo, se le proveyo el conjunto de datos generado, y al cabo de 50000 iteraciones la red obtuvo un 92 \% de precisión
+      en el conjunto de entrenamiento al reconocer estilos.
+      Para realizar el ajuste fino se utilizó la librería Caffe en Python, y para el reentrenamiento fue requerido el uso de una GPU GTX 680. 
+    arquitectura de red + detalles de entrenamiento (fine-tunning / splits)
 \subsection{Resultados de clasificación}
 ¿?
 
 \section{Elección del número de iteraciones empleando el módulo de
   reconocimiento}
-\subsection{Dataset}
+\subsection{Conjunto de datos}
+  Para ejecutar el procedimiento, es necesario disponer de 2 conjuntos de imagenes, uno correspondiente a las imagenes de contenido y otro correspondiente a las imagenes de estilo.
+  Para el conjunto de imagenes de contenido fueron elegidas 5 imagenes, de las cuales 2 son retratos de personas y las 3 restantes son fotografias de paisajes.
+  Con respecto al conjunto de imagenes de estilo, para cada uno de los estilos fueron elegidas 3 imagenes aleatoriamente.
 \subsection{Detalles de implementación}
+  El proceso consistio en aplicar el algoritmo de transferencia de estilo combinando cada una de las fotos del conjunto de contenido con cada una de las fotos del conjunto de estilo,
+  y guardando el resultado cada 10 iteraciones, hasta llegar a las 1000 iteraciones para cada uno de los procesos particulares.
+  Ademas para cada combinacion de imagen de estilo e imagen de contenido el algoritmo se ejecuto 2 veces, una comenzando desde la imagen de contenido y otra comenzando desde una imagen de ruido.
+  Finalmente todo el conjunto de imagenes obtenido es evaluado por el modulo de reconocimiento de estilo, que otorga un puntaje de la imagen para cada uno de los estilos.
 \subsection{Número de iteraciones vs. score de clasificación}
-
+  A partir de los puntajes obtenidos por las imagenes generadas cada 10 iteraciones, se realiza un analisis para poder elegir la imagen ideal, en relacion a numero de iteraciones y puntaje
+  de clasificacion obtenido.
+  Inicialmente se suponia que el estilo de la imagen resultante se iba a corresponder con el estilo de la imagen de contenido en todos los casos, pero luego de analizar varios casos, pudimos concluir que 
+  esta hipotesis es falsa, ya que la imagen de contenido tambien influye aunque en mucho menor proporcion para la clasificacion de estilo. Lo que avala la idea que presenta Gatys de que 
+  el estilo y el contenido de una imagen no son absolutamente separables.
+  A continuacion se muestran algunos graficos generados para el analisis de la relacion entre el numero de iteraciones vs. el puntaje de clasificacion.
 presentar y discutir experimentos y resultados
 
 concluir con un criterio de parada (RESALTARLO)
