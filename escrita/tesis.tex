@@ -376,7 +376,7 @@
 	    L = \frac{1}{N}\sum_{i=1}^{N} L_i(y_i, f(x_i, W, b)) + \lambda \Omega(W)
           \end{equation}
           Con $L:\mathcal{Y}\times \mathcal{Y}\rightarrow\mathbb{R}_+$, donde $\mathcal{Y}$ en el caso de la clasificación de la Sec.~\ref{sec:prediccion} seria ${1,..,K}$. 
-          Esta ecuacion contiene 2 partes: Una función de pérdida $L_i(y_i, f(x_i, W, b))$
+          Esta ecuacion contiene 2 terminos: Una función de pérdida $L_i(y_i, f(x_i, W, b))$
           y un coeficiente de regularización $\lambda \Omega(W)$ que penaliza a los modelos complejos, $\lambda$ es un hiperparámetro que define cuanto influye la regularización 
           sobre el resultado final y $N$ es la cantidad de datos de entrenamiento.
 	  Una función de pérdida es una función real, no negativa $L_i({\widehat y}, y)$, que mide cuán diferente es la predicción ${\widehat y}$ obtenida, con respecto a la
@@ -826,10 +826,17 @@
 	Esta arquitectura también solo tiene una capa completamente conectada en el extremo final de la red. ResNets actualmente son, por lejos, el estado del arte de las
 	Redes Neuronales Convolucionales \cite{Kaiming:ResNet} .
 
-    \section {Reentrenamiento}
+    \section {Ajuste fino}
       %STANFORD
-      El reentranmiento (Finetuning en inglés) toma un modelo ya entrenado, adapta la arquitectura y retoma el entrenamiento partiendo desde los pesos del modelo ya entrenado.
-
+      El ajuste fino (Finetuning en inglés), es una tecnica que toma un modelo ya entrenado, con sus respectivos pesos,  y consiste en adaptar la arquitectura
+      del modelo inicial, para el problema al cual se quiere emplear, brindando un conjunto de datos de entrenamiento con el cual se entrena la red adaptada,
+      pero la inicializacion de los pesos coincide con los pesos obtenidos del modelo preentrenado.
+      Por ejemplo una red fue entrenada para reconocer distintas razas de perros en imagenes, y ahora se desea clasificar gatos segun su raza. En lugar de entrenar una
+      red desde un estado aleatorio inicial, se puede utilizar la red preentrenada para perros, reemplazando la ultima capa completamente conectada por otra que 
+      tenga la cantidad de salidas igual a la cantidad de razas de gato que se desean reconocer.
+      Para el entrenamiento de esta red adaptada se le da como entrada un conjunto de imagenes, de gatos de las distintas razas, de esta forma los  pesos se van
+      ajustando para lograr reconocer este nuevo tipo de conceptos en las imagenes.
+      \FIXME{DESARROLLAR MEJOR EL EJEMPLO}
       \paragraph{Modelos preentrenados}
 	Debido a que una red neuronal convolucional moderna requiere entre 2 y 3 semanas para entrenarse, utilizando multiples GPUs para el conjunto de datos ImageNet \cite{imagenet_cvpr09},
 	es comun ver que gente publica sus Redes ya entrenadas para el beneficio de otras personas que lo pueden usar para hacer reentrandas, lo que requiere un tiempo mucho menor.
@@ -877,29 +884,34 @@
       Aquí presentamos un sistema artificial basado en una Red Neural Profunda que crea imágenes artísticas de alta calidad perceptiva. El sistema utiliza representaciones neuronales
       para separar y recombinar el contenido y el estilo de imágenes arbitrarias, proporcionando un algoritmo para la creación de imágenes artísticas.
 
-    \section{Sintesis}
+    \section{Sintesis \label{sec:sintesis}}
       Cuando las Redes Neuronales Convolucionales (CNNs) son entrenadas para reconocimiento de objetos, desarrollan una representacion de la imagen que hace que la información
-      del objeto sea cada vez más explícita a lo largo de la jerarquia de las capas de la red.Por lo tanto, a lo largo de la jerarquía de procesamiento de la red,
-      la imagen de entrada se transforma en representaciones que cada vez más se preocupan por el contenido real de la imagen en lugar del valor de sus píxeles detallados.
+      del objeto sea cada vez más explícita a lo largo de la jerarquia de las capas de la red. Por lo tanto, a lo largo de las distintas capas de la red,
+      la imagen de entrada se transforma en representaciones que cada vez más se preocupan por el contenido real de la imagen en lugar del valor de sus píxeles.
       Podemos visualizar directamente la información que cada capa contiene sobre la imagen de entrada, reconstruyendo la imagen solo a partir de los mapas de caracteristicas
       de esa capa. Las capas más altas de la red capturan el contenido de alto nivel en términos de objetos y su ordenamiento en la imagen pero no se limitan a los valores de cada
       pixel. En  cambio, las reconstrucciones de las capas inferiores simplemente pretenden reproducir los valores exactos de píxeles de la imagen original y algunas formas
       basicas como lineas o curvas. Por lo tanto, tomaremos a los mapas de características en las capas superiores de la red como el contenido representado.
       Para obtener la representacion del estilo de la imagen de entrada, se usa un espacio de caracteristicas originalmente diseñado para capturar información de texturas.
-      Este espacio de caracteristicas esta construido sobre las respuestas de los filtros de cada capa de la red. Consiste en la correlación entre diferentes respuestas de los filtros.
+      Este espacio de caracteristicas esta construido sobre las respuestas de los filtros de cada capa de la red. Consiste en la correlación entre las diferentes respuestas de los filtros.
       Incluyendo las correlaciones de multiples capas, se obtiene una representacion que captura información de la textura pero no del ordenamiento global de la imagen.
       Al reconstruir las imágenes a partir de las representaciones obtenidas, se puede observar que producen una version texturizada de la imagen que captura su
       apariencia general en terminos de colores y estructuras localizadas, a estas representaciones las llamaremos representaciones de estilo.
       El principal descubrimiento de este articulo es que la representacion del estilo y el contenido de una imagen pueden ser separables con una Red Neuronal Convolucional entrenada
       para el reconocimiento de objetos. De esta forma, al manipularse independientemente se pueden generar una nueva imagen desde 2 imágenes de entradas distintas, simultaneamente se corresponda con la representacion
       del contenido de una imagen y la respresentacion del estilo de la otra.\\
+      Por otro lado el algoritmo presentado, requiere la definición de algunos hiperparametros, que afectan en gran medida al resultado generado. 
+      Al ser un problema de optimización, el numero de iteraciones en que se aplica el descenso por el gradiente determina cuanto se minimiza la funcion de perdida
+      y por lo tanto que tanto se acerca la imagen generada al estilo de la imagen de estilo y el contenido a la imagen de contenido.
+      Otro hiperparametro que requiere el algoritmo es definir cuales seran las capas de la red utilizadas para calcular el estilo y cual sera la capa elegida 
+      para calcular el contenido.
       	  \begin{figure}[h]
 	    \includegraphics[width=\linewidth]{./img/gatys_1.png}
 	    \caption{COMPLETAR}
 	    \label{fig:gatys_1}
 	  \end{figure}
 
-    \section{Métodos}
+    \section{Métodos \label{sec:metodos}}
       Los resultados exhibidos fueron obtenidos utilizando la red VGG-19, de disponibilidad publica.
       Generalmente, cada capa de la red define un banco de filtros no lineal cuya complejidad aumenta con la posición de la capa en la red.
       Para visualizar la información de la imagen codificada en diferentes capas de la jerarquía se realiza descenso gradiente en una imagen de ruido blanco
@@ -950,21 +962,16 @@
 
 \chapter{Elección Automatica de hiperparámetros para Transferencia de estilo}
   \section{Descripción del problema}
-    Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes, sin embargo es necesario definir una serie de hiperparámetros,
-    que necesita el algoritmo para poder ejecutarse. El criterio de elección de estos hiperparámetros termina siendo muy influyente en el resultado final.
-    Los principales hiperparámetros a definir son:
-    \begin{itemize}
-      \item Número de iteraciones que se ejecutará el optimizador.
-      \item Modelo de Red Neuronal Convolucional preentrenada que se utilizará (existen una variedad de CNN presentadas anteriormente) junto con las capas que se utilizarán de la
-      respectiva red tanto para calcular el estilo como el contenido.
-      \item Imagen desde la cual comenzar la optimización, es posible comenzar desde una imagen de ruido, desde la imagen de contenido.
-      \item Método de optimización a utilizar.
-    \end{itemize}
-
-    \subsection{Evaluación}
-      Además, para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica, que permita definir si un resultado
-      obtenido es mejor que otro, debido a que en lo que respecta a las obras de arte, las evaluaciones suelen ser cualitativas en lugar de cuantitativas. Por ello es que se debe
-      buscar una forma de cuantificar estos aspectos cualitativos.
+    Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes, sin embargo, como se menciona en la seccion \ref{sec:sintesis} 
+    es necesario definir el numero de iteraciones como un hiperparámetro, que necesita el algoritmo para poder ejecutarse. 
+    El criterio de elección de este hiperparámetro termina siendo muy influyente en el resultado final.
+    Con respecto a las capas elegidas para calcular el estilo y el contenido, estas fueron predefinidas en todos los casos analizados, de la misma forma, 
+    para concentrarse unicamente en la elección del numero de iteraciones.
+    
+    \subsection{Evaluación \label{sec:evaluacion}}
+      Para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica, que permita definir si un resultado
+      obtenido es mejor que otro, debido a que en lo que respecta a las obras de arte, las evaluaciones suelen ser cualitativas en lugar de cuantitativas. 
+      Por ello es que se debe buscar una forma de cuantificar estos aspectos cualitativos.
 
   \section{Solución propuesta \label{sec:solucion}}
     En la solución propuesta en este trabajo se plantea poder definir automáticamente el número de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado.
@@ -973,43 +980,33 @@
     La solución consta de 2 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo) y otro módulo encargado de
     evaluar.
     \subsection{Módulo de generación de imágenes}
-      En este modulo se implementa el algoritmo propuesto por Gatys, para la transferencia
+      En este modulo se implementa el algoritmo propuesto por Gatys, para la transferencia de estilo, requiere como entrada una imagen de estilo, 
+      una imagen de contenido y como hiperparametro el numero de iteraciones que se ejecutara el optimizador para generar el resultado final.
     \subsection{Módulo de evaluación de imágenes}
       %% Como se mencionó anteriormente, para lo que respecta a las obras de arte, la evaluación suele ser cualitativa. Por lo que para poder establecer una métrica de comparación cuantitativa
       %% que permita evaluar el resultado generado, la idea que planteamos es implementar un modulo que reconozca el estilo de una imagen.
-      Como se mencionó en Sec.~\ref{sec:solucion}, una de las limitaciones del proceso de transferencia de estilo es que la evaluación de
+      Como se mencionó en Sec.~\ref{sec:evaluacion}, una de las limitaciones del proceso de transferencia de estilo es que la evaluación de
       la imagen resultante es de carácter cualitativo. A fin de establecer una medida cuantitativa y así controlar el resultado de la generación de
-      manera más objetiva, se propone ....
+      manera más objetiva, se propone definir un clasificador, que se encargue de reconocer el estilo de una imagen, brindando un puntaje de clasificacion para cada estilo.
+      De esta forma la imagen se evalua cuantitativamente segun el puntaje obtenido en el estilo objetivo. 
       \subsubsection{Reconocimiento de estilo}
-	A partir de esta idea se realizó una investigación de los posibles metodos para lograr esto. Decidimos basarnos en el algortimo presentado en \cite{Karayev:Style_Recognition}.
+	A partir de la idea de definir un clasificador de estilos, se realizó una investigación de los posibles metodos para lograr esto. Se decidio basarse en el algortimo presentado en \cite{Karayev:Style_Recognition}.
 	Este articulo plantea que los vectores de caracteristicas obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy utiles a la hora de
 	reconocer estilos, aunque muchos estilos parecieran ser principalmente definidos por las elecciones de colores, los vectores de caracteristicas de las CNN, proveen mucha mas información
 	que los vectores obtenidos a partir de histogramas de colores por ejemplo.
-	Basado en esta idea, decidimos implementar una version simplificada que consiste en reentrenar una Red Neuronal Convolucional preentrenda para el reconocimiento de objetos.
-
+	Basado en esta idea, decidimos implementar una version simplificada que consiste en realizar ajuste fino sobre una Red Neuronal Convolucional preentrenda para el reconocimiento de objetos.
 	De esta forma se van realizando evaluaciones del resultado obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
+	A partir del puntaje de clasificacion obtenido, segun el criterio de seleccion se define si el modulo generador debe seguir ejecutandose o el resultado generado
+	ya obtuvo un puntaje aceptable en el estilo objetivo.
 
     \subsection{Criterio de Selección}
-      El criterio de selección para elegir la imagen óptima fue el siguiente:
+      El criterio de selección que se definio para elegir la imagen óptima fue el siguiente:
       Dado que el estilo de la imagen resultante no siempre termina siendo el mismo estilo de la imagen provista para transferir el estilo, el estilo objetivo se definió como el estilo
       que tiene asignada una mayor probabilidad de reconocimiento luego de 1000 iteraciones.
-      Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo supera al puntaje del resto de los estilos y se toma el punto medio.
-
-
-
-      \subsubsection{Módulo de generación de imágenes}
-	Existen una gran variedad de implementaciónes de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
-	La que se decidió utilizar fue la de Justin Jhonson \cite{Johnson:Neural_Style}, la cual posee el mayor grado de aceptación en la industria.
-	La principal tecnología utilizada en esta implementación es el Framework Torch, que utiliza como lenguaje de programación a Lua.
-	La red elegida para ejecutar este modulo fue la Network in Network (NIN) \cite{NIN}, debido a que tiene una performance similar a AlexNet, pero requiere de mucha menor cantidad
-	de memoria.
-	Algunas diferencias entre la implementacion y el algoritmo orginial consisten en definir si comenzar la optimizacion desde ruido blanco o desde la imagen de contenido.
-      \subsubsection{Módulo de evaluación de imágenes}
-	Se realizó reentranmiento sobre AlexNet, con el un subconjunto del conjunto de datos de Wikipaintings, para que la red reentrenada aprenda a reconocer
-	el estilo de una obra de arte para los 10 estilos que mas datos provee, obteniendo una precisión del 92\%.
-	La implementación del módulo de evaluación fue realizada principalmente en Python, utilizando el Framework Caffe y la libreria OpenCV.
-      \subsection{Criterio de Selección}
-	Implementado en Python
+      Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo supera al puntaje del resto de los estilos.
+      La imagen optima elegida es la correspondiente al numero de iteraciones medio del intervalo donde el estilo objetivo es el maximo. En caso de que haya mas de un
+      de un intervalo que cumpla con este requisito, se devuelve una imagen optima de cada intervalo como posibles imagenes optimas para que el usuario elija cual es
+      la optima segun su criterio cualitativo.
 
 
 \chapter{Experimentos}
@@ -1073,7 +1070,8 @@ descripción del contenido del capítulo (muy importante)
       aprenda a reconocer entre los posibles estilos. Los valores con los que se inicializo la red, eran los valores obtenidos al entrenar AlexNet para el reconocimiento de objetos de ImageNet.
       Para reentrenar la red ajustando los valores para el reconocimiento de estilo, se le proveyo el conjunto de datos generado, y al cabo de 50000 iteraciones la red obtuvo un 92 \% de precisión
       en el conjunto de entrenamiento al reconocer estilos.
-      Para realizar el ajuste fino se utilizó la librería Caffe en Python, y para el reentrenamiento fue requerido el uso de una GPU GTX 680. 
+      Para realizar el ajuste fino se utilizó las librerías Caffe y OpenCV en Python, y para el reentrenamiento fue requerido el uso de una GPU GTX 680. 
+ 
     arquitectura de red + detalles de entrenamiento (fine-tunning / splits)
 \subsection{Resultados de clasificación}
 ¿?
@@ -1089,6 +1087,22 @@ descripción del contenido del capítulo (muy importante)
   y guardando el resultado cada 10 iteraciones, hasta llegar a las 1000 iteraciones para cada uno de los procesos particulares.
   Ademas para cada combinacion de imagen de estilo e imagen de contenido el algoritmo se ejecuto 2 veces, una comenzando desde la imagen de contenido y otra comenzando desde una imagen de ruido.
   Finalmente todo el conjunto de imagenes obtenido es evaluado por el modulo de reconocimiento de estilo, que otorga un puntaje de la imagen para cada uno de los estilos.
+  \subsubsection{Algoritmo de Transferencia de estilo}
+    Existen una gran variedad de implementaciónes de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
+    La que se decidió utilizar fue la de Justin Jhonson \cite{Johnson:Neural_Style}, la cual posee el mayor grado de aceptación en la industria.
+    La principal tecnología utilizada en esta implementación es el Framework Torch, que utiliza como lenguaje de programación a Lua.
+    La implementacion  utilizada, permite controlar algunas otras variables mediante hiperparametros extras a lo requerido por el algoritmo originalmente:
+    Los principales hiperparámetros adicionales a los requeridos por el algoritmo son:
+    \begin{itemize}
+      \item Modelo de Red Neuronal Convolucional preentrenada que se utilizará (existen una variedad de CNN presentadas anteriormente) junto con las capas que se utilizarán de la
+      respectiva red tanto para calcular el estilo como el contenido.
+      \item Imagen desde la cual comenzar la optimización, es posible comenzar desde una imagen de ruido, desde la imagen de contenido.
+      \item Método de optimización a utilizar.
+      \item Tamaño de la imagen generada
+      \item Peso de funciones de perdida de estilo y contenido en la funcion de perdida total \FIXME{esto lo requiere el algoritmo}
+      \item Tasa de aprendizaje para el optimizador
+    \end{itemize}
+
 \subsection{Número de iteraciones vs. score de clasificación}
   A partir de los puntajes obtenidos por las imagenes generadas cada 10 iteraciones, se realiza un analisis para poder elegir la imagen ideal, en relacion a numero de iteraciones y puntaje
   de clasificacion obtenido.
@@ -1096,7 +1110,8 @@ descripción del contenido del capítulo (muy importante)
   esta hipotesis es falsa, ya que la imagen de contenido tambien influye aunque en mucho menor proporcion para la clasificacion de estilo. Lo que avala la idea que presenta Gatys de que 
   el estilo y el contenido de una imagen no son absolutamente separables.
   A continuacion se muestran algunos graficos generados para el analisis de la relacion entre el numero de iteraciones vs. el puntaje de clasificacion.
-presentar y discutir experimentos y resultados
+presentar y discutir experimentos y resultados.
+\FIXME{Agregar graficos}
 
 concluir con un criterio de parada (RESALTARLO)
 
