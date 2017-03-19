@@ -374,15 +374,18 @@
 	    L = \frac{1}{N}\sum_{i=1}^{N} L_i(y_i, f(x_i, W, b)) + \lambda \Omega(W)
           \end{equation}
           Con $L:\mathcal{Y}\times \mathcal{Y}\rightarrow\mathbb{R}_+$, donde $\mathcal{Y}$ en el caso de la clasificación de la Sec.~\ref{sec:prediccion} seria ${1,..,K}$. 
-          Esta ecuacion contiene 2 terminos: Una función de pérdida $L_i(y_i, f(x_i, W, b))$
+          Esta ecuacion contiene 2 terminos: Un termino relacionado a las funciones de pérdida de cada imagen $L_i(y_i, f(x_i, W, b))$
           y un coeficiente de regularización $\lambda \Omega(W)$ que penaliza a los modelos complejos, $\lambda$ es un hiperparámetro que define cuanto influye la regularización 
           sobre el resultado final y $N$ es la cantidad de datos de entrenamiento.
-	  Una función de pérdida es una función real, no negativa $L_i({\widehat y}, y)$, que mide cuán diferente es la predicción ${\widehat y}$ obtenida, con respecto a la
+	  Una función de pérdida es una función real, no negativa $L({\widehat y}, y)$, que mide cuán diferente es la predicción ${\widehat y}$ obtenida, con respecto a la
 	  salida esperada $y$. Existen diversas funciónes de pérdida que se utilizan en distintos contextos. A continuación se presentan algunas que se aplican usualmente:
 	  \begin{itemize}
 	    \item Función de Pérdida 0-1:
 	      \begin{equation*}
-		L({\widehat y}, y) =  1 si {\widehat y} = y 0 en caso contrario.
+		L({\widehat y}, y) =  \begin{cases} 
+					    1 \text{si ${\widehat y} = y$}
+					    0 \text{en caso contrario.}
+		                      \end{cases}
 	      \end{equation*}
 	    \item Función de Pérdida Hinge:
 	      \begin{equation*}
@@ -432,7 +435,7 @@
       Un problema recurrente en el aprendizaje automático es que para una buena generalización, son necesarios grandes conjuntos de entrenamiento,
       pero grandes conjuntos de entrenamiento también son más costosos desde el punto de vista computacional.
       En aplicaciones de gran escala, el conjunto de entrenamiento puede ser del orden de los millones de ejemplos, por lo que computar la función de
-      pérdida completa sobre todo el conjunto para actualizar un solo parámetro seria algo impracticable.
+      pérdida completa sobre todo el conjunto para actualizar un solo parámetro seria algo impracticable.\\
       Un enfoque común que se aplica a este problema es computar el gradiente sobre pequeños lotes del conjunto de entrenamiento,
       que permite lograr una buena aproximación al objetivo completo con una convergencia mucho mas rapida, es decir se reduce $N$ a un pequeño subconjunto, de esta forma se
       reduce el numero de calculos realizados en cada iteración. Este metodo se lo conoce como \emph{Descenso por el gradiente estocástico} y es el mas utilizado para optimizar 
@@ -547,7 +550,7 @@
 	Las redes neuronales utilizadas en la actualidad tienen alrededor de 100 millones de parámetros distribuidos entre 10-20 capas.
 	\begin{figure}[H]
 	  \begin{center}
-	    \includegraphics[scale=0.5]{./img/stanford_neural_net.jpeg}
+	    \includegraphics[scale=0.5]{./img/bishop_neural_network.jpg}
 	  \end{center}
 	  \caption{Red Neuronal Artificial}
 	  \label{fig:neural_network}
@@ -566,6 +569,7 @@
 	  El ciclo consta de 2 fases, propagación y luego actualizacion de parámetros. Cuando ingresan los parámetro a la función se calcula el resultado final, y se lo compara con el resultado
 	  deseado, aplicando la función de pérdida se calcula el error, mediante el metodo de optimizacion se define el gradiente para luego realizar la retropropagación en la función hasta
 	  actualizar los parámetros.
+	  \FIXME{VER EN BISHOP pag 260}
 	\subsubsection {Entrenamiento}
 	  El entrenamiento de una red neuronal consiste de 2 pasos: paso hacia adelante, y paso de retropropagación del error
 	  \begin{enumerate}
@@ -708,6 +712,12 @@
     que el conjunto de entrada son imágenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura.
     Estan inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes, suelen tener un gran numero de capas ocultas, por lo que
     son consideras parte del Aprendizaje Profundo.
+    Con lo que respecta a las imagenes, muchos de los enfoques modernos en Visión por Computadoras explotan la propiedad de que píxeles cercanos están más correlacionados entre ellos que a los pixeles mas 
+    distantes, mediante la extracción de características locales que dependen sólo pequeñas subregiones de la imagen. La información de tales características pueden entonces ser combinados 
+    en etapas posteriores de procesamiento con el fin de detectar de caracteristicas de alto nivel hasta finalmente proveer información de la imagen completa. Ademas, las caracteristicas
+    locales que son utiles en una region de la imagen, probablemente sean utiles en otras regiones de la imagen. \FIXME{BISHOP 285 }
+    \subsection{Funcion de Convolucion}
+      \FIXME{Definir funcion de convolucion}
     \begin{figure}[H]
       \begin{center}
        \includegraphics[width=0.8\linewidth]{./img/stanford_cnn.jpeg}
@@ -719,7 +729,7 @@
     \end{figure}
 
     \subsection {Arquitectura de una red neuronal convolucional}
-      En las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad.
+      En las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad, como se ilustra en la figura \ref{fig:cnn}.
       Cada capa acepta un volumen de 3 dimensiones como entrada y lo transforma en un volumen de salida de 3 dimensiones a traves de una función diferenciable.
       Algunas capas pueden tener o no parámetros, al igual que hiperparámetros. La entrada y salida de cada una de estas capas son conjuntos de arreglos llamados “mapas de features”.
       En el caso mas simple de arquitectura, la red transforma el volumen de una imagen de entrada en un volumen de salida, conteniendo los puntajes de cada clase para el problema de clasificación.
