@@ -88,8 +88,6 @@
   \end{center}
 \end{titlepage}
 
-\pagebreak
-
 \iffalse
 \maketitle                  % create a title page from the preamble info
 \include{abstract}          % include the abstract
@@ -116,7 +114,7 @@
     del poder de cómputo y al descenso del precio de los nuevos dispositivos, ya que las técnicas computacionales empleadas para esto, requieren un cómputo mucho mas complejo.\\
     La transferencia de estilo requiere de la interacción de 2 de las principales areas de las Ciencias de la Computación y de gran auge en la actualidad: Visión por Computadoras y Aprendizaje Automático,
     que hasta hace un tiempo, fueron evolucionando en paralelo, independientemente una de la otra. Hoy en día se han logrado resultados completamente disruptivos, al aplicar
-    Aprendizaje Automático para algunas de las principales tareas de Visión por Computadoras, como lo son la clasificación de imágenes, detección y reconocimiento de objetos.\\
+    Aprendizaje Automático para algunas de las principales tareas de Visión por Computadoras, como lo son la clasificación de imágenes, detección y reconocimiento de objetos.
 
     \paragraph{Aprendizaje Automático}
       El area de Aprendizaje Automático es el área de las Ciencias de la Computación que da a las computadoras la capacidad de aprender sin ser explícitamente programadas, explora el estudio
@@ -137,10 +135,10 @@
       La principal herramienta elegida para poder llevar a cabo la transferencia de estilo en fotografías son las Redes Neuronales Convolucionales, estas Redes Neuronales Artificiales asumen
       explicitamente que los elementos de  entrada del algoritmo serán imágenes, lo cual le permite implementar ciertas optimizaciónes dentro del algoritmo, luego
       se irán explicando mas detalladamente todos estos conceptos en profundidad.\\
-      Otro ejemplo de amplia investigación y desarrollo en la actualidad son los autos que se conducen por si solos, los cuales emplean estas técnicas dentro de sus procesos para lograrlo.\\
-
+      Otro ejemplo de amplia investigación y desarrollo en la actualidad son los autos que se conducen por si solos, los cuales emplean estas técnicas dentro de sus procesos para lograrlo.
+ 
     \begin{figure}[h]
-      \includegraphics[width=0.9\linewidth]{./img/nvidia_car_detection.png}\\
+      \includegraphics[width=0.9\linewidth]{./img/nvidia_car_detection.png}
       \caption{En la figura se puede observar la detección de objetos que hace el vehiculo, utilizando Redes Neuronales Convolucionales en tiempo real}
       \label{fig:car_detection}
     \end{figure}
@@ -148,7 +146,7 @@
       El área de Visión por Computadoras es el área de las Ciencias de la Computación que se encarga de cómo las computadoras pueden lograr obtener una comprensión de alto nivel de imágenes digitales o videos.
       Desde la perspectiva de la ingeniería, busca automatizar tareas que el sistema visual humano puede hacer. Incluye métodos para adquirir, procesar, analizar y comprender las imágenes del mundo real
       con el fin de producir información numérica o simbólica para que puedan ser tratados por una computadora. El objetivo principal de Visión por Computadoras es reducir la distancia
-      entre lo que un humano interpreta a partir de una imagen y la forma en la que las computadoras representan esa misma imagen.\\
+      entre lo que un humano interpreta a partir de una imagen y la forma en la que las computadoras representan esa misma imagen.
 
   \section {Motivación}
     En lo que respecta al área de visión por computadoras, una imagen es representada por un arreglo de 2 dimensiones donde cada valor representa la intensidad captada por un sensor
@@ -167,7 +165,7 @@
     Debido a que las obras de arte, sueles calificadas con metricas cualitativas y no tanto cuantitativas, se decidió utilizar otra red neuronal convolucional,
     entrenada especialmente para reconocer estilos artisticos y en base a los resultados que arroja se define si el número de iteraciones es suficiente para generar el resultado final
     o es necesario continuar iterando. \\
-    Para introducir al lector en el tema, a continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artistico a fotografías:\\
+    Para introducir al lector en el tema, a continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artistico a fotografías:
     \FIXME{ACOMODAR IMAGENES Y COMPLETAR PIE DE FOTO}
     \begin{figure}[h]
 
@@ -189,7 +187,7 @@
     En el capitulo 3 se hara un recorrido por los principales articulos de investigación y los algoritmos alli definidos para las tecnicas de transferencia estilos artisticos en fotografías.
     Para luego, en el capítulo 4 abordar en detalle la solución propuesta, junto con un análisis y evaluación empírica de la misma.\\
     En el capítulo 5 contiene los experimentos realizados y los resultados obtenidos, para finalmente en el capitulo 6 establecer una conclusión acerca del trabajo realizado,
-    junto con las perspectivas y posibles tareas a futuro.\\
+    junto con las perspectivas y posibles tareas a futuro.
 
 \chapter{Marco Teórico}
 
@@ -261,7 +259,7 @@
 	   que el concepto central es la definición de una función de distancia entre las instancias. Cada definición de distancias induce un agrupamiento de los datos, basado en esa métrica.
 
 	  \begin{figure}[h]
-	    \includegraphics[scale=0.5]{./img/stackoverflow_clustering.png}\\
+	    \includegraphics[scale=0.5]{./img/stackoverflow_clustering.png}
 	    \caption{En la primer figura se puede observar los datos distribuidos en el espacio, que luego son agrupados por colores en 3 clases distintas}
 	    \label{fig:clustering}
 	  \end{figure}
@@ -284,7 +282,7 @@
 	Por ejemplo, mediante aprendizaje por refuerzo una computadora puede aprender a jugar al Backgammon o al Ajedrez a niveles profesionales.
 
     \subsection{Vectores de Características para el Aprendizaje}
-      \FIXME{Posible Referencia \url{http://machinelearningmastery.com/discover-feature-engineering-how-to-engineer-features-and-how-to-get-good-at-it/}}\\
+      \FIXME{Posible Referencia \url{http://machinelearningmastery.com/discover-feature-engineering-how-to-engineer-features-and-how-to-get-good-at-it/}}
       Para que un modelo pueda aprender, es necesario definir un vector de caracteristicas (features vector en inglés) que este deberá aprender a partir de las instancias de entrenamiento.
       Una Feature es una pieza de información que podría ser útil para la predicción. Cualquier atributo podría ser una feature, siempre y cuando sea útil para el modelo.
       Segun el tipo de dato, las caracteristicas iran variando. \\
@@ -588,17 +586,17 @@
 	  
 	  
       \subsection {Neurona artificial}
+	\begin{figure}[H]
+          \begin{center}
+            \includegraphics[width=0.4\linewidth]{./img/neuron.jpg}
+	  \caption{Neurona artificial \label{fig:neuron}}
+          \end{center}
+	\end{figure}
 	La unidad de procesamiento de una red neuronal es una neurona. La misma consta de un vector de entrada, un vector de pesos y una función de activación no lineal, 
 	como se puede ver en la figura \ref{fig:neuron}.
 	En una neurona se realiza el producto punto entre el vector de entrada, y su vector de pesos, le suma el sesgo y aplica la función no lineal.
 	Una unica neurona puede ser utilizada para implementar un clasificador binario.
-	\begin{figure}[H]
-          \begin{center}
-            \includegraphics[width=0.4\linewidth]{./img/neuron.jpg}
-	  \caption{Neurona artificial}
-          \end{center}
-          \label{fig:neuron}
-	\end{figure}
+
 
       \subsection {Funciones de Activación comunmente utilizadas}
 	Toda función de activacion toma un unico número como entrada, realiza un operacion matematica predefinida, no lineal y devuelve el resultado obtenido.
@@ -869,9 +867,9 @@
       Inicialmente el autor publica un articulo para sintetizar texturas naturales utilizando Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos,
       donde define a una textura como la correlación entre los distintos mapas de caracteristicas de cada una de las capas de la red.\cite{Gatys:Texture_Synthesis}
       Esta misma idea luego la aplica para la Transferencia de Estilos, problema que normalmente se encaraba en una rama de la visión de computadoras llamada representación
-      no fotorrealista \cite{Kyprianidis:ArtisticStylization}. También hay otros conceptualmente más relacionado con los métodos de uso de la textura de transferencia para lograr
-      el estilo artístico de transferencia: \cite{Hertzmann:ImageAnalogies}, \cite{Ashikhmin:FastTextureTransfer}, \cite{Efros:ImageQuilting}, \cite{Lee:DirectionalTextureTransfer},
-      \cite{Xie:FGTS}. Sin Embargo, estos enfoques anteriores se basan principalmente en técnicas no paramétricas
+      no fotorrealista \cite{Kyprianidis:ArtisticStylization}. Existen otros enfoques conceptualmente más relacionados con los métodos que utilizan la textura para lograr la transferencia
+      del estilo artístico: \cite{Hertzmann:ImageAnalogies}, \cite{Ashikhmin:FastTextureTransfer}, \cite{Efros:ImageQuilting}, \cite{Lee:DirectionalTextureTransfer},
+      \cite{Xie:FGTS}. Sin Embargo, estos enfoques anteriores se basan principalmente en técnicas no paramétricas \FIXME{EXPLICAR MAS}
       para manipular directamente el píxel de la representación de una imagen. En cambio, mediante Redes Neuronales Convolucionales entrenadas en el reconocimiento de objetos,  se puede
       llevar a cabo manipulaciones de caracteristicas de alto nivel que representan explícitamente el contenido de una imagen.
       La publicación de estos artículos, ha incentivado a muchos investigadores del area a continuar desarrollando estas ideas, a tal punto que hasta el dia de hoy se siguen publicando
@@ -881,7 +879,7 @@
       En lo que al arte respecta, los humanos han desarrollado la capacidad de crear experiencias visuales únicas componiendo una compleja interacción entre el contenido y el estilo de una imagen.
       Sin ir mas lejos, las bases algoritmicas de este proceso se desconocen y no existen sistemas artificiales que con capacidades similares. Sin embargo, en otras areas fundamentales
       de la percepcion visual como el reconocimiento de objetos y rostros recientemente se ha alcanzado precisión cercana a la de un humano, utilizando modelos de redes neuronales profundas.
-      Aquí presentamos un sistema artificial basado en una Red Neural Profunda que crea imágenes artísticas de alta calidad perceptiva. El sistema utiliza representaciones neuronales
+      Aquí se presenta un sistema artificial basado en una Red Neural Profunda que crea imágenes artísticas de alta calidad perceptiva. El sistema utiliza representaciones neuronales
       para separar y recombinar el contenido y el estilo de imágenes arbitrarias, proporcionando un algoritmo para la creación de imágenes artísticas.
 
     \section{Sintesis \label{sec:sintesis}}
@@ -903,7 +901,7 @@
       Por otro lado el algoritmo presentado, requiere la definición de algunos hiperparametros, que afectan en gran medida al resultado generado. 
       Al ser un problema de optimización, el numero de iteraciones en que se aplica el descenso por el gradiente determina cuanto se minimiza la funcion de perdida
       y por lo tanto que tanto se acerca la imagen generada al estilo de la imagen de estilo y el contenido a la imagen de contenido.
-      Otro hiperparametro que requiere el algoritmo es definir cuales seran las capas de la red utilizadas para calcular el estilo y cual sera la capa elegida 
+      Otros hiperparametros que requiere el algoritmo son definir cual sera la Red Convolucional utilizada y cuales seran las capas de la red empleadas para calcular el estilo y cual sera la capa elegida 
       para calcular el contenido.
       	  \begin{figure}[h]
 	    \includegraphics[width=\linewidth]{./img/gatys_1.png}
@@ -912,7 +910,7 @@
 	  \end{figure}
 
     \section{Métodos \label{sec:metodos}}
-      Los resultados exhibidos fueron obtenidos utilizando la red VGG-19, de disponibilidad publica.
+      Los resultados exhibidos fueron obtenidos utilizando la red VGG-19, de disponibilidad publica \cite{SimonyanVGG}. 
       Generalmente, cada capa de la red define un banco de filtros no lineal cuya complejidad aumenta con la posición de la capa en la red.
       Para visualizar la información de la imagen codificada en diferentes capas de la jerarquía se realiza descenso gradiente en una imagen de ruido blanco
       para encontrar otra imagen que coincida con las características de respuesta de la imagen original.
@@ -964,9 +962,9 @@
   \section{Descripción del problema}
     Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes, sin embargo, como se menciona en la seccion \ref{sec:sintesis} 
     es necesario definir el numero de iteraciones como un hiperparámetro, que necesita el algoritmo para poder ejecutarse. 
-    El criterio de elección de este hiperparámetro termina siendo muy influyente en el resultado final.
-    Con respecto a las capas elegidas para calcular el estilo y el contenido, estas fueron predefinidas en todos los casos analizados, de la misma forma, 
-    para concentrarse unicamente en la elección del numero de iteraciones.
+    El criterio de elección de este hiperparámetro termina siendo muy influyente en el resultado final. A medida que el numero de iteraciones
+    aumenta, la funcion de perdida del resultado obtenido se va pareciendo cada vez a la funcion de perdida calculada a partir de las imagenes de entrada, sin embargo, 
+    esto influye notablemente en el tiempo de ejecución requerido por el algoritmo. 
     
     \subsection{Evaluación \label{sec:evaluacion}}
       Para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica, que permita definir si un resultado
@@ -974,15 +972,25 @@
       Por ello es que se debe buscar una forma de cuantificar estos aspectos cualitativos.
 
   \section{Solución propuesta \label{sec:solucion}}
-    En la solución propuesta en este trabajo se plantea poder definir automáticamente el número de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado.
-    El resto de los hiperparámetros permanecen predefinidos a mano, excepto la imagen de la cual comenzar que influye notablemente en la cantidad de iteraciones que debe realizar el
-    algoritmo para obtener un resultado aceptable.
-    La solución consta de 2 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo) y otro módulo encargado de
-    evaluar.
-    \subsection{Módulo de generación de imágenes}
+    En la solución propuesta en este trabajo se plantea poder definir automáticamente el número de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado
+    aceptable en la minima cantidad de iteraciones posible, reduciendo de esta forma el tiempo de ejecución del algoritmo.
+    Con respecto al resto de los hiperparámetros  requeridos por el algoritmo, estos permanecen predefinidos de  antemano.
+    La solución consta de 3 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo), otro módulo encargado de
+    evaluar la imagen generada, y un tercer modulo que determina, en base al puntaje de clasificacion obtenido si es necesario continuar el proceso de generacion, como se puede
+    observar en la figura \ref{fig:diagrama}
+    
+    \begin{figure}[h]
+      \begin{center}
+	\includegraphics[width=\linewidth]{./img/diagrama.png}
+      \end{center}
+      \caption{En la figura se puede observar la interaccion entre los distintos modulos propuestos}
+      \label{fig:diagrama}
+    \end{figure}
+    
+    \subsection{Módulo de generación de imágenes \label{sec:generador}}
       En este modulo se implementa el algoritmo propuesto por Gatys, para la transferencia de estilo, requiere como entrada una imagen de estilo, 
-      una imagen de contenido y como hiperparametro el numero de iteraciones que se ejecutara el optimizador para generar el resultado final.
-    \subsection{Módulo de evaluación de imágenes}
+      una imagen de contenido y como hiperparametro el numero de iteraciones que se ejecutara el optimizador para generar el resultado final. 
+    \subsection{Módulo de evaluación de imágenes \label{sec:evaluador}}
       %% Como se mencionó anteriormente, para lo que respecta a las obras de arte, la evaluación suele ser cualitativa. Por lo que para poder establecer una métrica de comparación cuantitativa
       %% que permita evaluar el resultado generado, la idea que planteamos es implementar un modulo que reconozca el estilo de una imagen.
       Como se mencionó en Sec.~\ref{sec:evaluacion}, una de las limitaciones del proceso de transferencia de estilo es que la evaluación de
@@ -999,20 +1007,20 @@
 	A partir del puntaje de clasificacion obtenido, segun el criterio de seleccion se define si el modulo generador debe seguir ejecutandose o el resultado generado
 	ya obtuvo un puntaje aceptable en el estilo objetivo.
 
-    \subsection{Criterio de Selección}
-      El criterio de selección que se definio para elegir la imagen óptima fue el siguiente:
-      Dado que el estilo de la imagen resultante no siempre termina siendo el mismo estilo de la imagen provista para transferir el estilo, el estilo objetivo se definió como el estilo
-      que tiene asignada una mayor probabilidad de reconocimiento luego de 1000 iteraciones.
-      Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo supera al puntaje del resto de los estilos.
-      La imagen optima elegida es la correspondiente al numero de iteraciones medio del intervalo donde el estilo objetivo es el maximo. En caso de que haya mas de un
-      de un intervalo que cumpla con este requisito, se devuelve una imagen optima de cada intervalo como posibles imagenes optimas para que el usuario elija cual es
-      la optima segun su criterio cualitativo.
+    \subsection{Criterio de Selección \label{sec:seleccion}}
+      El criterio de selección que se propone para elegir la imagen óptima es el siguiente:
+      Basado en la hipotesis de que el resultado generado por el modulo generador \ref{sec:generador} obtenga un puntaje similar que la imagen de estilo en el modulo evaluador 
+      \ref{sec:evaluador}, se define una tolerancia del $\pm 20\%$ con respecto al puntaje obtenido por la imagen de estilo, en caso de que el resultado obtenga un puntaje que pertenezca
+      a este rango, la imagen es aceptada como resultado final, en caso contrario el generador debe seguir iterando hasta obtener un resultado que cumpla con este requisito.
 
 
 \chapter{Experimentos}
-
-descripción del contenido del capítulo (muy importante)
-
+ En este capitulo se exponen los experimentos realizados basados en la solución propuesta en la seccion \ref{sec:solucion}, que permiten validar o rechazar las hipotesis planteadas.
+ Para ello se realizaron 2 experimentos principales: El primero consiste en crear un modulo de reconocimiento de estilos artisticos realizando ajuste fino sobre una CNN preentrenada 
+ para el reconocimiento de objetos. En el segundo experimento se realiza el analisis empirico para la elección del numero de iteraciones mediante el criterio de selección planteado en la 
+ seccion \ref{sec:seleccion}.
+ \FIXME{descripción del contenido del capítulo (muy importante) HIPOTESIS?}
+ 
 \section{Módulo de reconocimiento}
 
   \subsection{Conjunto de datos}
@@ -1053,7 +1061,7 @@ descripción del contenido del capítulo (muy importante)
 
 	  \end{tabularx}
 
-	  \caption{Many figures}\label{mosaico_estilos}
+	  \caption{Ejemplos de obras de arte correspondientes a los estilos seleccionados}\label{mosaico_estilos}
 	\end{figure}
 
       \subsubsection{Recoleccion de datos}
@@ -1061,61 +1069,65 @@ descripción del contenido del capítulo (muy importante)
 	\begin{enumerate}
 	 \item Definir los 10 principales estilos de los que se dispongan mayor cantidad de obras.
 	 \item Descargar cada una de las obras de arte de todos los estilos seleccionados
-	 \item Verificar que la descarga haya sido exitosa y el archivo obtenido este en condiciones
+	 \item Verificar que la descarga haya sido exitosa y el archivo obtenido este en condiciones para ser utilizado en el proceso.
 	 \item Ordenar los archivos segun el estilo al que pertenecen.
+	 Luego de realizado este proceso, el conjunto de datos generado se conforma por \FIXME{AGREGAR NUMERO DE IMAGENES DEL DATASET}
 	\end{enumerate}
 
     \subsection{Detalles de implementación}
-      Para realizar el ajuste fino, sobre este conjunto de datos generado, se utilizo la arquitectura de la red AlexNet, reemplazando la ultima capa por una capa que 
+      Para realizar el ajuste fino, sobre este conjunto de datos generado, se utilizo la arquitectura de la red AlexNet \cite{AlexNet}, reemplazando la ultima capa por una capa que 
       aprenda a reconocer entre los posibles estilos. Los valores con los que se inicializo la red, eran los valores obtenidos al entrenar AlexNet para el reconocimiento de objetos de ImageNet.
-      Para reentrenar la red ajustando los valores para el reconocimiento de estilo, se le proveyo el conjunto de datos generado, y al cabo de 50000 iteraciones la red obtuvo un 92 \% de precisión
-      en el conjunto de entrenamiento al reconocer estilos.
+      Para reentrenar la red ajustando los valores para el reconocimiento de estilo, se le proveyo el conjunto de datos generado, y se definio realizar 50000 iteraciones para el ajuste fino.
       Para realizar el ajuste fino se utilizó las librerías Caffe y OpenCV en Python, y para el reentrenamiento fue requerido el uso de una GPU GTX 680. 
  
-    arquitectura de red + detalles de entrenamiento (fine-tunning / splits)
-\subsection{Resultados de clasificación}
-¿?
+  \subsection{Resultados de clasificación}
+   La red obtuvo un 92 \% de precisión en el conjunto de entrenamiento al reconocer estilos.
 
-\section{Elección del número de iteraciones empleando el módulo de
-  reconocimiento}
-\subsection{Conjunto de datos}
-  Para ejecutar el procedimiento, es necesario disponer de 2 conjuntos de imagenes, uno correspondiente a las imagenes de contenido y otro correspondiente a las imagenes de estilo.
-  Para el conjunto de imagenes de contenido fueron elegidas 5 imagenes, de las cuales 2 son retratos de personas y las 3 restantes son fotografias de paisajes.
-  Con respecto al conjunto de imagenes de estilo, para cada uno de los estilos fueron elegidas 3 imagenes aleatoriamente.
-\subsection{Detalles de implementación}
-  El proceso consistio en aplicar el algoritmo de transferencia de estilo combinando cada una de las fotos del conjunto de contenido con cada una de las fotos del conjunto de estilo,
-  y guardando el resultado cada 10 iteraciones, hasta llegar a las 1000 iteraciones para cada uno de los procesos particulares.
-  Ademas para cada combinacion de imagen de estilo e imagen de contenido el algoritmo se ejecuto 2 veces, una comenzando desde la imagen de contenido y otra comenzando desde una imagen de ruido.
-  Finalmente todo el conjunto de imagenes obtenido es evaluado por el modulo de reconocimiento de estilo, que otorga un puntaje de la imagen para cada uno de los estilos.
-  \subsubsection{Algoritmo de Transferencia de estilo}
-    Existen una gran variedad de implementaciónes de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
-    La que se decidió utilizar fue la de Justin Jhonson \cite{Johnson:Neural_Style}, la cual posee el mayor grado de aceptación en la industria.
-    La principal tecnología utilizada en esta implementación es el Framework Torch, que utiliza como lenguaje de programación a Lua.
-    La implementacion  utilizada, permite controlar algunas otras variables mediante hiperparametros extras a lo requerido por el algoritmo originalmente:
-    Los principales hiperparámetros adicionales a los requeridos por el algoritmo son:
-    \begin{itemize}
-      \item Modelo de Red Neuronal Convolucional preentrenada que se utilizará (existen una variedad de CNN presentadas anteriormente) junto con las capas que se utilizarán de la
-      respectiva red tanto para calcular el estilo como el contenido.
-      \item Imagen desde la cual comenzar la optimización, es posible comenzar desde una imagen de ruido, desde la imagen de contenido.
-      \item Método de optimización a utilizar.
-      \item Tamaño de la imagen generada
-      \item Peso de funciones de perdida de estilo y contenido en la funcion de perdida total \FIXME{esto lo requiere el algoritmo}
-      \item Tasa de aprendizaje para el optimizador
-    \end{itemize}
+  \section{Elección del número de iteraciones empleando el módulo de reconocimiento}
+    \subsection{Conjunto de datos}
+      Para ejecutar el procedimiento, es necesario disponer de 2 conjuntos de imagenes, uno correspondiente a las imagenes de contenido y otro correspondiente a las imagenes de estilo.
+      Para el conjunto de imagenes de contenido fueron elegidas 5 imagenes, de las cuales 2 son retratos de personas y las 3 restantes son fotografias de paisajes.
+      Con respecto al conjunto de imagenes de estilo, para cada uno de los estilos fueron elegidas 3 imagenes aleatoriamente.
+    \subsection{Detalles de implementación}
+      El proceso consistio en aplicar el algoritmo de transferencia de estilo combinando cada una de las fotos del conjunto de contenido con cada una de las fotos del conjunto de estilo,
+      y guardando el resultado cada 10 iteraciones, hasta llegar a las 1000 iteraciones para cada uno de los procesos particulares.
+      Ademas para cada combinacion de imagen de estilo e imagen de contenido el algoritmo se ejecuto 2 veces, una comenzando desde la imagen de contenido y otra comenzando desde una imagen de ruido.
+      Finalmente todo el conjunto de imagenes obtenido es evaluado por el modulo de reconocimiento de estilo, que otorga un puntaje de la imagen para cada uno de los estilos.
+      \subsubsection{Algoritmo de Transferencia de estilo}
+	Existen una gran variedad de implementaciónes de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
+	La que se decidió utilizar fue la de Justin Jhonson \cite{Johnson:Neural_Style}, la cual posee el mayor grado de aceptación en la industria.
+	La principal tecnología utilizada en esta implementación es el Framework Torch, que utiliza como lenguaje de programación a Lua.
+	La implementacion  utilizada, permite controlar algunas otras variables mediante hiperparametros extras a lo requerido por el algoritmo originalmente:
+	Los principales hiperparámetros adicionales a los requeridos por el algoritmo son:
+	\begin{itemize}
+	  \item Modelo de Red Neuronal Convolucional preentrenada que se utilizará (existen una variedad de CNN presentadas anteriormente) junto con las capas que se utilizarán de la
+	  respectiva red tanto para calcular el estilo como el contenido.
+	  \item Imagen desde la cual comenzar la optimización, es posible comenzar desde una imagen de ruido, desde la imagen de contenido.
+	  \item Método de optimización a utilizar.
+	  \item Tamaño de la imagen generada
+	  \item Peso de funciones de perdida de estilo y contenido en la funcion de perdida total \FIXME{esto lo requiere el algoritmo}
+	  \item Tasa de aprendizaje para el optimizador
+	\end{itemize}
+	
 
-\subsection{Número de iteraciones vs. score de clasificación}
-  A partir de los puntajes obtenidos por las imagenes generadas cada 10 iteraciones, se realiza un analisis para poder elegir la imagen ideal, en relacion a numero de iteraciones y puntaje
-  de clasificacion obtenido.
-  Inicialmente se suponia que el estilo de la imagen resultante se iba a corresponder con el estilo de la imagen de contenido en todos los casos, pero luego de analizar varios casos, pudimos concluir que 
-  esta hipotesis es falsa, ya que la imagen de contenido tambien influye aunque en mucho menor proporcion para la clasificacion de estilo. Lo que avala la idea que presenta Gatys de que 
-  el estilo y el contenido de una imagen no son absolutamente separables.
-  A continuacion se muestran algunos graficos generados para el analisis de la relacion entre el numero de iteraciones vs. el puntaje de clasificacion.
-presentar y discutir experimentos y resultados.
-\FIXME{Agregar graficos}
-
-concluir con un criterio de parada (RESALTARLO)
-
-mostrar imágenes. muchos casos
+    \subsection{Número de iteraciones vs. Puntaje de clasificación}
+      A partir de los puntajes obtenidos por las imagenes generadas cada 10 iteraciones, se realiza un analisis para poder elegir la imagen ideal, en relacion a numero de iteraciones y puntaje
+      de clasificacion obtenido.
+      A continuacion se muestran algunos graficos generados para el analisis de la relacion entre el numero de iteraciones vs. el puntaje de clasificacion.
+      presentar y discutir experimentos y resultados.
+      \FIXME{Agregar graficos de analisis}
+      En los distintos graficos se puede observar 
+    \subsection{Validacion de hipotesis para criterio de seleccion}
+      Luego se realizar un analisis en varios graficos como los presentados en la seccion anterior se concluyo que la hipotesis sobre que el el puntaje de clasificacion de la imagen 
+      de estilo y el puntaje de la imagen generada coinciden es falsa, debido a que esto no ocurre en todos los casos analizados, dependiendo de la imagen de contenido el estilo
+      que obtiene mayor puntaje de clasificacion puede ser distinto al estilo de la imagen de estilo, ya que la imagen de contenido puede influir en el puntaje de clasificacion de estilo
+      de la imagen generada, aunque en mucho menor proporción respecto a la imagen de estilo. Este resultado avala la idea que presenta Gatys acerca de que el estilo y el contenido de una
+      imagen no son absolutamente separables.\\
+      Debido a esto, el criterio de seleccion que se definio para elegir la imagen optima fue el siguiente: el estilo objetivo se definio como el estilo que tiene asignada una mayor
+      probabilidad de reconocimiento luego de 1000 iteraciones. Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo 
+      supera al puntaje del resto de los estilos. La imagen optima elegida es la correspondiente al numero de iteraciones medio del intervalo donde el estilo objetivo es el maximo. En caso de que haya mas de un de
+      un intervalo que cumpla con este requisito, se devuelve una imagen optima de cada intervalo como posibles imagenes optimas para que el usuario elija cual es la optima segun su criterio
+      cualitativo.
 
 
 \chapter{Conclusiones, Perspectivas y trabajos a futuro}
