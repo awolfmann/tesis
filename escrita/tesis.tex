@@ -1036,8 +1036,9 @@
  seccion \ref{sec:seleccion}.
  \FIXME{descripción del contenido del capítulo (muy importante) HIPOTESIS?}
  
-\section{Módulo de reconocimiento}
-
+\section{Módulo de reconocimiento de estilo}
+  Para implementar el modulo de reconocimiento de estilo se decidio realizar ajuste fino sobre una red neuronal convolucional preentrenada para el reconocimiento de objetos.
+  A lo largo de esta seccion se detallan las caracteristicas de la implementación de este modulo. 
   \subsection{Conjunto de datos}
     El conjunto de datos utilizado para en este trabajo es el de WikiArt.\url{https://www.wikiart.org/}.  
     Este conjunto de datos proviene de un proyecto de disponibilidad publica que tiene como objetivo principal hacer accesible el mundo del arte a cualquier persona y en cualquier lugar. 
@@ -1099,6 +1100,8 @@
    La red obtuvo un 92 \% de precisión en el conjunto de entrenamiento al reconocer estilos.
 
   \section{Elección del número de iteraciones empleando el módulo de reconocimiento}
+    Este experimento consiste en realizar un analisis empirico de la evolucion de los puntajes de clasificacion de estilo a medida que aumenta el numero de iteraciones 
+    que se ejecuta el modulo de generacion de imagenes. 
     \subsection{Conjunto de datos}
       Para ejecutar el procedimiento, es necesario disponer de 2 conjuntos de imagenes, uno correspondiente a las imagenes de contenido y otro correspondiente a las imagenes de estilo.
       Para el conjunto de imagenes de contenido fueron elegidas 5 imagenes, de las cuales 2 son retratos de personas y las 3 restantes son fotografias de paisajes.
