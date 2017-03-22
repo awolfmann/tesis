@@ -970,10 +970,10 @@
 
 \chapter{Elección Automatica de hiperparámetros para Transferencia de estilo}
   \section{Descripción del problema}
-    Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes, sin embargo, como se menciona en la seccion \ref{sec:sintesis} 
-    es necesario definir el numero de iteraciones como un hiperparámetro, que necesita el algoritmo para poder ejecutarse. 
-    El criterio de elección de este hiperparámetro termina siendo muy influyente en el resultado final. A medida que el numero de iteraciones
-    aumenta, la funcion de perdida del resultado obtenido se va pareciendo cada vez a la funcion de perdida calculada a partir de las imagenes de entrada, sin embargo, 
+    Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes, sin embargo, como se menciona en la sección \ref{sec:sintesis} 
+    es necesario definir el número de iteraciones como un hiperparámetro, que necesita el algoritmo para poder ejecutarse. 
+    El criterio de elección de este hiperparámetro termina siendo muy influyente en el resultado final. A medida que el número de iteraciones
+    aumenta, la función de pérdida del resultado obtenido se va pareciendo cada vez a la función de pérdida calculada a partir de las imagenes de entrada, sin embargo, 
     esto influye notablemente en el tiempo de ejecución requerido por el algoritmo. 
     
     \subsection{Evaluación \label{sec:evaluacion}}
@@ -1000,24 +1000,29 @@
     \subsection{Módulo de generación de imágenes \label{sec:generador}}
       En este modulo se implementa el algoritmo propuesto por Gatys, para la transferencia de estilo, requiere como entrada una imagen de estilo, 
       una imagen de contenido y como hiperparametro el numero de iteraciones que se ejecutara el optimizador para generar el resultado final. 
+      La salida de este es una imagen generada donde el contenido se acerca a la imagen de contenido  y el estilo se acerca a la imagen de estilo, a medida
+      que va aumentando el numero de iteraciones la distancia entre las imagenes de entrada y la imagen generada se va minimizando.
     \subsection{Módulo de evaluación de imágenes \label{sec:evaluador}}
       %% Como se mencionó anteriormente, para lo que respecta a las obras de arte, la evaluación suele ser cualitativa. Por lo que para poder establecer una métrica de comparación cuantitativa
       %% que permita evaluar el resultado generado, la idea que planteamos es implementar un modulo que reconozca el estilo de una imagen.
       Como se mencionó en Sec.~\ref{sec:evaluacion}, una de las limitaciones del proceso de transferencia de estilo es que la evaluación de
       la imagen resultante es de carácter cualitativo. A fin de establecer una medida cuantitativa y así controlar el resultado de la generación de
       manera más objetiva, se propone definir un clasificador, que se encargue de reconocer el estilo de una imagen, brindando un puntaje de clasificacion para cada estilo.
-      De esta forma la imagen se evalua cuantitativamente segun el puntaje obtenido en el estilo objetivo. 
+      De esta forma la imagen se evalua cuantitativamente segun el puntaje obtenido en el estilo objetivo.
+      La entrada de este modulo es la imagen generada y la salida es los puntajes de clasificacion obtenidos por la imagen para cada uno de los estilos. 
+      
       \subsubsection{Reconocimiento de estilo}
 	A partir de la idea de definir un clasificador de estilos, se realizó una investigación de los posibles metodos para lograr esto. Se decidio basarse en el algortimo presentado en \cite{Karayev:Style_Recognition}.
 	Este articulo plantea que los vectores de caracteristicas obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy utiles a la hora de
 	reconocer estilos, aunque muchos estilos parecieran ser principalmente definidos por las elecciones de colores, los vectores de caracteristicas de las CNN, proveen mucha mas información
 	que los vectores obtenidos a partir de histogramas de colores por ejemplo.
 	Basado en esta idea, decidimos implementar una version simplificada que consiste en realizar ajuste fino sobre una Red Neuronal Convolucional preentrenda para el reconocimiento de objetos.
-	De esta forma se van realizando evaluaciones del resultado obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
-	A partir del puntaje de clasificacion obtenido, segun el criterio de seleccion se define si el modulo generador debe seguir ejecutandose o el resultado generado
-	ya obtuvo un puntaje aceptable en el estilo objetivo.
+	De esta forma se van realizando evaluaciones de la imagen de salida obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
 
-    \subsection{Criterio de Selección \label{sec:seleccion}}
+
+    \subsection{Módulo de Selección \label{sec:seleccion}}
+      Este modulo es el encargado de determinar si es necesario seguir generando imagenes o se acepta la imagen obtenida en la iteracion actual. La entrada de este modulo
+      es el vector de puntajes de clasificacion calculados por el modulo generador \ref{sec:generador}, y la salida es un valor binario indicando si se acepta o no la imagen.
       El criterio de selección que se propone para elegir la imagen óptima es el siguiente:
       Basado en la hipotesis de que el resultado generado por el modulo generador \ref{sec:generador} obtenga un puntaje similar que la imagen de estilo en el modulo evaluador 
       \ref{sec:evaluador}, se define una tolerancia del $\pm 20\%$ con respecto al puntaje obtenido por la imagen de estilo, en caso de que el resultado obtenga un puntaje que pertenezca
