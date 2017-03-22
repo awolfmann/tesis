@@ -45,7 +45,7 @@ def process_image(image):
     image = caffe.io.resize_image( image, (227,227), interp_order=3 ) # RESCALE
     image -= [123, 117, 104]          # (approximately) mean subtraction
     image = image[::-1]               # RGB -> BGR
-    image = image.transpose(2, 0, 1)  # HWC -> CHW   
+    image = image.transpose(2, 0, 1)  # HWC -> CHW
     # image -= [104, 117, 123]          # (approximately) mean subtraction
 
     # clamp values in [0, 255]
@@ -54,6 +54,15 @@ def process_image(image):
     # round and cast from float32 to uint8
     # image = np.round(image)
     image = np.require(image, dtype=np.float32)
+
+    # if mean is not None:
+    #     self._mean = np.array(mean).squeeze()
+    #     # create transformer for the input called 'data'
+    #     self._transformer = caffe.io.Transformer({'data': self._net.blobs['data'].data.shape})
+    #     self._transformer.set_transpose('data', (2,0,1))     # move image channels to outermost dimension
+    #     self._transformer.set_mean('data', self._mean)       # subtract the dataset-mean value in each channel
+    #     self._transformer.set_raw_scale('data', 255)         # rescale from [0, 1] to [0, 255]
+    #     self._transformer.set_channel_swap('data', (2,1,0))  # swap channels from RGB to BGR
 
     return image
 
@@ -183,9 +192,9 @@ def solver(train_net_path, test_net_path=None, base_lr=0.001):
     # Effectively boosts the training batch size by the given factor, without
     # affecting memory utilization.
     s.iter_size = 1
-    
+
     s.max_iter = 100000     # # of times to update the net (training iterations)
-    
+
     # Solve using the stochastic gradient descent (SGD) algorithm.
     # Other choices include 'Adam' and 'RMSProp'.
     s.type = 'SGD'
@@ -214,11 +223,11 @@ def solver(train_net_path, test_net_path=None, base_lr=0.001):
     # snapshot every 10K iterations -- ten times during training.
     s.snapshot = 5000
     s.snapshot_prefix = caffe_root + 'models/finetune_wikipaintings_style/finetune_wikipaintings_style'
-    
+
     # Train on the GPU.  Using the CPU to train large networks is very slow.
     s.solver_mode = caffe_pb2.SolverParameter.GPU
     #s.solver_mode = caffe_pb2.SolverParameter.CPU
-    
+
     # Write the solver to a temporary file and return its filename.
     with tempfile.NamedTemporaryFile(delete=False) as f:
         f.write(str(s))
@@ -240,7 +249,7 @@ def run_solvers(niter, solvers, disp_interval=50):
             loss_disp = '; '.join('%s: loss=%.3f, acc=%2d%%' %
                                   (n, loss[n][it], np.round(100*acc[n][it]))
                                   for n, _ in solvers)
-            print '%3d) %s' % (it, loss_disp)     
+            print '%3d) %s' % (it, loss_disp)
     # Save the learned weights from both nets.
     weight_dir = tempfile.mkdtemp()
     weights = {}
@@ -324,7 +333,7 @@ style_net_loaded = caffe.Net(style_net(train=False, subset='test'),
 # plt.imshow(deprocess_net_image(image))
 del style_data_batch
 
-# image_filename = '/home/ariel/Documents/tesis/neural-style/examples/inputs/picasso_selfport1907.jpg' 
+# image_filename = '/home/ariel/Documents/tesis/neural-style/examples/inputs/picasso_selfport1907.jpg'
 
 
 # load the mean ImageNet image (as distributed with Caffe) for subtraction
@@ -338,7 +347,7 @@ transformer = caffe.io.Transformer({'data': style_net_loaded.blobs['data'].data.
 transformer.set_transpose('data', (2,0,1))  # move image channels to outermost dimension
 transformer.set_mean('data', mu)            # subtract the dataset-mean value in each channel
 transformer.set_raw_scale('data', 255)      # rescale from [0, 1] to [0, 255]
-transformer.set_channel_swap('data', (2,1,0))  # swap channels from RGB to BGR  
+transformer.set_channel_swap('data', (2,1,0))  # swap channels from RGB to BGR
 style_net_loaded.blobs['data'].reshape( 1,        # batch size
                                         3,         # 3-channel (BGR) images
                                         227, 227)  # image size is 227x227
@@ -366,7 +375,7 @@ def disp_preds(net, image, labels, file, k=5, name='ImageNet'):
         print('\n'.join('\t(%d) %5.2f%% %s' % (i+1, 100*probs[p], labels[p])
                         for i, p in enumerate(top_k)))
 
-    
+
 def disp_imagenet_preds(net, image):
     disp_preds(net, image, imagenet_labels, name='ImageNet')
 
@@ -389,7 +398,7 @@ def predictions(net, image):
 # # scores_file.write('CONTENT IMAGE \n')
 # # disp_style_preds(style_net_loaded, transformed_content_image, scores_file)
 
-# style_image_file = '/home/ariel/Documents/tesis/neural-style/examples/inputs/woman-with-hat-matisse.jpg' 
+# style_image_file = '/home/ariel/Documents/tesis/neural-style/examples/inputs/woman-with-hat-matisse.jpg'
 # style_image = caffe.io.load_image(style_image_file)
 # transformed_style_image = transformer.preprocess('data', style_image)
 # scores_file.write('STYLE IMAGE \n')
@@ -404,9 +413,9 @@ def process_scores(output_path, output_name):
         #     csvwriter.writerow([0] + probs.tolist())
         # elif start == 'random':
         #     probs = predictions(style_net_loaded, transformed_style_image)
-        #     csvwriter.writerow([0] + probs.tolist()) 
+        #     csvwriter.writerow([0] + probs.tolist())
         # else:
-        #     print 'ERROR'           
+        #     print 'ERROR'
         for it in range(0, 1001, 10):
             outname = output_name +'_{:d}.png'.format(it)
             image_filename = join(output_path, outname)
@@ -427,7 +436,7 @@ def tag_style_images():
 
 # tag_style_images()
 
-# transfered_image_file = '/home/ariel/Documents/tesis/neural-style/examples/outputs/golden_gate_kahlo.png' 
+# transfered_image_file = '/home/ariel/Documents/tesis/neural-style/examples/outputs/golden_gate_kahlo.png'
 # transfered_image = caffe.io.load_image(transfered_image_file)
 # transformed_transfered_image = transformer.preprocess('data', transfered_image)
 # print('TRANSFERED IMAGE')
@@ -442,5 +451,3 @@ def tag_style_images():
 #     image = caffe.io.load_image(image_filename)
 #     transformed_image = transformer.preprocess('data', image)
 #     disp_style_preds(style_net_loaded, transformed_image, scores_file)
-
-

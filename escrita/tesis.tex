@@ -8,7 +8,7 @@
 \usepackage{graphicx} % graficos
 \usepackage{subfig}
 \usepackage{tabularx}
-\usepackage{subcaption}
+%\usepackage{subcaption}
 \captionsetup{compatibility=false}
 \usepackage[export]{adjustbox}
 \usepackage[spanish]{babel}
@@ -136,7 +136,7 @@
       explicitamente que los elementos de  entrada del algoritmo serán imágenes, lo cual le permite implementar ciertas optimizaciónes dentro del algoritmo, luego
       se irán explicando mas detalladamente todos estos conceptos en profundidad.\\
       Otro ejemplo de amplia investigación y desarrollo en la actualidad son los autos que se conducen por si solos, los cuales emplean estas técnicas dentro de sus procesos para lograrlo.
- 
+
     \begin{figure}[h]
       \includegraphics[width=0.9\linewidth]{./img/nvidia_car_detection.png}
       \caption{En la figura se puede observar la detección de objetos que hace el vehiculo, utilizando Redes Neuronales Convolucionales en tiempo real}
@@ -298,10 +298,10 @@
 	El enfoque basado en técnicas superficiales (o “shallow” en inglés) y el enfoque de aprendizaje profundo (o “deep” en inglés).
 
       \subsubsection{Enfoque Clasico \FIXME{MODELOS \emph{SHALLOW}}}
-	El enfoque clasico (Shallow en la literatura en ingles) responde a la manera tradicional de hacer visión por computadoras. Se busca generar una representación invariante 
-	a la posición, iluminación, fondo, etc. utilizando principalmente técnicas estadísticas a partir de conocimiento anterior del objeto y del contexto. 
-	Los descriptores son diseñados a mano a partir de características físicas, hipótesis y observaciones. Con este enfoque no se aprenden caracteristicas de los objetos sino que 
-	se procesa la imágen de interés con un extractor de features prefijadas y luego se pasa la nueva representación a un clasificador entrenable. 
+	El enfoque clasico (Shallow en la literatura en ingles) responde a la manera tradicional de hacer visión por computadoras. Se busca generar una representación invariante
+	a la posición, iluminación, fondo, etc. utilizando principalmente técnicas estadísticas a partir de conocimiento anterior del objeto y del contexto.
+	Los descriptores son diseñados a mano a partir de características físicas, hipótesis y observaciones. Con este enfoque no se aprenden caracteristicas de los objetos sino que
+	se procesa la imágen de interés con un extractor de features prefijadas y luego se pasa la nueva representación a un clasificador entrenable.
 	Los métodos más utilizadas que generan este tipo de descriptores son SIFT, SURF y Vectores Fisher.
 	Otro ejemplo es el de la bolsa de palabras visuales, similar al metodo ejemplificado para texto, que se ilustra en la siguiente imagen:\\
 	\begin{figure}[h]
@@ -317,8 +317,8 @@
 	como formas, contornos, etc. Es decir que provean una especie de contenido semántico de la imagen.
 
       \subsubsection{Enfoque de Aprendizaje Profundo}
-	En este enfoque tiene como objetivo lograr representar el contenido semantico de una imagen mediante un unico algoritmo que aprenda a representarlo por si mismo, 
-	a partir de los datos, 	en lugar de que sean diseñadas a mano y prefijadas en el detector. 
+	En este enfoque tiene como objetivo lograr representar el contenido semantico de una imagen mediante un unico algoritmo que aprenda a representarlo por si mismo,
+	a partir de los datos, 	en lugar de que sean diseñadas a mano y prefijadas en el detector.
 	El problema asociado a esto es que no sabemos cuales seran las features que el modelo aprende durante el entrenamienton y tampoco se logran comprender claramente.
 	Lo que si se conoce es que las features aprendidas tienen en cierto modo una especie de jerarquia, es decir que las features de bajo nivel aprendidas desde los pixeles
 	alimentan el aprendizaje de otras features que aprenden a reconocer contornos y bordes, y asi sucesivamente hasta llegar a las features de mas alto nivel que logran reconocer
@@ -341,7 +341,7 @@
 	  de la predicción. Para el caso de un problema de clasificación de imágenes, el modelo dado una imagen, puede otorgar un puntaje a cada una de las $K$ clases posibles,
 	  y la que obtenga el mayor puntaje será la clase asignada para esa imagen. Para poder realizar una predicción es necesaria una función de puntuación $f:R^D {\rightarrow} R^K$
 	  donde $D$ es la dimensionalidad del vector de entrada que toma $f$. \\
-	  Ademas, es necesario una funcion de decisión $H$, por ejemplo para el caso de clasificación $H:R^K{\rightarrow}{1,..,K}$ 
+	  Ademas, es necesario una funcion de decisión $H$, por ejemplo para el caso de clasificación $H:R^K{\rightarrow}{1,..,K}$
 	  que toma el resultado de $f$ y decide a cual de las $K$ clases pertenece y para el caso de la regresión es la funcion identidad $H(f(x))=f(x)$.
 	  Un ejemplo de función de puntuación:
 	  Suponiendo que tenemos $x$ una imagen de entrada, que la queremos asociar a una clase $y_{j}$ de las $K$ clases posibles , sea $D$ la dimensionalidad de $x$, $x \in R^D$,
@@ -373,16 +373,16 @@
           \begin{equation}
 	    L = \frac{1}{N}\sum_{i=1}^{N} L_i(y_i, f(x_i, W, b)) + \lambda \Omega(W)
           \end{equation}
-          Con $L:\mathcal{Y}\times \mathcal{Y}\rightarrow\mathbb{R}_+$, donde $\mathcal{Y}$ en el caso de la clasificación de la Sec.~\ref{sec:prediccion} seria ${1,..,K}$. 
+          Con $L:\mathcal{Y}\times \mathcal{Y}\rightarrow\mathbb{R}_+$, donde $\mathcal{Y}$ en el caso de la clasificación de la Sec.~\ref{sec:prediccion} seria ${1,..,K}$.
           Esta ecuacion contiene 2 terminos: Un termino relacionado a las funciones de pérdida de cada imagen $L_i(y_i, f(x_i, W, b))$
-          y un coeficiente de regularización $\lambda \Omega(W)$ que penaliza a los modelos complejos, $\lambda$ es un hiperparámetro que define cuanto influye la regularización 
+          y un coeficiente de regularización $\lambda \Omega(W)$ que penaliza a los modelos complejos, $\lambda$ es un hiperparámetro que define cuanto influye la regularización
           sobre el resultado final y $N$ es la cantidad de datos de entrenamiento.
 	  Una función de pérdida es una función real, no negativa $L({\widehat y}, y)$, que mide cuán diferente es la predicción ${\widehat y}$ obtenida, con respecto a la
 	  salida esperada $y$. Existen diversas funciónes de pérdida que se utilizan en distintos contextos. A continuación se presentan algunas que se aplican usualmente:
 	  \begin{itemize}
 	    \item Función de Pérdida 0-1:
 	      \begin{equation*}
-		L({\widehat y}, y) =  \begin{cases} 
+		L({\widehat y}, y) =  \begin{cases}
 					    1 \text{si ${\widehat y} = y$}
 					    0 \text{en caso contrario.}
 		                      \end{cases}
@@ -427,18 +427,18 @@
       en cada dimensión.La idea de principal de este metodo es el refinamiento iterativo, se evalua el resultado del calculo del gradiente y se actualizan los parámetros repetidamente,
       toma un hiperparámetro $\eta$ llamado tasa de aprendizaje que define el tamaño de cada paso en la iteración.
       Sea $F$ la función de pérdida, $w$ el vector de pesos, $N$ el numero de datos de entrenamiento, cada iteracion consiste de:
-      
+
       \begin{equation}
 	w_{n+1} = w_n - \eta \nabla L(w_n)  = w_n - \eta \sum_{i=1}^{N} \nabla L_i(w_n)
       \end{equation}
-      
+
       Un problema recurrente en el aprendizaje automático es que para una buena generalización, son necesarios grandes conjuntos de entrenamiento,
       pero grandes conjuntos de entrenamiento también son más costosos desde el punto de vista computacional.
       En aplicaciones de gran escala, el conjunto de entrenamiento puede ser del orden de los millones de ejemplos, por lo que computar la función de
       pérdida completa sobre todo el conjunto para actualizar un solo parámetro seria algo impracticable.\\
       Un enfoque común que se aplica a este problema es computar el gradiente sobre pequeños lotes del conjunto de entrenamiento,
       que permite lograr una buena aproximación al objetivo completo con una convergencia mucho mas rapida, es decir se reduce $N$ a un pequeño subconjunto, de esta forma se
-      reduce el numero de calculos realizados en cada iteración. Este metodo se lo conoce como \emph{Descenso por el gradiente estocástico} y es el mas utilizado para optimizar 
+      reduce el numero de calculos realizados en cada iteración. Este metodo se lo conoce como \emph{Descenso por el gradiente estocástico} y es el mas utilizado para optimizar
       funciones de pérdida en las Redes Neuronales.
 
 	\begin{algorithm}[H]
@@ -555,7 +555,7 @@
 	  \caption{Red Neuronal Artificial}
 	  \label{fig:neural_network}
 	\end{figure}
-	
+
       \subsection{Aprendizaje basado en el Gradiente}
 	El diseño y entrenamiento de una red neural no es muy diferente de la formación de cualquier otro modelo de aprendizaje automático con descenso por el gradiente.
 	La diferencia más grande entre los modelos lineales y las redes neuronales es que la no linealidad de una red neuronal hace que las funciónes de pérdida
@@ -587,8 +587,8 @@
 	    \cite{Automatic_differentiation_ML} }
 	    \label{fig:backprop}
 	  \end{figure}
-	  
-	  
+
+
       \subsection {Neurona artificial}
 	\begin{figure}[H]
           \begin{center}
@@ -596,7 +596,7 @@
 	  \caption{Neurona artificial \label{fig:neuron}}
           \end{center}
 	\end{figure}
-	La unidad de procesamiento de una red neuronal es una neurona. La misma consta de un vector de entrada, un vector de pesos y una función de activación no lineal, 
+	La unidad de procesamiento de una red neuronal es una neurona. La misma consta de un vector de entrada, un vector de pesos y una función de activación no lineal,
 	como se puede ver en la figura \ref{fig:neuron}.
 	En una neurona se realiza el producto punto entre el vector de entrada, y su vector de pesos, le suma el sesgo y aplica la función no lineal.
 	Una unica neurona puede ser utilizada para implementar un clasificador binario.
@@ -628,7 +628,7 @@
 	      \caption{Grafico de la funcion Sigmoide}
 	      \label{fig:sigmoid}
 	    \end{figure}
-	
+
 	  \subsubsection {Tangente hiperbolica}
 	    \begin{figure}[H]
 	      \begin{center}
@@ -637,11 +637,11 @@
 	      \caption{Grafico de la funcion Tangente hiperbolica}
 	      \label{fig:tanh}
 	    \end{figure}
-	    Proyecta el dominio al rango [-1,1], como se muestra en la figura \ref{fig:tanh}. Al igual que la neurona sigmoide, sus activaciones saturan, pero a diferencia 
+	    Proyecta el dominio al rango [-1,1], como se muestra en la figura \ref{fig:tanh}. Al igual que la neurona sigmoide, sus activaciones saturan, pero a diferencia
 	    de la neurona sigmoide su salida esta centrada en cero. Por lo tanto, en la práctica la tanh siempre es preferida sobre sigmoide.
 	    \FIXME{CORREGIR}
 	    \begin{equation*}
-	     f(x) = max(0,x) 
+	     f(x) = max(0,x)
 	    \end{equation*}
 
 	  \subsubsection {ReLU}
@@ -657,7 +657,7 @@
 	      \caption{Grafico de la funcion ReLU}
 	      \label{fig:relu}
 	    \end{figure}
-	    
+
 	    Las unidades lineales rectificadas son fáciles de optimizar porque son muy similares a las unidades lineales.
 	    La única diferencia entre una unidad lineal y una unidad lineal rectificada es que una unidad lineal rectificada da salida a cero a través de la mitad de su dominio.
 	    Esto hace que las derivadas a través de una unidad lineal rectificada permanezcan grandes siempre que la unidad esté activa.
@@ -694,7 +694,7 @@
 	\end{figure}
 
   \section {Aprendizaje Profundo}
-    La caída de los precios de hardware y el desarrollo de GPUs para uso personal en los últimos años y la gran disponibilidad de datos, han contribuido al desarrollo del 
+    La caída de los precios de hardware y el desarrollo de GPUs para uso personal en los últimos años y la gran disponibilidad de datos, han contribuido al desarrollo del
     concepto de aprendizaje profundo (Deep Learning en ingles)
     que consiste de redes neuronales artificiales, que poseen mas de una capa oculta (se considera capa oculta a toda capa que no sea la de entrada ni salida). Este enfoque trata de
     modelar la forma en que el cerebro humano procesa luz y sonido en visión y audición.
@@ -712,8 +712,8 @@
     que el conjunto de entrada son imágenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura.
     Estan inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes, suelen tener un gran numero de capas ocultas, por lo que
     son consideras parte del Aprendizaje Profundo.
-    Con lo que respecta a las imagenes, muchos de los enfoques modernos en Visión por Computadoras explotan la propiedad de que píxeles cercanos están más correlacionados entre ellos que a los pixeles mas 
-    distantes, mediante la extracción de características locales que dependen sólo pequeñas subregiones de la imagen. La información de tales características pueden entonces ser combinados 
+    Con lo que respecta a las imagenes, muchos de los enfoques modernos en Visión por Computadoras explotan la propiedad de que píxeles cercanos están más correlacionados entre ellos que a los pixeles mas
+    distantes, mediante la extracción de características locales que dependen sólo pequeñas subregiones de la imagen. La información de tales características pueden entonces ser combinados
     en etapas posteriores de procesamiento con el fin de detectar de caracteristicas de alto nivel hasta finalmente proveer información de la imagen completa. Ademas, las caracteristicas
     locales que son utiles en una region de la imagen, probablemente sean utiles en otras regiones de la imagen. \FIXME{BISHOP 285 }
     \subsection{Funcion de Convolucion}
@@ -840,7 +840,7 @@
       del modelo inicial, para el problema al cual se quiere emplear, brindando un conjunto de datos de entrenamiento con el cual se entrena la red adaptada,
       pero la inicializacion de los pesos coincide con los pesos obtenidos del modelo preentrenado.
       Por ejemplo una red fue entrenada para reconocer distintas razas de perros en imagenes, y ahora se desea clasificar gatos segun su raza. En lugar de entrenar una
-      red desde un estado aleatorio inicial, se puede utilizar la red preentrenada para perros, reemplazando la ultima capa completamente conectada por otra que 
+      red desde un estado aleatorio inicial, se puede utilizar la red preentrenada para perros, reemplazando la ultima capa completamente conectada por otra que
       tenga la cantidad de salidas igual a la cantidad de razas de gato que se desean reconocer.
       Para el entrenamiento de esta red adaptada se le da como entrada un conjunto de imagenes, de gatos de las distintas razas, de esta forma los  pesos se van
       ajustando para lograr reconocer este nuevo tipo de conceptos en las imagenes.
@@ -908,10 +908,10 @@
       El principal descubrimiento de este articulo es que la representacion del estilo y el contenido de una imagen pueden ser separables con una Red Neuronal Convolucional entrenada
       para el reconocimiento de objetos. De esta forma, al manipularse independientemente se pueden generar una nueva imagen desde 2 imágenes de entradas distintas, simultaneamente se corresponda con la representacion
       del contenido de una imagen y la respresentacion del estilo de la otra.\\
-      Por otro lado el algoritmo presentado, requiere la definición de algunos hiperparametros, que afectan en gran medida al resultado generado. 
+      Por otro lado el algoritmo presentado, requiere la definición de algunos hiperparametros, que afectan en gran medida al resultado generado.
       Al ser un problema de optimización, el numero de iteraciones en que se aplica el descenso por el gradiente determina cuanto se minimiza la funcion de perdida
       y por lo tanto que tanto se acerca la imagen generada al estilo de la imagen de estilo y el contenido a la imagen de contenido.
-      Otros hiperparametros que requiere el algoritmo son definir cual sera la Red Convolucional utilizada y cuales seran las capas de la red empleadas para calcular el estilo y cual sera la capa elegida 
+      Otros hiperparametros que requiere el algoritmo son definir cual sera la Red Convolucional utilizada y cuales seran las capas de la red empleadas para calcular el estilo y cual sera la capa elegida
       para calcular el contenido.
       	  \begin{figure}[h]
 	    \includegraphics[width=\linewidth]{./img/gatys_1.png}
@@ -920,7 +920,7 @@
 	  \end{figure}
 
     \section{Métodos \label{sec:metodos}}
-      Los resultados exhibidos fueron obtenidos utilizando la red VGG-19, de disponibilidad publica \cite{SimonyanVGG}. 
+      Los resultados exhibidos fueron obtenidos utilizando la red VGG-19, de disponibilidad publica \cite{SimonyanVGG}.
       Generalmente, cada capa de la red define un banco de filtros no lineal cuya complejidad aumenta con la posición de la capa en la red.
       Para visualizar la información de la imagen codificada en diferentes capas de la jerarquía se realiza descenso gradiente en una imagen de ruido blanco
       para encontrar otra imagen que coincida con las características de respuesta de la imagen original.
@@ -956,10 +956,13 @@
       Para generar las imágenes que mezclan el contenido de una fotografía con el estilo de una obra de arte conjuntamente minimizamos la distancia de una imagen de ruido blanco
       de la representación de contenido de la fotografía en una capa de la red y la representación de estilo de la obra de arte en un número de capas de la CNN.
       Funcion de Pérdida total:
-      \begin{equation}
+      \begin{equation}\label{eq:objetivo}
        L_{total}(\overrightarrow{p},\overrightarrow{a},\overrightarrow{x}) = \alpha L_{contenido}(\overrightarrow{p},\overrightarrow{x}) + \beta L_{estilo}(\overrightarrow{a},\overrightarrow{x})
       \end{equation}
       Donde $\alpha$ y $\beta$ son los factores de peso para el contenido y el estilo respectivamente.
+
+      \FIXME{``formalizar'' la solución de resolver el problema
+        \eqref{eq:objetivo} como $\hat x = \arg\min_X L_{total}...$}
 
       \begin{figure}[h]
 	\includegraphics[width=\linewidth]{./img/gatys_2.png}
@@ -970,15 +973,15 @@
 
 \chapter{Elección Automatica de hiperparámetros para Transferencia de estilo}
   \section{Descripción del problema}
-    Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes, sin embargo, como se menciona en la sección \ref{sec:sintesis} 
-    es necesario definir el número de iteraciones como un hiperparámetro, que necesita el algoritmo para poder ejecutarse. 
+    Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes, sin embargo, como se menciona en la sección \ref{sec:sintesis}
+    es necesario definir el número de iteraciones como un hiperparámetro, que necesita el algoritmo para poder ejecutarse.
     El criterio de elección de este hiperparámetro termina siendo muy influyente en el resultado final. A medida que el número de iteraciones
-    aumenta, la función de pérdida del resultado obtenido se va pareciendo cada vez a la función de pérdida calculada a partir de las imagenes de entrada, sin embargo, 
-    esto influye notablemente en el tiempo de ejecución requerido por el algoritmo. 
-    
+    aumenta, la función de pérdida del resultado obtenido se va pareciendo cada vez a la función de pérdida calculada a partir de las imagenes de entrada, sin embargo,
+    esto influye notablemente en el tiempo de ejecución requerido por el algoritmo.
+
     \subsection{Evaluación \label{sec:evaluacion}}
       Para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica, que permita definir si un resultado
-      obtenido es mejor que otro, debido a que en lo que respecta a las obras de arte, las evaluaciones suelen ser cualitativas en lugar de cuantitativas. 
+      obtenido es mejor que otro, debido a que en lo que respecta a las obras de arte, las evaluaciones suelen ser cualitativas en lugar de cuantitativas.
       Por ello es que se debe buscar una forma de cuantificar estos aspectos cualitativos.
 
   \section{Solución propuesta \label{sec:solucion}}
@@ -988,7 +991,7 @@
     La solución consta de 3 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo), otro módulo encargado de
     evaluar la imagen generada, y un tercer modulo que determina, en base al puntaje de clasificacion obtenido si es necesario continuar el proceso de generacion, como se puede
     observar en la figura \ref{fig:diagrama}
-    
+
     \begin{figure}[h]
       \begin{center}
 	\includegraphics[width=\linewidth]{./img/diagrama.png}
@@ -996,10 +999,10 @@
       \caption{En la figura se puede observar la interaccion entre los distintos modulos propuestos}
       \label{fig:diagrama}
     \end{figure}
-    
+
     \subsection{Módulo de generación de imágenes \label{sec:generador}}
-      En este modulo se implementa el algoritmo propuesto por Gatys, para la transferencia de estilo, requiere como entrada una imagen de estilo, 
-      una imagen de contenido y como hiperparametro el numero de iteraciones que se ejecutara el optimizador para generar el resultado final. 
+      En este modulo se implementa el algoritmo propuesto por Gatys, para la transferencia de estilo, requiere como entrada una imagen de estilo,
+      una imagen de contenido y como hiperparametro el numero de iteraciones que se ejecutara el optimizador para generar el resultado final.
       La salida de este es una imagen generada donde el contenido se acerca a la imagen de contenido  y el estilo se acerca a la imagen de estilo, a medida
       que va aumentando el numero de iteraciones la distancia entre las imagenes de entrada y la imagen generada se va minimizando.
     \subsection{Módulo de evaluación de imágenes \label{sec:evaluador}}
@@ -1009,8 +1012,8 @@
       la imagen resultante es de carácter cualitativo. A fin de establecer una medida cuantitativa y así controlar el resultado de la generación de
       manera más objetiva, se propone definir un clasificador, que se encargue de reconocer el estilo de una imagen, brindando un puntaje de clasificacion para cada estilo.
       De esta forma la imagen se evalua cuantitativamente segun el puntaje obtenido en el estilo objetivo.
-      La entrada de este modulo es la imagen generada y la salida es los puntajes de clasificacion obtenidos por la imagen para cada uno de los estilos. 
-      
+      La entrada de este modulo es la imagen generada y la salida es los puntajes de clasificacion obtenidos por la imagen para cada uno de los estilos.
+
       \subsubsection{Reconocimiento de estilo}
 	A partir de la idea de definir un clasificador de estilos, se realizó una investigación de los posibles metodos para lograr esto. Se decidio basarse en el algortimo presentado en \cite{Karayev:Style_Recognition}.
 	Este articulo plantea que los vectores de caracteristicas obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy utiles a la hora de
@@ -1019,30 +1022,34 @@
 	Basado en esta idea, decidimos implementar una version simplificada que consiste en realizar ajuste fino sobre una Red Neuronal Convolucional preentrenda para el reconocimiento de objetos.
 	De esta forma se van realizando evaluaciones de la imagen de salida obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
 
+        \FIXME{Resaltar el módulo de reconocimiento y como se aplica en el
+          pipeline de generación de estilo. esta ES la contribución más
+          importante del trabajo (positiva o negativa). hablar de la
+          construcción del dataset}
 
     \subsection{Módulo de Selección \label{sec:seleccion}}
       Este modulo es el encargado de determinar si es necesario seguir generando imagenes o se acepta la imagen obtenida en la iteracion actual. La entrada de este modulo
       es el vector de puntajes de clasificacion calculados por el modulo generador \ref{sec:generador}, y la salida es un valor binario indicando si se acepta o no la imagen.
       El criterio de selección que se propone para elegir la imagen óptima es el siguiente:
-      Basado en la hipotesis de que el resultado generado por el modulo generador \ref{sec:generador} obtenga un puntaje similar que la imagen de estilo en el modulo evaluador 
+      Basado en la hipotesis de que el resultado generado por el modulo generador \ref{sec:generador} obtenga un puntaje similar que la imagen de estilo en el modulo evaluador
       \ref{sec:evaluador}, se define una tolerancia del $\pm 20\%$ con respecto al puntaje obtenido por la imagen de estilo, en caso de que el resultado obtenga un puntaje que pertenezca
       a este rango, la imagen es aceptada como resultado final, en caso contrario el generador debe seguir iterando hasta obtener un resultado que cumpla con este requisito.
 
 
 \chapter{Experimentos}
  En este capitulo se exponen los experimentos realizados basados en la solución propuesta en la seccion \ref{sec:solucion}, que permiten validar o rechazar las hipotesis planteadas.
- Para ello se realizaron 2 experimentos principales: El primero consiste en crear un modulo de reconocimiento de estilos artisticos realizando ajuste fino sobre una CNN preentrenada 
- para el reconocimiento de objetos. En el segundo experimento se realiza el analisis empirico para la elección del numero de iteraciones mediante el criterio de selección planteado en la 
+ Para ello se realizaron 2 experimentos principales: El primero consiste en crear un modulo de reconocimiento de estilos artisticos realizando ajuste fino sobre una CNN preentrenada
+ para el reconocimiento de objetos. En el segundo experimento se realiza el analisis empirico para la elección del numero de iteraciones mediante el criterio de selección planteado en la
  seccion \ref{sec:seleccion}.
  \FIXME{descripción del contenido del capítulo (muy importante) HIPOTESIS?}
- 
+
 \section{Módulo de reconocimiento de estilo}
   Para implementar el modulo de reconocimiento de estilo se decidio realizar ajuste fino sobre una red neuronal convolucional preentrenada para el reconocimiento de objetos.
-  A lo largo de esta seccion se detallan las caracteristicas de la implementación de este modulo. 
+  A lo largo de esta seccion se detallan las caracteristicas de la implementación de este modulo.
   \subsection{Conjunto de datos}
-    El conjunto de datos utilizado para en este trabajo es el de WikiArt.\url{https://www.wikiart.org/}.  
-    Este conjunto de datos proviene de un proyecto de disponibilidad publica que tiene como objetivo principal hacer accesible el mundo del arte a cualquier persona y en cualquier lugar. 
-    WikiArt cuenta con una 150.000 obras de arte, de 2.500 artistas. Estas obras se encuentran en museos, universidades y otros edificios civiles de más de 70 países. Aunque la mayoría de estas obras de arte no está en la vista pública. 
+    El conjunto de datos utilizado para en este trabajo es el de WikiArt.\url{https://www.wikiart.org/}.
+    Este conjunto de datos proviene de un proyecto de disponibilidad publica que tiene como objetivo principal hacer accesible el mundo del arte a cualquier persona y en cualquier lugar.
+    WikiArt cuenta con una 150.000 obras de arte, de 2.500 artistas. Estas obras se encuentran en museos, universidades y otros edificios civiles de más de 70 países. Aunque la mayoría de estas obras de arte no está en la vista pública.
     Para la implementación de la solución, se utilizo un subconjunto, tomando los 10 estilos que mayor cantidad de obras de arte disponen. A continuacion se enumeran los estilos contemplados:
     \begin{enumerate}
       \item Impresionismo  (14433 obras de arte disponibles)
@@ -1056,23 +1063,23 @@
       \item Simbolismo (4689 obras de arte disponibles)
       \item Neo Clasisimo (3306 obras de arte disponibles)
     \end{enumerate}
-      A modo de ejemplo, en la figura \ref{mosaico_estilos} se muestra una imagen correspondiente a cada uno de los estilos elegidos. 
+      A modo de ejemplo, en la figura \ref{mosaico_estilos} se muestra una imagen correspondiente a cada uno de los estilos elegidos.
 	\FIXME{REVISAR MOSAICO}
 	\begin{figure}
 	  \def\tabularxcolumn#1{m{#1}}
 	  \begin{tabularx}{\textwidth}{@{}cXX@{}}
 	  %
 	  \begin{tabular}{cc}
-	    \subfloat[Modernismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/frida_kahlo.jpg}} 
-	    & \subfloat[Impresionismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/cezanne.jpg}}\\    
-	    \subfloat[Surrealismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/jhonson_style_candy.jpg}} 
-	    & \subfloat[Post Impresionismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/starry_night.jpg}}\\    
-	    \subfloat[Simbolismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/nicholas-roerich_chiktan-citadel-in-himalayas.jpg}} 
-	    & \subfloat[Neo Clasisimo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/pierre-narcisse-guerin_not-detected.jpg}}\\    
-	    \subfloat[Romanticismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/shipwreck.jpg}} 
+	    \subfloat[Modernismo]{\includegraphics[height=0.15\textheight]{./img/frida_kahlo.jpg}}
+	    & \subfloat[Impresionismo]{\includegraphics[height=0.15\textheight]{./img/cezanne.jpg}}\\
+	    \subfloat[Surrealismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/jhonson_style_candy.jpg}}
+	    & \subfloat[Post Impresionismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/starry_night.jpg}}\\
+	    \subfloat[Simbolismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/nicholas-roerich_chiktan-citadel-in-himalayas.jpg}}
+	    & \subfloat[Neo Clasisimo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/pierre-narcisse-guerin_not-detected.jpg}}\\
+	    \subfloat[Romanticismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/shipwreck.jpg}}
 	    & \subfloat[Barroco]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/rembrandt_bathsheba-bathing.jpg}}\\
-	    \subfloat[Realismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/vincent-van-gogh_cart-with-red-and-white-ox.jpg}} 
-	    & \subfloat[Expresionismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/picasso_selfport.jpg}}\\ 
+	    \subfloat[Realismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/vincent-van-gogh_cart-with-red-and-white-ox.jpg}}
+	    & \subfloat[Expresionismo]{\includegraphics[width=0.4\linewidth, height=0.15\textheight]{./img/picasso_selfport.jpg}}\\
 	  \end{tabular}
 
 	  \end{tabularx}
@@ -1091,17 +1098,17 @@
 	\end{enumerate}
 
     \subsection{Detalles de implementación}
-      Para realizar el ajuste fino, sobre este conjunto de datos generado, se utilizo la arquitectura de la red AlexNet \cite{AlexNet}, reemplazando la ultima capa por una capa que 
+      Para realizar el ajuste fino, sobre este conjunto de datos generado, se utilizo la arquitectura de la red AlexNet \cite{AlexNet}, reemplazando la ultima capa por una capa que
       aprenda a reconocer entre los posibles estilos. Los valores con los que se inicializo la red, eran los valores obtenidos al entrenar AlexNet para el reconocimiento de objetos de ImageNet.
       Para reentrenar la red ajustando los valores para el reconocimiento de estilo, se le proveyo el conjunto de datos generado, y se definio realizar 50000 iteraciones para el ajuste fino.
-      Para realizar el ajuste fino se utilizó las librerías Caffe y OpenCV en Python, y para el reentrenamiento fue requerido el uso de una GPU GTX 680. 
- 
+      Para realizar el ajuste fino se utilizó las librerías Caffe y OpenCV en Python, y para el reentrenamiento fue requerido el uso de una GPU GTX 680.
+
   \subsection{Resultados de clasificación}
    La red obtuvo un 92 \% de precisión en el conjunto de entrenamiento al reconocer estilos.
 
   \section{Elección del número de iteraciones empleando el módulo de reconocimiento}
-    Este experimento consiste en realizar un analisis empirico de la evolucion de los puntajes de clasificacion de estilo a medida que aumenta el numero de iteraciones 
-    que se ejecuta el modulo de generacion de imagenes. 
+    Este experimento consiste en realizar un analisis empirico de la evolucion de los puntajes de clasificacion de estilo a medida que aumenta el numero de iteraciones
+    que se ejecuta el modulo de generacion de imagenes.
     \subsection{Conjunto de datos}
       Para ejecutar el procedimiento, es necesario disponer de 2 conjuntos de imagenes, uno correspondiente a las imagenes de contenido y otro correspondiente a las imagenes de estilo.
       Para el conjunto de imagenes de contenido fueron elegidas 5 imagenes, de las cuales 2 son retratos de personas y las 3 restantes son fotografias de paisajes.
@@ -1126,7 +1133,7 @@
 	  \item Peso de funciones de perdida de estilo y contenido en la funcion de perdida total \FIXME{esto lo requiere el algoritmo}
 	  \item Tasa de aprendizaje para el optimizador
 	\end{itemize}
-	
+
 
     \subsection{Número de iteraciones vs. Puntaje de clasificación}
       A partir de los puntajes obtenidos por las imagenes generadas cada 10 iteraciones, se realiza un analisis para poder elegir la imagen ideal, en relacion a numero de iteraciones y puntaje
@@ -1134,15 +1141,15 @@
       A continuacion se muestran algunos graficos generados para el analisis de la relacion entre el numero de iteraciones vs. el puntaje de clasificacion.
       presentar y discutir experimentos y resultados.
       \FIXME{Agregar graficos de analisis}
-      En los distintos graficos se puede observar 
+      En los distintos graficos se puede observar
     \subsection{Validacion de hipotesis para criterio de seleccion}
-      Luego se realizar un analisis en varios graficos como los presentados en la seccion anterior se concluyo que la hipotesis sobre que el el puntaje de clasificacion de la imagen 
+      Luego se realizar un analisis en varios graficos como los presentados en la seccion anterior se concluyo que la hipotesis sobre que el el puntaje de clasificacion de la imagen
       de estilo y el puntaje de la imagen generada coinciden es falsa, debido a que esto no ocurre en todos los casos analizados, dependiendo de la imagen de contenido el estilo
       que obtiene mayor puntaje de clasificacion puede ser distinto al estilo de la imagen de estilo, ya que la imagen de contenido puede influir en el puntaje de clasificacion de estilo
       de la imagen generada, aunque en mucho menor proporción respecto a la imagen de estilo. Este resultado avala la idea que presenta Gatys acerca de que el estilo y el contenido de una
       imagen no son absolutamente separables.\\
       Debido a esto, el criterio de seleccion que se definio para elegir la imagen optima fue el siguiente: el estilo objetivo se definio como el estilo que tiene asignada una mayor
-      probabilidad de reconocimiento luego de 1000 iteraciones. Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo 
+      probabilidad de reconocimiento luego de 1000 iteraciones. Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo
       supera al puntaje del resto de los estilos. La imagen optima elegida es la correspondiente al numero de iteraciones medio del intervalo donde el estilo objetivo es el maximo. En caso de que haya mas de un de
       un intervalo que cumpla con este requisito, se devuelve una imagen optima de cada intervalo como posibles imagenes optimas para que el usuario elija cual es la optima segun su criterio
       cualitativo.
