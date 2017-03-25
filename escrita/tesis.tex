@@ -165,18 +165,17 @@
     Debido a que las obras de arte, sueles calificadas con métricas cualitativas y no tanto cuantitativas, se decidió utilizar otra red neuronal convolucional,
     entrenada especialmente para reconocer estilos artísticos y en base a los resultados que arroja se define si el número de iteraciones es suficiente para generar el resultado final
     o es necesario continuar iterando. \\
-    Para introducir al lector en el tema, a continuación se muestran algunos ejemplos de resultados generados transfiriendo el estilo artístico a fotografías:
-    \FIXME{ACOMODAR IMÁGENES Y COMPLETAR PIE DE FOTO}
+    Para introducir al lector en el tema en la figura \ref{fig:style_transfer_candy_tower} se puede observar un ejemplo del resultado de aplicar la transferencia de estilo en fotografias.
     \begin{figure}[h]
 
-      \subfloat[Imagen de Estilo]{\includegraphics[width=0.9\linewidth, height=5cm]{./img/jhonson_style_candy.jpg}\label{fig:candy}}
+      \subfloat[Imagen de Estilo]{\includegraphics[height=0.3\textheight]{./img/jhonson_style_candy.jpg}\label{fig:candy}}
 
-      \subfloat[Imagen de Contenido]{\includegraphics[width=0.9\linewidth, height=5cm]{./img/jhonson_content_tower.jpg}\label{fig:tower}}
+      \subfloat[Imagen de Contenido]{\includegraphics[height=0.3\textheight]{./img/jhonson_content_tower.jpg}\label{fig:tower}}
 
       \subfloat[Resultado obtenido transfiriendo el estilo de la obra de arte a la imagen de contenido]
-      {\includegraphics[width=0.9\linewidth, height=5cm]{./img/jhonson_result_tower_candy.jpg}\label{fig:candy_tower}}
+      {\includegraphics[height=0.3\textheight]{./img/jhonson_result_tower_candy.jpg}\label{fig:candy_tower}}
 
-    \caption{En la figura se puede observar un ejemplo de como funciona la transferencia de estilo}
+    \caption{Ejemplo de transferencia de estilo}
     \label{fig:style_transfer_candy_tower}
     \end{figure}
 
@@ -220,7 +219,6 @@
       Tom M. Mitchell elaboró una definición más formal de este concepto de aprendizaje: “se dice que un programa de computadora aprende de una experiencia E con respecto a una clase
       de tarea T y medición de desempeño P, si su desempeño en la tarea T, medido por P, mejora con la experiencia E” [Mitchell,1997].\\
       El aprendizaje automático es esencialmente una forma de estadística aplicada con énfasis en el uso de computadoras para estimar estadísticamente funciones complicadas.
-      \FIXME{AGREGAR EJEMPLO, DETECCIÓN DE NÚMEROS EN IMÁGENES, TEXTURAS O ALGÚN OTRO?}
 
     \subsection{Clasificación de algoritmos de aprendizaje automático}
       Dentro del aprendizaje automático, los algoritmos se pueden clasificar
@@ -297,7 +295,7 @@
 	A lo largo del desarrollo de la visión por computadora se distinguen dos enfoques para la generación de descriptores capaces de reconocer características de una imagen:
 	El enfoque basado en técnicas superficiales (o “shallow” en inglés) y el enfoque de aprendizaje profundo (o “deep” en inglés).
 
-      \subsubsection{Enfoque Clásico \FIXME{MODELOS \emph{SHALLOW}}}
+      \subsubsection{Enfoque Clásico}
 	El enfoque clásico (Shallow en la literatura en ingles) responde a la manera tradicional de hacer visión por computadoras. Se busca generar una representación invariante
 	a la posición, iluminación, fondo, etc. utilizando principalmente técnicas estadísticas a partir de conocimiento anterior del objeto y del contexto.
 	Los descriptores son diseñados a mano a partir de características físicas, hipótesis y observaciones. Con este enfoque no se aprenden características de los objetos sino que
@@ -718,6 +716,7 @@
     locales que son útiles en una región de la imagen, probablemente sean útiles en otras regiones de la imagen. \FIXME{BISHOP 285 }
     \subsection{Función de Convolución}
       \FIXME{Definir función de convolución}
+      \FIXME{Hablar de filtro}
     \begin{figure}[H]
       \begin{center}
        \includegraphics[width=0.8\linewidth]{./img/stanford_cnn.jpeg}
@@ -870,29 +869,44 @@
 	\end{itemize}
 
 \chapter{Algoritmo de Transferencia de estilo}
-
-    \section{Contexto}
-      En este capitulo se desarrollan los contenidos específicos relativos al Algoritmo de Transferencia de Estilos artisticos a fotografías. El algoritmo elegido para tal fin es el que
-      presenta Gatys en su articulo \cite{Gatys:Neural_Style}. \\
-      Inicialmente, el autor publica un articulo para sintetizar texturas naturales utilizando Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos,
-      donde define a una textura como la correlación entre los distintos mapas de caracteristicas de cada una de las capas de la red.\cite{Gatys:Texture_Synthesis}
-      Esta misma idea luego la aplica para la Transferencia de Estilos, problema que normalmente se encaraba en una rama de la visión de computadoras llamada representación
-      no fotorrealista \cite{Kyprianidis:ArtisticStylization}. Existen otros enfoques conceptualmente más relacionados con los métodos que utilizan la textura para lograr la transferencia
-      del estilo artístico: \cite{Hertzmann:ImageAnalogies}, \cite{Ashikhmin:FastTextureTransfer}, \cite{Efros:ImageQuilting}, \cite{Lee:DirectionalTextureTransfer},
-      \cite{Xie:FGTS}. Sin Embargo, estos enfoques anteriormente mencionados, se basan principalmente en técnicas que manipulan directamente el píxel de la representación de una imagen. 
-      En cambio, mediante Redes Neuronales Convolucionales entrenadas en el reconocimiento de objetos,  se puede llevar a cabo manipulaciones de caracteristicas de alto nivel que representan 
-      explícitamente el contenido de una imagen. \\
-      La publicación de estos artículos, ha incentivado a muchos investigadores del area a continuar desarrollando estas ideas, a tal punto que hasta el dia de hoy se siguen publicando
-      avances el tema, a gran velocidad.
-
     \section{Introducción}
+      En este capitulo se desarrollan los contenidos específicos relativos al Algoritmo de Transferencia de Estilos artisticos a fotografías. El algoritmo elegido para tal fin es el que
+      presenta Gatys et al. \cite{Gatys:Neural_Style}. \\
       En lo que al arte respecta, los humanos han desarrollado la capacidad de crear experiencias visuales únicas componiendo una compleja interacción entre el contenido y el estilo de una imagen.
       Sin ir mas lejos, las bases algoritmicas de este proceso se desconocen y no existen sistemas artificiales que con capacidades similares. Sin embargo, en otras areas fundamentales
       de la percepcion visual como el reconocimiento de objetos y rostros recientemente se ha alcanzado precisión cercana a la de un humano, utilizando modelos de redes neuronales profundas.
       Aquí se presenta un sistema artificial basado en una Red Neural Profunda que crea imágenes artísticas de alta calidad perceptiva. El sistema utiliza representaciones neuronales
       para separar y recombinar el contenido y el estilo de imágenes arbitrarias, proporcionando un algoritmo para la creación de imágenes artísticas.
+    
+    \section {Sintetizacion de texturas}
+      \FIXME{AGREGAR INFO}
+      Inicialmente, el autor publica un articulo para sintetizar texturas naturales utilizando Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos,
+      donde define a una textura como la correlación entre los distintos mapas de caracteristicas de cada una de las capas de la red \cite{Gatys:Texture_Synthesis}. 
+      
+    \section{Contexto}
+      Transferir el estilo de una imagen a otra puede ser considerado un problema de transferencia de texturas. En la transferencia de texturas el objetivo es sintetizar la textura de la imagen
+      de donde proviene, con algunas restricciones, de modo que permita preservar el contenido semantico de la imagen a la cual se le desea transferir la textura.
+      Teniendo en cuenta todo esto, el autor adapta su idea propuesta para sintetizar texturas a la Transferencia de Estilos, problema que normalmente se encaraba en una rama de la visión de computadoras llamada representación
+      no fotorrealista \cite{Kyprianidis:ArtisticStylization}. 
+      Existen otros algoritmos que utilizan este enfoque de considerarlo como un problema de transferencia de texturas, por ejemplo: Hertzmann analogias de imagenes para transferir la 
+      textura de una imagen de estilo a otra imagen \cite{Hertzmann:ImageAnalogies}, Ashkimin se centra en la transferencia de la informacion de alta frecuencia de la textura, 
+      preservando la informacion a gruesa escala de la de la imagen de destino \cite{Ashikhmin:FastTextureTransfer}, Efros y Freeman introduce un mapa de correspondencias
+      que incluye las características de la imagen de destino, tales como la intensidad de la imagen para restringir el proceso de sintetizacion de la textura \cite{Efros:ImageQuilting}, 
+      Lee et al. mejora este algoritmo agregando a la tranferencia de textura, informacion adicional acerca de los contornos y bordes \cite{Lee:DirectionalTextureTransfer}.
+      Aunque estos algoritmos logran resultados notables, todos ellos sufren de la misma limitación fundamental: usan sólo características de bajo nivel de la imagen de destino para 
+      informar a la transferencia de textura. Idealmente, sin embargo, un algortimo de transferencia de estilo debe ser capaz de extraer la semántica del contenido de la imagen de 
+      destino (por ejemplo, los objetos y el paisaje general) y, luego, informar al procedimiento de transferencia de textura para represente el contenido semántico de la imagen de destino 
+      junto con el estilo de la imagen de origen. Por lo tanto, un requisito fundamental es encontrar representaciones de la imagen que, modelen independientemente las variaciones 
+      de la semántica del contenido de la imagen y el estilo que se les presentan. Esto se puede lograr utilizando los mapas de caracteristicas de las Redes Neuronales Convolucionales 
+      entrenadas en el reconocimiento de objetos, ya que se ha probado que estas logran extraer información semantica de alto nivel del contenido de las imagenes \cite{AlexNet}. \\
+      La publicación de estos artículos, ha incentivado a muchos investigadores del area a continuar desarrollando estas ideas, a tal punto que hasta el dia de hoy se siguen publicando
+      avances el tema, a gran velocidad.
 
     \section{Sintesis \label{sec:sintesis}}
+      El algoritmo desarrollado conceptualmente es un algoritmo de tranferencia de texturas que restringe el metodo de sintetizacion de texturas utilizando mapas de caracteristicas
+      de redes neuronales convolucionales. Dado que la modelizacion de la textura se basa en estas mismas representaciones, el metodo de transferencia de estilo se reduce a un problema
+      de optimizacion en una unica red neuronal. Las imagenes son generadas minimizando la distancia entre los mapas de caracteristicas de las imagenes de entrada con los mapas de
+      caracteristica de la imagen de salida.
       Cuando las Redes Neuronales Convolucionales (CNNs) son entrenadas para reconocimiento de objetos, desarrollan una representación de la imagen que hace que la información
       del objeto sea cada vez más explícita a lo largo de la jerarquia de las capas de la red. Por lo tanto, a lo largo de las distintas capas de la red,
       la imagen de entrada se transforma en representaciones que cada vez más se preocupan por el contenido real de la imagen en lugar del valor de sus píxeles.
@@ -914,10 +928,26 @@
       Otros hiperparametros que requiere el algoritmo son definir cual sera la Red Convolucional utilizada y cuales seran las capas de la red empleadas para calcular el estilo y cual sera la capa elegida
       para calcular el contenido.
       	  \begin{figure}[h]
-	    \includegraphics[width=\linewidth]{./img/gatys_1.png}
-	    \caption{COMPLETAR}
-	    \label{fig:gatys_1}
+	    \includegraphics[width=\textwidth]{./img/gatys_1.png}
+	    \caption{Reconstrucciones del Estilo y Contenido utilizando una CNN}
+	    \label{fig:gatys_reconstrucciones}
 	  \end{figure}
+      En la figura \ref{fig:gatys_reconstrucciones} se pueden observar el resultado de reconstruir el estilo y el contenido utilizando los mapas de caracteristicas que se obtienen al
+      realizar una pasada hacia adelante en la red VGG. Dada una imagen de entrada, en cada capa de la red, ésta se representa como el mapa de caracteristicas en respuesta a los filtros
+      que pertenecen a esa capa. Mientras que el número de filtros va aumentando a lo largo de la jerarquía de la red, el tamaño de las representaciones de la imágenes va siendo reducido p
+      or algunos mecanismos disminución de resolución(por ejemplo, agrupación) que conduce a una disminución en el número total de unidades por cada capa de la red.\\
+      \textbf{Reconstruccion del contenido:}
+	En la parte inferior de la figura \ref{fig:gatys_reconstrucciones} podemos visualizar la información en diferentes etapas de procesamiento en la CNN por la reconstrucción 
+	de la imagen de entrada solamente conociendo las respuestas de los filtros 
+	en una capa en particular. Al reconstruir la imagen de entrada a partir de las capas 'conv1\_1'(a), 'conv2\_1' (b), 'conv3\_1' (c), 'conv4\_1' (d) y 'conv5\_1' (e) de la red VGG,  
+	se puede observar que la reconstrucción de las capas inferiores es casi perfecta (a,b,c). En cambio, en las capas más altas de la red, información detallada de los píxeles se 
+	pierde, mientras que el contenido de alto nivel  de la la imagen se conserva (d,e). \\
+      \textbf{Reconstruccion del estilo}:
+	En la parte superior de la figura \ref{fig:gatys_reconstrucciones} construimos un nuevo espacio de características que captura el estilo de una imagen de entrada. 
+	La representación de estilo se obtiene calculando las correlaciones entre los mapas de características de diferentes capas de la CNN. Al reconstruir el estilo de la imagen de estilo  
+	utlizando diferentes subconjuntos de capas de la red ('conv1\_1' (a), "conv1\_1' y 'conv2\_1' (b), 'conv1\_1', 'conv2\_1' y 'conv3\_1' (c),'conv1\_1', 'conv2\_1', 'conv3\_1 ' y 'conv4\_1' (d), 
+	'conv1\_1', 'conv2\_1', 'conv3\_1', 'conv4\_1' y 'conv5\_1' (e)). 
+	Esto crea imágenes que coinciden con el estilo de la imagen dada, descartando la información del orden espacial de la escena.
 
     \section{Métodos \label{sec:metodos}}
       Los resultados exhibidos fueron obtenidos utilizando la red VGG-19, de disponibilidad publica \cite{SimonyanVGG}.
@@ -962,15 +992,30 @@
       Esta funcion combina linealmente las funciones de perdida del contenido y el estilo, por lo que se conforma por 2 terminos principales, uno correspondiente a la funcion de perdida
       del contenido y otro correspondiente a la funcion de perdida del estilo, donde $\alpha$ y $\beta$ son los factores de peso para el contenido y el estilo respectivamente, 
       a la hora de combinarlos.
+      \begin{equation}
+       \hat x = \arg\min_X L_{total}
+      \end{equation}
+
 
       \FIXME{``formalizar'' la solución de resolver el problema
-        \eqref{eq:objetivo} como $\hat x = \arg\min_X L_{total}...$}
+        \eqref{eq:objetivo} como $\overrightarrow{x} = \arg\min_X L_{total}...$}
 
       \begin{figure}[h]
-	\includegraphics[width=\linewidth]{./img/gatys_method.png}
-	\caption{COMPLETAR}
-	\label{fig:gatys_2}
+	\includegraphics[width=\textwidth]{./img/gatys_method.png}
+	\caption{Algoritmo de transferencia de estilo}
+	\label{fig:gatys_generacion}
       \end{figure}
+	A continuacion se realiza una explicacion detallada de lo que se muestra en la figura \ref{fig:gatys_generacion}: \\
+	En primer lugar, las características de contenido y estilo se extraen y almacenan. La imagen de estilo $\overrightarrow{a}$ se pasa a través de la red
+	y sus representaciones de estilo $A^l$ en todas las capas incluidas, son calculadas y almacenadas (a la izquierda). La imagen de contenido $\overrightarrow{p}$ pasa a través 
+	de la red y la representación del contenido $P^l$ en una capa se almacena (a la derecha). Luego a partir de una imagen de ruido blanco $\overrightarrow{x}$ pasa a través de la red y sus
+	características de estilo de $G^l$ y sus características de contenido $F^l$ son calculadas. \\
+	En cada capa incluida en la representación de estilo, se calcula la diferencia cuadratica media punto a punto entre $G^l$ y $A^l$ para obtener la funcion de perdida del estilo
+	$L_{estilo}$ (a la izquierda). Tambien se calcula la diferencia cuadratica media entre $F^l$ y $P^l$ para obtener la funcion de perdida del contenido $L_{contenido}$ (a la derecha).
+	La función pérdida total $L_{total}$ es entonces una combinación lineal entre la función de perdida del contenido y la función de pérdida del estilo.
+	La derivada de  $L_{total}$ con respecto a los valores de los píxeles pueden ser calculadas con el metodo  de retropropagación del error (en el medio). 
+	Este gradiente se utiliza de forma iterativa actualizando la imagen $\overrightarrow{x}$ hasta que simultáneamente coincida con las características de estilo de la imagen 
+	de estilo $\overrightarrow{a}$ y con las características de contenido de la imagen de contenido $\overrightarrow{p}$ (en la parte inferior central).
 
 
 \chapter{Elección Automatica de hiperparámetros para Transferencia de estilo}
@@ -1009,8 +1054,6 @@
       que va aumentando el numero de iteraciones la distancia entre las imagenes de entrada y la imagen generada se va minimizando.
     
     \subsection{Módulo de evaluación de imágenes: Reconocimiento de estilo \label{sec:evaluador}}
-      %% Como se mencionó anteriormente, para lo que respecta a las obras de arte, la evaluación suele ser cualitativa. Por lo que para poder establecer una métrica de comparación cuantitativa
-      %% que permita evaluar el resultado generado, la idea que planteamos es implementar un modulo que reconozca el estilo de una imagen.
       Como se mencionó en Sec.~\ref{sec:evaluacion}, una de las limitaciones del proceso de transferencia de estilo es que la evaluación de
       la imagen resultante es de carácter cualitativo. A fin de establecer una medida cuantitativa y así controlar el resultado de la generación de
       manera más objetiva, se propone definir un clasificador, que se encargue de reconocer el estilo de una imagen, brindando un puntaje de clasificacion para cada estilo.
@@ -1197,6 +1240,10 @@
 \chapter{Conclusiones, Perspectivas y trabajos a futuro}
   \section{Conclusiones}
   \section{Trabajos a futuro}
+    \FIXME{ \url{https://dailyvisionblog.wordpress.com/2016/07/31/notes-on-texture-networks-feed-forward-synthesis-of-textures-and-stylized-images-and-style-transfer-related-papers/}}
+    \subsection{Reconocimiento de Estilos}
+      Basandose en la misma idea de entrenar una red convolucional para reconocer solo 10 estilos, se podria extender esto a todos los estilos y utilizando todas las imagenes disponibles
+      en WikiArt.
     \subsection{Automatizacion de hiperparámetros}
       Se podría realizar una especie de predefinición del número de iteraciones que requiere cada estilo, ejecutando el algoritmo una gran cantidad de veces y definiendo este valor
       estadisticamente, aunque esto puede llegar a no funciónar correctamente en todos los casos ya que dependiendo de la imagen de contenido, el estilo objetivo podria variar.
@@ -1204,6 +1251,7 @@
       A partir del articulo presentado por Gatys, se fueron publicando una serie de articulos que presentaban mejoras u optimizaciones al algortimo, ademas de buscar comprimir la red,
       para que una vez entrenada en un dispositivo de gran capacidad de computo, luego pueda ser insertado y ejecutado para transferir estilo en dispositivo menor como lo son los smartphones.
       Por ejemplo se lograron entrenar modelos que transfieran el estilo de una obra de arte en particular, que puede ser ejecutado en un smartphone
+      
 \printindex
 \bibliography{./tex/biblio}        %use a bibtex bibliography file refs.bib
 \bibliographystyle{unsrt}
