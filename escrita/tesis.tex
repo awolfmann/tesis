@@ -876,12 +876,24 @@
       Sin ir mas lejos, las bases algoritmicas de este proceso se desconocen y no existen sistemas artificiales que con capacidades similares. Sin embargo, en otras areas fundamentales
       de la percepcion visual como el reconocimiento de objetos y rostros recientemente se ha alcanzado precisión cercana a la de un humano, utilizando modelos de redes neuronales profundas.
       Aquí se presenta un sistema artificial basado en una Red Neural Profunda que crea imágenes artísticas de alta calidad perceptiva. El sistema utiliza representaciones neuronales
-      para separar y recombinar el contenido y el estilo de imágenes arbitrarias, proporcionando un algoritmo para la creación de imágenes artísticas.
-    
-    \section {Sintetizacion de texturas}
-      \FIXME{AGREGAR INFO}
+      para separar y recombinar el contenido y el estilo de imágenes arbitrarias, proporcionando un algoritmo para la creación de imágenes artísticas.\\
       Inicialmente, el autor publica un articulo para sintetizar texturas naturales utilizando Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos,
-      donde define a una textura como la correlación entre los distintos mapas de caracteristicas de cada una de las capas de la red \cite{Gatys:Texture_Synthesis}. 
+      donde define a una textura como la correlación entre los distintos mapas de caracteristicas de cada una de las capas de la red \cite{Gatys:Texture_Synthesis}. Aplicando este enfoque
+      logro obtener resultados muy interesantes como se muestran en la figura \ref{fig:textures}, en la parte inferior de la figura se muestra la imagen de muestra y en la parte superior
+      se muestra la reconstrucción de la imagen a partir de los mapas de caracteristicas de una de las ultimas capas de la CNN. Ademas en la ultima columna se muestra la representación
+      de una imagen que no corresponde a una textura, para dar una mejor intuicion de como se representa la informacion de la imagen.\\
+      \textbf{Sintesis de texturas:}
+      En el contexto del procesamiento de imagenes el concepto de textura hace referencia a imagenes digitales que se componen por elementos repetitivos a lo largo de la misma.
+      La sintesis de texturas es el proceso de construir algoritmicamente una imagen digital de grandes dimensiones basandose en una muestra pequeña, respetando la estructura de su contenido. La Sintesis de
+      texturas puede ser utilizada para rellenar agujeros en imágenes (como en los algoritmos de restauración) y la expansión de pequeñas imágenes.
+      Los algoritmos de sintesis de texturas tienen como objetivo principal que la imagen generada sea lo mas parecida posible a la imagen de muestra que estan sintetizando.\\
+      	\begin{figure}[H]
+	  \begin{center}
+	   \includegraphics[width=0.8\linewidth]{./img/textures.png}
+	  \end{center}
+	  \caption{Ejemplos de sintesis de texturas utilizando Redes Neuronales Convolucionales}
+	  \label{fig:textures}
+	\end{figure}
       
     \section{Contexto}
       Transferir el estilo de una imagen a otra puede ser considerado un problema de transferencia de texturas. En la transferencia de texturas el objetivo es sintetizar la textura de la imagen
@@ -991,14 +1003,12 @@
       \end{equation}
       Esta funcion combina linealmente las funciones de perdida del contenido y el estilo, por lo que se conforma por 2 terminos principales, uno correspondiente a la funcion de perdida
       del contenido y otro correspondiente a la funcion de perdida del estilo, donde $\alpha$ y $\beta$ son los factores de peso para el contenido y el estilo respectivamente, 
-      a la hora de combinarlos.
-      \begin{equation}
-       \hat x = \arg\min_X L_{total}
+      a la hora de combinarlos. Por lo tanto, la salida del algoritmo, a partir de lo enunciado en la ecuación \eqref{eq:objetivo}, sera el argumento $\overrightarrow{x}$
+      que minimice la funcion de perdida total, como se puede observar en la ecuacion \eqref{eq:resultante}. Para una mejor comprensión, en la figura \ref{fig:gatys_generacion} 
+      se exhibe graficamente como funciona el algoritmo.
+      \begin{equation} \label{eq:resultante}
+       \overrightarrow{x} = \arg\min_{\overrightarrow{x}} L_{total}(\overrightarrow{p},\overrightarrow{a},\overrightarrow{x})
       \end{equation}
-
-
-      \FIXME{``formalizar'' la solución de resolver el problema
-        \eqref{eq:objetivo} como $\overrightarrow{x} = \arg\min_X L_{total}...$}
 
       \begin{figure}[h]
 	\includegraphics[width=\textwidth]{./img/gatys_method.png}
@@ -1037,28 +1047,29 @@
     Con respecto al resto de los hiperparámetros  requeridos por el algoritmo, estos permanecen predefinidos de  antemano.
     La solución consta de 3 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo), otro módulo encargado de
     evaluar la imagen generada, y un tercer modulo que determina, en base al puntaje de clasificacion obtenido si es necesario continuar el proceso de generacion, como se puede
-    observar en la figura \ref{fig:diagrama}
+    observar en la figura \ref{fig:diagrama}.
 
     \begin{figure}[h]
       \begin{center}
 	\includegraphics[width=\linewidth]{./img/diagrama.png}
       \end{center}
-      \caption{En la figura se puede observar la interaccion entre los distintos modulos propuestos}
+      \caption{Diagrama de interaccion entre los distintos modulos propuestos}
       \label{fig:diagrama}
     \end{figure}
 
     \subsection{Módulo de generación de imágenes \label{sec:generador}}
-      En este modulo se implementa el algoritmo propuesto por Gatys, para la transferencia de estilo, requiere como entrada una imagen de estilo,
+      En este modulo se implementa el algoritmo propuesto por Gatys, para la transferencia de estilo, que requiere como entrada una imagen de estilo,
       una imagen de contenido y como hiperparametro el numero de iteraciones que se ejecutara el optimizador para generar el resultado final.
-      La salida de este es una imagen generada donde el contenido se acerca a la imagen de contenido  y el estilo se acerca a la imagen de estilo, a medida
-      que va aumentando el numero de iteraciones la distancia entre las imagenes de entrada y la imagen generada se va minimizando.
+      La salida de este es una imagen generada donde el contenido se acerca a la imagen de contenido y el estilo se acerca a la imagen de estilo, a medida
+      que va aumentando el numero de iteraciones la distancia entre las imagenes de entrada y la imagen generada se va minimizando. Para mas detalles
+      acerca del funcionamiento de este modulo, ver figura \ref{fig:gatys_generacion}.
     
     \subsection{Módulo de evaluación de imágenes: Reconocimiento de estilo \label{sec:evaluador}}
       Como se mencionó en Sec.~\ref{sec:evaluacion}, una de las limitaciones del proceso de transferencia de estilo es que la evaluación de
       la imagen resultante es de carácter cualitativo. A fin de establecer una medida cuantitativa y así controlar el resultado de la generación de
       manera más objetiva, se propone definir un clasificador, que se encargue de reconocer el estilo de una imagen, brindando un puntaje de clasificacion para cada estilo.
       De esta forma la imagen se evalua cuantitativamente segun el puntaje obtenido en el estilo objetivo.
-      La entrada de este modulo es la imagen generada y la salida es los puntajes de clasificacion obtenidos por la imagen para cada uno de los estilos.
+      La entrada de este modulo es la imagen generada y la salida es los puntajes de clasificacion obtenidos por la imagen para cada uno de los estilos.\\
 
       A partir de la idea de definir un clasificador de estilos, se realizó una investigación de los posibles metodos para lograr esto. Se decidio basarse en el algortimo presentado en \cite{Karayev:Style_Recognition}.
       Este articulo plantea que los vectores de caracteristicas obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy utiles a la hora de
@@ -1081,9 +1092,8 @@
  Para ello se realizaron 2 experimentos principales: El primero consiste en crear un modulo de reconocimiento de estilos artisticos realizando ajuste fino sobre una CNN preentrenada
  para el reconocimiento de objetos. En el segundo experimento se realiza el analisis empirico para la elección del numero de iteraciones mediante el criterio de selección planteado en la
  seccion \ref{sec:seleccion}.
- \FIXME{descripción del contenido del capítulo (muy importante) HIPOTESIS?}
 
-\section{Módulo de reconocimiento de estilo}
+\section{Reconocimiento de estilo}
   Para implementar el modulo de reconocimiento de estilo se decidio realizar ajuste fino sobre una red neuronal convolucional preentrenada para el reconocimiento de objetos.
   A lo largo de esta seccion se detallan las caracteristicas de la implementación de este modulo.
   \subsection{Conjunto de datos}
@@ -1105,6 +1115,7 @@
     \end{enumerate}
       A modo de ejemplo, en la figura \ref{mosaico_estilos} se muestra una imagen correspondiente a cada uno de los estilos elegidos.
 	\begin{figure}
+	  \begin{center}
 	  \def\tabularxcolumn#1{m{#1}}
 	  \begin{tabularx}{\textwidth}{@{}cXX@{}}
 	  %
@@ -1124,13 +1135,15 @@
 	  \end{tabularx}
 
 	  \caption{Ejemplos de obras de arte correspondientes a los estilos seleccionados}\label{mosaico_estilos}
+	  \end{center}
+
 	\end{figure}
 
       \subsubsection{Recolección y construcción del conjunto datos}
 	El proceso de recoleccion y construccion de datos consistio en distintas etapas:
 	\begin{enumerate}
-	 \item Definir los 10 principales estilos de los que se dispongan mayor cantidad de obras.
-	 \item Descargar cada una de las obras de arte de todos los estilos seleccionados
+	 \item Definir los 10 principales estilos de los que se dispongan mayor cantidad de obras, enumeradas anteriormente.
+	 \item Descargar cada una de las obras de arte de todos los estilos seleccionados.
 	 \item Verificar que la descarga haya sido exitosa y el archivo obtenido este en condiciones para ser utilizado en el proceso.
 	 \item Ordenar los archivos segun el estilo al que pertenecen.
 	 Luego de realizado este proceso, de las 81320 imagenes disponibles para los estilos elegidos, el conjunto de datos generado queda conformado por 68807 imagenes.
@@ -1142,10 +1155,10 @@
       Para reentrenar la red ajustando los valores para el reconocimiento de estilo, se le proveyo el conjunto de datos generado, y se definio realizar 50000 iteraciones para el ajuste fino.
       Para realizar el ajuste fino se utilizó las librerías Caffe y OpenCV en Python, y para el reentrenamiento fue requerido el uso de una GPU GTX 680.
 
-  \subsection{Resultados de clasificación}
-   La red obtuvo un 92 \% de precisión en el conjunto de entrenamiento al reconocer estilos.
+    \subsection{Resultados de clasificación}
+    La red obtuvo un 92 \% de precisión en el conjunto de entrenamiento al reconocer estilos.
 
-  \section{Elección del número de iteraciones empleando el módulo de reconocimiento}
+  \section{Elección del número de iteraciones empleando el módulo de reconocimiento} 
     Este experimento consiste en realizar un analisis empirico de la evolucion de los puntajes de clasificacion de estilo a medida que aumenta el numero de iteraciones
     que se ejecuta el modulo de generacion de imagenes.
     \subsection{Conjunto de datos}
@@ -1175,12 +1188,46 @@
 
 
     \subsection{Número de iteraciones vs. Puntaje de clasificación}
-      A partir de los puntajes obtenidos por las imagenes generadas cada 10 iteraciones, se realiza un analisis para poder elegir la imagen ideal, en relacion a numero de iteraciones y puntaje
-      de clasificacion obtenido.
-      A continuacion se muestran algunos graficos generados para el analisis de la relacion entre el numero de iteraciones vs. el puntaje de clasificacion.
-      presentar y discutir experimentos y resultados.
+      Luego de generar distintas imagenes para cada uno de los estilos, variando entre imagenes de retratos y paisajes como imagenes de contenido, se realizó un analisis
+      de la evolucion de los puntajes obtenidos por estas imagenes, a medida que el numero de iteraciones va aumentando. En esta seccion se presentan algunos casos de ejemplo
+      que permiten ilustrar lo sucedido en la mayoria de los casos del conjunto de datos generado.\\
+      El primer caso presentado en la figura \ref{fig:caso1_tubingen} es el mas simple, como imagen de estilo se utiliza The Shipwreck of the Minotaur, Joseph Mallord William Turner, 1805 (a),
+      el cual pertenece al Romanticismo, y como imagen de contenido se utiliza una fotografia de un paisaje de la ciudad de Tubingen, Alemania (b).
+      En la imagen (c) se puede observar el resultado obtenido partiendo desde una imagen de ruido, luego de 620 iteraciones y en la imagen (d) se puede observar el resultado partiendo desde 
+      la imagen de contenido, luego de 600 iteraciones.
+      La diferencia entre ambos resultados en este caso es sutil, pero al comenzar desde la imagen de contenido, los bordes y contornos de esta, son mas notorios en el resultado
+      que al comenzar desde ruido.
+        \begin{figure}[H]
+	  \def\tabularxcolumn#1{m{#1}}
+	  \begin{tabularx}{\textwidth}{@{}cXX@{}}
+	  \begin{tabular}{cc}
+	    \subfloat[Imagen de Estilo: Shipwreck, Turner, 1805]{\includegraphics[height=0.2\textheight]{./img/shipwreck.jpg}}
+	    & \subfloat[Imagen de Contenido: Fotografia de Tubingen]{\includegraphics[height=0.2\textheight]{./img/tubingen.jpg}}\\
+	    \subfloat[Resultado comenzando desde ruido]{\includegraphics[ height=0.2\textheight]{./img/tubingen_shipwreck_620_random.png}}
+	    & \subfloat[Resultado comenzando desde el contenido]{\includegraphics[height=0.2\textheight]{./img/tubingen_shipwreck_600_image.png}}\\
+	  \end{tabular}
+	  \end{tabularx}
+	  
+	  \caption{Ejemplos de obras de arte correspondientes a los estilos seleccionados}\label{fig:caso1_tubingen}
+	\end{figure}
+	En cuanto a la evolucion de los puntajes de clasificación, como se puede observar en la figura \ref{fig:puntajes_caso1}, en este caso se cumple con la hipotesis de que el 
+	estilo predicho para el resultado coincide con el estilo de la imagen de estilo (Romanticismo), al partir desde una imagen de ruido, en las primeras 200 iteraciones el 
+	clasificador no logra reconocer un claro estilo, pero luego se va normalizando hasta obtener una predicción confiable, ya que la diferencia con los otros estilos es notoria.
+	\begin{figure}[H]
+	  \begin{center}
+	    \subfloat[Evolucion de los puntajes comenzando desde ruido]{\includegraphics[ height=0.35\textheight]{./img/tubingen_shipwreck_random_scores.png}}\\
+	    %\subfloat[Evolucion de los puntajes comenzando desde contenido]{\includegraphics[height=0.4\textheight]{./img/tubingen_shipwreck_image_scores.png}}\\
+	  \end{center}
+	  \caption{Evolucion de los puntajes}
+	  \label{fig:puntajes_caso1}
+	\end{figure}
+	
+	Como segundo caso de analisis se eligio una situacion en la que la prediccion de la imagen resultante coincide con el estilo de la imagen de estilo provista, si se comienza
+	el procedimiento desde la imagen de ruido, pero esto no ocurre si se comienza desde la imagen de contenido.
+	Para este caso exhibido en la figura \ref{fig:caso2_scream}, como imagen de estilo se utilizo El grito, de Edward Munch, 1893 correspondiente al Expresionismo (a) y como imagen de contenido una fotografia del Golden Gate, un
+	icono de la ciudad de San Francisco, Estados Unidos (b). En la imagen (c) se muestra el resultado partiendo desde ruido y en la (d) desde la imagen de contenido, ambas luego de
+	540 iteraciones, desde el aspecto visual estos resultados son muy similares, pero para el clasificador son muy distintos como luego de muestra en la figura \ref{fig:puntajes_caso2}.
       
-      En los distintos graficos se puede observar
       	\begin{figure}[H]
 	  \def\tabularxcolumn#1{m{#1}}
 	  \begin{tabularx}{\textwidth}{@{}cXX@{}}
@@ -1191,46 +1238,32 @@
 	    & \subfloat[Resultado comenzando desde el contenido]{\includegraphics[height=0.2\textheight]{./img/golden_gate_the_scream_540_image.png}}\\
 	  \end{tabular}
 	  \end{tabularx}
-	  
-	  \caption{Ejemplos de obras de arte correspondientes a los estilos seleccionados}\label{mosaico_estilos}
+	  \caption{Ejemplos de obras de arte correspondientes a los estilos seleccionados}\label{fig:caso2_scream}
 	\end{figure}
+      
+      Al analizar la evolucion de los puntajes predichos por el clasificador nos encontramos con la sorpresa de que el puntaje maximo de clasificación varia dependiendo de la imagen
+      en la cual comienza el proceso de tranferencia de estilo, como se puede ver en la figura \ref {fig:puntajes_caso2}, en el grafico (a) se muestra la evolucion de los puntajes
+      partiendo de la imagen de ruido, que luego de las 200 iteraciones se termina normalizando al Expresionismo como predicción, lo cual coincide con la imagen de estilo provista.
+      Sin embargo, en el grafico (b) se muestra la evolucion de los puntajes de predicción partiendo de la imagen de contenido, en la cual se exhibe al Simbolismo como prediccion 
+      mayoritaria.
+      
       \begin{figure}[H]
 	\begin{center}
-	  \subfloat[Evolucion de los puntajes comenzando desde ruido]{\includegraphics[ height=0.4\textheight]{./img/golden_gate_thescream_random_scores.png}}\\
+	  \subfloat[Evolucion de los puntajes comenzando desde ruido]{\includegraphics[height=0.4\textheight]{./img/golden_gate_thescream_random_scores.png}}\\
 	  \subfloat[Evolucion de los puntajes comenzando desde contenido]{\includegraphics[height=0.4\textheight]{./img/golden_gate_thescream_image_scores.png}}\\
 	\end{center}
 	\caption{Evolucion de los puntajes}
-	\label{fig:golden_gate_scream}
+	\label{fig:puntajes_caso2}
       \end{figure}
       
-        \begin{figure}[H]
-	  \def\tabularxcolumn#1{m{#1}}
-	  \begin{tabularx}{\textwidth}{@{}cXX@{}}
-	  \begin{tabular}{cc}
-	    \subfloat[Imagen de Estilo: The Scream]{\includegraphics[height=0.2\textheight]{./img/shipwreck.jpg}}
-	    & \subfloat[Imagen de Contenido: Fotografia del Golden Gate]{\includegraphics[height=0.2\textheight]{./img/tubingen.jpg}}\\
-	    \subfloat[Resultado comenzando desde ruido]{\includegraphics[ height=0.2\textheight]{./img/tubingen_shipwreck_620_random.png}}
-	    & \subfloat[Resultado comenzando desde el contenido]{\includegraphics[height=0.2\textheight]{./img/tubingen_shipwreck_600_image.png}}\\
-	  \end{tabular}
-	  \end{tabularx}
-	  
-	  \caption{Ejemplos de obras de arte correspondientes a los estilos seleccionados}\label{mosaico_estilos}
-	\end{figure}
-      \begin{figure}[H]
-	\begin{center}
-	  \subfloat[Evolucion de los puntajes comenzando desde ruido]{\includegraphics[ height=0.35\textheight]{./img/tubingen_shipwreck_random_scores.png}}\\
-	  %\subfloat[Evolucion de los puntajes comenzando desde contenido]{\includegraphics[height=0.4\textheight]{./img/tubingen_shipwreck_image_scores.png}}\\
-	\end{center}
-	\caption{Evolucion de los puntajes}
-	\label{fig:tubingen_shipwreck}
-      \end{figure}
     \subsection{Validacion de hipotesis para criterio de seleccion}
       Luego se realizar un analisis en varios graficos como los presentados en la seccion anterior se concluyo que la hipotesis sobre que el el puntaje de clasificacion de la imagen
       de estilo y el puntaje de la imagen generada coinciden es falsa, debido a que esto no ocurre en todos los casos analizados, dependiendo de la imagen de contenido el estilo
       que obtiene mayor puntaje de clasificacion puede ser distinto al estilo de la imagen de estilo, ya que la imagen de contenido puede influir en el puntaje de clasificacion de estilo
       de la imagen generada, aunque en mucho menor proporción respecto a la imagen de estilo. Este resultado avala la idea que presenta Gatys acerca de que el estilo y el contenido de una
       imagen no son absolutamente separables.\\
-      Debido a esto, el criterio de seleccion que se definio para elegir la imagen optima fue el siguiente: el estilo objetivo se definio como el estilo que tiene asignada una mayor
+      Debido a esto, el criterio de seleccion que se definio para elegir la imagen optima fue el siguiente: el estilo objetivo, en lugar de ser el estilo correspondiente a la imagen de estilo
+      provista para la transferencia de estilo, se definio como el estilo que tiene asignada una mayor
       probabilidad de reconocimiento luego de 1000 iteraciones. Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo
       supera al puntaje del resto de los estilos. La imagen optima elegida es la correspondiente al numero de iteraciones medio del intervalo donde el estilo objetivo es el maximo. En caso de que haya mas de un de
       un intervalo que cumpla con este requisito, se devuelve una imagen optima de cada intervalo como posibles imagenes optimas para que el usuario elija cual es la optima segun su criterio
