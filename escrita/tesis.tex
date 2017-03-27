@@ -575,14 +575,32 @@
 	  respecto a los pesos deben ser evaluados. La importancia de la contribución de la retropropagación es la de proveer un método	computacionalmente eficiente para la evaluación 
 	  de dichas derivadas. Debido a que en esta etapa los errores son propagados hacia atrás a través de la red, se utiliza el término de retropropagación del error.
 	  En la segunda etapa, las derivadas son utilizadas para calcular los ajustes que se les deben hacer a los pesos, en cada una de las capas de la red.
+	  
 	  Las principales funciones de error de interes, para calcular el error total en todo el conjunto de datos de $N$ instancias, lo hacen midiendo el error en cada una de las instancias,
 	  es decir son de la forma:
 	  \begin{equation*}
-	    E(W) = sum_{i=1}^N E_n 
+	    E(W) = \sum_{i=1}^N E_n 
 	  \end{equation*}
+	  Aqui debemos considerar el problema de la evaluación de $\nabla E_n(w)$ para cada término en la función de error. Esto puede ser usado directamente para la optimización secuencial, 
+	  o los resultados pueden ser acumulados a lo largo  del conjunto de entrenamiento en el caso de los métodos por lotes.
+	  Consideremos, en primer lugar de un simple modelo lineal en el que las salidas $y_k$ son combinaciones lineales de las variables de entrada $x_i$, es decir:
+	  \begin{equation*}
+	    y_k = \sum_i w_{ki} x_i
+	  \end{equation*}
+	  junto con una función de error que, para un determinado valor de entrada $n$, toma la forma:
+	  \begin{equation*}
+	    E_n = \frac{1}{2} \sum_k (y_{nk}-t_{nk})^2
+	  \end{equation*}
+	  donde $y_{nk} = y_{k} (X_n , W)$. El gradiente de esta función de error con respecto a un peso $w_{ji}$ está dada por:
+	  \begin{equation*}
+	    \frac{\partial E_n}{\partial w_{ji}} = (y_{nj} − t_{nj}) x_{ni}
+	  \end{equation*}
+	  que puede ser interpretado como un 'computo local' que involucra el producto entre un "error" $y_{nj} − t_{nj}$ asociado a la de salida del enlace $w_{ji}$ y la variable $x_{ni}$ 
+	  asociada a la variable de entrada del enlace.
+	  Veremos ahora cómo este simple resultado se extiende hasta el escenario más complejo de redes neuronales artificiales.
 	  En una red neuronal cada unidad de computo, calcula una suma pesada de sus valores de entrada, de la forma:
 	  \begin{equation} \label{eq:unidad_computo}
-	   a_j = sum_{i} w_{ji} z_i
+	   a_j = \sum_{i} w_{ji} z_i
 	  \end{equation}
 	  Donde $z_i$ es el valor de entrada, $a_j$ es el valor que le envia a la unidad $j$ y $w_{ji}$ es el peso asociado a esa conexion.
 	  La suma obtenida en \eqref{eq:unidad_computo} es luego transformada por una funcion no lineal $h(.)$ para calcular el valor correspondiente a la unidad $j$, es decir:
@@ -612,16 +630,31 @@
 	  \end{equation}
 	  La ecuación \eqref{eq:sustitution2} nos dice que la derivada se obtiene simplemente multiplicando el valor de $\delta$ para la unidad en el extremo de salida del peso 
 	  por el valor de$z$ para la unidad en el extremo de entrada del peso. Tenga en cuenta que esto lleva de la misma forma como para el simple modelo lineal considerado al inicio de esta sección.
-	  Por lo tanto, con el fin de evaluar los derivados, sólo tenemos que calcular el valor de $\delta_j$ para cada oculta y de salida de la unidad en la red y, a continuación, aplicar (5.53). 
-	  Como ya hemos visto, para la salida de las unidades, tenemos
-	  \FIXME{SEGUIR EN PAGINA 261}
-	  Equation (5.53) tells us that the required derivative is obtained simply by multiplying the value of $\delta$ for the unit at the output end of the weight by the value of z for 
-	  the unit at the input end of the weight (where z = 1 in the case of a bias). Note that this takes the same form as for the simple linear model considered at the start of 
-	  this section. Thus, in order to evaluate the derivatives, we need only to calculate the value of $\delta_j$ for each hidden and output unit in the network, and then apply (5.53). 
-	  As we have seen already, for the output units, we have
-
-
-
+	  Por lo tanto, con el fin de evaluar los derivados, sólo tenemos que calcular el valor de $\delta_j$ para cada unidad oculta y de salida  en la red y, a continuación, aplicar (5.53). 
+	  Como ya hemos visto, para las unidades de salida tenemos
+	  \begin{equation}
+	   \delta_k = y_k t_k
+	  \end{equation}
+	  Para evaluar las $\delta$ para las unidades ocultas, volvemos a hacer uso de la regla de la cadena para derivadas parciales:
+	  \begin{equation}\label{eq:chain_rule}
+	   \delta_j \equiv \frac{\partial E_n}{\partial a_j} = \sum_k \frac{\partial E_n}{\partial a_k} \frac{\partial a_k}{\partial a_j}
+	  \end{equation}
+	  \begin{figure}[h]
+	    \begin{center}
+	    \includegraphics[width=\linewidth]{./img/bishop_backpropagation.jpg}
+	    \end{center}
+	    \caption{ Ilustración del cálculo de $\delta_j$ oculta de la unidad j por retropropagación de la $\delta$ a partir de esas k unidades para las que la unidad $j$ envía 
+	      conexiones. La flecha azul indica el la dirección del flujo de la información durante la propagación hacia adelante, y las flechas rojas indican la propagación 
+	      hacia atrásde la información de error.}
+	    \label{fig:backpropagation}
+	  \end{figure}
+	  Donde la suma se ejecuta sobre todas las unidades $k$ donde la unidad $j$ envía conexiones. La disposición de las unidades y pesos se ilustra en la Figura \ref{fig:backpropagation} 
+	  Notar que las unidades etiquetadas k podrían incluir otras unidades ocultas y/o de salida. En la escritura de la (5.55), estamos haciendo uso del hecho 
+	  de que las variaciones en un j dar lugar a variaciones en la función de error sólo a través de las variaciones en las variables de k . Si ahora sustituimos la definición 
+	  de $\delta$ dada por \eqref{eq:notation} dentro de \eqref{eq:chain_rule}, y hacemos uso de \eqref{eq:unidad_computo} y \eqref{eq:nolineal}, obtenemos la siguiente fórmula de retropropagación
+	  \begin{equation}
+	   \delta_j = h'(a_j) \sum_k w_{kj} \delta_k
+	  \end{equation}
 
 	  Retropropagación (en inglés Backpropagation) es una forma de computar los gradientes de expresiones mediante la aplicación recursiva de la regla de la cadena.
 	  El ciclo consta de 2 fases, propagación y luego actualización de parámetros. Cuando ingresan los parámetros a la función, los valores intermedios se van propagando hasta 
