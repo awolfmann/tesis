@@ -126,7 +126,7 @@
       predicciones lo suficientemente precisas sobre nuevos ejemplos. Este modelo aprende una función de predicción $F$, a partir del conjunto de datos de entrenamiento que se le provee.
       Cada una de las instancias del conjunto de datos de entrenamiento es representado por un vector características, a partir de los cuales la función de predicción
       se va ajustando durante el entrenamiento o aprendizaje.
-      “Un modelo que aprende que no asume nada acerca de la identidad del concepto objetivo, no tiene ninguna base racional para clasificar cosas que nunca vio.” \cite{Mitchell:1997:ML:541177}
+      “Un modelo que aprende no asume nada acerca de la identidad del concepto objetivo, no tiene ninguna base racional para clasificar cosas que nunca vio” \cite{Mitchell:1997:ML:541177}.
 
       El aprendizaje automático se emplea en una serie de tareas informáticas en las que el diseño y la programación de algoritmos explícitos son inviables, como por ejemplo para la detección de Spam, el reconocimiento
       óptico de caracteres y los motores de búsqueda.\\
@@ -165,7 +165,9 @@
     Debido a que las obras de arte, sueles calificadas con métricas cualitativas y no tanto cuantitativas, se decidió utilizar otra red neuronal convolucional,
     entrenada especialmente para reconocer estilos artísticos y en base a los resultados que arroja se define si el número de iteraciones es suficiente para generar el resultado final
     o es necesario continuar iterando. \\
-    Para introducir al lector en el tema en la figura \ref{fig:style_transfer_candy_tower} se puede observar un ejemplo del resultado de aplicar la transferencia de estilo en fotografias.
+    Para introducir al lector en el tema en la figura \ref{fig:style_transfer_candy_tower} se puede observar un ejemplo del resultado de aplicar la transferencia de estilo en fotografias:
+    Como imagen de estilo se eligio una imagen abstracta \label{fig:candy} y como imagen de contenido una fotografia de un paisaje \label{fig:tower}, obteniendo como resultado de la
+    transferencia de estilo una imagen en la cual se mantienen las estructuras de la imagen de contenido pero con los colores y trazos de la imagen de estilo \ref{fig:candy_tower}
     \begin{figure}[h]
 
       \subfloat[Imagen de Estilo]{\includegraphics[height=0.3\textheight]{./img/jhonson_style_candy.jpg}\label{fig:candy}}
@@ -254,11 +256,13 @@
 	\paragraph {Agrupamiento}
 	   El algoritmo de Agrupamiento consiste en reunir objetos en grupos, de forma tal que los objetos pertenecientes a un mismo grupo son en algún sentido mas similares
 	   entre ellos que a los objetos que pertenecen a otro grupo. El objetivo de los métodos de agrupamiento es descubrir relaciones significativas presentes en los datos, por lo
-	   que el concepto central es la definición de una función de distancia entre las instancias. Cada definición de distancias induce un agrupamiento de los datos, basado en esa métrica.
+	   que el concepto central es la definición de una función de distancia entre las instancias. Cada definición de distancias induce un agrupamiento de los datos, basado en esa 
+	   métrica, tal como se puede observar en la figura \ref{fig:clustering}.
+	   
 
-	  \begin{figure}[h]
+	  \begin{figure}[H]
 	    \includegraphics[scale=0.5]{./img/stackoverflow_clustering.png}
-	    \caption{En la primer figura se puede observar los datos distribuidos en el espacio, que luego son agrupados por colores en 3 clases distintas}
+	    \caption{Ejemplo de agrupamiento de instancias mediante aprendizaje no supervisado}
 	    \label{fig:clustering}
 	  \end{figure}
 
@@ -280,9 +284,8 @@
 	Por ejemplo, mediante aprendizaje por refuerzo una computadora puede aprender a jugar al Backgammon o al Ajedrez a niveles profesionales.
 
     \subsection{Vectores de Características para el Aprendizaje}
-      \FIXME{Posible Referencia \url{http://machinelearningmastery.com/discover-feature-engineering-how-to-engineer-features-and-how-to-get-good-at-it/}}
-      Para que un modelo pueda aprender, es necesario definir un vector de características (features vector en inglés) que este deberá aprender a partir de las instancias de entrenamiento.
-      Una Feature es una pieza de información que podría ser útil para la predicción. Cualquier atributo podría ser una feature, siempre y cuando sea útil para el modelo.
+      Para que un modelo pueda aprender, es necesario definir un vector de características (features en inglés) que este deberá aprender a partir de las instancias de entrenamiento.
+      Una Feature es una pieza de información que podría ser útil al modelo permitiendole realizar una predicción mas precisa. Cualquier atributo podría ser una feature, siempre y cuando sea útil para el modelo.
       Según el tipo de dato, las características irán variando. \\
       Por ejemplo para representar un documento de texto, el método mas utilizado es la bolsa de palabras.
       Este método genera una característica por cada palabra de su vocabulario, y cada documento es representado por un vector, cada posición del vector se asocia a una palabra del
@@ -301,7 +304,8 @@
 	Los descriptores son diseñados a mano a partir de características físicas, hipótesis y observaciones. Con este enfoque no se aprenden características de los objetos sino que
 	se procesa la imagen de interés con un extractor de features prefijadas y luego se pasa la nueva representación a un clasificador entrenable.
 	Los métodos más utilizadas que generan este tipo de descriptores son SIFT, SURF y Vectores Fisher.
-	Otro ejemplo es el de la bolsa de palabras visuales, similar al método ejemplificado para texto, que se ilustra en la siguiente imagen:\\
+	Otro ejemplo es el de la bolsa de palabras visuales, similar al método ejemplificado para texto, que se ilustra en la figura \ref{fig:bovw}, donde se intenta reconocer un rostro,
+	una bicicleta y una guitarra, basandose en las palabras visuales que contiene su "Diccionario".
 	\begin{figure}[h]
 	  \begin{center}
 	    \includegraphics[scale=0.5]{./img/bag_of_visual_words.jpg}
@@ -322,12 +326,14 @@
 	alimentan el aprendizaje de otras features que aprenden a reconocer contornos y bordes, y así sucesivamente hasta llegar a las features de mas alto nivel que logran reconocer
 	estructuras y objetos. Debido a esto, las estructuras de aprendizaje profundo contemplan esta particularidad organizándose en diferentes capas, donde la salida de una capa
 	es la entrada a la capa siguiente. Las Redes Neuronales Convolucionales soportan el aprendizaje de este tipo features y es el modelo que analizaremos posteriormente en este trabajo.\\
-	\begin{figure}[h!]
+	En la figura \ref{fig:shallow_deep} se realiza una comparacion entre los enfoques clasicos y el enfoque de aprendizaje profundo.  En las 3 primeras opciones del diagrama se 
+	pueden observar las distintas formas de representar imágenes mediante técnicas de aprendizaje automático tradicional,
+	donde, en todos los casos, las características deben estar predefinidas a mano, y se van agregando modulos que permiten mejorar la prediccion. 
+	En cambio para las técnicas de aprendizaje profundo, las representaciones son aprendidas durante el entrenamiento del modelo.
+	\begin{figure}[H]
 	  \begin{center}
 		  \includegraphics[width=0.9\linewidth]{./img/vedaldi_shallow_deep.pdf}
-	  \caption{En las 3 primeras opciones del diagrama se pueden observar las distintas formas de representar imágenes mediante técnicas de aprendizaje automático tradicional,
-	  donde las características deben estar predefinidas a mano, en cambio para las técnicas de aprendizaje profundo, las representaciones son aprendidas durante el entrenamiento
-	  del modelo.}
+	  \caption{Comparacion de los distintos enfoques clasicos frente al enfoque de aprendizaje profundo}
 	  \label{fig:shallow_deep}
 	  \end{center}
 	\end{figure}
@@ -343,15 +349,16 @@
 	  que toma el resultado de $f$ y decide a cual de las $K$ clases pertenece y para el caso de la regresión es la función identidad $H(f(x))=f(x)$.
 	  Un ejemplo de función de puntuación:
 	  Suponiendo que tenemos $x$ una imagen de entrada, que la queremos asociar a una clase $y_{j}$ de las $K$ clases posibles , sea $D$ la dimensionalidad de $x$, $x \in R^D$,
-	  $j \in 1..K$, entonces $f$ es una función: $f:R^D {\rightarrow} {1,..,K}$. El caso mas simple es el de una clasificador lineal:\\
-	  \begin{equation}
+	  $j \in 1..K$, entonces $f$ es una función: $f:R^D {\rightarrow} {1,..,K}$. El caso mas simple es el de una clasificador lineal, como se expresa en la ecuacion \eqref{eq:linear_classifier}.
+	  \begin{equation}\label{eq:linear_classifier}
 	    f(x, W, b) = W x + b
 	  \end{equation}
 	  Donde $W \in R^{K \times D}$, $b \in R^{K \times 1}$ son los parámetros de la función. $W$ suele ser llamado los pesos y $b$ el sesgo, ya que influye en el resultado de salida, pero sin
-	  interactuar con el dato de entrada.
+	  interactuar con el dato de entrada. En la figura \ref{fig:linear_classifier} Se puede observar graficamente como funciona un clasificador lineal que distingue aviones, autos y ciervos,
+	  trazando lineas rectas en el hiperplano.
 	  Algunas cosas a tener en cuenta:
 	  \begin{itemize}
-	   \item Observar también que consideramos los datos de entrada $(x, y_{j})$  prefijados, pero tenemos control sobre el ajuste de los parámetros $W$ y $b$.
+	   \item Observar que consideramos los datos de entrada $(x, y_{j})$  prefijados, pero tenemos control sobre el ajuste de los parámetros $W$ y $b$.
 		 Nuestro objetivo será establecerlos de tal manera que las puntuaciones computadas coincidan con las etiquetas correctas sobre todo conjunto de entrenamiento.
 		 Intuitivamente deseamos que la clase correcta tenga una puntuación más alta que las puntuaciones de las clases incorrectas.
 	   \item Una ventaja de este enfoque es que los datos de entrenamiento se utilizan para aprender los parámetros $W$ y $b$, pero una vez que el aprendizaje es completo,
@@ -363,12 +370,12 @@
 	     \includegraphics[scale=0.5]{./img/stanford_linear_class.jpeg}
 	    \end{center}
 	    \caption{Ejemplo de clasificador lineal que utiliza una función de puntuación lineal para clasificar entre autos, aviones y ciervos}
-	    \label{fig:figure2}
+	    \label{fig:linear_classifier}
 	  \end{figure}
 
 	\subsubsection{Funciones de Pérdida}
-	  El problema de estimar los parámetros de un modelo, se resuelve optimizando una función de costo que se puede expresar como:
-          \begin{equation}
+	  El problema de estimar los parámetros de un modelo, se resuelve optimizando una función de costo expresada en la ecuacion \eqref{eq:perdida}.
+          \begin{equation}\label{eq:perdida}
 	    L = \frac{1}{N}\sum_{i=1}^{N} L_i(y_i, f(x_i, W, b)) + \lambda \Omega(W)
           \end{equation}
           Con $L:\mathcal{Y}\times \mathcal{Y}\rightarrow\mathbb{R}_+$, donde $\mathcal{Y}$ en el caso de la clasificación de la Sec.~\ref{sec:prediccion} seria ${1,..,K}$.
@@ -413,12 +420,12 @@
 	  Una técnica para evitar el sobre ajuste de modelos es utilizar regularización. Esencialmente, consiste en penalizar los parámetros del modelo para evitar su
 	  crecimiento desmedido, agregando un regularizador($\Omega(W)$) a la Función de Pérdida. \\
 	  La función de regularización mas comúnmente utilizada es la norma $L2$, definida como:
-	   \begin{equation}
+	   \begin{equation*}
 	    \Omega(W) = \frac{1}{2} {\sum_{k} {\sum_{l}} W_{k,l}^2}
-	   \end{equation}
+	   \end{equation*}
 
     \subsubsection{Optimización}
-      Minimizar la función de pérdida puede considerarse un problema de optimización, con lo cual se pueden aplicar las técnicas empleadas en este tipo de problemas, para resolverlo.
+      Minimizar la función de pérdida \eqref{eq:perdida} puede considerarse un problema de optimización, con lo cual se pueden aplicar las técnicas empleadas en este tipo de problemas, para resolverlo.
       El objetivo de la optimización es encontrar el vector de pesos $W$ que minimice la función de pérdida.\\
       La estrategia de optimización mas utilizada para este tipo de problemas es la de seguir la dirección del gradiente (también llamado derivada) de la función de pérdida.
       En este caso que la función toma como entrada un vector de números, se aplican las derivadas parciales y el gradiente es el vector resultante de calcular las derivadas parciales
@@ -426,14 +433,14 @@
       toma un hiper-parámetro $\eta$ llamado tasa de aprendizaje que define el tamaño de cada paso en la iteración.
       Sea $F$ la función de pérdida, $w$ el vector de pesos, $N$ el numero de datos de entrenamiento, cada iteración consiste de:
 
-      \begin{equation}
+      \begin{equation}\label{eq:gradient_descent}
 	w_{n+1} = w_n - \eta \nabla L(w_n)  = w_n - \eta \sum_{i=1}^{N} \nabla L_i(w_n)
       \end{equation}
 
       Un problema recurrente en el aprendizaje automático es que para una buena generalización, son necesarios grandes conjuntos de entrenamiento,
       pero grandes conjuntos de entrenamiento también son más costosos desde el punto de vista computacional.
       En aplicaciones de gran escala, el conjunto de entrenamiento puede ser del orden de los millones de ejemplos, por lo que computar la función de
-      pérdida completa sobre todo el conjunto para actualizar un solo parámetro seria algo impracticable.\\
+      pérdida completa sobre todo el conjunto para actualizar un solo parámetro, como ocurre en el caso de \eqref{eq:gradient_descent}, seria algo impracticable.\\
       Un enfoque común que se aplica a este problema es computar el gradiente sobre pequeños lotes del conjunto de entrenamiento,
       que permite lograr una buena aproximación al objetivo completo con una convergencia mucho mas rápida, es decir se reduce $N$ a un pequeño subconjunto, de esta forma se
       reduce el numero de cálculos realizados en cada iteración. Este método se lo conoce como \emph{Descenso por el gradiente estocástico} y es el mas utilizado para optimizar
@@ -559,14 +566,69 @@
 	La diferencia más grande entre los modelos lineales y las redes neuronales es que la no linealidad de una red neuronal hace que las funciones de pérdida
 	más interesantes se vuelvan no convexas. Esto significa que las redes neuronales suelen ser entrenadas mediante el uso de optimizadores iterativos basados ​​en gradientes
 	que simplemente minimizan la función de costo, en lugar de los solucionadores de ecuaciones lineales usados ​​para entrenar modelos de regresión lineal. Para el caso de las
-	redes neuronales, la técnica ampliamente utilizada es la de retropropagación del error:
+	redes neuronales, la técnica ampliamente utilizada es la de retropropagación del error.
 
 	\subsubsection{Retropropagación del Error}
 	  \FIXME{\url{http://cs231n.github.io/optimization-2/} AGREGAR FORMALIDADES REGLA DE LA CADENA}
-	  Retropropagación (en inglés Backpropagation) una forma  de computar los gradientes de expresiones mediante la aplicación recursiva de la regla de la cadena.
-	  El ciclo consta de 2 fases, propagación y luego actualización de parámetros. Cuando ingresan los parámetro a la función se calcula el resultado final, y se lo compara con el resultado
-	  deseado, aplicando la función de pérdida se calcula el error, mediante el método de optimización se define el gradiente para luego realizar la retropropagación en la función hasta
-	  actualizar los parámetros.
+	  La mayoría de los algoritmos de aprendizaje implican un procedimiento iterativo para la minimización de una función de error, que van ajustand los pesos mediante 
+	  una secuencia de pasos. En cada paso, se pueden distinguir dos etapas bien diferenciadas. En la primera etapa, las derivadas de la función de error con 
+	  respecto a los pesos deben ser evaluados. La importancia de la contribución de la retropropagación es la de proveer un método	computacionalmente eficiente para la evaluación 
+	  de dichas derivadas. Debido a que en esta etapa los errores son propagados hacia atrás a través de la red, se utiliza el término de retropropagación del error.
+	  En la segunda etapa, las derivadas son utilizadas para calcular los ajustes que se les deben hacer a los pesos, en cada una de las capas de la red.
+	  Las principales funciones de error de interes, para calcular el error total en todo el conjunto de datos de $N$ instancias, lo hacen midiendo el error en cada una de las instancias,
+	  es decir son de la forma:
+	  \begin{equation*}
+	    E(W) = sum_{i=1}^N E_n 
+	  \end{equation*}
+	  En una red neuronal cada unidad de computo, calcula una suma pesada de sus valores de entrada, de la forma:
+	  \begin{equation} \label{eq:unidad_computo}
+	   a_j = sum_{i} w_{ji} z_i
+	  \end{equation}
+	  Donde $z_i$ es el valor de entrada, $a_j$ es el valor que le envia a la unidad $j$ y $w_{ji}$ es el peso asociado a esa conexion.
+	  La suma obtenida en \eqref{eq:unidad_computo} es luego transformada por una funcion no lineal $h(.)$ para calcular el valor correspondiente a la unidad $j$, es decir:
+	  \begin{equation}\label{eq:nolineal}
+	   z_j = h(a_j)
+	  \end{equation}
+	  Para cada instancia en el conjunto de entrenamiento, vamos a suponer que hemos suministrado el correspondiente vector de entrada a la red y que se calcula la activación 
+	  de todas unidades en la red mediante aplicaciones sucesivas de \eqref{eq:unidad_computo} y \eqref{eq:nolineal}. Este proceso a menudo se denomina 
+	  propagación hacia adelante porque puede ser considerado como un flujo de avance de la información a través de la red.\\
+	  Ahora, considere la evaluación de la derivada de $E_n$ con respecto a un peso $w_{ji}$. Los valores de salidas de las distintas unidades dependerá del vector de entrada $n$. 
+	  Sin embargo, en el fin de mantener la notación despejada, vamos a omitir el subíndice $n$ de las variables de red. Primero observamos que $E_n$ depende del peso $w_{ji}$ 
+	  sólo a través de la suma de entrada $a_j$ a la unidad $j$. Por lo tanto, podemos aplicar la regla de la cadena para derivadas parciales, con lo cual obtenemos:
+	  \begin{equation} \label{eq:partial_derivatives}
+	   \frac{\partial E_n}{\partial w_{ji}} = \frac{\partial E_n}{\partial a_j} \frac{\partial a_j}{\partial w_{ji}}
+	  \end{equation}
+	  Se introduce una notacion util:
+	  \begin{equation} \label{notation}
+	   \delta_j \equiv \frac{\partial E_n}{\partial a_j}
+	  \end{equation}
+	  Utilizando \eqref{eq:unidad_computo} podemos escribir:
+	  \begin{equation} \label{eq:sustitution1}
+	   \frac{\partial a_j}{\partial w_{ji}} = z_i
+	  \end{equation}
+	  Substituyendo \eqref{notation} y \eqref{eq:sustitution1} en \eqref{eq:partial_derivatives} obtenemos:
+	  \begin{equation} \label{eq:sustitution2}
+	   \frac{\partial E_n}{\partial w_{ji}} = \delta_j z_i
+	  \end{equation}
+	  La ecuación \eqref{eq:sustitution2} nos dice que la derivada se obtiene simplemente multiplicando el valor de $\delta$ para la unidad en el extremo de salida del peso 
+	  por el valor de$z$ para la unidad en el extremo de entrada del peso. Tenga en cuenta que esto lleva de la misma forma como para el simple modelo lineal considerado al inicio de esta sección.
+	  Por lo tanto, con el fin de evaluar los derivados, sólo tenemos que calcular el valor de $\delta_j$ para cada oculta y de salida de la unidad en la red y, a continuación, aplicar (5.53). 
+	  Como ya hemos visto, para la salida de las unidades, tenemos
+	  \FIXME{SEGUIR EN PAGINA 261}
+	  Equation (5.53) tells us that the required derivative is obtained simply by multiplying the value of $\delta$ for the unit at the output end of the weight by the value of z for 
+	  the unit at the input end of the weight (where z = 1 in the case of a bias). Note that this takes the same form as for the simple linear model considered at the start of 
+	  this section. Thus, in order to evaluate the derivatives, we need only to calculate the value of $\delta_j$ for each hidden and output unit in the network, and then apply (5.53). 
+	  As we have seen already, for the output units, we have
+
+
+
+
+	  Retropropagación (en inglés Backpropagation) es una forma de computar los gradientes de expresiones mediante la aplicación recursiva de la regla de la cadena.
+	  El ciclo consta de 2 fases, propagación y luego actualización de parámetros. Cuando ingresan los parámetros a la función, los valores intermedios se van propagando hasta 
+	  calcular el resultado final, esto conforma la fase de propagación. Una vez finalizada la propagación, se compara el resultado obtenido con el resultado deseado. 
+	  Luego aplicando la función de pérdida se calcula el error. Mediante el método de optimización (por ejemplo Descenso por el gradiente estocastico), se define el gradiente 
+	  para finalmente realizar la retropropagación en la función hasta actualizar los parámetros.
+	  
 	  \FIXME{VER EN BISHOP pag 260}
 	\subsubsection {Entrenamiento}
 	  El entrenamiento de una red neuronal consiste de 2 pasos: paso hacia adelante, y paso de retropropagación del error
