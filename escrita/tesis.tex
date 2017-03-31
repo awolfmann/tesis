@@ -135,7 +135,8 @@
       La principal herramienta elegida para poder llevar a cabo la transferencia de estilo en fotografías son las Redes Neuronales Convolucionales, estas Redes Neuronales Artificiales asumen
       explícitamente que los elementos de  entrada del algoritmo serán imágenes, lo cual le permite implementar ciertas optimizaciones dentro del algoritmo, luego
       se irán explicando mas detalladamente todos estos conceptos en profundidad.\\
-      Otro ejemplo de amplia investigación y desarrollo en la actualidad son los autos que se conducen por si solos, los cuales emplean estas técnicas dentro de sus procesos para lograrlo.
+      Otro ejemplo de amplia investigación y desarrollo en la actualidad son los autos que se conducen por si solos, como se ilustra en la figura \ref{fig:car_detection},
+      los cuales emplean estas técnicas de aprendizaje profundo dentro de sus procesos para lograrlo.
 
     \begin{figure}[h]
       \includegraphics[width=0.9\linewidth]{./img/nvidia_car_detection.png}
@@ -166,16 +167,16 @@
     entrenada especialmente para reconocer estilos artísticos y en base a los resultados que arroja se define si el número de iteraciones es suficiente para generar el resultado final
     o es necesario continuar iterando. \\
     Para introducir al lector en el tema en la figura \ref{fig:style_transfer_candy_tower} se puede observar un ejemplo del resultado de aplicar la transferencia de estilo en fotografias:
-    Como imagen de estilo se eligio una imagen abstracta \label{fig:candy} y como imagen de contenido una fotografia de un paisaje \label{fig:tower}, obteniendo como resultado de la
+    Como imagen de estilo se eligio una imagen abstracta \ref{fig:candy} y como imagen de contenido una fotografia de un paisaje \ref{fig:tower}, obteniendo como resultado de la
     transferencia de estilo una imagen en la cual se mantienen las estructuras de la imagen de contenido pero con los colores y trazos de la imagen de estilo \ref{fig:candy_tower}
     \begin{figure}[h]
 
-      \subfloat[Imagen de Estilo]{\includegraphics[height=0.3\textheight]{./img/jhonson_style_candy.jpg}\label{fig:candy}}
+      \subfloat[Imagen de Estilo]{\includegraphics[height=0.27\textheight]{./img/jhonson_style_candy.jpg}\label{fig:candy}}
 
-      \subfloat[Imagen de Contenido]{\includegraphics[height=0.3\textheight]{./img/jhonson_content_tower.jpg}\label{fig:tower}}
+      \subfloat[Imagen de Contenido]{\includegraphics[height=0.27\textheight]{./img/jhonson_content_tower.jpg}\label{fig:tower}}
 
       \subfloat[Resultado obtenido transfiriendo el estilo de la obra de arte a la imagen de contenido]
-      {\includegraphics[height=0.3\textheight]{./img/jhonson_result_tower_candy.jpg}\label{fig:candy_tower}}
+      {\includegraphics[height=0.27\textheight]{./img/jhonson_result_tower_candy.jpg}\label{fig:candy_tower}}
 
     \caption{Ejemplo de transferencia de estilo}
     \label{fig:style_transfer_candy_tower}
@@ -310,8 +311,8 @@
 	  \begin{center}
 	    \includegraphics[scale=0.5]{./img/bag_of_visual_words.jpg}
 	    \caption{Ejemplo de Bolsa de Palabras visuales}
+	    \label{fig:bovw}
 	  \end{center}
-	  \label{fig:bovw}
 	\end{figure}
 
 	Estas técnicas son utilizadas como paso de preprocesamiento de la imagen, ya que representación cruda en píxeles es insuficiente para proveerla como dato de entrada de un algoritmo
@@ -542,23 +543,40 @@
     \section{Redes Neuronales Artificiales}
 
       \subsection{Introducción}
-	Las Redes Neuronales Artificiales básicamente son una combinación lineal de funciones no lineales.
-	Un algoritmo de aprendizaje de red neuronal artificial (ANN), usualmente llamado "red neuronal" (NN), es un algoritmo de aprendizaje que se inspira en la estructura y aspectos funcionales
-	de la redes neuronales biológicas. Los cálculos se estructuran en términos de un grupo interconectado de neuronas artificiales, procesando la información utilizando un enfoque de grafos
-	a la computación. Las redes neuronales modernas son herramientas no lineales de modelado de datos estadísticos. Usualmente se usan para modelar relaciones complejas entre entradas y salidas,
+	Un algoritmo de aprendizaje de red neuronal artificial, usualmente llamado "red neuronal", es un algoritmo de aprendizaje  que sirve como herramienta de modelado de datos 
+	estadísticos en forma no lineal. Usualmente se usan para modelar relaciones complejas entre entradas y salidas,
 	para encontrar patrones en los datos, o para capturar la estructura estadística en una distribución de probabilidad conjunta desconocida entre las variables observadas. \\
-	Las redes neuronales se pueden modelar como un conjunto de neuronas conectadas en un grafo acíclico, que se suelen organizar por capas, las neuronas de una capa
+	Las redes neuronales se pueden modelar como un conjunto de neuronas(unidades de computo) conectadas en un grafo acíclico, que se suelen organizar por capas, las neuronas de una capa
 	se conectan con neuronas de sus capas adyacentes pero nunca se conectan 2 neuronas de una misma capa, como se puede observar en la figura \ref{fig:neural_network}.
-	Toda red neuronal tiene una capa de entrada, una capa de salida y un número determinado de capas ocultas, que pueden ser de distintos tipos.
+	Toda red neuronal tiene una capa de entrada, una capa de salida y un número determinado de capas ocultas, que pueden ser de distintos tipos. En la caso de la figura \ref{fig:neural_network}
+	la red neuronal que se ilustra, esta conformada por una capa de salida, una oculta y una capa de salida. Cada una de las capas puede estar compuesta por un numero distinto de
+	unidades.\\
 	Una de las principales razones por la cual las redes neuronales están organizadas en capas, es que este tipo de estructura permite evaluar una red, muy simple y eficientemente realizando
 	operaciones matriciales vectoriales, una red neuronal puede ser pensada como una serie de multiplicaciones de matrices entrelazadas con funciones de activaciones no lineales.
 	Las redes neuronales utilizadas en la actualidad tienen alrededor de 100 millones de parámetros distribuidos entre 10-20 capas.
 	\begin{figure}[H]
 	  \begin{center}
-	    \includegraphics[scale=0.5]{./img/bishop_neural_network.jpg}
+	    \includegraphics[width=0.8\linewidth]{./img/bishop_neural_network.jpg}
 	  \end{center}
 	  \caption{Red Neuronal Artificial}
 	  \label{fig:neural_network}
+	\end{figure}
+
+      \subsection {Neurona artificial}
+	La unidad de procesamiento de una red neuronal es una neurona. La misma toma como parametros un vector de entrada, un vector de pesos, un valor de sesgo. El computo realizado
+	en una neurona puede separarse en 2 etapas. En la primer etapa se realiza la suma de los productos punto a punto de los vectores de entrada, adicionandole finalmente el sesgo.
+	En la segunda etapa se realiza una transformacion no lineal del valor obtenido en la etapa anterior, 
+	entre los cuales se realiza un producto
+	punto a punto, luego se realiza la suma de los cada uno de los valores
+	una función de activación no lineal,
+	como se puede ver en la figura \ref{fig:neuron}.
+	En una neurona se realiza el producto punto entre el vector de entrada, y su vector de pesos, se le suma el sesgo y finalmente se aplica una función no lineal, obteniendo
+	de esta forma el vector de salida correspondiente.
+	\begin{figure}[H]
+          \begin{center}
+            \includegraphics[width=0.4\linewidth]{./img/neuron.jpg}
+	  \caption{Neurona artificial \label{fig:neuron}}
+          \end{center}
 	\end{figure}
 
       \subsection{Aprendizaje basado en el Gradiente}
@@ -568,131 +586,126 @@
 	que simplemente minimizan la función de costo, en lugar de los solucionadores de ecuaciones lineales usados ​​para entrenar modelos de regresión lineal. Para el caso de las
 	redes neuronales, la técnica ampliamente utilizada es la de retropropagación del error.
 
-	\subsubsection{Retropropagación del Error}
-	  \FIXME{\url{http://cs231n.github.io/optimization-2/} AGREGAR FORMALIDADES REGLA DE LA CADENA}
-	  La mayoría de los algoritmos de aprendizaje implican un procedimiento iterativo para la minimización de una función de error, que van ajustand los pesos mediante 
-	  una secuencia de pasos. En cada paso, se pueden distinguir dos etapas bien diferenciadas. En la primera etapa, las derivadas de la función de error con 
-	  respecto a los pesos deben ser evaluados. La importancia de la contribución de la retropropagación es la de proveer un método	computacionalmente eficiente para la evaluación 
-	  de dichas derivadas. Debido a que en esta etapa los errores son propagados hacia atrás a través de la red, se utiliza el término de retropropagación del error.
-	  En la segunda etapa, las derivadas son utilizadas para calcular los ajustes que se les deben hacer a los pesos, en cada una de las capas de la red.
-	  
-	  Las principales funciones de error de interes, para calcular el error total en todo el conjunto de datos de $N$ instancias, lo hacen midiendo el error en cada una de las instancias,
-	  es decir son de la forma:
-	  \begin{equation*}
-	    E(W) = \sum_{i=1}^N E_n 
-	  \end{equation*}
-	  Aqui debemos considerar el problema de la evaluación de $\nabla E_n(w)$ para cada término en la función de error. Esto puede ser usado directamente para la optimización secuencial, 
-	  o los resultados pueden ser acumulados a lo largo  del conjunto de entrenamiento en el caso de los métodos por lotes.
-	  Consideremos, en primer lugar de un simple modelo lineal en el que las salidas $y_k$ son combinaciones lineales de las variables de entrada $x_i$, es decir:
-	  \begin{equation*}
-	    y_k = \sum_i w_{ki} x_i
-	  \end{equation*}
-	  junto con una función de error que, para un determinado valor de entrada $n$, toma la forma:
-	  \begin{equation*}
-	    E_n = \frac{1}{2} \sum_k (y_{nk}-t_{nk})^2
-	  \end{equation*}
-	  donde $y_{nk} = y_{k} (X_n , W)$. El gradiente de esta función de error con respecto a un peso $w_{ji}$ está dada por:
-	  \begin{equation*}
-	    \frac{\partial E_n}{\partial w_{ji}} = (y_{nj} − t_{nj}) x_{ni}
-	  \end{equation*}
-	  que puede ser interpretado como un 'computo local' que involucra el producto entre un "error" $y_{nj} − t_{nj}$ asociado a la de salida del enlace $w_{ji}$ y la variable $x_{ni}$ 
-	  asociada a la variable de entrada del enlace.
-	  Veremos ahora cómo este simple resultado se extiende hasta el escenario más complejo de redes neuronales artificiales.
-	  En una red neuronal cada unidad de computo, calcula una suma pesada de sus valores de entrada, de la forma:
-	  \begin{equation} \label{eq:unidad_computo}
-	   a_j = \sum_{i} w_{ji} z_i
-	  \end{equation}
-	  Donde $z_i$ es el valor de entrada, $a_j$ es el valor que le envia a la unidad $j$ y $w_{ji}$ es el peso asociado a esa conexion.
-	  La suma obtenida en \eqref{eq:unidad_computo} es luego transformada por una funcion no lineal $h(.)$ para calcular el valor correspondiente a la unidad $j$, es decir:
-	  \begin{equation}\label{eq:nolineal}
-	   z_j = h(a_j)
-	  \end{equation}
-	  Para cada instancia en el conjunto de entrenamiento, vamos a suponer que hemos suministrado el correspondiente vector de entrada a la red y que se calcula la activación 
-	  de todas unidades en la red mediante aplicaciones sucesivas de \eqref{eq:unidad_computo} y \eqref{eq:nolineal}. Este proceso a menudo se denomina 
-	  propagación hacia adelante porque puede ser considerado como un flujo de avance de la información a través de la red.\\
-	  Ahora, considere la evaluación de la derivada de $E_n$ con respecto a un peso $w_{ji}$. Los valores de salidas de las distintas unidades dependerá del vector de entrada $n$. 
-	  Sin embargo, en el fin de mantener la notación despejada, vamos a omitir el subíndice $n$ de las variables de red. Primero observamos que $E_n$ depende del peso $w_{ji}$ 
-	  sólo a través de la suma de entrada $a_j$ a la unidad $j$. Por lo tanto, podemos aplicar la regla de la cadena para derivadas parciales, con lo cual obtenemos:
-	  \begin{equation} \label{eq:partial_derivatives}
-	   \frac{\partial E_n}{\partial w_{ji}} = \frac{\partial E_n}{\partial a_j} \frac{\partial a_j}{\partial w_{ji}}
-	  \end{equation}
-	  Se introduce una notacion util:
-	  \begin{equation} \label{notation}
-	   \delta_j \equiv \frac{\partial E_n}{\partial a_j}
-	  \end{equation}
-	  Utilizando \eqref{eq:unidad_computo} podemos escribir:
-	  \begin{equation} \label{eq:sustitution1}
-	   \frac{\partial a_j}{\partial w_{ji}} = z_i
-	  \end{equation}
-	  Substituyendo \eqref{notation} y \eqref{eq:sustitution1} en \eqref{eq:partial_derivatives} obtenemos:
-	  \begin{equation} \label{eq:sustitution2}
-	   \frac{\partial E_n}{\partial w_{ji}} = \delta_j z_i
-	  \end{equation}
-	  La ecuación \eqref{eq:sustitution2} nos dice que la derivada se obtiene simplemente multiplicando el valor de $\delta$ para la unidad en el extremo de salida del peso 
-	  por el valor de$z$ para la unidad en el extremo de entrada del peso. Tenga en cuenta que esto lleva de la misma forma como para el simple modelo lineal considerado al inicio de esta sección.
-	  Por lo tanto, con el fin de evaluar los derivados, sólo tenemos que calcular el valor de $\delta_j$ para cada unidad oculta y de salida  en la red y, a continuación, aplicar (5.53). 
-	  Como ya hemos visto, para las unidades de salida tenemos
-	  \begin{equation}
-	   \delta_k = y_k t_k
-	  \end{equation}
-	  Para evaluar las $\delta$ para las unidades ocultas, volvemos a hacer uso de la regla de la cadena para derivadas parciales:
-	  \begin{equation}\label{eq:chain_rule}
-	   \delta_j \equiv \frac{\partial E_n}{\partial a_j} = \sum_k \frac{\partial E_n}{\partial a_k} \frac{\partial a_k}{\partial a_j}
-	  \end{equation}
-	  \begin{figure}[h]
-	    \begin{center}
-	    \includegraphics[width=\linewidth]{./img/bishop_backpropagation.jpg}
-	    \end{center}
-	    \caption{ Ilustración del cálculo de $\delta_j$ oculta de la unidad j por retropropagación de la $\delta$ a partir de esas k unidades para las que la unidad $j$ envía 
-	      conexiones. La flecha azul indica el la dirección del flujo de la información durante la propagación hacia adelante, y las flechas rojas indican la propagación 
-	      hacia atrásde la información de error.}
-	    \label{fig:backpropagation}
-	  \end{figure}
-	  Donde la suma se ejecuta sobre todas las unidades $k$ donde la unidad $j$ envía conexiones. La disposición de las unidades y pesos se ilustra en la Figura \ref{fig:backpropagation} 
-	  Notar que las unidades etiquetadas k podrían incluir otras unidades ocultas y/o de salida. En la escritura de la (5.55), estamos haciendo uso del hecho 
-	  de que las variaciones en un j dar lugar a variaciones en la función de error sólo a través de las variaciones en las variables de k . Si ahora sustituimos la definición 
-	  de $\delta$ dada por \eqref{eq:notation} dentro de \eqref{eq:chain_rule}, y hacemos uso de \eqref{eq:unidad_computo} y \eqref{eq:nolineal}, obtenemos la siguiente fórmula de retropropagación
-	  \begin{equation}
-	   \delta_j = h'(a_j) \sum_k w_{kj} \delta_k
-	  \end{equation}
-
-	  Retropropagación (en inglés Backpropagation) es una forma de computar los gradientes de expresiones mediante la aplicación recursiva de la regla de la cadena.
-	  El ciclo consta de 2 fases, propagación y luego actualización de parámetros. Cuando ingresan los parámetros a la función, los valores intermedios se van propagando hasta 
-	  calcular el resultado final, esto conforma la fase de propagación. Una vez finalizada la propagación, se compara el resultado obtenido con el resultado deseado. 
-	  Luego aplicando la función de pérdida se calcula el error. Mediante el método de optimización (por ejemplo Descenso por el gradiente estocastico), se define el gradiente 
-	  para finalmente realizar la retropropagación en la función hasta actualizar los parámetros.
-	  
-	  \FIXME{VER EN BISHOP pag 260}
-	\subsubsection {Entrenamiento}
-	  El entrenamiento de una red neuronal consiste de 2 pasos: paso hacia adelante, y paso de retropropagación del error
-	  \begin{enumerate}
-	    \item En el paso hacia adelante se evalúa la red y se obtiene el resultado de salida, el cual se mide el error, se calcula el gradiente para luego aplicar el paso de retroalimentación
-	    \item En el paso de retropropagación del error se ajustan los pesos internos de la red en base al resultado del gradiente, desde las capas finales de la red hasta las capas iniciales.
-	  \end{enumerate}
-	  \FIXME{VER EN BISHOP}
-	  \begin{figure}[H]
-	    \begin{center}
-	    \includegraphics[width=\linewidth]{./img/backprop.png}
-	    \end{center}
-	    \caption{ Descripción de la retropropagación. (a) El entrenamiento es alimentado hacia delante, generando de salida correspondiente. (b) Error entre la salida real y la salida deseada
-	    se calcula. (c) El error se propaga hacia atrás, a través de actualizaciones donde una proporción del gradiente ($ \frac{\partial E}{\partial w_i}$ ) es la resta de cada peso. $x_i$, $w_i$, $\phi$ son las entradas,
-	    la entrada de pesos, y la función de activación de una neurona. Error $E$ se calcula a partir de la salida $y$ de salida deseado $t$. $\eta$ es la tasa de aprendizaje.
-	    \cite{Automatic_differentiation_ML} }
-	    \label{fig:backprop}
-	  \end{figure}
-
-
-      \subsection {Neurona artificial}
-	\begin{figure}[H]
-          \begin{center}
-            \includegraphics[width=0.4\linewidth]{./img/neuron.jpg}
-	  \caption{Neurona artificial \label{fig:neuron}}
-          \end{center}
+      \subsection{Retropropagación del Error}
+	La mayoría de los algoritmos de aprendizaje implican un procedimiento iterativo para la minimización de una función de error, que van ajustando los pesos mediante 
+	una secuencia de pasos. En cada paso, se pueden distinguir dos etapas bien diferenciadas. En la primera etapa, las derivadas de la función de error con 
+	respecto a los pesos deben ser evaluados. En la segunda etapa, las derivadas son utilizadas para calcular los ajustes que se les deben hacer a los pesos, en cada una 
+	de las capas de la red. La importante contribución de la retropropagación (propagar el error hacia atras, a traves de la red) es la de proveer un 
+	método computacionalmente eficiente para evaluar las derivadas requeridas en la primer etapa. A lo largo de esta sección, iremos desarrollando las ideas fundamentales de dicho
+	método.\\
+	Dado que debemos minimizar una función de error, primero es necesario analizar la forma de las principales funciones de error de interes. 
+	Para calcular el error total en todo el conjunto de datos de $N$ instancias, se hace midiendo el error en cada una de las instancias, es decir, las funciones de error 
+	son de la forma:
+	\begin{equation*}
+	  E(w) = \sum_{i=1}^N E_n(w)
+	\end{equation*}
+	Aqui debemos considerar el problema de la evaluación de $\nabla E_n(w)$ para cada término en la función de error. Esto puede ser usado directamente para la optimización secuencial, 
+	o los resultados pueden ser acumulados a lo largo  del conjunto de entrenamiento en el caso de los métodos de optimización por lotes.\\
+	\iffalse
+	Consideremos, en primer lugar de un simple modelo lineal en el que las salidas $y_k$ son combinaciones lineales de las variables de entrada $x_i$, es decir:
+	\begin{equation*}
+	  y_k = \sum_i w_{ki} x_i
+	\end{equation*}
+	junto con una función de error que, para un determinado valor de entrada $n$, toma la forma:
+	\begin{equation*}
+	  E_n = \frac{1}{2} \sum_k (y_{nk}-t_{nk})^2
+	\end{equation*}
+	donde $y_{nk} = y_{k} (X_n , W)$. El gradiente de esta función de error con respecto a un peso $w_{ji}$ está dada por:
+	\begin{equation*}
+	  \frac{\partial E_n}{\partial w_{ji}} = (y_{nj} − t_{nj}) x_{ni}
+	\end{equation*}
+	que puede ser interpretado como un 'computo local' que involucra el producto entre un "error" $y_{nj} − t_{nj}$ asociado a la de salida del enlace $w_{ji}$ y la variable $x_{ni}$ 
+	asociada a la variable de entrada del enlace.
+	Veremos ahora cómo este simple resultado se extiende hasta el escenario más complejo de redes neuronales artificiales.
+	\fi
+	En una red neuronal cada unidad de computo, calcula una suma pesada de sus valores de entrada, de la forma:
+	\begin{equation} \label{eq:unidad_computo}
+	  a_j = \sum_{i} w_{ji} z_i
+	\end{equation}
+	Donde $z_i$ es el valor de entrada, $a_j$ es el valor que le envia a la unidad $j$ y $w_{ji}$ es el peso asociado a esa conexion.
+	La suma obtenida en \eqref{eq:unidad_computo} es luego transformada por una funcion no lineal $h(.)$ para calcular el valor correspondiente a la unidad $j$, es decir:
+	\begin{equation}\label{eq:nolineal}
+	  z_j = h(a_j)
+	\end{equation}
+	Para cada instancia en el conjunto de entrenamiento, vamos a suponer que hemos suministrado el correspondiente vector de entrada a la red y que se calcula la activación 
+	de todas unidades en la red mediante aplicaciones sucesivas de \eqref{eq:unidad_computo} y \eqref{eq:nolineal}. Este proceso a menudo se denomina 
+	propagación hacia adelante porque puede ser considerado como un flujo de avance de la información a través de la red.\\
+	Ahora, considere la evaluación de la derivada de $E_n$ con respecto a un peso $w_{ji}$. Los valores de salidas de las distintas unidades dependerá del vector de entrada $n$. 
+	Sin embargo, en el fin de mantener la notación despejada, vamos a omitir el subíndice $n$ de las variables de red. Primero observamos que $E_n$ depende del peso $w_{ji}$ 
+	sólo a través de la suma de entrada $a_j$ a la unidad $j$. Por lo tanto, podemos aplicar la regla de la cadena para derivadas parciales, con lo cual obtenemos:
+	\begin{equation} \label{eq:partial_derivatives}
+	  \frac{\partial E_n}{\partial w_{ji}} = \frac{\partial E_n}{\partial a_j} \frac{\partial a_j}{\partial w_{ji}}
+	\end{equation}
+	Se introduce una notacion util:
+	\begin{equation} \label{eq:notation}
+	  \delta_j \equiv \frac{\partial E_n}{\partial a_j}
+	\end{equation}
+	Utilizando \eqref{eq:unidad_computo} podemos escribir:
+	\begin{equation} \label{eq:sustitution1}
+	  \frac{\partial a_j}{\partial w_{ji}} = z_i
+	\end{equation}
+	Substituyendo \eqref{eq:notation} y \eqref{eq:sustitution1} en \eqref{eq:partial_derivatives} obtenemos:
+	\begin{equation} \label{eq:sustitution2}
+	  \frac{\partial E_n}{\partial w_{ji}} = \delta_j z_i
+	\end{equation}
+	La ecuación \eqref{eq:sustitution2} nos dice que la derivada se obtiene simplemente multiplicando el valor de $\delta$ para la unidad en el extremo de salida del peso 
+	por el valor de$z$ para la unidad en el extremo de entrada del peso. Tenga en cuenta que esto lleva de la misma forma como para el simple modelo lineal considerado al inicio de esta sección.
+	Por lo tanto, con el fin de evaluar los derivados, sólo tenemos que calcular el valor de $\delta_j$ para cada unidad oculta y de salida  en la red y, a continuación, aplicar (5.53). 
+	Como ya hemos visto, para las unidades de salida tenemos
+	\begin{equation} \label{eq:delta_salida}
+	  \delta_k = y_k - t_k
+	\end{equation}
+	Para evaluar las $\delta$ para las unidades ocultas, volvemos a hacer uso de la regla de la cadena para derivadas parciales:
+	\begin{equation}\label{eq:chain_rule}
+	  \delta_j \equiv \frac{\partial E_n}{\partial a_j} = \sum_k \frac{\partial E_n}{\partial a_k} \frac{\partial a_k}{\partial a_j}
+	\end{equation}
+	\begin{figure}[h]
+	  \begin{center}
+	  \includegraphics[width=0.5\linewidth]{./img/bishop_backpropagation.jpg}
+	  \end{center}
+	  \caption{Ilustración del cálculo de $\delta_j$ de la unidad oculta  $j$ por retropropagación de la $\delta 's$ a partir de las $k$ unidades para las cuales la unidad $j$ envía 
+	    conexiones. La flecha azul indica el la dirección del flujo de la información durante la propagación hacia adelante, y las flechas rojas indican la propagación 
+	    hacia atrás de la información de error.}
+	  \label{fig:backpropagation}
 	\end{figure}
-	La unidad de procesamiento de una red neuronal es una neurona. La misma consta de un vector de entrada, un vector de pesos y una función de activación no lineal,
-	como se puede ver en la figura \ref{fig:neuron}.
-	En una neurona se realiza el producto punto entre el vector de entrada, y su vector de pesos, le suma el sesgo y aplica la función no lineal.
-	Una única neurona puede ser utilizada para implementar un clasificador binario.
+	Donde la suma se ejecuta sobre todas las unidades $k$ donde la unidad $j$ envía conexiones. La disposición de las unidades y pesos se ilustra en la Figura \ref{fig:backpropagation} 
+	Notar que las unidades etiquetadas k podrían incluir otras unidades ocultas y/o de salida. En la escritura de la (5.55), estamos haciendo uso del hecho 
+	de que las variaciones en un j dar lugar a variaciones en la función de error sólo a través de las variaciones en las variables de k . Si ahora sustituimos la definición 
+	de $\delta$ dada por \eqref{eq:notation} dentro de \eqref{eq:chain_rule}, y hacemos uso de \eqref{eq:unidad_computo} y \eqref{eq:nolineal}, obtenemos la siguiente fórmula de retropropagación
+	\begin{equation}\label{eq:backpropagation}
+	  \delta_j = h'(a_j) \sum_k w_{kj} \delta_k
+	\end{equation}
+	la cual nos dice que el valor de $\delta$ para una determinada unidad oculta se puede obtener mediante la propagación de la $\delta$'s hacia atrás a partir de unidades 
+	de más adelante en la red, como se ilustra en la figura \ref{fig:backpropagation}.  
+	Como ya conocemos los valores de los $\delta$'s para las unidades de salida, podemos aplicar de forma recursiva \eqref{eq:backpropagation} para evaluar los $\delta$'s 
+	para todas las unidades ocultas en una red, independientemente de su arquitectura.
+	Por lo que la retropropagación del error se puede resumir en los siguientes pasos:
+	\begin{enumerate}
+	  \item Aplicar un vector de entrada $x_n$ a la red y  propagarlo hacia adelante a través de la red utilizando \eqref{eq:unidad_computo} y \eqref{eq:nolineal} para encontrar 
+	  las activaciones de todas las unidades ocultas y de salida.
+	  \item Evaluar las $\delta_k$ para todas las unidades de salida utilizando \eqref{eq:delta_salida}.
+	  \item Propagar hacia atras los $\delta$'s usando \eqref{eq:backpropagation} para obtener el $\delta_j$ de cada unidad oculta de la red.
+	  \item Utilizar \eqref{eq:sustitution2} para evaluar las derivadas requeridas.
+	\end{enumerate}
+
+
+      \subsubsection {Entrenamiento}
+	El entrenamiento de una red neuronal consiste de 2 pasos: paso hacia adelante, y paso de retropropagación del error
+	\begin{enumerate}
+	  \item En el paso hacia adelante se evalúa la red y se obtiene el resultado de salida, el cual se mide el error, se calcula el gradiente para luego aplicar el paso de retroalimentación
+	  \item En el paso de retropropagación del error se ajustan los pesos internos de la red en base al resultado del gradiente, desde las capas finales de la red hasta las capas iniciales.
+	\end{enumerate}
+	\FIXME{VER EN BISHOP}
+	\begin{figure}[H]
+	  \begin{center}
+	  \includegraphics[width=\linewidth]{./img/backprop.png}
+	  \end{center}
+	  \caption{ Descripción de la retropropagación. (a) El entrenamiento es alimentado hacia delante, generando de salida correspondiente. (b) Error entre la salida real y la salida deseada
+	  se calcula. (c) El error se propaga hacia atrás, a través de actualizaciones donde una proporción del gradiente ($ \frac{\partial E}{\partial w_i}$ ) es la resta de cada peso. $x_i$, $w_i$, $\phi$ son las entradas,
+	  la entrada de pesos, y la función de activación de una neurona. Error $E$ se calcula a partir de la salida $y$ de salida deseado $t$. $\eta$ es la tasa de aprendizaje.
+	  \cite{Automatic_differentiation_ML} }
+	  \label{fig:backprop}
+	\end{figure}
 
 
       \subsection {Funciones de Activación comúnmente utilizadas}
