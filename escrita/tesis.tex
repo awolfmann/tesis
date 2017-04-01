@@ -811,7 +811,7 @@
 	A la hora de definir la configuracion de una red, es posible agregar capas de marginación las cuales se emplean como 
 	técnica de regularización para reducir la saturación en redes neuronales previniendo el sobreajuste. Estas capas de marginación se encargan de 
 	\emph{silenciar} algunas neuronas, aleatoriamente, es decir toman valores de entrada, que para el caso de las neuronas elegidas a ser silenciadas, se ignoran
-	sin generar valores de salida, como se puede observar en la figura \ref{fig::dropout}. Esto permite que durante el entrenamiento se evite el sobreajuste y la red aprenda 
+	sin generar valores de salida, como se puede observar en la figura \ref{fig:dropout}. Esto permite que durante el entrenamiento se evite el sobreajuste y la red aprenda 
 	a predecir correctamente aun sin disponer de toda la información, lo que termina produciendo una mejor generalización.
 	\begin{figure}[H]
 	  \begin{center}
@@ -837,50 +837,35 @@
       Tales espacios también suelen imponer altos costos computacionales. El aprendizaje profundo fue diseñado para superar estos y otros obstáculos.
 
   \section {Redes Neuronales Convolucionales}
-    Las redes neuronales convolucionales (Convolutional Neural Networks en ingles, o CNN) son muy similares a las redes neuronales antes vistas en la seccion \ref{sec:redes_neuronales}, 
-    con la diferencia en que la arquitectura
-    de una red neuronal convolucional asume explícitamente que el conjunto de entrada son imágenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura.
-    Están inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes, ademas, suelen tener un gran numero de capas ocultas, 
-    por lo que son consideras parte del Aprendizaje Profundo.
-    Antes de comenzar con la explicacion detallada de como se conforman las CNN es necesario definir dos conceptos que se utilizan aqui: filtro y  la operacion de convolucion.
-    \paragraph{Filtro} Un filtro es una matriz que se va aplicando a pequeñas cuadriculas pertenecientes a la representación en pixeles de la imagen.
-    \paragraph{Convolucion}
+    \subsection{Introducción}
+      Las redes neuronales convolucionales (Convolutional Neural Networks en ingles, o CNN) son muy similares a las redes neuronales antes vistas en la seccion \ref{sec:redes_neuronales}, 
+      con la diferencia en que la arquitectura
+      de una red neuronal convolucional asume explícitamente que el conjunto de entrada son imágenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura.
+      Están inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes como la convolucion, detallada en la seccion \ref{sec:convolucion}.
+      Ademas, suelen tener un gran numero de capas ocultas, por lo que son consideras parte del Aprendizaje Profundo.
     
-    Con lo que respecta a las imágenes, muchos de los enfoques modernos en Visión por Computadoras explotan la propiedad de que píxeles cercanos están más correlacionados entre ellos que a los píxeles mas
-    distantes, mediante la extracción de características locales que dependen sólo pequeñas subregiones de la imagen. La información de tales características pueden entonces ser combinados
-    en etapas posteriores de procesamiento con el fin de detectar de características de alto nivel hasta finalmente proveer información de la imagen completa. Además, las características
-    locales que son útiles en una región de la imagen, probablemente sean útiles en otras regiones de la imagen. 
-    Estas nociones son incorporadas a las redes neuronales mediante 3 mecanismos: (i) campos receptivos locales, (ii) compartir pesos y (iii) realizar submuestreos. 
-    La estructura de una CNN se ilustra en la Figura \ref{fig:bishop_cnn}. En una capa convolucional, las unidades se organizan en 3 dimensiones, donde los distintos planos generados,
-    utilizando la dimensiones alto y ancho se llaman mapa de caracteristicas.
-    Las unidades en un mapa de caracteristicas toma como entradas solo una pequeña subregión de la imagen, y todas las unidades de un mismo mapa de caracteristicas se 
-    ven obligadas a compartir los mismos valores de peso. Por ejemplo, una mapa de caracteristicas puede consistir de 100 unidades dispuestas en una de cuadrícula 10x10, 
-    donde cada unidad  toma de entradas una porcion de 5x5 pixeles de la imagen. El mapa de caracteristicas completo tiene entonces 25 parametros de pesos ajustables,
-    más uno de sesgo. Los valores de entrada de cada porcion de imagen son linealmente combinados utilizando los pesos y el sesgo, y el resultado  es transformado por una funcion no lineal
-    como la funcion sigmoide como lo visto en la seccion \ref{sec:neurona}. 
-    Si consideramos a las unidades como detectores de caracteristicas, entonces, todas las unidades en un mismo mapa de caracteristicas detectan el mismo patrón, pero en diferentes 
-    ubicaciones en la imagen de entrada. Debido a que comparten los pesos, la evaluación de las activaciones de estas unidades es equivalente a  realizar una operación de convolución 
-    sobre la intensidad de los pixeles de la imagen con un filtro compuesto por los parámetros de peso. Si la imagen de entrada es desplazada, las activaciones del mapa de caracteristicas serán desplazadas por la misma cantidad.
-    \FIXME{BISHOP 285}
-    \begin{figure}[h]
-      \begin{center}
-      \includegraphics[width=0.8\linewidth]{./img/bishop_cnn.jpg}
-      \end{center}
-      \caption{Una CNN ordena a sus neuronas en tres dimensiones (ancho, alto, profundidad), como se visualiza en una de
-	las capas. Cada capa de una CNN transforma un volumen 3D de entrada a un volumen 3D de salida. En este ejemplo, en la capa de entrada se encuentra la imagen, por lo que su ancho y su altura
-	serían las dimensiones de la imagen, y la profundidad sería 3 (los canales Rojo, Verde, Azul). \cite{Karpathy:Stanford}}
-      \label{fig:bishop_cnn}
-    \end{figure}
-      
-    \FIXME{BISHOP 285 }
-    \subsection{Función de Convolución}
-      \FIXME{Definir función de convolución}
-      \FIXME{Hablar de filtro}
-
+   \subsection{Convolución} \label{sec:convolucion}
+      En el area del procesamiento de imagenes, la convolución es una tecnica de proposito general para transferir el efecto a una imagen, utilizando el valor de sus pixeles,
+      mediante una pequeña matriz comunmente llamada filtro (por lo general de $3\times3$ o $5\times5$). 
+      Al realizar la convolucion sobre una imagen, aplicando un filtro determinado, el resultado es otra imagen nueva, donde cada uno de los pixeles de esta nueva imagen se calcula de la siguiente forma:
+      Este filtro actua determinando el valor del pixel central donde se esta aplicando el filtro, sumando los valores de los pixeles vecinos pesados por el valor correspondiente del filtro para 
+      cada pixel, como se puede observar en la figura \ref{fig:convolution}, donde se aplica un filtro de $3\times3$ donde el caculo realizado es (40*0)+(42*1)+(46*0) + (46*0)+(50*0)+(55*0) + (52*0)+(56*0)+(58*0) = 42,
+      por lo que el valor obtenido para ese pixel es 42.
+      Este filtro se va desplazando sobre todos los pixeles de la imagen de entrada hasta lograr calcular todos los pixeles de la imagen de salida, en el caso de los pixeles correspondientes
+      a los bordes de la imagen, donde ya no disponen de pixeles vecinos en alguna de las posiciones donde se aplica el filtro, una forma de completar el calculo es considerando que donde
+      hay pixeles ausentes su valor es cero.
+      \begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.8\linewidth]{./img/convolution.png}
+	\end{center}
+	\caption{Convolucion}
+	\label{fig:convolution}
+      \end{figure}
+   
     \subsection {Arquitectura de una red neuronal convolucional}
       En las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad, como se ilustra en la figura \ref{fig:cnn}.
       Cada capa acepta un volumen de 3 dimensiones como entrada y lo transforma en un volumen de salida de 3 dimensiones a través de una función diferenciable.
-      Algunas capas pueden tener o no parámetros, al igual que hiper-parámetros. La entrada y salida de cada una de estas capas son conjuntos de arreglos llamados “mapas de features”.
+      Algunas capas pueden tener o no parámetros, al igual que hiper-parámetros. La entrada y salida de cada una de estas capas son conjuntos de arreglos llamados mapas de caracteristicas.
       En el caso mas simple de arquitectura, la red transforma el volumen de una imagen de entrada en un volumen de salida, conteniendo los puntajes de cada clase para el problema de clasificación.
       Típicamente, las CNNs suelen además organizarse por etapas, cada etapa consiste de una capa convolucional, una no lineal y una de agrupamiento.
       A continuación se detallan estos tipos de capas.
@@ -898,7 +883,7 @@
       \subsubsection{Capa Convolucional}
 	Los parámetros consisten en un conjunto de filtros aprendibles. Cada filtro el pequeño espacialmente(alto y ancho) pero se extiende sobre toda la profundidad del volumen de entrada.
 	Durante el paso hacia adelante, se desliza o convoluciona el filtro a través del alto y ancho del volumen de entrada y se computa el producto punto entre los valores del filtro y los valores
-	del volumen de entrada. A medida que se va deslizando el filtro sobre el ancho y el alto del volumen de entrada, se va generando un mapa de activación de 2 dimensiones que contiene los
+	del volumen de entrada. A medida que se va deslizando el filtro sobre el ancho y el alto del volumen de entrada, se va generando un mapa de caracteristicas de 2 dimensiones que contiene los
 	valores de respuesta de ese filtro en cada posición espacial.\\
 	Intuitivamente, la red aprenderá los filtros que se activan cuando ven algún tipo de característica visual como un borde de cierta orientación o una mancha de algún color en la
 	primera capa, o eventualmente panal entero o patrones de rueda en las capas más altas de la red. Dado que tendremos un conjunto de filtros en cada capa Convolucional,
@@ -936,13 +921,40 @@
 	    que aquí se muestra, con un salto de 2. Es decir, cada operación se toma con 4 números (pequeño cuadrado de 2x2). \cite{Karpathy:Stanford}}
 	  \label{fig:maxpool_layer}
 	\end{figure}
-
+\iffalse
       \subsubsection{Capas No Lineales}
-	Estas capas son las encargadas de aplicar una función de activación no lineal, la principal funciones de activación utilizadas son las ReLU o alguna de sus variantes.
-
+	Estas capas son las encargadas de aplicar una función de activación no lineal, las principales funciones de activación utilizadas son las ReLU o alguna de sus variantes.
+\fi
       \subsubsection{Capa Completamente Conectada}
-	Las neuronas entre dos capas adyacentes están completamente conectadas de a pares, pero las neuronas dentro de una sola capa no comparten conexiones.
+	Una capa completamente conectada toma todas las neuronas de la capa anterior y las conecta a cada una de las neuronas que posee, es decir, 
+	mediante una capa completamente conectada, las neuronas entre dos capas adyacentes están completamente conectadas de a pares, de esta forma, se pierde la localidad espacial,
+	por lo que este tipo de capas suelen estar al final de la red.
 
+    \subsection{Funcionamiento \FIXME{VER TITULO}} 
+      Con lo que respecta a las imágenes, muchos de los enfoques modernos en Visión por Computadoras explotan la propiedad de que píxeles cercanos están más correlacionados entre ellos que a los píxeles mas
+      distantes, mediante la extracción de características locales que dependen sólo pequeñas subregiones de la imagen. La información de tales características pueden entonces ser combinados
+      en etapas posteriores de procesamiento con el fin de detectar de características de alto nivel hasta finalmente proveer información de la imagen completa. Además, las características
+      locales que son útiles en una región de la imagen, probablemente sean útiles en otras regiones de la imagen. 
+      Estas nociones son incorporadas a las redes neuronales mediante 3 mecanismos: (i) campos receptivos locales, (ii) compartir pesos y (iii) realizar submuestreos o agrupaciones. 
+      La estructura de una CNN se ilustra en la Figura \ref{fig:bishop_cnn}. En una capa convolucional, las unidades se organizan en 3 dimensiones, donde los distintos planos generados,
+      utilizando la dimensiones alto y ancho se llaman mapa de caracteristicas.
+      Las unidades en un mapa de caracteristicas toma como entradas solo una pequeña subregión de la imagen, y todas las unidades de un mismo mapa de caracteristicas se 
+      ven obligadas a compartir los mismos valores de peso. Por ejemplo, una mapa de caracteristicas puede consistir de 100 unidades dispuestas en una de cuadrícula 10x10, 
+      donde cada unidad  toma de entradas una porcion de 5x5 pixeles de la imagen. El mapa de caracteristicas completo tiene entonces 25 parametros de pesos ajustables,
+      más uno de sesgo. Los valores de entrada de cada porcion de imagen son linealmente combinados utilizando los pesos y el sesgo, y el resultado  es transformado por una funcion no lineal
+      como la funcion sigmoide como lo visto en la seccion \ref{sec:neurona}. 
+      Si consideramos a las unidades como detectores de caracteristicas, entonces, todas las unidades en un mismo mapa de caracteristicas detectan el mismo patrón, pero en diferentes 
+      ubicaciones en la imagen de entrada. Debido a que comparten los pesos, la evaluación de las activaciones de estas unidades es equivalente a  realizar una operación de convolución 
+      sobre la intensidad de los pixeles de la imagen con un filtro compuesto por los parámetros de peso. 
+      \begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.8\linewidth]{./img/bishop_cnn.jpg}
+	\end{center}
+	\caption{Diagrama que ilustra parte de una CNN, mostrando una capa convolucional, seguido por una capa de agrupación.}
+	\label{fig:bishop_cnn}
+      \end{figure}
+
+\iffalse
     \subsection {Consideraciones computacionales}
       El cuello de botella más grande a tener en cuenta al construir arquitecturas de CNN es la limitación de memoria.
       Muchas placas gráficas de procesamiento (GPUs en ingles) modernas tienen un límite de memoria de 3/4/6GB, las mejores GPUs que tienen cerca de 16GB de memoria.
@@ -959,7 +971,7 @@
 	\item Una vez que tenga una estimación aproximada del número total de valores (para activaciones, gradientes y extra). Si la red no entra en memoria, una heurística común
 	  para que entre es disminuir el tamaño del lote, ya que la mayor parte de la memoria suele ser consumida por las activaciones.
       \end{itemize}
-
+\fi
 
     \subsection {Casos de estudio de redes convolucionales famosas}
 
