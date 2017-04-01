@@ -540,7 +540,7 @@
       Si cambiamos el modelo para que no sea lineal, entonces la mayoría de las funciones de pérdida ya no pueden ser optimizadas en forma cerrada.
       Esto nos obliga a elegir un procedimiento iterativo de optimización numérica, como el descenso por el gradiente.
 
-    \section{Redes Neuronales Artificiales}
+    \section{Redes Neuronales Artificiales}\label{sec:redes_neuronales}
 
       \subsection{Introducción}
 	Un algoritmo de aprendizaje de red neuronal artificial, usualmente llamado "red neuronal", es un algoritmo de aprendizaje  que sirve como herramienta de modelado de datos 
@@ -561,32 +561,71 @@
 	  \caption{Red Neuronal Artificial}
 	  \label{fig:neural_network}
 	\end{figure}
-
-      \subsection {Neurona artificial}
+      
+      \subsection {Neurona artificial} \label{sec:neurona}
 	La unidad de procesamiento de una red neuronal es una neurona. La misma toma como parametros un vector de entrada, un vector de pesos, un valor de sesgo. El computo realizado
-	en una neurona puede separarse en 2 etapas. En la primer etapa se realiza la suma de los productos punto a punto de los vectores de entrada, adicionandole finalmente el sesgo.
-	En la segunda etapa se realiza una transformacion no lineal del valor obtenido en la etapa anterior, 
-	entre los cuales se realiza un producto
-	punto a punto, luego se realiza la suma de los cada uno de los valores
-	una función de activación no lineal,
-	como se puede ver en la figura \ref{fig:neuron}.
-	En una neurona se realiza el producto punto entre el vector de entrada, y su vector de pesos, se le suma el sesgo y finalmente se aplica una función no lineal, obteniendo
-	de esta forma el vector de salida correspondiente.
+	en una neurona puede separarse en 2 etapas.
+	\begin{enumerate}
+	  \item En la primer etapa se realiza la suma de los productos punto a punto de los vectores de entrada, adicionandole finalmente el sesgo.
+	    Sea $X$ el vector de entrada, de $D$ dimensiones, $W$ el vector de pesos y $w_0$ el sesgo, se puede formalizar de la siguiente forma:
+	    \begin{equation} \label{eq:neurona_lineal}
+	      a = sum_{i=1}^{D} w_{i} x_i + w_{0} 
+	    \end{equation}
+	    Donde $x_i$ es cada uno de los valores del vector $X$ y $w_{i}$ los valores del vector $W$. El valor $a$ se conoce como el valor de \emph{activación}.
+	  \item En la segunda etapa se realiza una transformacion no lineal del valor de activación, obtenido en la etapa anterior, dada por la funcion de activación $h$,es decir:
+	    \begin{equation}\label{eq:neurona_nolineal}
+	      z = h(a)
+	    \end{equation}
+	\end{enumerate}
+	La neurona aqui descripta suele ser una neurona que pertenece a la primer capa oculta de la red, ya que en \eqref{eq:neurona_lineal} se interactua 
+	con los valores del vector de entrada de la red, en caso de que no pertenezca a la primer capa oculta, se reemplazan los $x_i$ por los correspondientes $z_i$
+	obtenidos en la capa anterior. Finalmente cuando la neurona pertenece a la capa de salida, el valor obtenido en \eqref{eq:neurona_nolineal} termina siendo el valor de salida
+	de la prediccion es decir $y$.
+
+	\FIXME{revisar que imagen poner en \ref{fig:neuron}}
 	\begin{figure}[H]
           \begin{center}
             \includegraphics[width=0.4\linewidth]{./img/neuron.jpg}
 	  \caption{Neurona artificial \label{fig:neuron}}
           \end{center}
 	\end{figure}
-
+  
       \subsection{Aprendizaje basado en el Gradiente}
 	El diseño y entrenamiento de una red neural no es muy diferente de la formación de cualquier otro modelo de aprendizaje automático con descenso por el gradiente.
 	La diferencia más grande entre los modelos lineales y las redes neuronales es que la no linealidad de una red neuronal hace que las funciones de pérdida
 	más interesantes se vuelvan no convexas. Esto significa que las redes neuronales suelen ser entrenadas mediante el uso de optimizadores iterativos basados ​​en gradientes
 	que simplemente minimizan la función de costo, en lugar de los solucionadores de ecuaciones lineales usados ​​para entrenar modelos de regresión lineal. Para el caso de las
-	redes neuronales, la técnica ampliamente utilizada es la de retropropagación del error.
+	redes neuronales, la técnica ampliamente utilizada es la de retropropagación del error que se detalla luego en la seccion \ref{sec:backpropagation}.
+      
+      \subsection{Configuracion y Diseño}
+	En la etapa de configuracion y diseño de una red neuronal es donde se define la arquitectura de la red, es decir cuantas capas tendra, cuantas neuronas tendra cada una de las capas
+	y cuales seran las funciones de activacion que estas utilizaran.
+	Ademas en esta etapa se define cual sera la funcion de perdida que se utilizara para calcular el error durante el entrenamiento.
+	
+      \subsection {Entrenamiento}
+	Una vez finalizada la etapa de configuracion y diseño es necesario inicializar los pesos, comunmente inicializados con valores aleatorios cercanos a 0, para luego comenzar con la etapa
+	de entrenamiento de la red.
+	El entrenamiento de una red neuronal consiste en realizar un ciclo de entrenamiento durante un cierto numero de iteraciones, utilizando el conjunto de datos de entrenamiento,
+	de forma tal que se reduzca el error obtenido por la funcion de perdida, al comparar la predicción obtenida con el valor correcto de la etiqueta para esa instancia.
+	El ciclo de entrenamiento se compone de 2 pasos: paso hacia adelante, y paso de retropropagación del error.
+	\begin{enumerate}
+	  \item En el paso hacia adelante se evalúa la red y se obtiene el resultado de salida, con el cual se mide el error, utilizando la función de perdida elegida.
+	  \item En el paso de retropropagación del error se calcula el gradiente para luego ajustar los pesos internos de la red en base al resultado del gradiente, 
+	    desde las capas finales de la red hasta las capas iniciales.
+	\end{enumerate}
+	\FIXME{VER EN BISHOP}
+	\begin{figure}[H]
+	  \begin{center}
+	  \includegraphics[width=\linewidth]{./img/backprop.png}
+	  \end{center}
+	  \caption{ Descripción de la retropropagación. (a) El entrenamiento es alimentado hacia delante, generando de salida correspondiente. (b) Error entre la salida real y la salida deseada
+	  se calcula. (c) El error se propaga hacia atrás, a través de actualizaciones donde una proporción del gradiente ($ \frac{\partial E}{\partial w_i}$ ) es la resta de cada peso. $x_i$, $w_i$, $\phi$ son las entradas,
+	  la entrada de pesos, y la función de activación de una neurona. Error $E$ se calcula a partir de la salida $y$ de salida deseado $t$. $\eta$ es la tasa de aprendizaje.
+	  \cite{Automatic_differentiation_ML} }
+	  \label{fig:backprop}
+	\end{figure}
 
-      \subsection{Retropropagación del Error}
+      \subsection{Retropropagación del Error} \label{sec:backpropagation}
 	La mayoría de los algoritmos de aprendizaje implican un procedimiento iterativo para la minimización de una función de error, que van ajustando los pesos mediante 
 	una secuencia de pasos. En cada paso, se pueden distinguir dos etapas bien diferenciadas. En la primera etapa, las derivadas de la función de error con 
 	respecto a los pesos deben ser evaluados. En la segunda etapa, las derivadas son utilizadas para calcular los ajustes que se les deben hacer a los pesos, en cada una 
@@ -689,25 +728,6 @@
 	\end{enumerate}
 
 
-      \subsubsection {Entrenamiento}
-	El entrenamiento de una red neuronal consiste de 2 pasos: paso hacia adelante, y paso de retropropagación del error
-	\begin{enumerate}
-	  \item En el paso hacia adelante se evalúa la red y se obtiene el resultado de salida, el cual se mide el error, se calcula el gradiente para luego aplicar el paso de retroalimentación
-	  \item En el paso de retropropagación del error se ajustan los pesos internos de la red en base al resultado del gradiente, desde las capas finales de la red hasta las capas iniciales.
-	\end{enumerate}
-	\FIXME{VER EN BISHOP}
-	\begin{figure}[H]
-	  \begin{center}
-	  \includegraphics[width=\linewidth]{./img/backprop.png}
-	  \end{center}
-	  \caption{ Descripción de la retropropagación. (a) El entrenamiento es alimentado hacia delante, generando de salida correspondiente. (b) Error entre la salida real y la salida deseada
-	  se calcula. (c) El error se propaga hacia atrás, a través de actualizaciones donde una proporción del gradiente ($ \frac{\partial E}{\partial w_i}$ ) es la resta de cada peso. $x_i$, $w_i$, $\phi$ son las entradas,
-	  la entrada de pesos, y la función de activación de una neurona. Error $E$ se calcula a partir de la salida $y$ de salida deseado $t$. $\eta$ es la tasa de aprendizaje.
-	  \cite{Automatic_differentiation_ML} }
-	  \label{fig:backprop}
-	\end{figure}
-
-
       \subsection {Funciones de Activación comúnmente utilizadas}
 	Toda función de activación toma un único número como entrada, realiza un operación matemática predefinida, no lineal y devuelve el resultado obtenido.
 	Algunos ejemplos de funciones que se utilizan:
@@ -788,8 +808,11 @@
 
       \subsection {Regularización: Marginación}
 	\FIXME{DESARROLLAR MAS, EXPLICAR COMO SE HACE, QUE EFECTO TIENE}
-	La marginación (Dropout en la literatura en ingles) es una técnica de regularización para reducir la saturación en redes neuronales previniendo el sobreajuste.
-	El término "marginación" se refiere a dejar de lado algunas unidades (ocultas y visibles) en una red neuronal, a la hora de entrenar la red.
+	A la hora de definir la configuracion de una red, es posible agregar capas de marginación las cuales se emplean como 
+	técnica de regularización para reducir la saturación en redes neuronales previniendo el sobreajuste. Estas capas de marginación se encargan de 
+	\emph{silenciar} algunas neuronas, aleatoriamente, es decir toman valores de entrada, que para el caso de las neuronas elegidas a ser silenciadas, se ignoran
+	sin generar valores de salida, como se puede observar en la figura \ref{fig::dropout}. Esto permite que durante el entrenamiento se evite el sobreajuste y la red aprenda 
+	a predecir correctamente aun sin disponer de toda la información, lo que termina produciendo una mejor generalización.
 	\begin{figure}[H]
 	  \begin{center}
 	   \includegraphics[width=0.6\linewidth]{./img/dropout.jpeg}
@@ -814,26 +837,45 @@
       Tales espacios también suelen imponer altos costos computacionales. El aprendizaje profundo fue diseñado para superar estos y otros obstáculos.
 
   \section {Redes Neuronales Convolucionales}
-    Las redes neuronales convolucionales (CNN) son muy similares a las redes neuronales antes vista, con la diferencia en que la arquitectura de una red neuronal convolucional asume explícitamente
-    que el conjunto de entrada son imágenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura.
-    Están inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes, suelen tener un gran numero de capas ocultas, por lo que
-    son consideras parte del Aprendizaje Profundo.
+    Las redes neuronales convolucionales (Convolutional Neural Networks en ingles, o CNN) son muy similares a las redes neuronales antes vistas en la seccion \ref{sec:redes_neuronales}, 
+    con la diferencia en que la arquitectura
+    de una red neuronal convolucional asume explícitamente que el conjunto de entrada son imágenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura.
+    Están inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes, ademas, suelen tener un gran numero de capas ocultas, 
+    por lo que son consideras parte del Aprendizaje Profundo.
+    Antes de comenzar con la explicacion detallada de como se conforman las CNN es necesario definir dos conceptos que se utilizan aqui: filtro y  la operacion de convolucion.
+    \paragraph{Filtro} Un filtro es una matriz que se va aplicando a pequeñas cuadriculas pertenecientes a la representación en pixeles de la imagen.
+    \paragraph{Convolucion}
+    
     Con lo que respecta a las imágenes, muchos de los enfoques modernos en Visión por Computadoras explotan la propiedad de que píxeles cercanos están más correlacionados entre ellos que a los píxeles mas
     distantes, mediante la extracción de características locales que dependen sólo pequeñas subregiones de la imagen. La información de tales características pueden entonces ser combinados
     en etapas posteriores de procesamiento con el fin de detectar de características de alto nivel hasta finalmente proveer información de la imagen completa. Además, las características
-    locales que son útiles en una región de la imagen, probablemente sean útiles en otras regiones de la imagen. \FIXME{BISHOP 285 }
+    locales que son útiles en una región de la imagen, probablemente sean útiles en otras regiones de la imagen. 
+    Estas nociones son incorporadas a las redes neuronales mediante 3 mecanismos: (i) campos receptivos locales, (ii) compartir pesos y (iii) realizar submuestreos. 
+    La estructura de una CNN se ilustra en la Figura \ref{fig:bishop_cnn}. En una capa convolucional, las unidades se organizan en 3 dimensiones, donde los distintos planos generados,
+    utilizando la dimensiones alto y ancho se llaman mapa de caracteristicas.
+    Las unidades en un mapa de caracteristicas toma como entradas solo una pequeña subregión de la imagen, y todas las unidades de un mismo mapa de caracteristicas se 
+    ven obligadas a compartir los mismos valores de peso. Por ejemplo, una mapa de caracteristicas puede consistir de 100 unidades dispuestas en una de cuadrícula 10x10, 
+    donde cada unidad  toma de entradas una porcion de 5x5 pixeles de la imagen. El mapa de caracteristicas completo tiene entonces 25 parametros de pesos ajustables,
+    más uno de sesgo. Los valores de entrada de cada porcion de imagen son linealmente combinados utilizando los pesos y el sesgo, y el resultado  es transformado por una funcion no lineal
+    como la funcion sigmoide como lo visto en la seccion \ref{sec:neurona}. 
+    Si consideramos a las unidades como detectores de caracteristicas, entonces, todas las unidades en un mismo mapa de caracteristicas detectan el mismo patrón, pero en diferentes 
+    ubicaciones en la imagen de entrada. Debido a que comparten los pesos, la evaluación de las activaciones de estas unidades es equivalente a  realizar una operación de convolución 
+    sobre la intensidad de los pixeles de la imagen con un filtro compuesto por los parámetros de peso. Si la imagen de entrada es desplazada, las activaciones del mapa de caracteristicas serán desplazadas por la misma cantidad.
+    \FIXME{BISHOP 285}
+    \begin{figure}[h]
+      \begin{center}
+      \includegraphics[width=0.8\linewidth]{./img/bishop_cnn.jpg}
+      \end{center}
+      \caption{Una CNN ordena a sus neuronas en tres dimensiones (ancho, alto, profundidad), como se visualiza en una de
+	las capas. Cada capa de una CNN transforma un volumen 3D de entrada a un volumen 3D de salida. En este ejemplo, en la capa de entrada se encuentra la imagen, por lo que su ancho y su altura
+	serían las dimensiones de la imagen, y la profundidad sería 3 (los canales Rojo, Verde, Azul). \cite{Karpathy:Stanford}}
+      \label{fig:bishop_cnn}
+    \end{figure}
+      
+    \FIXME{BISHOP 285 }
     \subsection{Función de Convolución}
       \FIXME{Definir función de convolución}
       \FIXME{Hablar de filtro}
-    \begin{figure}[H]
-      \begin{center}
-       \includegraphics[width=0.8\linewidth]{./img/stanford_cnn.jpeg}
-      \end{center}
-      \caption{A la izquierda: Red Neuronal regular de 3 capas. A la derecha: Una CNN ordena a sus neuronas en tres dimensiones (ancho, alto, profundidad), como se visualiza en una de
-	las capas. Cada capa de una CNN transforma un volumen 3D de entrada a un volumen 3D de salida. En este ejemplo, en la capa de entrada se encuentra la imagen, por lo que su ancho y su altura
-	serían las dimensiones de la imagen, y la profundidad sería 3 (los canales Rojo, Verde, Azul). \cite{Karpathy:Stanford}}
-      \label{fig:cnn}
-    \end{figure}
 
     \subsection {Arquitectura de una red neuronal convolucional}
       En las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad, como se ilustra en la figura \ref{fig:cnn}.
@@ -842,7 +884,16 @@
       En el caso mas simple de arquitectura, la red transforma el volumen de una imagen de entrada en un volumen de salida, conteniendo los puntajes de cada clase para el problema de clasificación.
       Típicamente, las CNNs suelen además organizarse por etapas, cada etapa consiste de una capa convolucional, una no lineal y una de agrupamiento.
       A continuación se detallan estos tipos de capas.
-
+      \begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=0.8\linewidth]{./img/stanford_cnn.jpeg}
+	\end{center}
+	\caption{Una CNN ordena a sus neuronas en tres dimensiones (ancho, alto, profundidad), como se visualiza en una de
+	  las capas. Cada capa de una CNN transforma un volumen 3D de entrada a un volumen 3D de salida. En este ejemplo, en la capa de entrada se encuentra la imagen, por lo que su ancho y su altura
+	  serían las dimensiones de la imagen, y la profundidad sería 3 (los canales Rojo, Verde, Azul). \cite{Karpathy:Stanford}}
+	\label{fig:cnn}
+      \end{figure}
+      
     \subsection {Tipos de Capas}
       \subsubsection{Capa Convolucional}
 	Los parámetros consisten en un conjunto de filtros aprendibles. Cada filtro el pequeño espacialmente(alto y ancho) pero se extiende sobre toda la profundidad del volumen de entrada.
