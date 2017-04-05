@@ -106,89 +106,103 @@
 
 \chapter{Introducción}
   \section {Contexto}
-    En los últimos años las fotografías están cada vez más, pasando a ser un objeto virtual en lugar de físico, de la mano del gran aumento en el uso de los dispositivos móviles
-    cualquier persona puede tomar miles fotografías en un instante de tiempo, y compartirla en las redes sociales.
-    A partir de esto, se han desarrollado muchas aplicaciones entorno a las fotografías, ya sea desde redes sociales masivamente utilizadas, hasta aplicaciones que aplican efectos o filtros
-    a la fotografía para transformarla en un retrato en blanco y negro o sepia por ejemplo. \\
+    En los últimos años las fotografías están pasando a ser un objeto virtual en lugar de físico, de la mano del gran aumento en el uso de los dispositivos móviles.
+    Cualquier persona puede tomar miles de fotografías en un instante de tiempo, y compartirlas en las redes sociales.
+    A partir de esto, se han desarrollado muchas aplicaciones entorno a las fotografías ya sea, desde redes sociales masivamente utilizadas hasta aplicaciones que aplican efectos 
+    o filtros a la fotografía para transformarla en un retrato en blanco y negro o sepia por ejemplo. 
+    
     Muy recientemente se han comenzado a desarrollar aplicaciones que logran transferir el estilo de una obra de arte a una fotografía. Esto es posible gracias al incremento
-    del poder de cómputo y al descenso del precio de los nuevos dispositivos, ya que las técnicas computacionales empleadas para esto, requieren un cómputo mucho mas complejo.\\
-    La transferencia de estilo requiere de la interacción de 2 de las principales áreas de las Ciencias de la Computación y de gran auge en la actualidad: Visión por Computadoras y Aprendizaje Automático,
-    que hasta hace un tiempo, fueron evolucionando en paralelo, independientemente una de la otra. Hoy en día se han logrado resultados completamente disruptivos, al aplicar
+    del poder de cómputo y al descenso del precio de los nuevos dispositivos, ya que las técnicas computacionales empleadas para lograr esto, requieren un cómputo mucho mas complejo 
+    y demandante.
+    
+    La transferencia de estilo requiere de la interacción de 2 de las principales áreas de las Ciencias de la Computación, de gran auge en la actualidad: Visión por Computadoras y Aprendizaje Automático.
+    Hasta hace un tiempo estas areas fueron evolucionando en paralelo, independientemente una de la otra. Hoy en día se han logrado resultados completamente disruptivos, al aplicar
     Aprendizaje Automático para algunas de las principales tareas de Visión por Computadoras, como lo son la clasificación de imágenes, detección y reconocimiento de objetos.
 
     \paragraph{Aprendizaje Automático}
-      El área de Aprendizaje Automático es el área de las Ciencias de la Computación que da a las computadoras la capacidad de aprender sin ser explícitamente programadas, explora el estudio
-      y la construcción de algoritmos que pueden aprender y hacer predicciones sobre los datos. Tales algoritmos lo logran siguiendo las instrucciones estrictamente estáticas del programa
-      mediante la fabricación de predicciones o decisiones impulsadas por datos a través de la construcción de un modelo generado con las muestras de entrada.
+      El área de Aprendizaje Automático es el área de las Ciencias de la Computación que da a las computadoras la capacidad de aprender sin ser explícitamente programadas. Explora el estudio
+      y la construcción de algoritmos que pueden aprender y hacer predicciones sobre los datos de entrada. 
+      Tales algoritmos logran aprender a inferir caracteristicas que poseen los datos, a traves de la construcción de un modelo de predicción, en la etapa de entrenamiento del modelo.
+      Cuando finaliza esta etapa, el modelo debe ser capaz de predecir caracteristicas de una muestra nueva, nunca antes vista, en base a lo aprendido en el entrenamiento.
+      
       El principal objetivo de un sistema de aprendizaje es generalizar desde su experiencia o conocimiento previo. Generalizar en este contexto es la habilidad del sistema de realizar
-      predicciones con precisión sobre un ejemplo nuevo no visto antes, luego de aprender sobre el conjunto de entrenamiento. Los ejemplos de entrenamiento provienen de un espacio
-      con probabilidad de distribución desconocida del cual es considerado representativo. El sistema de aprendizaje debe construir un modelo o función sobre el espacio total que le permite realizar
-      predicciones lo suficientemente precisas sobre nuevos ejemplos. Este modelo aprende una función de predicción $F$, a partir del conjunto de datos de entrenamiento que se le provee.
-      Cada una de las instancias del conjunto de datos de entrenamiento es representado por un vector características, a partir de los cuales la función de predicción
-      se va ajustando durante el entrenamiento o aprendizaje.
-      “Un modelo que aprende no asume nada acerca de la identidad del concepto objetivo, no tiene ninguna base racional para clasificar cosas que nunca vio” \cite{Mitchell:1997:ML:541177}.
+      predicciones con precisión sobre un ejemplo nuevo no visto antes, luego de aprender sobre el conjunto de entrenamiento. Estos ejemplos de entrenamiento provienen de un espacio
+      con probabilidad de distribución desconocida del cual es considerado representativo. El sistema de aprendizaje debe construir un modelo o función sobre el espacio total que le permita realizar
+      predicciones lo suficientemente precisas sobre nuevos ejemplos. El modelo aprende una función de predicción $F$, a partir del conjunto de instancias de entrenamiento, 
+      cada una de ellas, representada por un vector de características.  Durante el entrenamiento, $F$  \emph{aprende a predecir}, ajustandose a estos vectores. 
+      Segun Mitchell, considerado uno de los impulsores del uso masivo del aprendizaje automático, “Un modelo que aprende no asume nada acerca de la identidad del concepto objetivo, 
+      no tiene ninguna base racional para clasificar cosas que nunca vio” \cite{Mitchell:1997:ML:541177}.
 
-      El aprendizaje automático se emplea en una serie de tareas informáticas en las que el diseño y la programación de algoritmos explícitos son inviables, como por ejemplo para la detección de Spam, el reconocimiento
-      óptico de caracteres y los motores de búsqueda.\\
-      Dentro del Aprendizaje Automático, existe un subdominio llamado Aprendizaje Profundo, basado en un conjunto de algoritmos que intentan modelar abstracciones de alto nivel en los datos,
-      mediante Redes Neuronales Artificiales de gran profundidad.\\
-      La principal herramienta elegida para poder llevar a cabo la transferencia de estilo en fotografías son las Redes Neuronales Convolucionales, estas Redes Neuronales Artificiales asumen
-      explícitamente que los elementos de  entrada del algoritmo serán imágenes, lo cual le permite implementar ciertas optimizaciones dentro del algoritmo, luego
-      se irán explicando mas detalladamente todos estos conceptos en profundidad.\\
-      Otro ejemplo de amplia investigación y desarrollo en la actualidad son los autos que se conducen por si solos, como se ilustra en la figura \ref{fig:car_detection},
-      los cuales emplean estas técnicas de aprendizaje profundo dentro de sus procesos para lograrlo.
+      El aprendizaje automático esta ideado para ser empleado en una serie de tareas informáticas en las que el diseño y la programación de algoritmos explícitos son inviables, 
+      como por ejemplo para la detección de Spam, el reconocimiento óptico de caracteres y los motores de búsqueda.\cite{Bishop:2006:PRM:1162264}
+      
+      Dentro del Aprendizaje Automático, existe un subdominio llamado Aprendizaje Profundo, que ataca problemas complejos en los cuales representar una instancia no es una tarea sencilla.
+      Por ejemplo para representar una imagen se suelen utilizar sus pixeles o pequeñas subregiones de pixeles, sin embargo estas representacion no logran capturar caracteristicas de 
+      alto nivel, como es el caso de detectar si existe o no un ojo dada una subregion de pixeles de la imagen.
+      
+      Dado a que en este tipo de problemas no hay representacion intuitiva clara de los datos, los algoritmos de aprendizaje automático aprenden no solo a realizar predicciones, sino  
+      que tambien aprenden a representar los datos de entrada, capturando caracteristicas de alto nivel, de forma tal que la predicción en base a estas representaciones sea lo mas precisa posible.
+      \cite{Goodfellow-et-al-2016}
+      Para el caso de los problemas relacionados con imagenes, la tecnica de aprendizaje profundo mayormente utilizada es la de Redes Neuronales Convolucionales.
+      Estas redes, son un tipo especifico de Redes Neuronales Artificiales, que asumen explicitamente que los datos de entrada seran imagenes, lo cual permite implementar 
+      ciertas optimizaciones dentro del algoritmo. Todos estos conceptos seran posteriormente explicados en detalle a lo largo del siguiente capítulo.
+      
+      La transferencia de estilo en fotografías es considerado un problema complejo dentro del area de vision por computadoras, por lo que, luego de realizar diferentes
+      investigaciones se decidió atacarlo utilizando las Redes Neuronales Convolucionales, como lo hace Gatys et. al. \cite{Gatys:Neural_Style}. 
+      Otro ejemplo de amplia investigación y desarrollo en la actualidad son los autos que se conducen por si solos, 
+      como se ilustra en la figura \ref{fig:car_detection}, los cuales emplean estas técnicas de aprendizaje profundo dentro de sus procesos para lograrlo.
 
-    \begin{figure}[h]
-      \includegraphics[width=0.9\linewidth]{./img/nvidia_car_detection.png}
-      \caption{En la figura se puede observar la detección de objetos que hace el vehículo, utilizando Redes Neuronales Convolucionales en tiempo real}
-      \label{fig:car_detection}
-    \end{figure}
+      \begin{figure}[h]
+	\includegraphics[width=0.9\linewidth]{./img/nvidia_car_detection.png}
+	\caption{Vehiculo conducido automaticamente, detectando objetos en tiempo real mediante Redes Neuronales Convolucionales}
+	\label{fig:car_detection}
+      \end{figure}
+    
     \paragraph{Visión por Computadoras}
       El área de Visión por Computadoras es el área de las Ciencias de la Computación que se encarga de cómo las computadoras pueden lograr obtener una comprensión de alto nivel de imágenes digitales o vídeos.
       Desde la perspectiva de la ingeniería, busca automatizar tareas que el sistema visual humano puede hacer. Incluye métodos para adquirir, procesar, analizar y comprender las imágenes del mundo real
       con el fin de producir información numérica o simbólica para que puedan ser tratados por una computadora. El objetivo principal de Visión por Computadoras es reducir la distancia
-      entre lo que un humano interpreta a partir de una imagen y la forma en la que las computadoras representan esa misma imagen.
+      entre lo que un humano interpreta a partir de una imagen y la forma en la que las computadoras representan esa misma imagen \cite{Szeliski:2010:CVA:1941882}.
 
   \section {Motivación}
     En lo que respecta al área de visión por computadoras, una imagen es representada por un arreglo de 2 dimensiones donde cada valor representa la intensidad captada por un sensor
     de un determinado punto espacial, representados como píxeles. La representación de los píxeles es muy sensible a cambios en la iluminación, ángulo, contraste y tamaño que pueda existir.\\
-    Además, este tipo de representación es insuficiente para proveerla como dato de entrada de un algoritmo que se encargue de realizar alguna de las tareas antes mencionadas, como la
-    detección de objetos o la transferencia de estilos, ya que para estos, es necesario proveer una representación de mas alto nivel, que permita detectar características de alto nivel,
-    como formas, contornos, etc. Debido a esto se suelen utilizar representaciones intermedias para este tipo de algoritmos, para el caso del problema de transferencia de estilo,
-    al utilizar Redes Neuronales Convolucionales, estas redes aprenden a generar representaciones intermedias de alto nivel, es decir, conceptos dados a nivel semántico.\\
-    Existen artículos de investigación en los cuales se definen algoritmos para la transferencia de estilos artísticos en fotografías, que se basan en modelos estocásticos,
-    los cuales requieren una gran cantidad de hiper-parámetros predefinidos empíricamente, es decir parámetros que deben ser fijados previo a la ejecución del algoritmo que dependen
-    de la elección propia del usuario, pero que influyen en gran manera sobre el resultado. Al ser modelos estocásticos, se basan en la idea de iterativamente,
-    minimizar una función de pérdida hasta lograr el objetivo deseado. \\
-    El principal objetivo de este trabajo es poder realizar una elección inteligente de uno de los principales hiper-parámetros como lo es el número de iteraciones
-    que debe realizar el algoritmo hasta obtener un resultado interesante. \\
-    Para poder determinar cuando un resultado logra ser aceptable es necesario definir una métrica para esto.
-    Debido a que las obras de arte, sueles calificadas con métricas cualitativas y no tanto cuantitativas, se decidió utilizar otra red neuronal convolucional,
-    entrenada especialmente para reconocer estilos artísticos y en base a los resultados que arroja se define si el número de iteraciones es suficiente para generar el resultado final
-    o es necesario continuar iterando. \\
+    Además, este tipo de representación, es insuficiente para proveerla como dato de entrada de un algoritmo que se encargue de realizar alguna de las tareas antes mencionadas, como la
+    detección de objetos o la transferencia de estilos. Para este tipo de tareas es necesario proveer una representación de alto nivel, que permita detectar características tales,
+    como formas, contornos, etc. Debido a esto, se suelen utilizar representaciones intermedias para este tipo de algoritmos. Para el caso del problema de transferencia de estilo,al utilizar Redes Neuronales Convolucionales, estas redes aprenden a generar representaciones de alto nivel, es decir, conceptos dados a nivel semántico.
+    
+    Existen artículos de investigación en los cuales se definen algoritmos para la transferencia de estilos artísticos en fotografías, basados en modelos estocásticos,
+    los cuales requieren una gran cantidad de hiper-parámetros predefinidos empíricamente, es decir parámetros que deben ser fijados previo a la ejecución del algoritmo, que dependen
+    de la elección propia del usuario, pero que influyen en gran manera sobre el resultado. Al ser modelos estocásticos, la idea principal es minimizar iterativamente,
+    una función de pérdida hasta lograr el objetivo deseado.
+    
+    El principal objetivo de este trabajo es poder realizar una optimización de los hiperparámetros automáticamente. Principalmente el número de iteraciones, el cual, determina
+    el tiempo que se debe ejecutar el algoritmo y la calidad del resultado obtenido. La idea de optimizar este hiperparametro es obtener un resultado deseable, en el menor tiempo posible.
+    
+    Determinar cuando un resultado logra ser aceptable requiere definir una métrica cuantitativa que evalue la calidad del resultado. Sin embargo, las obras de arte, suelen ser calificadas 
+    con métricas cualitativas. La metrica cuantitativa que se decidió utilizar en este trabajo es el nivel de pertenencia que tiene el resultado con respecto al estilo que se le transfirio.
+    Para medir esta metrica se entreno una red neuronal convolucional que reconoce estilos artisticos y el nivel de pertenencia esta dado por el nivel de confianza que obtiene la imagen resultante
+    al ser evaluada en esta red. En base al puntaje obtenido se determina si el numero de iteraciones es suficiente o si es necesario seguir ejecutando el algoritmo.
+    
     Para introducir al lector en el tema en la figura \ref{fig:style_transfer_candy_tower} se puede observar un ejemplo del resultado de aplicar la transferencia de estilo en fotografias:
     Como imagen de estilo se eligio una imagen abstracta \ref{fig:candy} y como imagen de contenido una fotografia de un paisaje \ref{fig:tower}, obteniendo como resultado de la
     transferencia de estilo una imagen en la cual se mantienen las estructuras de la imagen de contenido pero con los colores y trazos de la imagen de estilo \ref{fig:candy_tower}
     \begin{figure}[h]
-
       \subfloat[Imagen de Estilo]{\includegraphics[height=0.27\textheight]{./img/jhonson_style_candy.jpg}\label{fig:candy}}
-
       \subfloat[Imagen de Contenido]{\includegraphics[height=0.27\textheight]{./img/jhonson_content_tower.jpg}\label{fig:tower}}
-
       \subfloat[Resultado obtenido transfiriendo el estilo de la obra de arte a la imagen de contenido]
       {\includegraphics[height=0.27\textheight]{./img/jhonson_result_tower_candy.jpg}\label{fig:candy_tower}}
-
-    \caption{Ejemplo de transferencia de estilo}
-    \label{fig:style_transfer_candy_tower}
+      \caption{Ejemplo de transferencia de estilo}
+      \label{fig:style_transfer_candy_tower}
     \end{figure}
 
   \section {Estructura del trabajo}
     A lo largo de este trabajo se hará un recorrido por los principales conceptos para comprender tanto el problema como la solución y las técnicas empleadas para la transferencia
     de estilos artísticos en fotografías.\\
-    El capítulo 2 se desarrolla el marco teórico y cuestiones formales requeridas, principalmente orientado al aprendizaje Automático y a las redes neuronales.\\
-    En el capitulo 3 se hará un recorrido por los principales artículos de investigación y los algoritmos allí definidos para las técnicas de transferencia estilos artísticos en fotografías.
+    El capítulo 2 desarrolla el marco teórico y cuestiones formales requeridas, principalmente orientado al aprendizaje Automático y a las redes neuronales.\\
+    En el capitulo 3 se hace un recorrido por los principales artículos de investigación y los algoritmos empleados en las técnicas de transferencia estilos artísticos en fotografías.
     Para luego, en el capítulo 4 abordar en detalle la solución propuesta, junto con un análisis y evaluación empírica de la misma.\\
-    En el capítulo 5 contiene los experimentos realizados y los resultados obtenidos, para finalmente en el capitulo 6 establecer una conclusión acerca del trabajo realizado,
+    En el capítulo 5 contiene los experimentos realizados y los resultados obtenidos. Finalmente en el capitulo 6 se  presentan las conclusiónes obtenidas acerca del trabajo realizado,
     junto con las perspectivas y posibles tareas a futuro.
 
 \chapter{Marco Teórico}
