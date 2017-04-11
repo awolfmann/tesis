@@ -1315,9 +1315,9 @@
 	 \item Descargar cada una de las obras de arte de todos los estilos seleccionados.
 	 \item Verificar que la descarga haya sido exitosa y el archivo obtenido este en condiciones para ser utilizado en el proceso.
 	 \item Ordenar los archivos segun el estilo al que pertenecen.
-	 Luego de realizado este proceso, de las 81320 imagenes disponibles para los estilos elegidos, el conjunto de datos generado queda conformado por 68807 imagenes.
-	\end{enumerate}
-
+	 \end{enumerate}
+	Luego de realizado este proceso, el conjunto de datos generado queda conformado por 68807 imagenes.
+	
     \subsection{Detalles de implementación}
       Para realizar el ajuste fino, sobre este conjunto de datos generado, se utilizo la arquitectura de la red AlexNet \cite{AlexNet}, reemplazando la ultima capa por una capa que
       aprenda a reconocer entre los posibles estilos. Los valores con los que se inicializo la red, eran los valores obtenidos al entrenar AlexNet para el reconocimiento de objetos de ImageNet.
