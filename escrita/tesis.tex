@@ -286,52 +286,51 @@
 	establecer una similtud de intereses con otros usuarios, que ademas vieron otras peliculas, las cuales son recomendadas a este usuario.
 
     \subsection{Representación de la Información en Aprendizaje Automático}
-      Para que un modelo pueda aprender, es necesario lograr una representacion adecuada de los objetos sobre los cuales se desea aprender.
-      Dependiendo de la información que se desee aprender, estas representaciones pueden ir variando. Si se desea aprender sobre el riesgo crediticio de un usuario,
-      la información que represente a este usuario sera diferente a la representación de ese mismo usuario si se desea aprender sobre sus intereses gastronomicos.
+      Para que un modelo pueda aprender, es necesario lograr una representacion adecuada de los objetos sobre los cuales se desea asimilar información.
+      Dependiendo de la información que se desee aprender, estas representaciones pueden ir variando. Si se desea entender sobre el riesgo crediticio de un usuario,
+      la información que represente a este usuario sera diferente a la representación de ese mismo usuario si se desea  sobre sus intereses gastronomicos.
 
-      Definir la representación de un objeto, que permita aprender al modelo, de una forma precisa puede llegar a ser la tarea mas importante de todo el proceso de aprendizaje.
-      Estas representaciones suelen estructurarse como un vector de características (\emph{features} en inglés) que el modelo deberá aprender a partir de las instancias de entrenamiento.
+      Definir la representación de un objeto de forma precisa, tal que le permita al modelo capturar toda la información requerida puede llegar a ser la tarea mas importante de todo el 
+      proceso de aprendizaje.
+      Estas representaciones suelen estructurarse como un vector de características (\emph{features} en inglés) que el modelo deberá obtener a partir de las instancias de entrenamiento.
       Una \emph{feature} puede ser cualquier dato asociado a la instancia, que podría ser útil al modelo para realizar una predicción mas precisa.
 
-      Por ejemplo para representar un documento de texto, el método mas
-      utilizado es la bolsa de palabras.
+      Por ejemplo para representar un conjunto de datos conformado por documentos de texto, el método comunmente utilizado es la bolsa de palabras (\emph{Bag of Words} en la literatura en inglés). 
+      Este metodo emplea una estructura de datos auxiliar conocida como ``vocabulario'' o ``diccionario'', que contiene todas las palabras utilizadas en el conjunto de datos. 
+      Cada documento se representa como un histograma de ocurrencias respecto de las palabras del vocabulario. 
+      La dimensionalidad de la representación es igual al número de palabras que componen dicha estructura.
 
-      \FIXME{En modelo BoW emplea una estructura de datos auxiliar conocida como
-      ``vocabulario'' o ``diccionario''. Cada nuevo documento se representa como
-      un histograma de ocurrencias respecto de las palabras del vocabulario. La
-      dimensionalidad de la representación es igual al número de palabras que
-      componen dicha estructura.}
+      Para representar una imagen, el método más sencillo es usar directamente el valor de los píxeles. No obstante, para que una representación de una imagen sea lo suficientemente
+      descriptiva respecto al contenido de la misma, debe superar ciertos desafios, ilustrados graficamente en la figura \ref{fig:stanford_challenges}:
+      \begin{itemize}
+	\item Variación del punto de vista: Una simple instancia de un objeto puede estar orientada de muchas formas frente a la camara que toma la imagen.
+	\item Variación de escala: Las clases visuales suelen exhibir variaciones en su tamaño en el mundo real y no solo en lo referido a la imagen.
+	\item Deformación: Muchos objetos de interes no tienen un cuerpo rigido y pueden ser deformados de muchas formas
+	\item Oclusión: Los objetos de interes pueden estar ocluidos y solo una pequeña porcion del objeto puede ser visible.
+	\item Condiciones de iluminación: Los efectos de la iluminación pueden influir de forma drástica a nivel de píxeles.
+	\item Influencia del fondo: los objetos de interés pueden estar inmersos en un ambiente en el cual sean dificiles de identificar.
+	\item Variaciones intra clase: Existen muchos instancias completamente distinta de una misma categoría de objetos.
+      \end{itemize}
+      
+      \begin{figure}[h]
+	\includegraphics[scale=0.5]{./img/stanford_challenges.jpeg}
+	\caption{Desafios que debe superar la representación de una imagen}
+	\label{fig:stanford_challenges}
+      \end{figure}
 
-      Este método genera una característica por cada palabra de su vocabulario, y cada documento es representado por un vector, cada posición del vector se asocia a una palabra del
-      vocabulario y el valor que posee esa posición es la cantidad de veces que aparece la palabra asociada.
-
-      Para representar una imagen, el método más sencillo es usar directamente
-      el valor de los píxeles. \FIXME{PORQUE NO SIRVEN LOS PIXELES} %% Aunque este metodo no generaliza muy bien, puede mejorar utilizando
-      %% transformaciones algorítmicas del conjunto de entrenamiento. El siguiente paso seria tomar el promedio sobre pequeños cuadrados de la imagen.
-      %% Sin embargo, es necesaria alguna función compleja que comprenda el significado de la imagen más allá de la representación numérica de la misma.
       A lo largo del desarrollo de la visión por computadora se distinguen dos enfoques para la generación de representaciones que permitan reconocer características de una imagen:
       El enfoque basado en técnicas superficiales (o “shallow” en inglés) y el enfoque de aprendizaje profundo (o “deep” en inglés).
 
       \subsubsection{Enfoque Clásico}
-      \FIXME{enfoque clásico = describir regiones locales de las imágenes de
-        forma robusta frente a cambios de iluminación, pose de los objetos,
-        etc. El conjunto de estas representaciones se codifican y agregan en una
-        representación vectorial de dimensionalidad fija, la cual se emplea como
-        entrada a los algoritmos de aprendizaje subsiguientes. Un ejemplo de
-        esta clase de representaciones es el modelo de bolsas de palabras
-        visuales el cual, en analogía al modelo para texto, recurre a una
-        estuctura auxiliar para construir un histograma de ocurrencias de
-        ``palabras visuales''. Este concepto se ilustra en la figura XX en donde
-        ...}
+	En el enfoque clásico (o arquitecturas Shallow, como se conocen en la literatura en ingles), se busca generar una representación invariante a la posición, iluminación, fondo, etc.
+	que describan regiones locales de la imagen, de forma robusta. Para ello se utilizan principalmente técnicas estadísticas a partir de conocimiento anterior del objeto y del contexto,
+	con lo cual dependen en cierta forma de una decisión manual de quien construye el algoritmo.
+	El conjunto de estas representaciones locales se codifican y agregan en una representación vectorial de dimensionalidad fija, la cual se emplea como
+        entrada a los algoritmos de aprendizaje subsiguientes. Un ejemplo de esta clase de representaciones es el modelo de bolsas de palabras
+        visuales el cual, en analogía al modelo para texto, recurre a una estuctura auxiliar para construir un histograma de ocurrencias de
+        ``palabras visuales''. Este concepto se ilustra en la figura \ref{fig:bovw} en donde se intenta reconocer un rostro,
+	una bicicleta y una guitarra, basandose en las palabras visuales que contiene su ``Diccionario''.
 
-      El enfoque clásico (o arquitecturas Shallow, como se conocen en la literatura en ingles) responde a la manera tradicional de hacer visión por computadoras.
-	Se busca generar una representación invariante a la posición, iluminación, fondo, etc. utilizando principalmente técnicas estadísticas a partir de conocimiento anterior del objeto y del contexto.
-	Las \emph{features} son diseñadas a mano a partir de características físicas, hipótesis y observaciones. Con este enfoque no se aprenden características de los objetos sino que
-	se procesa la imagen de interés con un extractor de \emph{features} prefijadas y luego se pasa la nueva representación a un clasificador entrenable.
-
-	Un ejemplo de este tipo de representaciones es la de la bolsa de palabras visuales, similar al método ejemplificado para texto, que se ilustra en la figura \ref{fig:bovw}, donde se intenta reconocer un rostro,
-	una bicicleta y una guitarra, basandose en las palabras visuales que contiene su "Diccionario".
 	\begin{figure}[h]
 	  \begin{center}
 	    \includegraphics[scale=0.5]{./img/bag_of_visual_words.jpg}
@@ -341,22 +340,23 @@
 	\end{figure}
 
       \subsubsection{Enfoque de Aprendizaje Profundo}
-	Este enfoque tiene como objetivo lograr una representación composicional de la imagen, es decir, \FIXME{Explicar Composicional}.
-	El aprendizaje profundo consta de un único algoritmo que, en lugar de ser diseñadas a mano, aprende a realizar la representación por si mismo.
+	Este enfoque tiene como objetivo lograr una representación composicional de la imagen. Consta de un único algoritmo que, a diferencia del enfoque clasico, aprende a realizar 
+	la representación por si mismo, en lugar de depender de decisiones externas.
 	El contenido representado dependerá de la información que tenga como objetivo aprender el modelo. Por ejemplo, suponiendo que una misma imagen contenga un gato y un perro,
 	si el modelo debe reconocer perros, la representacion contiene información relevante al perro, en cambio si el modelo debe reconocer animales, la representación incluye
-	información de ambos animales. Finalmente, basado en la representación construida, calcula una predicción.
+	información de ambos animales.
 
 	El problema asociado a este enfoque es que se desconoce cuales serán las \emph{features} que el modelo aprendera a representar durante el entrenamiento.
 	Sin embargo, se puede establecer que las \emph{features} aprendidas tienen en cierto modo una especie de jerarquía, es decir que las \emph{features} de bajo nivel aprendidas desde los píxeles
 	alimentan el aprendizaje de otras \emph{features} que aprenden a reconocer contornos y bordes, y así sucesivamente hasta llegar a las \emph{features} de mas alto nivel
 	que logran reconocer estructuras y objetos. Debido a esto, las estructuras de aprendizaje profundo contemplan esta particularidad organizándose en diferentes capas,
 	donde la salida de una capa es la entrada a la capa siguiente. Las Redes Neuronales Convolucionales soportan el aprendizaje de este tipo \emph{features}
-	y es el modelo empleado en este trabajo. \FIXME{AGREGAR REF}
+	y es el modelo empleado en este trabajo. 
 
 	En la figura \ref{fig:shallow_deep} se realiza una comparacion entre los enfoques clasicos y el enfoque de aprendizaje profundo.  En las 3 primeras opciones del diagrama se
 	pueden observar las distintas formas de representar imágenes mediante técnicas de aprendizaje automático tradicional,
-	donde, en todos los casos, las características deben estar predefinidas a mano, y se van agregando modulos que permiten mejorar la prediccion.
+	donde, en todos los casos, las representaciones estan predefinidas antes de entrenar el modelo. Para mejorar estas representaciones se van agregando modulos 
+	que permiten mejorar la prediccion.
 	En cambio para las técnicas de aprendizaje profundo, las representaciones son directamente aprendidas durante el entrenamiento del modelo.
 
 	\begin{figure}[h]
@@ -367,42 +367,37 @@
 	  \end{center}
 	\end{figure}
 
-        \subsection{Aprendizaje}
+        \subsection{Aprendizaje} \label{sec:aprendizaje}
 
-        \FIXME{Tanto en las representaciones ``shallow'' como en aquellas
-          basados en arquitecturas ``deep'', el concepto de ``aprendizaje a
-          partir de ejemplos'' requiere la introducción de dos conceptos
-          fundamentales: el de función de predicción y el de función
-          objetivo. Mediante la primera se define un modelo que, una vez
-          ajustados sus parámetros, nos servirá para realizar predicciones sobre
-          entradas no visas durante el entrenamiento mientras que la segunda nos
-          define el criterio a partir del cual se deben ajustar los parámetros
-          de la anterior.  Para facilitar la exposición, se abordará el problema
-          de clasificación mediante funciones de predicción lineales. En la
-          sección NN se tratará el caso de funciones de predicción más
-          complejas, en particular el caso de redes neuronales artificiales y
-          sus particularidades.  }
+	  Tanto en las representaciones ``shallow'' como en aquellas  basadas en arquitecturas ``deep'', el concepto de ``aprendizaje a
+          partir de ejemplos'' requiere la introducción de dos conceptos fundamentales: el de función de predicción y el de función
+          de perdida. Mediante la primera se define un modelo que, una vez ajustados sus parámetros, se utiliza para realizar predicciones sobre
+          entradas no vistas durante el entrenamiento. La segunda define el criterio a partir del cual se deben ajustar los parámetros
+          de la anterior. 
+          
+          Para facilitar la exposición, se abordará el problema de clasificación mediante funciones de predicción lineales. En la
+          sección \ref{sec:redes_neuronales} se tratará el caso de funciones de predicción más complejas, en particular el caso de redes neuronales artificiales y
+          sus particularidades.
 
-        \FIXME{Una función de predicción en clasificación se puede representar
-          en términos generales como un mapeo $F_{\theta}: \mathcal{X}
-          {\rightarrow} \{1,..,K\}$ con parámetros $\theta$, del conjunto del
-          espacio de entrada $\mathcal{X}$ (en nuestro caso las imágenes o sus
-          representaciones) al un conjunto discreto de categorías o clases. EN
-          el caso de modelos lineales, la función de predicción toma la forma:
-          \begin{equation}
-            f(x)= ...
+	  Una función de predicción en clasificación se puede representar en términos generales como un mapeo $f_{\theta}: \mathcal{X}
+          {\rightarrow} \{1,\dots,K\}$ con parámetros $\theta$, del conjunto del espacio de entrada $\mathcal{X}$ (en nuestro caso las imágenes o sus
+          representaciones) al un conjunto discreto de categorías o clases ($\{1,\dots,K\}$). Al utilizar modelos lineales, la función de predicción toma la forma:
+          \begin{equation} \label{eq:linear_classifier}
+            f(x) = W x + b
           \end{equation}
-          en donde $\theta=\{W, b\}$, con $W\in\mathbb{R}^{K \times D}$ y $b\in\mathbb{R}^K$.}
+          en donde $\theta=\{W, b\}$, con $W\in\mathbb{R}^{K \times D}$ y $b\in\mathbb{R}^K$.
+          El objetivo del aprendizaje es estimar $\theta$, a partir de un conjunto de $N$ pares de entrenamiento $\{(x_i, y_i)\}_{i=1}^N$, $y_i \in \mathcal{X}$, $y_i\in\{1,\dots,K\}$
+          donde $x_i$ hace referencia a la representación de la i-esima imagen del conjunto e $y_i$ es la respectiva categoría asociada.
+	  A modo de ilustración, en la figura \ref{fig:linear_classifier} se puede observar graficamente como funciona un clasificador lineal que distingue aviones, autos y ciervos en imagenes.
+	  \begin{figure}[h!]
+	    \begin{center}
+	     \includegraphics[scale=0.5]{./img/stanford_linear_class.jpeg}
+	    \end{center}
+	    \caption{Ejemplo de clasificador lineal que utiliza una función de puntuación lineal para clasificar entre autos, aviones y ciervos}
+	    \label{fig:linear_classifier}
+	  \end{figure}
 
-          \FIXME{A los fines de estimar $\theta$ contamos con un conjunto de $N$ pares de
-          entrenamiento $\{(x_i, y_i)\}_{i=1}^N$, $y_i \in \mathcal{X}$,
-          $y_i\in\{1,\dots,K\}$. }
-
-	Dado una $F_{\theta}: \mathcal{X} {\rightarrow} \{1,..,K\}$ de parametros $\theta$. El objetivo del aprendizaje es poder estimar el valor de $\theta$,
-	a partir de un conjunto anotado de datos provistos para entrenar el modelo. A continuación detallaremos algunos conceptos principales para el entrenamiento de un modelo
-	y luego se explica como funciona la fase de aprendizaje.
-	\FIXME{REVISAR}
-	\subsubsection{Función de Predicción \label{sec:prediccion}}
+\iffalse	  
 	  Una predicción puede tener un resultado binario (0 o 1) o puede devolver un puntaje por lo general con valores continuos entre 0 y 1, indicando un cierto valor de confianza
 	  de la predicción. Para el caso de un problema de clasificación de imágenes, el modelo dado una imagen, puede otorgar un puntaje a cada una de las $K$ clases posibles,
 	  y la que obtenga el mayor puntaje será la clase asignada para esa imagen. Para poder realizar una predicción es necesaria una función de puntuación $f:R^D {\rightarrow} R^K$
@@ -415,13 +410,10 @@
 	  \begin{equation}\label{eq:linear_classifier}
 	    f(x, W, b) = W x + b
 	  \end{equation}
-	  \FIXME{EXPLICAR SOBRE EL SESGO}
-	  Donde $W \in R^{K \times D}$, $b \in R^{K \times 1}$ son los parámetros de la función. $W$ suele ser llamado los pesos y $b$ el sesgo, ya que influye en el resultado de salida, pero sin
-	  interactuar con el dato de entrada. En la figura \ref{fig:linear_classifier} Se puede observar graficamente como funciona un clasificador lineal que distingue aviones, autos y ciervos,
-	  trazando lineas rectas en el hiperplano.
+	  Donde $W \in R^{K \times D}$, $b \in R^{K \times 1}$ son los parámetros de la función. 
 	  Algunas cosas a tener en cuenta:
 	  \begin{itemize}
-	   \item Los datos de entrada $(x, y_{j})$  se consideran prefijados, pero parámetros $W$ y $b$ son ajustables.
+	   \item Los datos de entrada $(x, y_{j})$  se consideran prefijados, pero los parámetros contenidos en $\theta$ son ajustables.
 		 El objetivo del aprendizaje será establecerlos de tal manera que las puntuaciones computadas coincidan con las etiquetas correctas sobre todo conjunto de entrenamiento.
 		 Intuitivamente, se desea que la clase correcta tenga una puntuación más alta que las puntuaciones de las clases incorrectas.
 	   \item Una ventaja de este enfoque es que los datos de entrenamiento se utilizan para aprender los parámetros $W$ y $b$, pero una vez que el aprendizaje es completo,
@@ -430,15 +422,8 @@
 		mantener información de cada una de las instancias de entrenamiento para poder realizar la evaluación de una nueva instancia,
 		como por ejemplo el algoritmo de K vecinos mas cercanos (\emph{K nearest neighbours} en la literatura en ingles).
 	  \end{itemize}
-	  \begin{figure}[h!]
-	    \begin{center}
-	     \includegraphics[scale=0.5]{./img/stanford_linear_class.jpeg}
-	    \end{center}
-	    \caption{Ejemplo de clasificador lineal que utiliza una función de puntuación lineal para clasificar entre autos, aviones y ciervos}
-	    \label{fig:linear_classifier}
-	  \end{figure}
+\fi
 
-	\subsubsection{Funciones de Pérdida}
 	  El problema de estimar los parámetros de un modelo, se resuelve optimizando una función de costo expresada en la ecuacion \eqref{eq:perdida}.
           \begin{equation}\label{eq:perdida}
 	    L = \frac{1}{N}\sum_{i=1}^{N} L_i(y_i, f(x_i, W, b)) + \lambda \Omega(W)
@@ -448,9 +433,9 @@
           y un coeficiente de regularización $\lambda \Omega(W)$ que penaliza a los modelos complejos, $\lambda$ es un hiper-parámetro que define cuanto influye la regularización
           sobre el resultado final y $N$ es la cantidad de datos de entrenamiento.
 	  Una función de pérdida es una función real, no negativa $L({\widehat y}, y)$, que mide cuán diferente es la predicción ${\widehat y}$ obtenida, con respecto a la
-	  salida esperada $y$. Existen diversas funciones de pérdida que se utilizan en distintos contextos. A continuación se presentan algunas que se aplican usualmente:
+	  salida esperada $y$. Existen diversas funciones de pérdida que se utilizan en distintos contextos. A continuación se mencionan algunas que se aplican usualmente:
 	  \begin{itemize}
-	    \item Función de Pérdida 0-1: \FIXME{REVISAR}
+	    \item Función de Pérdida 0-1:
 	      \begin{equation*}
 		L({\widehat y}, y) =  \begin{cases}
 					    1 & \text{si ${\widehat y} = y$} \\
@@ -469,13 +454,13 @@
 	      \end{equation*}
 	      Similar a la función Hinge, pero al ser derivable, puede utizarse para aplicar Descenso por el gradiente.
 	    \item Función de Pérdida de Entropía Cruzada
-	      \begin{equation*}
+	      \begin{equation} \label{eq:cross_entropy}
 		L({\widehat y}, y) = -y{\log({\widehat y}}) - (1-y) {\log(1-{\widehat y})}
-	      \end{equation*}
+	      \end{equation}
 	      Es una función continua, convexa y derivable que se adapta a métodos de Descenso por el gradiente, se utiliza en Redes Neuronales Profundas.
 
 	  \end{itemize}
-
+\iffalse
 	\subsubsection {Sobreajuste y Regularización}
 	  Uno de los principales objetivos de los algoritmos de aprendizaje automático es su capacidad de generalizar a ejemplos nunca antes vistos. Sin embargo, si la fase
 	  de aprendizaje se realiza durante demasiado tiempo o si los ejemplos del conjunto de entrenamiento son raros, el modelo aprendido podría ajustarse específicamente
@@ -488,7 +473,7 @@
 	   \begin{equation*}
 	    \Omega(W) = \frac{1}{2} {\sum_{k} {\sum_{l}} W_{k,l}^2}
 	   \end{equation*}
-
+\fi
     \subsubsection{Optimización}
       Minimizar la función de pérdida \eqref{eq:perdida} puede considerarse un problema de optimización, con lo cual se pueden aplicar las técnicas empleadas en este tipo de problemas, para resolverlo.
       El objetivo de la optimización es encontrar el vector de pesos $W$ que minimice la función de pérdida.\\
@@ -528,7 +513,7 @@
 	    \EndFor
 	  \end{algorithmic}
 	\end{algorithm}
-
+\iffalse
     \subsection{Resumen: Ciclo del Aprendizaje Automático}
       Luego de explicar todos los conceptos relevantes al Aprendizaje automático, podemos resumir al ciclo común a todos los algoritmos de Aprendizaje automático a lo siguiente:
       \begin{enumerate}
@@ -549,7 +534,7 @@
 	\item Evaluación: Se aplica el modelo entrenado a los datos del conjunto de prueba, y se aplican métricas para poder establecer que tan bien predice el modelo entrenado para datos nunca antes vistos.
       \end{enumerate}
 
-\iffalse
+
 
     \section{Clasificación de imágenes mediante Aprendizaje
       Supervisado}\FIXME{REMOVE. DEJARLO EN SUSPENSO PARA VER DONDE VA MÁS ADELANTE}
@@ -598,13 +583,11 @@
     \section{Redes Neuronales Artificiales}\label{sec:redes_neuronales}
 
       \subsection{Introducción}
-	Una red neuronal artificial, es una version compleja del clasificador lineal, pero que utiliza los mismos conceptos de funciones de perdida y funcion de prediccion.
-	Basicamente es una combinación lineal de funciones no lineales.
-
-	Un algoritmo de aprendizaje de red neuronal artificial, usualmente llamado "red neuronal", es un algoritmo de aprendizaje  que sirve como herramienta de modelado de datos
+	Un algoritmo de aprendizaje de red neuronal artificial, usualmente llamado ``red neuronal", es un algoritmo de aprendizaje que sirve como herramienta de modelado de datos
 	en forma no lineal. Usualmente se usan para modelar relaciones complejas entre entradas y salidas,
 	para encontrar patrones en los datos, o para capturar la estructura estadística en una distribución de probabilidad conjunta desconocida entre las variables observadas.
-
+	Una red neuronal, basicamente es una version compleja del clasificador lineal, pero que utiliza los mismos conceptos de funciones de perdida y funcion de prediccion.
+	  
 	Las redes neuronales se pueden modelar como un conjunto de unidades de computo (neuronas) conectadas en un grafo acíclico, que se suelen organizar por capas, las neuronas de una capa
 	se conectan con neuronas de sus capas adyacentes pero nunca se conectan 2 neuronas de una misma capa, como se puede observar en la figura \ref{fig:neural_network}.
 	Toda red neuronal tiene una capa de entrada, una capa de salida y un número determinado de capas ocultas, que pueden ser de distintos tipos. En la caso de la figura \ref{fig:neural_network}
@@ -629,7 +612,6 @@
 	  \label{fig:neural_network}
 	\end{figure}
 
-      \subsection {Neurona artificial} \label{sec:neurona}
 	La unidad de procesamiento de una red neuronal es una neurona. La misma toma como parametros un vector de entrada, un vector de pesos, un valor de sesgo. El computo realizado
 	en una neurona puede separarse en 2 etapas.
 	\begin{enumerate}
@@ -644,18 +626,12 @@
 	      z = h(a)
 	    \end{equation}
 	\end{enumerate}
-	La neurona aqui descripta suele ser una neurona que pertenece a la primer capa oculta de la red, ya que en \eqref{eq:neurona_lineal} se interactua
-	con los valores del vector de entrada de la red, en caso de que no pertenezca a la primer capa oculta, se reemplazan los $x_i$ por los correspondientes $z_i$
-	obtenidos en la capa anterior. Finalmente cuando la neurona pertenece a la capa de salida, el valor obtenido en \eqref{eq:neurona_nolineal} termina siendo el valor de salida
+	La unidad aqui descripta pertenece a la primer capa oculta de la red, ya que en \eqref{eq:neurona_lineal} se interactua	con los valores del vector de entrada de la red, 
+	en caso de que no pertenezca a la primer capa oculta, se reemplazan los $x_i$ por los correspondientes $z_i$
+	obtenidos en la capa anterior. Finalmente cuando la unidad pertenece a la capa de salida, el valor obtenido en \eqref{eq:neurona_nolineal} termina siendo el valor de salida
 	de la prediccion es decir $y$.
-
-	\FIXME{revisar que imagen poner en \ref{fig:neuron}}
-	\begin{figure}[H]
-          \begin{center}
-            \includegraphics[width=0.4\linewidth]{./img/neuron.jpg}
-	  \caption{Neurona artificial \label{fig:neuron}}
-          \end{center}
-	\end{figure}
+	
+	Al utilizar una red neuronal como modelo de aprendizaje automatico para clasificación, primero configurar la arquitectura de la red para luego comenzar con la etapa de aprendizaje.
 
 \iffalse
       \subsection{Aprendizaje basado en el Gradiente}
@@ -666,12 +642,11 @@
 	redes neuronales, la técnica ampliamente utilizada es la de retropropagación del error que se detalla luego en la seccion \ref{sec:backpropagation}.
 \fi
 
-\iffalse
       \subsection{Configuracion y Diseño}
 	En la etapa de configuracion y diseño de una red neuronal es donde se define la arquitectura de la red, es decir cuantas capas tendra, cuantas neuronas tendra cada una de las capas
 	y cuales seran las funciones de activacion que estas utilizaran.
 	Ademas en esta etapa se define cual sera la funcion de perdida que se utilizara para calcular el error durante el entrenamiento.
-\fi
+
       \subsection {Aprendizaje}
 	Una vez finalizada la etapa de configuracion y diseño es necesario inicializar los pesos, comunmente inicializados con valores aleatorios cercanos a 0, para luego comenzar con la etapa
 	de entrenamiento de la red.
@@ -683,7 +658,6 @@
 	  \item En el paso de retropropagación del error se calcula el gradiente para luego ajustar los pesos internos de la red en base al resultado del gradiente,
 	    desde las capas finales de la red hasta las capas iniciales.
 	\end{enumerate}
-	\FIXME{VER EN BISHOP}
 	\begin{figure}[H]
 	  \begin{center}
 	  \includegraphics[width=\linewidth]{./img/backprop.png}
@@ -696,39 +670,42 @@
 	\end{figure}
 
       \subsection{Retropropagación del Error} \label{sec:backpropagation}
-	La mayoría de los algoritmos de aprendizaje implican un procedimiento iterativo para la minimización de una función de error, que van ajustando los pesos mediante
+	La mayoría de los algoritmos de aprendizaje implican un procedimiento iterativo para la minimización de una función de perdida o error, en el cual ajustan los pesos mediante
 	una secuencia de pasos. En cada paso, se pueden distinguir dos etapas bien diferenciadas. En la primera etapa, las derivadas de la función de error con
-	respecto a los pesos deben ser evaluados. En la segunda etapa, las derivadas son utilizadas para calcular los ajustes que se les deben hacer a los pesos, en cada una
+	respecto a los pesos deben ser evaluados. En la segunda etapa, las derivadas son utilizadas para calcular los ajustes que se les deben efectuar a los pesos, en cada una
 	de las capas de la red. La importante contribución de la retropropagación (propagar el error hacia atras, a traves de la red) es la de proveer un
 	método computacionalmente eficiente para evaluar las derivadas requeridas en la primer etapa. A lo largo de esta sección, iremos desarrollando las ideas fundamentales de dicho
 	método.
 
-	Dado que debemos minimizar una función de error, primero es necesario analizar la forma de las principales funciones de error de interes.
-	Para calcular el error total en todo el conjunto de datos de $N$ instancias, se hace midiendo el error en cada una de las instancias, es decir, las funciones de error
-	son de la forma:
-	\FIXME{UNIFICAR NOTACION CON \eqref{eq:perdida}}
-	\begin{equation*}
-	  E(w) = \sum_{i=1}^N E_n(w)
-	\end{equation*}
-	Aqui debemos considerar el problema de la evaluación de $\nabla E_n(w)$ para cada término en la función de error. Esto puede ser usado directamente para la optimización secuencial,
-	o los resultados pueden ser acumulados a lo largo  del conjunto de entrenamiento en el caso de los métodos de optimización por lotes.\\
-	\iffalse
+	Como hemos visto, la función de perdida total, definida en \eqref{eq:perdida} se calcula midiendo el error en cada una de las $N$ instancias pertenecientes al conjunto de datos.
+	Una forma simplificada de considerar \eqref{eq:perdida} es:
+	\begin{equation} \label {eq:perdida_simplificada}
+	  L(W) = \frac{1}{N}\sum_{n=1}^{N} L_n(Y_n, f(X_n, W)) + \lambda \Omega(W)
+	\end{equation}
+	donde el sesgo $b$ se considera parte del vector $W$. Ademas, como $(X_n, Y_n)$ estan predefinidas, podemos considerar que cada $L_n$ solo depende de $W$.
+	Debido a todo esto, para calcular el gradiente de la funcion de perdida total, debemos evaluar $\nabla L_n(W)$ para cada término en la función de error. 
+	Esto puede ser usado directamente para la optimización secuencial,o los resultados pueden ser acumulados a lo largo  del conjunto de entrenamiento en el caso de los métodos de optimización por lotes.
+	
 	Consideremos, en primer lugar de un simple modelo lineal en el que las salidas $y_k$ son combinaciones lineales de las variables de entrada $x_i$, es decir:
 	\begin{equation*}
-	  y_k = \sum_i w_{ki} x_i
+	  y_k = \sum_i W_{ki} x_i
 	\end{equation*}
-	junto con una función de error que, para un determinado valor de entrada $n$, toma la forma:
+	Por simplicidad de decidió utilizar la función error cuadratica medio, que aunque no aplica para el caso de clasificación, facilita los calculos y puede
+	ser reemplazada facilmente por otras funciones de error como por ejemplo Entropía Cruzada \eqref{eq:cross_entropy}. 
+	Esta función para un determinado valor de entrada $n$, toma la forma:
 	\begin{equation*}
-	  E_n = \frac{1}{2} \sum_k (y_{nk}-t_{nk})^2   % log-loss
+	  L_n = \frac{1}{2} \sum_k (y_{nk}-Y_{nk})^2   % log-loss
 	\end{equation*}
-	donde $y_{nk} = y_{k} (X_n , W)$. El gradiente de esta función de error con respecto a un peso $w_{ji}$ está dada por:
+	donde $y_{nk} = y_{k} (X_n , W)$.
+	
+	El gradiente de esta función de error con respecto a un peso $w_{ji}$ está dada por:
 	\begin{equation*}
-	  \frac{\partial E_n}{\partial w_{ji}} = (y_{nj} − t_{nj}) x_{ni}
+	  \frac{\partial L_n}{\partial w_{ji}} = (y_{nj} − Y_{nj}) x_{ni}
 	\end{equation*}
-	que puede ser interpretado como un 'computo local' que involucra el producto entre un "error" $y_{nj} − t_{nj}$ asociado a la de salida del enlace $w_{ji}$ y la variable $x_{ni}$
+	que puede ser interpretado como un 'computo local' que involucra el producto entre un "error" $y_{nj} − Y_{nj}$ asociado a la de salida del enlace $w_{ji}$ y la variable $x_{ni}$
 	asociada a la variable de entrada del enlace.
 	Veremos ahora cómo este simple resultado se extiende hasta el escenario más complejo de redes neuronales artificiales.
-	\fi
+
 	En una red neuronal cada unidad de computo, calcula una suma pesada de sus valores de entrada, de la forma:
 	\begin{equation} \label{eq:unidad_computo}
 	  a_j = \sum_{i} w_{ji} z_i
@@ -745,11 +722,11 @@
 	Sin embargo, en el fin de mantener la notación despejada, vamos a omitir el subíndice $n$ de las variables de red. Primero observamos que $E_n$ depende del peso $w_{ji}$
 	sólo a través de la suma de entrada $a_j$ a la unidad $j$. Por lo tanto, podemos aplicar la regla de la cadena para derivadas parciales, con lo cual obtenemos:
 	\begin{equation} \label{eq:partial_derivatives}
-	  \frac{\partial E_n}{\partial w_{ji}} = \frac{\partial E_n}{\partial a_j} \frac{\partial a_j}{\partial w_{ji}}
+	  \frac{\partial L_n}{\partial w_{ji}} = \frac{\partial L_n}{\partial a_j} \frac{\partial a_j}{\partial w_{ji}}
 	\end{equation}
 	Se introduce una notacion util:
 	\begin{equation} \label{eq:notation}
-	  \delta_j \equiv \frac{\partial E_n}{\partial a_j}
+	  \delta_j \equiv \frac{\partial L_n}{\partial a_j}
 	\end{equation}
 	Utilizando \eqref{eq:unidad_computo} podemos escribir:
 	\begin{equation} \label{eq:sustitution1}
@@ -757,19 +734,20 @@
 	\end{equation}
 	Substituyendo \eqref{eq:notation} y \eqref{eq:sustitution1} en \eqref{eq:partial_derivatives} obtenemos:
 	\begin{equation} \label{eq:sustitution2}
-	  \frac{\partial E_n}{\partial w_{ji}} = \delta_j z_i
+	  \frac{\partial L_n}{\partial w_{ji}} = \delta_j z_i
 	\end{equation}
 	La ecuación \eqref{eq:sustitution2} nos dice que la derivada se obtiene simplemente multiplicando el valor de $\delta$ para la unidad en el extremo de salida del peso
 	por el valor de$z$ para la unidad en el extremo de entrada del peso. Tenga en cuenta que esto lleva de la misma forma como para el simple modelo lineal considerado al inicio de esta sección.
-	Por lo tanto, con el fin de evaluar los derivados, sólo tenemos que calcular el valor de $\delta_j$ para cada unidad oculta y de salida  en la red y, a continuación, aplicar (5.53).
-	Como ya hemos visto, para las unidades de salida tenemos
+	Por lo tanto, con el fin de evaluar los derivados, sólo tenemos que calcular el valor de $\delta_j$ para cada unidad oculta y de salida  en la red y, a continuación, aplicar \eqref{eq:sustitution2}.
+	Dado que para las unidades de salida  utilizamos el enlace canonico \FIXME{REVISAR}, tenemos
 	\begin{equation} \label{eq:delta_salida}
-	  \delta_k = y_k - t_k
+	  \delta_k = y_k - Y_k
 	\end{equation}
 	Para evaluar las $\delta$ para las unidades ocultas, volvemos a hacer uso de la regla de la cadena para derivadas parciales:
 	\begin{equation}\label{eq:chain_rule}
-	  \delta_j \equiv \frac{\partial E_n}{\partial a_j} = \sum_k \frac{\partial E_n}{\partial a_k} \frac{\partial a_k}{\partial a_j}
+	  \delta_j \equiv \frac{\partial L_n}{\partial a_j} = \sum_k \frac{\partial L_n}{\partial a_k} \frac{\partial a_k}{\partial a_j}
 	\end{equation}
+	
 	\begin{figure}[h]
 	  \begin{center}
 	  \includegraphics[width=0.5\linewidth]{./img/bishop_backpropagation.jpg}
@@ -779,6 +757,7 @@
 	    hacia atrás de la información de error.}
 	  \label{fig:backpropagation}
 	\end{figure}
+	
 	Donde la suma se ejecuta sobre todas las unidades $k$ donde la unidad $j$ envía conexiones. La disposición de las unidades y pesos se ilustra en la Figura \ref{fig:backpropagation}
 	Notar que las unidades etiquetadas k podrían incluir otras unidades ocultas y/o de salida. En la escritura de la ecuacion \eqref{eq:chain_rule}, estamos haciendo uso del hecho
 	de que las variaciones en un j dan lugar a variaciones en la función de error sólo a través de las variaciones en las variables de k. Si ahora sustituimos la definición
@@ -786,7 +765,7 @@
 	\begin{equation}\label{eq:backpropagation}
 	  \delta_j = h'(a_j) \sum_k w_{kj} \delta_k
 	\end{equation}
-	la cual nos dice que el valor de $\delta$ para una determinada unidad oculta se puede obtener mediante la propagación de la $\delta$'s hacia atrás a partir de unidades
+	donde $h'$ es la función derivada a partir de $h$. La ecuacion \eqref{eq:backpropagation} nos dice que el valor de $\delta$ para una determinada unidad oculta se puede obtener mediante la propagación de la $\delta$'s hacia atrás a partir de unidades
 	de más adelante en la red, como se ilustra en la figura \ref{fig:backpropagation}.
 	Como ya conocemos los valores de los $\delta$'s para las unidades de salida, podemos aplicar de forma recursiva \eqref{eq:backpropagation} para evaluar los $\delta$'s
 	para todas las unidades ocultas en una red, independientemente de su arquitectura.
@@ -799,9 +778,9 @@
 	  \item Utilizar \eqref{eq:sustitution2} para evaluar las derivadas requeridas.
 	\end{enumerate}
 
-\subsection {Funciones de Activación comúnmente utilizadas}
-	Como hemos visto en la seccion \label{sec:neurona}, cada unidad de computo requiere de una funcion de activacion, la toma un único número como entrada,
-	realiza un operación matemática predefinida, no lineal y devuelve el resultado obtenido. En esta seccion se analizan las principales funciones de activacion utilizadas.
+	\subsection {Funciones de Activación comúnmente utilizadas}
+	  Como hemos visto en la seccion \ref{sec:redes_neuronales}, cada unidad de computo requiere de una funcion de activacion, la toma un único número como entrada,
+	  realiza un operación matemática predefinida, no lineal y devuelve el resultado obtenido. En esta seccion se analizan las principales funciones de activacion utilizadas.
 	  \subsubsection {Sigmoide}
 
 	    La función sigmoide proyecta el dominio al rango (0,1) y su ecuación es:
@@ -838,7 +817,7 @@
 	    Proyecta el dominio al rango [-1,1], como se muestra en la figura \ref{fig:tanh}. Al igual que la neurona sigmoide, sus activaciones saturan, pero a diferencia
 	    de la neurona sigmoide su salida esta centrada en cero. Por lo tanto, en la práctica la tanh siempre es preferida sobre sigmoide.
 	    \begin{equation*}
-	     f(x) = \frac{\exp^x - \exp^{-x}}{\exp^x + exp^{-x}}
+	     f(x) = \frac{\exp^x - \exp^{-x}}{\exp^x + \exp^{-x}}
 	    \end{equation*}
 
 	  \subsubsection {ReLU}
@@ -879,7 +858,7 @@
 	    \end{itemize}
 
       \subsection {Regularización: Marginación}
-	\FIXME{DESARROLLAR MAS, EXPLICAR COMO SE HACE, QUE EFECTO TIENE}
+	\FIXME{DESARROLLAR MAS, EXPLICAR COMO SE HACE, QUE EFECTO TIENE SI SACAMOS OVERFITING Y REGULARIZACION SACARLO}
 	A la hora de definir la configuracion de una red, es posible agregar capas de marginación las cuales se emplean como
 	técnica de regularización para reducir la saturación en redes neuronales previniendo el sobreajuste. Estas capas de marginación se encargan de
 	\emph{silenciar} algunas neuronas, aleatoriamente, es decir toman valores de entrada, que para el caso de las neuronas elegidas a ser silenciadas, se ignoran
@@ -893,7 +872,7 @@
 	  de las subred basado en los datos de entrada. \cite{Srivastava:Dropout} }
 	  \label{fig:dropout}
 	\end{figure}
-
+\iffalse
   \section {Aprendizaje Profundo}
     La caída de los precios de hardware y el desarrollo de GPUs para uso personal en los últimos años y la gran disponibilidad de datos, han contribuido al desarrollo del
     concepto de aprendizaje profundo (Deep Learning en ingles)
@@ -907,25 +886,21 @@
       El desafío de generalizar a nuevos ejemplos se vuelve más difícil cuando se trabaja con datos de gran dimensión y los mecanismos utilizados para lograr la generalización
       en el aprendizaje  automático tradicional son insuficientes para aprender funciones complicadas en espacios de alta dimensión.
       Tales espacios también suelen imponer altos costos computacionales. El aprendizaje profundo fue diseñado para superar estos y otros obstáculos.
-
+\fi
   \section {Redes Neuronales Convolucionales}
-    \subsection{Introducción}
-      Las redes neuronales convolucionales (Convolutional Neural Networks en ingles, o CNN) son muy similares a las redes neuronales antes vistas en la seccion \ref{sec:redes_neuronales},
-      con la diferencia en que la arquitectura
-      de una red neuronal convolucional asume explícitamente que el conjunto de entrada son imágenes, lo que le permite codificar ciertas propiedades dentro de la arquitectura.
-      Están inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes como la convolucion, detallada en la seccion \ref{sec:convolucion}.
-      Ademas, suelen tener un gran numero de capas ocultas, por lo que son consideras parte del Aprendizaje Profundo.
-
-   \subsection{Convolución} \label{sec:convolucion}
+      Las redes neuronales convolucionales (Convolutional Neural Networks en ingles, o CNN) son muy similares a las redes neuronales antes vistas en la seccion \ref{sec:redes_neuronales}.
+      La principal diferencia es que la arquitectura de una red neuronal convolucional asume explícitamente que el conjunto de entrada son imágenes. Esto le permite codificar ciertas propiedades dentro de la arquitectura.
+      Están inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes como la convolucion.
+      
       En el area del procesamiento de imagenes, la convolución es una tecnica de proposito general para transferir el efecto a una imagen, utilizando el valor de sus pixeles,
       mediante una pequeña matriz comunmente llamada filtro (por lo general de $3\times3$ o $5\times5$).
-      Al realizar la convolucion sobre una imagen, aplicando un filtro determinado, el resultado es otra imagen nueva, donde cada uno de los pixeles de esta nueva imagen se calcula de la siguiente forma:
-      Este filtro actua determinando el valor del pixel central donde se esta aplicando el filtro, sumando los valores de los pixeles vecinos pesados por el valor correspondiente del filtro para
-      cada pixel, como se puede observar en la figura \ref{fig:convolution}, donde se aplica un filtro de $3\times3$ donde el caculo realizado es (40*0)+(42*1)+(46*0) + (46*0)+(50*0)+(55*0) + (52*0)+(56*0)+(58*0) = 42,
+      Al realizar la convolucion sobre una imagen, se aplica un filtro, obteniendo como resultado otra imagen nueva. Cada uno de los pixeles de esta nueva imagen se calcula de la siguiente forma:
+      El filtro actua determinando el valor del pixel central donde se esta aplicando, sumando los valores de los pixeles vecinos pesados por el valor correspondiente de la matriz para
+      cada pixel. En la figura \ref{fig:convolution}, se puede observar la aplicación de un filtro de $3\times3$. El caculo realizado es (40*0)+(42*1)+(46*0) + (46*0)+(50*0)+(55*0) + (52*0)+(56*0)+(58*0) = 42,
       por lo que el valor obtenido para ese pixel es 42.
-      Este filtro se va desplazando sobre todos los pixeles de la imagen de entrada hasta lograr calcular todos los pixeles de la imagen de salida, en el caso de los pixeles correspondientes
-      a los bordes de la imagen, donde ya no disponen de pixeles vecinos en alguna de las posiciones donde se aplica el filtro, una forma de completar el calculo es considerando que donde
-      hay pixeles ausentes su valor es cero.
+      Este filtro se va desplazando sobre todos los pixeles de la imagen de entrada hasta lograr calcular el valor todos los pixeles de la imagen de salida. Para el caso de los pixeles 
+      correspondientes a los bordes de la imagen, que no disponen de pixeles vecinos en alguna de las posiciones donde se aplica el filtro, existen diversas formas de completarlo. 
+      Una forma de completar el calculo es considerando que donde hay pixeles ausentes su valor es cero, otra es considerar que tiene el mismo valor que el pixel mas cercano.
       \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=0.8\linewidth]{./img/convolution.png}
@@ -934,10 +909,41 @@
 	\label{fig:convolution}
       \end{figure}
 
+      Muchos de los enfoques modernos en Visión por Computadoras explotan la propiedad de que píxeles cercanos están más correlacionados entre ellos 
+      que a los píxeles mas distantes. Esto se realiza mediante la extracción de características locales que dependen sólo pequeñas subregiones de la imagen. La información de tales características pueden entonces ser combinados
+      en etapas posteriores de procesamiento con el fin de detectar de características de alto nivel hasta finalmente proveer información de la imagen completa. Además, las características
+      locales que son útiles en una región de la imagen, probablemente sean útiles en otras regiones de la imagen.
+      Estas nociones son incorporadas a las redes neuronales convolucionales mediante 3 mecanismos: (i) campos receptivos locales, (ii) compartir pesos y (iii) realizar submuestreos o agrupaciones.
+      La estructura de una CNN se ilustra en la Figura \ref{fig:bishop_cnn}. En una capa convolucional, las unidades se organizan en 3 dimensiones, donde los distintos planos generados,
+      utilizando la dimensiones alto y ancho se llaman mapa de caracteristicas.
+
+      Las unidades en un mapa de caracteristicas toman como entradas solo una pequeña subregión de la imagen, y todas las unidades de un mismo mapa de caracteristicas se
+      ven obligadas a compartir los mismos valores de peso. Por ejemplo, una mapa de caracteristicas puede consistir de 100 unidades dispuestas en una de cuadrícula 10x10,
+      donde cada unidad  toma de entradas una porcion de 5x5 pixeles de la imagen. El mapa de caracteristicas completo tiene entonces 25 parametros de pesos ajustables,
+      más uno de sesgo. Los valores de entrada de cada porcion de imagen son linealmente combinados utilizando los pesos y el sesgo, y el resultado es transformado por una funcion 
+      no lineal como la funcion sigmoide.
+
+      Si consideramos a las unidades como detectores de caracteristicas, entonces, todas las unidades en un mismo mapa de caracteristicas detectan el mismo patrón, pero en diferentes
+      ubicaciones en la imagen de entrada. Debido a que comparten los pesos, la evaluación de las activaciones de estas unidades es equivalente a  realizar una operación de convolución
+      sobre la intensidad de los pixeles de la imagen con un filtro compuesto por los parámetros de peso.
+      
+      \begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.8\linewidth]{./img/bishop_cnn.jpg}
+	\end{center}
+	\caption{Diagrama que ilustra parte de una CNN, mostrando una capa convolucional, seguido por una capa de agrupación.}
+	\label{fig:bishop_cnn}
+      \end{figure}
+      
+      Lograr diseñar una red convolucional que funcione correctamente, no es una tarea simple. Ademas, una red neuronal convolucional moderna requiere entre 2 y 3 semanas para entrenarse, 
+      utilizando multiples GPUs para el conjunto de datos ImageNet \cite{imagenet_cvpr09}. Debido a estos motivos, en la actualidad un practica comun es adaptar
+      redes famosas ya preentrenadas, realizando sobre estas ajuste fino (''Finetuning`` en la literatura en ingles), detallado en la seccion \ref{sec:finetuning}.
+
+\iffalse
     \subsection {Arquitectura de una red neuronal convolucional}
-      En las redes neuronales convolucionales, las neuronas dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad, como se ilustra en la figura \ref{fig:cnn}.
+      En las redes neuronales convolucionales, las unidades dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad, como se ilustra en la figura \ref{fig:cnn}.
       Cada capa acepta un volumen de 3 dimensiones como entrada y lo transforma en un volumen de salida de 3 dimensiones a través de una función diferenciable.
-      Algunas capas pueden tener o no parámetros, al igual que hiper-parámetros. La entrada y salida de cada una de estas capas son conjuntos de arreglos llamados mapas de caracteristicas.
+      La entrada y salida de cada una de estas capas son conjuntos de arreglos llamados mapas de caracteristicas.
       En el caso mas simple de arquitectura, la red transforma el volumen de una imagen de entrada en un volumen de salida, conteniendo los puntajes de cada clase para el problema de clasificación.
       Típicamente, las CNNs suelen además organizarse por etapas, cada etapa consiste de una capa convolucional, una no lineal y una de agrupamiento.
       A continuación se detallan estos tipos de capas.
@@ -950,17 +956,18 @@
 	  serían las dimensiones de la imagen, y la profundidad sería 3 (los canales Rojo, Verde, Azul). \cite{Karpathy:Stanford}}
 	\label{fig:cnn}
       \end{figure}
+\fi
 
     \subsection {Tipos de Capas}
-      \subsubsection{Capa Convolucional}
-	Los parámetros consisten en un conjunto de filtros aprendibles. Cada filtro el pequeño espacialmente(alto y ancho) pero se extiende sobre toda la profundidad del volumen de entrada.
+      \subsubsection{Capa Convolucional} \label{}
+	Los parámetros consisten en un conjunto de filtros aprendibles. Cada filtro es pequeño espacialmente (alto y ancho) pero se extiende sobre toda la profundidad del volumen de entrada.
 	Durante el paso hacia adelante, se desliza o convoluciona el filtro a través del alto y ancho del volumen de entrada y se computa el producto punto entre los valores del filtro y los valores
 	del volumen de entrada. A medida que se va deslizando el filtro sobre el ancho y el alto del volumen de entrada, se va generando un mapa de caracteristicas de 2 dimensiones que contiene los
 	valores de respuesta de ese filtro en cada posición espacial.
 
 	Intuitivamente, la red aprenderá los filtros que se activan cuando ven algún tipo de característica visual como un borde de cierta orientación o una mancha de algún color en la
 	primera capa, o eventualmente panal entero o patrones de rueda en las capas más altas de la red. Dado que tendremos un conjunto de filtros en cada capa Convolucional,
-	y cada uno de ellos producirá un mapa de activación bidimensional separado, estos se apilaran a lo largo de la dimensión de profundidad para producir el volumen de salida.\\
+	y cada uno de ellos producirá un mapa de activación bidimensional separado, estos se apilaran a lo largo de la dimensión de profundidad para producir el volumen de salida.
 
 	\begin{figure}[H]
 	  \begin{center}
@@ -995,65 +1002,7 @@
 	mediante una capa completamente conectada, las neuronas entre dos capas adyacentes están completamente conectadas de a pares, de esta forma, se pierde la localidad espacial,
 	por lo que este tipo de capas suelen estar al final de la red.
 
-    \subsection{Funcionamiento \FIXME{VER TITULO}}
-      Con lo que respecta a las imágenes, muchos de los enfoques modernos en Visión por Computadoras explotan la propiedad de que píxeles cercanos están más correlacionados entre ellos que a los píxeles mas
-      distantes, mediante la extracción de características locales que dependen sólo pequeñas subregiones de la imagen. La información de tales características pueden entonces ser combinados
-      en etapas posteriores de procesamiento con el fin de detectar de características de alto nivel hasta finalmente proveer información de la imagen completa. Además, las características
-      locales que son útiles en una región de la imagen, probablemente sean útiles en otras regiones de la imagen.
-      Estas nociones son incorporadas a las redes neuronales mediante 3 mecanismos: (i) campos receptivos locales, (ii) compartir pesos y (iii) realizar submuestreos o agrupaciones.
-      La estructura de una CNN se ilustra en la Figura \ref{fig:bishop_cnn}. En una capa convolucional, las unidades se organizan en 3 dimensiones, donde los distintos planos generados,
-      utilizando la dimensiones alto y ancho se llaman mapa de caracteristicas.
-
-      Las unidades en un mapa de caracteristicas toma como entradas solo una pequeña subregión de la imagen, y todas las unidades de un mismo mapa de caracteristicas se
-      ven obligadas a compartir los mismos valores de peso. Por ejemplo, una mapa de caracteristicas puede consistir de 100 unidades dispuestas en una de cuadrícula 10x10,
-      donde cada unidad  toma de entradas una porcion de 5x5 pixeles de la imagen. El mapa de caracteristicas completo tiene entonces 25 parametros de pesos ajustables,
-      más uno de sesgo. Los valores de entrada de cada porcion de imagen son linealmente combinados utilizando los pesos y el sesgo, y el resultado  es transformado por una funcion no lineal
-      como la funcion sigmoide como lo visto en la seccion \ref{sec:neurona}.
-
-      Si consideramos a las unidades como detectores de caracteristicas, entonces, todas las unidades en un mismo mapa de caracteristicas detectan el mismo patrón, pero en diferentes
-      ubicaciones en la imagen de entrada. Debido a que comparten los pesos, la evaluación de las activaciones de estas unidades es equivalente a  realizar una operación de convolución
-      sobre la intensidad de los pixeles de la imagen con un filtro compuesto por los parámetros de peso.
-      \begin{figure}[h]
-	\begin{center}
-	\includegraphics[width=0.8\linewidth]{./img/bishop_cnn.jpg}
-	\end{center}
-	\caption{Diagrama que ilustra parte de una CNN, mostrando una capa convolucional, seguido por una capa de agrupación.}
-	\label{fig:bishop_cnn}
-      \end{figure}
-
-    \subsection {Casos de estudio de redes convolucionales famosas}
-
-      \subsubsection{LeNet}
-	 El primer éxito en las aplicaciones de Redes Neuronales Convolucionales, fue desarrollado por Yann LeCun en la década de 1990. La aplicación mas conocida que utiliza la arquitectura
-	 LeNet es para leer los códigos postales, números, etc \cite{Lecun:LeNet}.
-
-      \subsubsection{AlexNet}
-	La primera obra que popularizó las Redes Neuronales Convolucionales en Visión por Computadoras fue el AlexNet, desarrollada por Alex Krizhevsky, Ilya Sutskever y Geoff Hinton.
-	El AlexNet fue presentado al desafío ImageNet ILSVRC  en 2012 y obteniendo el primer puesto superando significativamente al segundo (top 5 de error de 16\% en comparación con el
-	subcampeón con el 26\% de error). La Red tenía una muy arquitectura similar a LeNet, pero era más profundo, más grande, y capas convolucionales apiladas una encima de la otra
-	(anteriormente era común tener solo capa convolucional siempre seguida inmediatamente por una capa de agrupación) \cite{AlexNet} .
-
-      \subsubsection{GoogLeNet}
-	El ganador de ILSVRC 2014 fue la Red Convolucional de Szegedy, proveniente de Google. Su contribución principal fue el desarrollo de un Módulo de "Inception" que reduce drásticamente
-	el número de parámetros de la red (4M, en comparación con AlexNet con 60M). Además, en este documento se utiliza la agrupación por promedio en lugar de capas totalmente conectadas
-	en la parte superior de la CNN, eliminando una gran cantidad de parámetros que no parecen influir mucho en el rendimiento \cite{Szegedy:Convolutions}.
-
-      \subsubsection{VGG}
-	El segundo puesto en ILSVRC 2014 fue la red de Karen Simonyan y Andrew Zisserman que llegó a ser conocido como VGG. Su contribución principal fue demostrar que la profundidad de
-	la red es un componente crítico para el buen desempeño. Su version final contiene 16 capas convolucionales, que ofrece una arquitectura muy homogénea, sólo
-	realiza convoluciones de 3x3 y agrupaciónes de 2x2 desde el principio hasta el final. Su modelo preentrenado está disponible para publicamente.
-	Una desventaja de la VGG es que es más caro para evaluar y consume mucha más memoria y parámetros (140M). La mayoría de estos parámetros se encuentran en la primera
-	capa totalmente conectada, y desde entonces se ha encontrado que estos capas pueden ser removidos con ningúna disminucion de rendimiento, reduciendo significativamente el
-	número de parámetros necesarios \cite{SimonyanVGG} .
-
-      \subsubsection{Resnet}
-	Las Redes Residuales fueron desarrolladas por Kaiming He, que fue el ganador de ILSVRC 2015. La caracteristica particular de este tipo de redes es que  utilizan conexiones salteadas
-	y hacen uso intensivo de la normalización por lotes.
-	Esta arquitectura también solo tiene una capa completamente conectada en el extremo final de la red. ResNets actualmente son, por lejos, el estado del arte de las
-	Redes Neuronales Convolucionales \cite{Kaiming:ResNet} .
-
-    \section {Ajuste fino}
-      %STANFORD
+    \section {Ajuste fino} \label{sec:finetuning}
       El ajuste fino (Finetuning en inglés), es una tecnica que toma un modelo ya entrenado, con sus respectivos pesos,  y consiste en adaptar la arquitectura
       del modelo inicial, para el problema al cual se quiere emplear, brindando un conjunto de datos de entrenamiento con el cual se entrena la red adaptada,
       pero la inicializacion de los pesos coincide con los pesos obtenidos del modelo preentrenado.
@@ -1062,11 +1011,43 @@
       tenga la cantidad de salidas igual a la cantidad de razas de gato que se desean reconocer.
       Para el entrenamiento de esta red adaptada se le da como entrada un conjunto de imagenes, de gatos de las distintas razas, de esta forma los  pesos se van
       ajustando para lograr reconocer este nuevo tipo de conceptos en las imagenes.
-      \FIXME{DESARROLLAR MEJOR EL EJEMPLO}
-      \paragraph{Modelos preentrenados}
-	Debido a que una red neuronal convolucional moderna requiere entre 2 y 3 semanas para entrenarse, utilizando multiples GPUs para el conjunto de datos ImageNet \cite{imagenet_cvpr09},
-	es comun ver que gente publica sus Redes ya entrenadas para el beneficio de otras personas que lo pueden usar para hacer reentrandas, lo que requiere un tiempo mucho menor.
+      
+      \subsection{Redes Convolucionales Famosas y Modelos preentrenados}
+	Como mencionamos anteriormente, una practica usual es reentrenar modelos preentrenados, adaptandolos a las necesidades especificas. Existen modelos de redes convolucionales
+	que reconocidos por haber ganado competencias orientadas a la clasificacion de imagenes, los cuales son de disponibilidad publica. Estos modelos suelen ser empleados como base 
+	preentrenada. A continuación se mencionan algunos de los mas famosos:
+	
+	\subsubsection{LeNet}
+	  El primer éxito en las aplicaciones de Redes Neuronales Convolucionales, fue desarrollado por Yann LeCun en la década de 1990. La aplicación mas conocida que utiliza la arquitectura
+	  LeNet es para leer los códigos postales, números, etc \cite{Lecun:LeNet}.
 
+	\subsubsection{AlexNet}
+	  La primera obra que popularizó las Redes Neuronales Convolucionales en Visión por Computadoras fue el AlexNet, desarrollada por Alex Krizhevsky, Ilya Sutskever y Geoff Hinton.
+	  El AlexNet fue presentado al desafío ImageNet ILSVRC  en 2012 y obteniendo el primer puesto superando significativamente al segundo (top 5 de error de 16\% en comparación con el
+	  subcampeón con el 26\% de error). La Red tenía una muy arquitectura similar a LeNet, pero era más profundo, más grande, y capas convolucionales apiladas una encima de la otra
+	  (anteriormente era común tener solo capa convolucional siempre seguida inmediatamente por una capa de agrupación) \cite{AlexNet} .
+
+	\subsubsection{GoogLeNet}
+	  El ganador de ILSVRC 2014 fue la Red Convolucional de Szegedy, proveniente de Google. Su contribución principal fue el desarrollo de un Módulo de "Inception" que reduce drásticamente
+	  el número de parámetros de la red (4M, en comparación con AlexNet con 60M). Además, en este documento se utiliza la agrupación por promedio en lugar de capas totalmente conectadas
+	  en la parte superior de la CNN, eliminando una gran cantidad de parámetros que no parecen influir mucho en el rendimiento \cite{Szegedy:Convolutions}.
+
+	\subsubsection{VGG}
+	  El segundo puesto en ILSVRC 2014 fue la red de Karen Simonyan y Andrew Zisserman que llegó a ser conocido como VGG. Su contribución principal fue demostrar que la profundidad de
+	  la red es un componente crítico para el buen desempeño. Su version final contiene 16 capas convolucionales, que ofrece una arquitectura muy homogénea, sólo
+	  realiza convoluciones de 3x3 y agrupaciónes de 2x2 desde el principio hasta el final. Su modelo preentrenado está disponible para publicamente.
+	  Una desventaja de la VGG es que es más caro para evaluar y consume mucha más memoria y parámetros (140M). La mayoría de estos parámetros se encuentran en la primera
+	  capa totalmente conectada, y desde entonces se ha encontrado que estos capas pueden ser removidos con ningúna disminucion de rendimiento, reduciendo significativamente el
+	  número de parámetros necesarios \cite{SimonyanVGG} .
+
+	\subsubsection{Resnet}
+	  Las Redes Residuales fueron desarrolladas por Kaiming He, que fue el ganador de ILSVRC 2015. La caracteristica particular de este tipo de redes es que  utilizan conexiones salteadas
+	  y hacen uso intensivo de la normalización por lotes.
+	  Esta arquitectura también solo tiene una capa completamente conectada en el extremo final de la red. ResNets actualmente son, por lejos, el estado del arte de las
+	  Redes Neuronales Convolucionales \cite{Kaiming:ResNet} .
+	
+	
+\iffalse
       \paragraph{Como y cuando hacer Reentrenamiento}
       \FIXME{REVISAR SI HACE FALTA PONERLO}
 	¿Cómo decidir qué tipo de transferencia de aprendizaje debe realizar en un nuevo conjunto de datos? Esta es una función de varios factores, pero los dos más importantes son el
@@ -1086,6 +1067,7 @@
 	  entrenar a una red convolucional desde cero. Sin embargo, en la práctica es muy a menudo todavía beneficioso para inicializar con pesos de un modelo pre-entrenado.
 	  En este caso, tendríamos suficientes datos y confianza para afinar a través de toda la red.
 	\end{itemize}
+\fi
 
 \chapter{Algoritmo de Transferencia de estilo}
     \section{Introducción}
