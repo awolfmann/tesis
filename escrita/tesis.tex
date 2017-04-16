@@ -391,7 +391,7 @@
 	  A modo de ilustración, en la figura \ref{fig:linear_classifier} se puede observar graficamente como funciona un clasificador lineal que distingue aviones, autos y ciervos en imagenes.
 	  \begin{figure}[ht]
 	    \begin{center}
-	     \includegraphics[width=0.8]{./img/stanford_linear_class.jpeg}
+	     \includegraphics[width=0.8\linewidth]{./img/stanford_linear_class.jpeg}
 	    \end{center}
 	    \caption{Ejemplo de clasificador lineal que utiliza una función de puntuación lineal para clasificar entre autos, aviones y ciervos}
 	    \label{fig:linear_classifier}
@@ -474,7 +474,7 @@
 	    \Omega(W) = \frac{1}{2} {\sum_{k} {\sum_{l}} W_{k,l}^2}
 	   \end{equation*}
 \fi
-    \subsubsection{Optimización}
+    \subsubsection{Optimización} \label{sec:optimizacion}
       Minimizar la función de pérdida \eqref{eq:perdida} puede considerarse un problema de optimización, con lo cual se pueden aplicar las técnicas empleadas en este tipo de problemas, para resolverlo.
       El objetivo de la optimización es encontrar el vector de pesos $W$ que minimice la función de pérdida.
       
@@ -1016,7 +1016,7 @@
       Para el entrenamiento de esta red adaptada se le da como entrada un conjunto de imagenes, de gatos de las distintas razas, de esta forma los  pesos se van
       ajustando para lograr reconocer este nuevo tipo de conceptos en las imagenes.
       
-      \subsection{Redes Convolucionales Famosas y Modelos preentrenados}
+      \subsection{Redes Convolucionales Famosas y Modelos preentrenados} \label{sec:cnn_famosas}
 	Como mencionamos anteriormente, una practica usual es reentrenar modelos preentrenados, adaptandolos a las necesidades especificas. Existen modelos de redes convolucionales
 	que reconocidos por haber ganado competencias orientadas a la clasificacion de imagenes, los cuales son de disponibilidad publica. Estos modelos suelen ser empleados como base 
 	preentrenada. A continuación se mencionan algunos de los mas famosos:
@@ -1176,7 +1176,7 @@
       entrenadas en el reconocimiento de objetos. Se ha comprobado que estas logran extraer información semantica de alto nivel del contenido de las imagenes \cite{AlexNet}.
 
 
-    \section{Sintesis \label{sec:sintesis}}
+    \section{Sintesis} \label{sec:sintesis}
       El algoritmo desarrollado por Gatys et al. es, conceptualmente un algoritmo de tranferencia de texturas que utiliza mapas de caracteristicas de redes neuronales convolucionales. 
       Dado que la modelizacion de la textura se basa en estas mismas representaciones, el metodo de transferencia de estilo se reduce a un problema
       de optimizacion en una unica red neuronal. Las imagenes son generadas minimizando la distancia entre los mapas de caracteristicas de las imagenes de entrada y los mapas de
@@ -1202,108 +1202,143 @@
       para el reconocimiento de objetos. De esta forma, al manipularse independientemente se pueden generar una nueva imagen desde 2 imágenes de entradas distintas, que 
       simultaneamente se corresponda con la representacion del contenido de una imagen y la respresentacion del estilo de la otra.
       
-      El algoritmo presentado se reduce a un problema de optimización, donde se define una funcion de perdida que mide el error entre las representaciones de estilo y contenido 
-      de la imagen generada, con las respectivas representaciones de las imagenes de entrada.
-      Comenzando desde una imagen de ruido blanco, se va minimizando el valor obtenido por la funcion de perdida, iterativamente, mediante el metodo de descenso por el gradiente, hasta 
-      llegar al resultado deseado.
-      \FIXME{Revisar}
-      en el cual el numero de iteraciones determina el grado de similitud entre la imagen generada con las imagenes elegidas para capturar el contenido y el estilo. 
-      La gran influencia de dicho numero radica en que este determina cuanto se minimizara la funcion de perdida mediante el metodo de descenso por el gradiente.
-      Al minimizar esta funcion de perdida se disminuye la distancia entre las representaciones de estilo y contenido de la imagen generada, con las respectivas representaciones
-      de las imagenes de entrada.
-      Otros hiperparametros que requiere el algoritmo son definir cual sera la Red Convolucional utilizada y cuales seran las capas de la red empleadas para calcular el estilo y cual sera la capa elegida
-      para calcular el contenido.
       \begin{figure}[h]
 	\includegraphics[width=\textwidth]{./img/gatys_1.png}
 	\caption{Reconstrucciones del Estilo y Contenido utilizando una CNN}
 	\label{fig:gatys_reconstrucciones}
       \end{figure}
 	  
-      En la figura \ref{fig:gatys_reconstrucciones} se pueden observar el resultado de reconstruir el estilo y el contenido utilizando los mapas de caracteristicas que se obtienen al
-      realizar una pasada hacia adelante en la red VGG. Dada una imagen de entrada, en cada capa de la red, ésta se representa como el mapa de caracteristicas en respuesta a los filtros
+      En la figura \ref{fig:gatys_reconstrucciones} se puede observar el resultado de reconstruir el estilo y el contenido utilizando los mapas de caracteristicas que se obtienen al
+      realizar una pasada hacia adelante en la red VGG \cite{SimonyanVGG}. Dada una imagen de entrada, en cada capa de la red, ésta se representa como el mapa de caracteristicas en respuesta a los filtros
       que pertenecen a esa capa. Mientras que el número de filtros va aumentando a lo largo de la jerarquía de la red, el tamaño de las representaciones de la imágenes va siendo reducido 
       por algunos mecanismos disminución de resolución(por ejemplo, agrupación) que conduce a una disminución en el número total de unidades por cada capa de la red.
       
-      \textbf{Reconstruccion del contenido:}
-	En la parte inferior de la figura \ref{fig:gatys_reconstrucciones} podemos visualizar la información en diferentes etapas de procesamiento en la CNN por la reconstrucción
-	de la imagen de entrada solamente conociendo las respuestas de los filtros
-	en una capa en particular. Al reconstruir la imagen de entrada a partir de las capas 'conv1\_1'(a), 'conv2\_1' (b), 'conv3\_1' (c), 'conv4\_1' (d) y 'conv5\_1' (e) de la red VGG,
-	se puede observar que la reconstrucción de las capas inferiores es casi perfecta (a,b,c). En cambio, en las capas más altas de la red, información detallada de los píxeles se
-	pierde, mientras que el contenido de alto nivel  de la la imagen se conserva (d,e). 
+      En la parte inferior de la figura \ref{fig:gatys_reconstrucciones} podemos visualizar la información en diferentes etapas de procesamiento en la CNN por la reconstrucción
+      de la imagen de entrada solamente conociendo las respuestas de los filtros en una capa en particular. 
+      Al reconstruir la imagen de entrada a partir de las capas 'conv1\_1'(a), 'conv2\_1' (b), 'conv3\_1' (c), 'conv4\_1' (d) y 'conv5\_1' (e) de la red VGG,
+      se puede observar que la reconstrucción de las capas inferiores es casi perfecta (a,b,c). 
+      En cambio, en las capas más altas de la red, información detallada de los píxeles se pierde, mientras que el contenido de alto nivel  de la la imagen se conserva (d,e). 
 	
-      \textbf{Reconstruccion del estilo}:
-	En la parte superior de la figura \ref{fig:gatys_reconstrucciones} construimos un nuevo espacio de características que captura el estilo de una imagen de entrada.
-	La representación de estilo se obtiene calculando las correlaciones entre los mapas de características de diferentes capas de la CNN. Al reconstruir el estilo de la imagen de estilo
-	utlizando diferentes subconjuntos de capas de la red ('conv1\_1' (a), "conv1\_1' y 'conv2\_1' (b), 'conv1\_1', 'conv2\_1' y 'conv3\_1' (c),'conv1\_1', 'conv2\_1', 'conv3\_1 ' y 'conv4\_1' (d),
-	'conv1\_1', 'conv2\_1', 'conv3\_1', 'conv4\_1' y 'conv5\_1' (e)).
-	Esto crea imágenes que coinciden con el estilo de la imagen dada, descartando la información del orden espacial de la escena.
-
-    \section{Métodos \label{sec:metodos}}
-      Generalmente, cada capa de la red define un banco de filtros no lineal cuya complejidad aumenta con la posición de la capa en la red.
-      Para visualizar la información de la imagen codificada en diferentes capas de la jerarquía se realiza descenso gradiente en una imagen de ruido blanco
-      para encontrar otra imagen que coincida con las características de respuesta de la imagen original.
-      Sea $\overrightarrow{x}$ la imagen de entrada, la cual será codificada por cada una de las capas de la red convolucional en un mapa de caracteristicas, basado en las respuestas de los filtros.
+      En la parte superior de la figura \ref{fig:gatys_reconstrucciones} construimos un nuevo espacio de características que captura el estilo de una imagen de entrada.
+      La representación de estilo se obtiene calculando las correlaciones entre los mapas de características de diferentes capas de la CNN. Al reconstruir el estilo de la imagen de estilo
+      utlizando diferentes subconjuntos de capas de la red ('conv1\_1' (a), "conv1\_1' y 'conv2\_1' (b), 'conv1\_1', 'conv2\_1' y 'conv3\_1' (c),'conv1\_1', 'conv2\_1', 'conv3\_1 ' y 'conv4\_1' (d),
+      'conv1\_1', 'conv2\_1', 'conv3\_1', 'conv4\_1' y 'conv5\_1' (e)).
+      Esto crea imágenes que coinciden con el estilo de la imagen dada, descartando la información del orden espacial de la escena.
+      
+      El algoritmo presentado se reduce a un problema de optimización, en el cual se define una funcion de perdida que mide el error entre las representaciones de estilo y contenido 
+      de la imagen generada, con las respectivas representaciones de las imagenes de entrada.
+      Esta funcion de perdida es una combinación lineal de 2 funciones de perdida distintas, una relacionada al contenido y otra al estilo, las cuales se desarrollan en las secciones \ref{sec:contenido} y \ref{sec:estilo} respectivamente.
+      Comenzando desde una imagen de ruido blanco, se va minimizando el valor obtenido por la funcion de perdida, iterativamente, mediante el metodo de descenso por el gradiente, hasta 
+      llegar al resultado deseado.
+      De esta forma, tanto el estilo como el contenido de la imagen generada se va aproximando al estilo y al contenido de las respectivas imagenes de entrada.
+      
+      Al ser un algoritmo iterativo, el numero de iteraciones determina el grado de similitud entre la imagen generada con las imagenes elegidas para capturar el contenido y el estilo. 
+      La gran influencia de dicho hiperparametro radica en que el mismo determina cuantas veces se minimizara la funcion de perdida mediante el metodo de descenso por el gradiente.
+      Ademas, como hemos visto en la seccion \ref{sec:optimizacion}, dicho metodo requiere de otro hiperparámetro llamado tasa de aprendizaje que define el tamaño de cada 
+      paso en la iteración.
+      Los hiperparámetros requeridos por el metodo de optimización aqui mencionado, son solo algunos de los hiperparámetros exigidos por el algoritmo, en la siguiente seccion se mencionan los demas.
+      
+    \section{Representacion del Contenido} \label{sec:contenido}
+      Generalmente, cada capa de la red define un banco de filtros no lineal cuya complejidad aumenta dependiendo de la jerarquía de la capa en la red.
+      Por lo tanto, una imagen de entrada $\overrightarrow{x}$ , se codifica en cada una de las capas de la red convolucional como un mapa de caracteristicas.
+      Estos mapas se obtienen a partir de las respuestas de los filtros pertenecientes a dicha capa con respecto a la imagen de entrada.
       Una capa con $N_l$ filtros distintos, tiene $N_l$ mapas de caracteristicas, cada uno de tamaño $M_l$, donde $M_l$ es el ancho por el largo del mapa de caracteristicas.
-      Por lo tanto las respuestas de una capa $l$ pueden ser alojadas en una matriz $F^l \in R^{N_l \times M_l}$, donde $F_{i,j}^l$ es la respuesta del $i$-esimo filtro en la posición $j$.
-      Entonces sean $\overrightarrow{p}$ y $\overrightarrow{x}$ la imagen original y la imagen generada, y sean $P^l$ y $F^l$ las respectivas representaciones en la capa $l$.
-      Funcion Pérdida del Contenido se define como:
-      \begin{equation}
+      Por consiguiente las respuestas de una capa $l$ pueden ser alojadas en una matriz $F^l \in R^{N_l \times M_l}$, donde $F_{i,j}^l$ es la respuesta del $i$-esimo filtro en la posición $j$.
+      
+      Para visualizar la información codificada en distintas capas de la red, segun su jerarquía, se puede ejecutar descenso por el gradiente a partir de una imagen de ruido blanco
+      para encontrar otra imagen que coincida con la respuesta de los filtros de la imagen original. Esto se puede ver en la 
+      parte inferior de la figura \ref{fig:gatys_reconstrucciones}.
+      Sean $\overrightarrow{p}$ y $\overrightarrow{x}$ la imagen original y la imagen generada, y sean $P^l$ y $F^l$ las respectivas representaciones en la capa $l$.
+      La funcion pérdida del contenido se define como el error cuadratico medio entre sus mapas de caracteristicas:
+      \begin{equation} \label{eq:perdida_contenido}
        L_{contenido}(\overrightarrow{p},\overrightarrow{x}, l) = \frac{1}{2} \sum_{i,j} (F_{i,j}^l - P_{i,j}^l)^2
       \end{equation}
-      El gradiente con respecto a la imagen $\overrightarrow{x}$ puede ser fácilmente calculado utilizando la retropropagación.
+      El gradiente con respecto a la imagen $\overrightarrow{x}$ puede ser fácilmente calculado utilizando la retropropagación del error, detallada en \ref{sec:backpropagation} (Figura \ref{fig:gatys_generacion} en la parte derecha).
+      Por consecuente, se puede ir adaptando la imagen $\overrightarrow{x}$ hasta que genere la misma respuesta que $\overrightarrow{p}$ en una determinada capa de la red.
+
+      
+    \section{Representacion del Estilo} \label{sec:estilo}
+      Para obtener la representación del estilo de una imagen, se construye un espacio caracteristicas sobre las respuestas de los filtros de cualquier capa de la red. 
       Sobre las respuestas de la CNN en cada capa de la red construimos una representación de estilo que calcula las correlaciones entre las diferentes respuestas de los filtros.
-      Estas correlaciones de las caracteristicas estan dadas por la matriz de Gram $G^l \in R^{N_l \times N_l}$, donde $G_{i,j}^l$ se calcula como el producto punto entre los vectores
+      Estas correlaciones de las caracteristicas estan dadas por la matriz de Gram $G^l \in R^{N_l \times N_l}$, en la cual $G_{i,j}^l$ se calcula como el producto punto entre los vectores
       de los mapas de caracteristicas $i$ y $j$ en la capa $l$:
       \begin{equation}
 	G_{i,j}^l = \sum_{k} F_{i,k}^l F_{j,k}^l
       \end{equation}
 
-      Para generar una textura que coincida con el estilo de una imagen dada, utilizamos el descenso de gradiente de una imagen de ruido blanco para encontrar otra imagen que coincida
-      con la representación de estilo de la imagen original. Esto se hace minimizando la distancia media cuadrada entre las entradas de la matriz de Gram de la imagen
-      original y la matriz de Gram de la imagen a generar. Sean $\overrightarrow{a}$ y $\overrightarrow{x}$ la imagen original y la imagen generada, y sean $A^l$ y $G^l$
+      Nuevamente, se puede visualizar la informacion capturada por estas caracteristicas construidas, se puede ejecutar descenso por el gradiente a partir de una imagen de ruido blanco
+      para encontrar otra imagen que coincida con la representacion de estilo de la imagen original. 
+      Esto se hace minimizando la distancia cuadratica media entre las entradas de la matriz de Gram de la imagen
+      original y la matriz de Gram de la imagen a generar.
+      En la parte superior de la figura \ref{fig:gatys_reconstrucciones} se puede observar la reconstruccion de estilo.
+      
+      Sean $\overrightarrow{a}$ y $\overrightarrow{x}$ la imagen original y la imagen generada, y sean $A^l$ y $G^l$
       las respectivas representaciones de estilo en la capa $l$, la contribución de esa capa a la función de perdida total del estilo es:
       \begin{equation}
        E_l = \frac{1}{4 N_l^2 M_l^2} \sum_{i,j} (G_{i,j}^l - A_{i,j}^l)^2
       \end{equation}
-      La función de Pérdida del Estilo total queda definida:
+      De esta forma, la función de pérdida del estilo total queda definida como una combinación lineal de las funciones de perdida de estilo de cada capa:
       \begin{equation}
        L_{estilo}(\overrightarrow{a},\overrightarrow{x}) = \sum_{l=0}^{L} w_l E_l
       \end{equation}
-      donde $w_l$ son los factores de peso que tiene cada capa sobre el resultado final. Los gradientes de $E_l$ con respecto a las activaciones de las capas de la red puede ser fácilmente
-      calculado utilizando la retropropagación del error.
-      Para generar las imágenes que mezclan el contenido de una fotografía con el estilo de una obra de arte conjuntamente minimizamos la distancia de una imagen de ruido blanco
-      de la representación de contenido de la fotografía en una capa de la red y la representación de estilo de la obra de arte en un número de capas de la CNN.
-      Funcion de Pérdida total:
+      donde $w_l$ son los factores de peso que tiene cada capa sobre el resultado final, estos factores son introducidos como hiperparámetros del algoritmo. 
+      Los gradientes de $E_l$ con respecto a las activaciones de las capas de la red puede ser fácilmente
+      calculados utilizando la tecnica retropropagación del error, explicada en la seccion \ref{sec:backpropagation}, (Figura \ref{fig:gatys_generacion} en la parte izquierda).
+      
+    \section{Transferencia de estilo}
+      Para transferir el estilo de una obra de arte $\overrightarrow{a}$ a una fotografia $\overrightarrow{p}$, se genera una nueva imagen
+      la cual simultaneamente deba coincidir con la representación de contenido de $\overrightarrow{p}$ y la representación de estilo de $\overrightarrow{a}$ (Figura \ref{fig:gatys_generacion}). 
+      Es decir, se minimizan en conjunto la distancia del mapa de caracteristicas de una imagen de ruido con la representacion del contenido de la fotografia
+      en una capa y la representacion del estilo de la obra de arte. Por lo tanto la función de perdida total que se minimiza es:
       \begin{equation}\label{eq:objetivo}
        L_{total}(\overrightarrow{p},\overrightarrow{a},\overrightarrow{x}) = \alpha L_{contenido}(\overrightarrow{p},\overrightarrow{x}) + \beta L_{estilo}(\overrightarrow{a},\overrightarrow{x})
       \end{equation}
       Esta funcion combina linealmente las funciones de perdida del contenido y el estilo, por lo que se conforma por 2 terminos principales, uno correspondiente a la funcion de perdida
       del contenido y otro correspondiente a la funcion de perdida del estilo, donde $\alpha$ y $\beta$ son los factores de peso para el contenido y el estilo respectivamente,
-      a la hora de combinarlos. Por lo tanto, la salida del algoritmo, a partir de lo enunciado en la ecuación \eqref{eq:objetivo}, sera el argumento $\overrightarrow{x}$
-      que minimice la funcion de perdida total, como se puede observar en la ecuacion \eqref{eq:resultante}. Para una mejor comprensión, en la figura \ref{fig:gatys_generacion}
-      se exhibe graficamente como funciona el algoritmo.
-      \begin{equation} \label{eq:resultante}
-       \overrightarrow{x} = \arg\min_{\overrightarrow{x}} L_{total}(\overrightarrow{p},\overrightarrow{a},\overrightarrow{x})
-      \end{equation}
-
+      a la hora de combinarlos, los cuales se consideran hiperparámetros. 
+      
       \begin{figure}[h]
 	\includegraphics[width=\textwidth]{./img/gatys_method.png}
 	\caption{Algoritmo de transferencia de estilo}
 	\label{fig:gatys_generacion}
       \end{figure}
-	A continuacion se realiza una explicacion detallada de lo que se muestra en la figura \ref{fig:gatys_generacion}:
-	
-	En primer lugar, las características de contenido y estilo se extraen y almacenan. La imagen de estilo $\overrightarrow{a}$ se pasa a través de la red
-	y sus representaciones de estilo $A^l$ en todas las capas incluidas, son calculadas y almacenadas (a la izquierda). La imagen de contenido $\overrightarrow{p}$ pasa a través
-	de la red y la representación del contenido $P^l$ en una capa se almacena (a la derecha). Luego a partir de una imagen de ruido blanco $\overrightarrow{x}$ pasa a través de la red y sus
-	características de estilo de $G^l$ y sus características de contenido $F^l$ son calculadas.
-	
-	En cada capa incluida en la representación de estilo, se calcula la diferencia cuadratica media punto a punto entre $G^l$ y $A^l$ para obtener la funcion de perdida del estilo
-	$L_{estilo}$ (a la izquierda). Tambien se calcula la diferencia cuadratica media entre $F^l$ y $P^l$ para obtener la funcion de perdida del contenido $L_{contenido}$ (a la derecha).
-	La función pérdida total $L_{total}$ es entonces una combinación lineal entre la función de perdida del contenido y la función de pérdida del estilo.
-	La derivada de  $L_{total}$ con respecto a los valores de los píxeles pueden ser calculadas con el metodo  de retropropagación del error (en el medio).
-	Este gradiente se utiliza de forma iterativa actualizando la imagen $\overrightarrow{x}$ hasta que simultáneamente coincida con las características de estilo de la imagen
-	de estilo $\overrightarrow{a}$ y con las características de contenido de la imagen de contenido $\overrightarrow{p}$ (en la parte inferior central).
+      A continuacion se realiza una explicacion detallada de lo que se muestra en la figura \ref{fig:gatys_generacion}:
+      
+      En primer lugar, las características de contenido y estilo se extraen y almacenan. La imagen de estilo $\overrightarrow{a}$ se pasa a través de la red
+      y sus representaciones de estilo $A^l$ en todas las capas incluidas, son calculadas y almacenadas (a la izquierda). La imagen de contenido $\overrightarrow{p}$ pasa a través
+      de la red y la representación del contenido $P^l$ en una capa se almacena (a la derecha). Luego a partir de una imagen de ruido blanco $\overrightarrow{x}$ pasa a través de la red y sus
+      características de estilo de $G^l$ y sus características de contenido $F^l$ son calculadas.
+      
+      En cada capa incluida en la representación de estilo, se calcula la diferencia cuadratica media punto a punto entre $G^l$ y $A^l$ para obtener la funcion de perdida del estilo
+      $L_{estilo}$ (a la izquierda). Tambien se calcula la diferencia cuadratica media entre $F^l$ y $P^l$ para obtener la funcion de perdida del contenido $L_{contenido}$ (a la derecha).
+      La función pérdida total $L_{total}$ es entonces una combinación lineal entre la función de perdida del contenido y la función de pérdida del estilo.
+      La derivada de  $L_{total}$ con respecto a los valores de los píxeles pueden ser calculadas con el metodo  de retropropagación del error (en el medio).
+      Este gradiente se utiliza de forma iterativa actualizando la imagen $\overrightarrow{x}$ hasta que simultáneamente coincida con las características de estilo de la imagen
+      de estilo $\overrightarrow{a}$ y con las características de contenido de la imagen de contenido $\overrightarrow{p}$ (en la parte inferior central).
+      
+      Finalmente, la salida del algoritmo, a partir de lo enunciado en la ecuación \eqref{eq:objetivo}, sera el argumento $\overrightarrow{x}$
+      que minimice la funcion de perdida total, como se puede observar en la ecuacion \eqref{eq:resultante}. 
+      \begin{equation} \label{eq:resultante}
+       \overrightarrow{x} = \arg\min_{\overrightarrow{x}} L_{total}(\overrightarrow{p},\overrightarrow{a},\overrightarrow{x})
+      \end{equation}
+      
+      \section{Hiperparámetros del algoritmo} \label{sec:hiperparametros}
+	A continuación se enumera la lista de hiperparámetros que requiere el algoritmo para ejecutarse y su influencia:
+	\begin{itemize}
+	 \item Numero de iteraciones: Determina cuantas veces se ejecuta el metodo de descenso por el gradiente para minimizar la funcion de perdida. 
+	  A medida que este numero aumenta, mayores son las chances de obtener un resultado aceptado.
+	 \item Tasa de aprendizaje: Define el tamaño del paso en cada iteración del descenso por el gradiente. Si esta tasa es muy pequeña, se requieren mayor numero 
+	  de iteraciones, sin embargo si es muy grande, se puede caer en un ciclo donde nunca se termine minimizando la funcion de perdida. 
+	 \item Red Convolucional: Dependiendo de la red convolucional que se utilice, cambia el tamaño de los mapas de caracteristicas, las capas, etc.
+	  Como se menciona en la seccion \ref{sec:cnn_famosas}, existen varias CNNs entrenadas para el reconocimiento de objetos, que tienen arquitecturas
+	  muy distintas, al igual que el procesamiento requerido para utilizarlas.
+	 \item Factores de peso de cada capa para la representación de estilo ($w_l, l \in \{1 \dots L\}$): Por lo general, a todas las capas elegidas se les asignada
+	  el mismo valor, y a las que no fueron elegidas se les asigna 0.
+	 \item Factores de peso para las funciones de perdida de estilo y contenido en la funcion de perdida total $(\alpha, \beta)$: Esto determina el grado de influencia
+	  de cada funcion de perdida, usualmente el ratio $\alpha / \beta$ suele estar entre $1 x 10^{-3}$ y $1 x 10^{-4}$ \FIXME{EXISTE UNA FIGURA EN gatys cvpr donde se discute esto}
+	 \item Inicializacion: A pesar de que en las secciones anteriores, en todo momento se comenzo desde una imagen de ruido, el algortimo podria partir desde la imagen
+	 de contenido o la de estilo. \FIXME{EXISTE UNA FIGURA EN gatys cvpr donde se discute esto}
+	\end{itemize}
 
 
 \chapter{Elección Automatica de hiperparámetros para Transferencia de estilo}
