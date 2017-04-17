@@ -1323,23 +1323,68 @@
       \end{equation}
       
       \section{Hiperparámetros del algoritmo} \label{sec:hiperparametros}
-	A continuación se enumera la lista de hiperparámetros que requiere el algoritmo para ejecutarse y su influencia:
+	A continuación se enumera la lista de hiperparámetros que requiere el algoritmo para ejecutarse y se discute acerca de su influencia en el mismo:
 	\begin{itemize}
 	 \item Numero de iteraciones: Determina cuantas veces se ejecuta el metodo de descenso por el gradiente para minimizar la funcion de perdida. 
-	  A medida que este numero aumenta, mayores son las chances de obtener un resultado aceptado.
+	  A medida que este numero aumenta, mayores son las chances de obtener un resultado aceptado, como se ilustra en la figura \ref{fig:img_iters}.
+	  \begin{figure}[h]
+	  \begin{center}
+	      \begin{tabular}{ccc}
+		\subfloat[100 Iteraciones]{\includegraphics[width=0.2\linewidth]{./img/profile_100.png}}
+		& \subfloat[200 Iteraciones]{\includegraphics[width=0.2\linewidth]{./img/profile_200.png}}
+		& \subfloat[300 Iteraciones]{\includegraphics[width=0.2\linewidth]{./img/profile_300.png}}
+		\end{tabular}
+	    \caption{Ejemplos de obras de arte correspondientes a los estilos seleccionados}
+	    \label{fig:img_iters}
+	  \end{center}
+	\end{figure}
+	
 	 \item Tasa de aprendizaje: Define el tamaño del paso en cada iteración del descenso por el gradiente. Si esta tasa es muy pequeña, se requieren mayor numero 
 	  de iteraciones, sin embargo si es muy grande, se puede caer en un ciclo donde nunca se termine minimizando la funcion de perdida. 
 	 \item Red Convolucional: Dependiendo de la red convolucional que se utilice, cambia el tamaño de los mapas de caracteristicas, las capas, etc.
 	  Como se menciona en la seccion \ref{sec:cnn_famosas}, existen varias CNNs entrenadas para el reconocimiento de objetos, que tienen arquitecturas
 	  muy distintas, al igual que el procesamiento requerido para utilizarlas.
-	 \item Factores de peso de cada capa para la representación de estilo ($w_l, l \in \{1 \dots L\}$): Por lo general, a todas las capas elegidas se les asignada
-	  el mismo valor, y a las que no fueron elegidas se les asigna 0.
+	 \item Capas de la red para la representación de estilo y sus respectivos pesos ($w_l, l \in \{1 \dots L\}$): Como hemos vistos anteriormente en la figura \ref{fig:gatys_reconstrucciones}, 
+	 la ubicacion de las capas en la jerarquia de la red, definen distintas experiencias visuales. Como para la representación de estilo se calcula la correlacion entre las capas elegidas,
+	 elegir capas intercaladas dentro de toda la jerarquia de la red otorgan una experiencia visual suave y continua.
+	 Con respecto a los pesos, por lo general a todas las capas elegidas se les asignada el mismo valor, y a las que no fueron elegidas se les asigna 0.
+	 \item Capa de la red para la representacion del contenido: En la figura \ref{fig:content_repr_layers} se analiza la eleccion de la capa $conv2_2$ y la capa $conv4_2$.
+	 Al elegir la capa inferior, gran parte de la información detallada de los píxeles en la fotografía y en la imagen generada coincidem (figura \ref{fig:content_repr_layers} al medio).
+	 En contraste, al elegir la capa superior, la estructura fina de la imagen se altera, en concordancia con el estilo (figura \ref{fig:content_repr_layers} abajo).
+	 \begin{figure}[h]
+	    \includegraphics[width=\textwidth]{./img/content_repr_layers.png}
+	    \caption{Comparacion de distintas capas de la red para la representación del contenido}
+	    \label{fig:content_repr_layers}
+	 \end{figure}
+	 
 	 \item Factores de peso para las funciones de perdida de estilo y contenido en la funcion de perdida total $(\alpha, \beta)$: Esto determina el grado de influencia
-	  de cada funcion de perdida, usualmente el ratio $\alpha / \beta$ suele estar entre $1 x 10^{-3}$ y $1 x 10^{-4}$ \FIXME{EXISTE UNA FIGURA EN gatys cvpr donde se discute esto}
+	  de cada funcion de perdida. 
+	  Un fuerte enfasis sobre el estilo resultara en una imagen que coincida con la apariencia de la obra de arte pero dificilmente se logre observar el contenido de la fotografía 
+	  ( $\alpha / \beta = 1 \times 10^{-4}$ figura \ref{fig:ratio_content_style} arriba a la izquierda). Al enfatizar sobre el contenido, se puede visualizar claramente la fotografía,
+	  pero el estilo no coincide completamente con la obra de arte ( $\alpha / \beta = 1 \times 10^{-1}$ figura \ref{fig:ratio_content_style} abajo a la derecha).
+	  \begin{figure}[h]
+	    \includegraphics[width=\textwidth]{./img/ratio_content_style.png}
+	    \caption{Comparacion de los distintos ratios entre el peso del estilo y el contenido en la funcion de perdida total}
+	    \label{fig:ratio_content_style}
+	 \end{figure}
+	 
 	 \item Inicializacion: A pesar de que en las secciones anteriores, en todo momento se comenzo desde una imagen de ruido, el algortimo podria partir desde la imagen
-	 de contenido o la de estilo. \FIXME{EXISTE UNA FIGURA EN gatys cvpr donde se discute esto}
+	 de contenido o la de estilo. En las primeras iteraciones se puede observar una inclinacion hacia la imagen de la cual se comienza (comenzar desde ruido o desde la imagen de estilo generan resultado similares) 
+	 como muestra la figura \ref{fig:img_init}, pero en el resultado final no termina mostrando una gran influencia.
+	  \begin{figure}[h]
+	    \begin{center}
+		\begin{tabular}{cc}
+		  \subfloat[Imagen generada a partir de ruido luego de 100 iteraciones]{\includegraphics[width=0.4\linewidth]{./img/chicago_wave_100_random.png}}
+		  & \subfloat[Imagen generada a partir de la fotografía luego de 100 iteraciones]{\includegraphics[width=0.4\linewidth]{./img/chicago_wave_100_image.png}}
+		  \end{tabular}
+	      \caption{Inicializacion del algoritmo}
+	      \label{fig:img_init}
+	    \end{center}
+	  \end{figure}
+	
 	\end{itemize}
 
+	
 
 \chapter{Elección Automatica de hiperparámetros para Transferencia de estilo}
   \section{Descripción del problema}
