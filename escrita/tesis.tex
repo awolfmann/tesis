@@ -1034,7 +1034,7 @@
 	    \label{fig:lenet}
 	  \end{figure}
 
-	\subsubsection{AlexNet}
+	\subsubsection{AlexNet} \label{sec:alexnet}
 	  La primera obra que popularizó las Redes Neuronales Convolucionales en Visión por Computadoras fue el AlexNet  \cite{AlexNet}, desarrollada por Alex Krizhevsky, Ilya Sutskever y Geoff Hinton.
 	  La red AlexNet fue presentada al desafío ImageNet ILSVRC  en 2012 y obtuvo el primer puesto superando significativamente al segundo (top 5 de error de 16\% en comparación con el
 	  subcampeón con el 26\% de error). La red tenía una muy arquitectura similar a LeNet, pero era más profunda, con más  capas convolucionales apiladas una encima de la otra
@@ -1118,7 +1118,7 @@
 	\end{itemize}
 \fi
 
-\chapter{Algoritmo de Transferencia de estilo}
+\chapter{Algoritmo de Transferencia de estilo} \label{chapter:style_transfer}
     \section{Introducción}
       En este capitulo se desarrollan los contenidos específicos relativos al Algoritmo de Transferencia de Estilos artisticos a fotografías. 
       El algoritmo elegido para tal fin es el que presenta Gatys et al. \cite{Gatys:Neural_Style}. 
@@ -1387,22 +1387,27 @@
 	
 
 \chapter{Elección Automatica de hiperparámetros para Transferencia de estilo}
-  \section{Descripción del problema}
-    Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes, sin embargo, como se menciona en la sección \ref{sec:sintesis}
-    es necesario definir el número de iteraciones como un hiperparámetro, que necesita el algoritmo para poder ejecutarse.
+  \section{Descripción del problema} \label{sec:descripcion}
+    Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes. Sin embargo, como se menciona en la sección \ref{sec:hiperparametros}
+    es necesario definir una serie de parametros previa a la ejecución del mismo. Entre estos, se encuentra el número de iteraciones, el cual fue seleccionado como el principal
+    hiperparámetro a automatizarse en este trabajo.
+    
     El criterio de elección de este hiperparámetro termina siendo muy influyente en el resultado final. A medida que el número de iteraciones
-    aumenta, la función de pérdida del resultado obtenido se va pareciendo cada vez a la función de pérdida calculada a partir de las imagenes de entrada, sin embargo,
-    esto influye notablemente en el tiempo de ejecución requerido por el algoritmo.
+    aumenta, el resultado generado se va aproximando cada vez a las representaciones de estilo y contenido de las respectivas imagenes de entrada. 
+    No obstante, este numero influye notablemente en el tiempo de ejecución requerido por el algoritmo. 
+    El objetivo principal de este trabajo el lograr obtener un resultado aceptado en la menor cantidad de iteraciones posible, reduciendo de esta forma el tiempo de ejecución 
+    del algoritmo.
 
-    \subsection{Evaluación \label{sec:evaluacion}}
-      Para poder realizar una comparación entre los distintos resultados generados por el algoritmo, es necesario establecer una métrica, que permita definir si un resultado
-      obtenido es mejor que otro, debido a que en lo que respecta a las obras de arte, las evaluaciones suelen ser cualitativas en lugar de cuantitativas.
-      Por ello es que se debe buscar una forma de cuantificar estos aspectos cualitativos.
+    En lo que respecta a las obras de arte, al ser un campo donde la subjetividad tiene gran poder, las metricas suelen ser cualitativas generalmente. 
+    Por lo tanto, para poder definir el criterio de aceptación de un resultado generado, es necesario lograr definir una metrica cuantitativa que plasme en algun sentido este tipo de 
+    metricas cualitativas. De esta forma, el algoritmo puede definir si aceptar un resultado generado, basandose en el valor obtenido por dicha metrica.
 
   \section{Solución propuesta \label{sec:solucion}}
-    En la solución propuesta en este trabajo se plantea poder definir automáticamente el número de iteraciones que debe ejecutarse el algoritmo hasta lograr obtener un resultado
-    aceptable en la minima cantidad de iteraciones posible, reduciendo de esta forma el tiempo de ejecución del algoritmo.
-    Con respecto al resto de los hiperparámetros  requeridos por el algoritmo, estos permanecen predefinidos de  antemano.
+    En este trabajo se plantea definir un criterio de aceptación, de caracter cuantitativo, de forma tal que el algoritmo pueda utilizar el valor obtenido por esta metrica,
+    como criterio de parada. Si el valor obtenido por la imagen generada se aproxima al valor esperado para ser aceptado, entonces el algoritmo detiene la ejecución y retorna
+    como salida esta misma imagen. En caso contrario, el algoritmo continua iterando hasta obtener una imagen cuyo valor se aproxime al esperado.
+    De esta forma el algoritmo evita requerir como hiperparámetro el número de iteraciones que debe ejecutarse, liberando al usuario de esta responsabilidad.
+    
     La solución consta de 3 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo), otro módulo encargado de
     evaluar la imagen generada, y un tercer modulo que determina, en base al puntaje de clasificacion obtenido si es necesario continuar el proceso de generacion, como se puede
     observar en la figura \ref{fig:diagrama}.
@@ -1415,50 +1420,67 @@
       \label{fig:diagrama}
     \end{figure}
 
-    \subsection{Módulo de generación de imágenes \label{sec:generador}}
-      En este modulo se implementa el algoritmo propuesto por Gatys, para la transferencia de estilo, que requiere como entrada una imagen de estilo,
-      una imagen de contenido y como hiperparametro el numero de iteraciones que se ejecutara el optimizador para generar el resultado final.
-      La salida de este es una imagen generada donde el contenido se acerca a la imagen de contenido y el estilo se acerca a la imagen de estilo, a medida
-      que va aumentando el numero de iteraciones la distancia entre las imagenes de entrada y la imagen generada se va minimizando. Para mas detalles
-      acerca del funcionamiento de este modulo, ver figura \ref{fig:gatys_generacion}.
+    
+    El modulo de generación de imagenes implementa el algoritmo propuesto por Gatys et al. \cite{Gatys:Neural_Style}, para la transferencia de estilo, descripto a lo largo del 
+    capitulo \ref{chapter:style_transfer}. 
+    Este algoritmo requiere como entrada una imagen de estilo, una imagen de contenido y una serie de hiperparámetros mencionados en la sección \ref{sec:hiperparametros}.
+    Para el caso de este modulo, el unico hiperparametro que permanece variable es el numero de iteraciones, prefijando lo demas, para poder analizar el comportamiento
+    en detalle del mismo.
+    La salida del modulo es una imagen generada donde el contenido se acerca a la imagen de contenido y el estilo se acerca a la imagen de estilo, a medida
+    que va aumentando el numero de iteraciones la distancia entre las imagenes de entrada y la imagen generada se va minimizando. 
 
-    \subsection{Módulo de evaluación de imágenes: Reconocimiento de estilo \label{sec:evaluador}}
-      Como se mencionó en Sec.~\ref{sec:evaluacion}, una de las limitaciones del proceso de transferencia de estilo es que la evaluación de
-      la imagen resultante es de carácter cualitativo. A fin de establecer una medida cuantitativa y así controlar el resultado de la generación de
-      manera más objetiva, se propone definir un clasificador, que se encargue de reconocer el estilo de una imagen, brindando un puntaje de clasificacion para cada estilo.
-      De esta forma la imagen se evalua cuantitativamente segun el puntaje obtenido en el estilo objetivo.
-      La entrada de este modulo es la imagen generada y la salida es los puntajes de clasificacion obtenidos por la imagen para cada uno de los estilos.
+    En lo que respecta al modulo de evaluación, como se mencionó en Sec.~\ref{sec:descripcion}, una de las limitaciones del proceso de transferencia de estilo es que la evaluación de
+    la imagen resultante es de carácter cualitativo. A fin de establecer una medida cuantitativa y así controlar el resultado de la generación de
+    manera más objetiva, se propone definir un clasificador. Este clasificador se encarga de determinar a que el estilo aritstico pertenece una imagen, brindando un puntaje 
+    de clasificacion para cada estilo.
+    De esta forma la imagen se evalua cuantitativamente segun el puntaje obtenido en el estilo objetivo.
+    La entrada de este modulo es la imagen generada y la salida es un vector de puntajes de clasificacion obtenidos por la imagen para cada uno de los estilos.
 
-      A partir de la idea de definir un clasificador de estilos, se realizó una investigación de los posibles metodos para lograr esto. Se decidio basarse en el algortimo presentado en \cite{Karayev:Style_Recognition}.
-      Este articulo plantea que los vectores de caracteristicas obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy utiles a la hora de
-      reconocer estilos, aunque muchos estilos parecieran ser principalmente definidos por las elecciones de colores, los vectores de caracteristicas de las CNN, proveen mucha mas información
-      que los vectores obtenidos a partir de histogramas de colores por ejemplo.
-      Basado en esta idea, decidimos implementar una version simplificada que consiste en realizar ajuste fino sobre una Red Neuronal Convolucional preentrenda para el reconocimiento de objetos.
-      De esta forma se van realizando evaluaciones de la imagen de salida obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
+    A partir de la idea de definir un clasificador de estilos, se realizó una investigación de los posibles metodos para lograr esto.
+    Luego de la misma, se decidio basarse en el algortimo presentado en \cite{Karayev:Style_Recognition}, el cual involucra tecnicas de aprendizaje profundo.
+    Este articulo plantea que los vectores de caracteristicas obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy utiles a la hora de
+    reconocer estilos. Aunque muchos estilos parecieran ser principalmente definidos por las elecciones de colores, los vectores de caracteristicas de las CNN, proveen mucha mas información
+    que los vectores obtenidos a partir de histogramas de colores por ejemplo.
+    Basado en esta idea, decidimos implementar una version simplificada que consiste en realizar ajuste fino sobre una Red Neuronal Convolucional preentrenda para el reconocimiento de objetos.
+    De esta forma se van realizando evaluaciones de la imagen de salida obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
 
-    \subsection{Módulo de Selección \label{sec:seleccion}}
-      Este modulo es el encargado de determinar si es necesario seguir generando imagenes o se acepta la imagen obtenida en la iteracion actual. La entrada de este modulo
-      es el vector de puntajes de clasificacion calculados por el modulo generador \ref{sec:generador}, y la salida es un valor binario indicando si se acepta o no la imagen.
-      El criterio de selección que se propone para elegir la imagen óptima es el siguiente:
-      Basado en la hipotesis de que el resultado generado por el modulo generador \ref{sec:generador} obtenga un puntaje similar que la imagen de estilo en el modulo evaluador
-      \ref{sec:evaluador}, se define una tolerancia del $\pm 20\%$ con respecto al puntaje obtenido por la imagen de estilo, en caso de que el resultado obtenga un puntaje que pertenezca
-      a este rango, la imagen es aceptada como resultado final, en caso contrario el generador debe seguir iterando hasta obtener un resultado que cumpla con este requisito.
+    Finalmente, el modulo de selección, es el encargado de determinar si e se acepta la imagen obtenida en la iteracion actual o es necesario seguir iterando. 
+    La entrada de este modulo es el vector de puntajes de clasificacion calculados por el modulo generador \ref{sec:generador}, y la salida es un valor binario indicando si se acepta o no la imagen.
+    
+    El criterio de selección que se propone para elegir la imagen óptima es el siguiente:
+    Basado en la hipotesis de que el resultado generado por el modulo generador \ref{sec:generador} obtenga un puntaje similar que la imagen de estilo en el modulo evaluador
+    \ref{sec:evaluador}, se define una tolerancia del $\pm 20\%$ con respecto al puntaje obtenido por la imagen de estilo, en caso de que el resultado obtenga un puntaje que pertenezca
+    a este rango, la imagen es aceptada como resultado final, en caso contrario el generador debe seguir iterando hasta obtener un resultado que cumpla con este requisito.
 
 
 \chapter{Experimentos}
- En este capitulo se exponen los experimentos realizados basados en la solución propuesta en la seccion \ref{sec:solucion}, que permiten validar o rechazar las hipotesis planteadas.
+ En este capitulo se exponen los experimentos realizados basados en la solución propuesta en la seccion \ref{sec:solucion}.
  Para ello se realizaron 2 experimentos principales: El primero consiste en crear un modulo de reconocimiento de estilos artisticos realizando ajuste fino sobre una CNN preentrenada
- para el reconocimiento de objetos. En el segundo experimento se realiza el analisis empirico para la elección del numero de iteraciones mediante el criterio de selección planteado en la
- seccion \ref{sec:seleccion}.
+ para el reconocimiento de objetos. En el segundo experimento se realiza el analisis empirico para la elección del numero de iteraciones mediante el criterio de selección propuesto.
 
 \section{Reconocimiento de estilo}
-  Para implementar el modulo de reconocimiento de estilo se decidio realizar ajuste fino sobre una red neuronal convolucional preentrenada para el reconocimiento de objetos.
+  Debido a su buen rendimiento frente a la clasificacion de imagenes, para implementar el clasificador de estilos se decidio utilizar una red neuronal convolucional.
+  Al no existir de forma publica una red entrenada para reconocer estilos artisticos, fue necesario realizar ajuste fino sobre una red neuronal convolucional preentrenada para el reconocimiento de objetos.
+  Para realizar el ajuste fino, es necesario definir la red sobre la cual se realizara, ademas del conjunto de datos que le será provisto a la misma.
   A lo largo de esta seccion se detallan las caracteristicas de la implementación de este modulo.
+  
   \subsection{Conjunto de datos}
-    El conjunto de datos utilizado para en este trabajo, se construyo a partir del conjunto de datos llamado WikiArt \url{https://www.wikiart.org/}.
-    Este conjunto de datos proviene de un proyecto de disponibilidad publica que tiene como objetivo principal hacer accesible el mundo del arte a cualquier persona y en cualquier lugar.
-    WikiArt cuenta con una 150.000 obras de arte, de 2.500 artistas. Estas obras se encuentran en museos, universidades y otros edificios civiles de más de 70 países. Aunque la mayoría de estas obras de arte no está en la vista pública.
-    Para la implementación de la solución, se utilizo un subconjunto, tomando los 10 estilos que mayor cantidad de obras de arte disponen. A continuacion se enumeran los estilos contemplados:
+    El conjunto de datos utilizado para en este trabajo, se construye como un subconjunto a partir del conjunto de datos llamado WikiArt \url{https://www.wikiart.org/}.
+    Este conjunto proviene de un proyecto de disponibilidad publica que tiene como objetivo principal hacer accesible el mundo del arte a cualquier persona y en cualquier lugar.
+    WikiArt, actualmente cuenta con unas 150.000 obras de arte, de 2.500 artistas aproximadamente. 
+    La obras contenidas en este conjunto se encuentran en museos, universidades y otros edificios civiles de más de 70 países. Aunque la mayoría de estas obras de arte no está en la vista pública.
+    
+    Para construir el conjunto, se decidió utilizar un subconjunto de los 10 estilos que mayor cantidad de obras de arte disponen. 
+    Luego, es necesario una etapa de recolección la cual consta de los siguientes pasos:
+    \begin{enumerate}
+      \item Definir los 10 principales estilos de los que se dispongan mayor cantidad de obras, enumeradas anteriormente.
+      \item Descargar cada una de las obras de arte de todos los estilos seleccionados.
+      \item Verificar que la descarga haya sido exitosa y el archivo obtenido este en condiciones para ser utilizado en el proceso.
+      \item Ordenar los archivos segun el estilo al que pertenecen.
+    \end{enumerate}
+    Al finalizar este proceso, el conjunto de datos generado queda conformado por 68807 imagenes.
+    
+    A continuacion se enumeran los estilos contemplados:
     \begin{enumerate}
       \item Impresionismo  (14433 obras de arte disponibles)
       \item Realismo (13595 obras de arte disponibles)
@@ -1497,24 +1519,12 @@
 
 	\end{figure}
 
-      \subsubsection{Recolección y construcción del conjunto datos}
-	El proceso de recoleccion y construccion de datos consistio en distintas etapas:
-	\begin{enumerate}
-	 \item Definir los 10 principales estilos de los que se dispongan mayor cantidad de obras, enumeradas anteriormente.
-	 \item Descargar cada una de las obras de arte de todos los estilos seleccionados.
-	 \item Verificar que la descarga haya sido exitosa y el archivo obtenido este en condiciones para ser utilizado en el proceso.
-	 \item Ordenar los archivos segun el estilo al que pertenecen.
-	 \end{enumerate}
-	Luego de realizado este proceso, el conjunto de datos generado queda conformado por 68807 imagenes.
-
-    \subsection{Detalles de implementación}
-      Para realizar el ajuste fino, sobre este conjunto de datos generado, se utilizo la arquitectura de la red AlexNet \cite{AlexNet}, reemplazando la ultima capa por una capa que
-      aprenda a reconocer entre los posibles estilos. Los valores con los que se inicializo la red, eran los valores obtenidos al entrenar AlexNet para el reconocimiento de objetos de ImageNet.
+    \subsection{Red neuronal y detalles de implementación}
+      Para realizar el ajuste fino, sobre este conjunto de datos generado, se utilizo la arquitectura de la red AlexNet \cite{AlexNet}, 
+      reemplazando la ultima capa por una capa que aprenda a reconocer entre los posibles estilos. 
+      Los valores con los que se inicializo la red, eran los valores obtenidos al entrenar AlexNet para el reconocimiento de objetos de ImageNet.
       Para reentrenar la red ajustando los valores para el reconocimiento de estilo, se le proveyo el conjunto de datos generado, y se definio realizar 50000 iteraciones para el ajuste fino.
       Para realizar el ajuste fino se utilizó las librerías Caffe y OpenCV en Python, y para el reentrenamiento fue requerido el uso de una GPU GTX 680.
-
-    \subsection{Resultados de clasificación}
-    La red obtuvo un 92 \% de precisión en el conjunto de entrenamiento al reconocer estilos.
 
   \section{Elección del número de iteraciones empleando el módulo de reconocimiento}
     Este experimento consiste en realizar un analisis empirico de la evolucion de los puntajes de clasificacion de estilo a medida que aumenta el numero de iteraciones
@@ -1527,23 +1537,13 @@
       El proceso consistio en aplicar el algoritmo de transferencia de estilo combinando cada una de las fotos del conjunto de contenido con cada una de las fotos del conjunto de estilo,
       y guardando el resultado cada 10 iteraciones, hasta llegar a las 1000 iteraciones para cada uno de los procesos particulares.
       Ademas para cada combinacion de imagen de estilo e imagen de contenido el algoritmo se ejecuto 2 veces, una comenzando desde la imagen de contenido y otra comenzando desde una imagen de ruido.
-      Finalmente todo el conjunto de imagenes obtenido es evaluado por el modulo de reconocimiento de estilo, que otorga un puntaje de la imagen para cada uno de los estilos.
+      Finalmente todo el conjunto de imagenes obtenido es evaluado por el modulo de reconocimiento de estilo, que otorga un puntaje de la imagen para cada uno de los estilos considerados.
       \subsubsection{Algoritmo de Transferencia de estilo}
 	Existen una gran variedad de implementaciónes de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
-	La que se decidió utilizar fue la de Justin Jhonson \cite{Johnson:Neural_Style}, la cual posee el mayor grado de aceptación en la industria.
+	Se decidió basarse en la implementación de Justin Jhonson \cite{Johnson:Neural_Style}, la cual posee el mayor grado de aceptación en la industria.
 	La principal tecnología utilizada en esta implementación es el Framework Torch, que utiliza como lenguaje de programación a Lua.
-	La implementacion  utilizada, permite controlar algunas otras variables mediante hiperparametros extras a lo requerido por el algoritmo originalmente:
-	Los principales hiperparámetros adicionales a los requeridos por el algoritmo son:
-	\begin{itemize}
-	  \item Modelo de Red Neuronal Convolucional preentrenada que se utilizará (existen una variedad de CNN presentadas anteriormente) junto con las capas que se utilizarán de la
-	  respectiva red tanto para calcular el estilo como el contenido.
-	  \item Imagen desde la cual comenzar la optimización, es posible comenzar desde una imagen de ruido, desde la imagen de contenido.
-	  \item Método de optimización a utilizar.
-	  \item Tamaño de la imagen generada
-	  \item Peso de funciones de perdida de estilo y contenido en la funcion de perdida total \FIXME{esto lo requiere el algoritmo}
-	  \item Tasa de aprendizaje para el optimizador
-	\end{itemize}
-
+	Esta implementacion permite ademas controlar algunas otras variables mediante hiperparametros extras a lo requerido por el algoritmo originalmente, 
+	como por ejemplo el método de optimización a utilizar y tamaño de la imagen generada.
 
     \subsection{Número de iteraciones vs. Puntaje de clasificación}
       Luego de generar distintas imagenes para cada uno de los estilos, variando entre imagenes de retratos y paisajes como imagenes de contenido, se realizó un analisis
@@ -1574,7 +1574,7 @@
 	clasificador no logra reconocer un claro estilo, pero luego se va normalizando hasta obtener una predicción confiable, ya que la diferencia con los otros estilos es notoria.
 	\begin{figure}[H]
 	  \begin{center}
-	    \subfloat[Evolucion de los puntajes comenzando desde ruido]{\includegraphics[ height=0.35\textheight]{./img/tubingen_shipwreck_random_scores.png}}\\
+	    \subfloat[Evolucion de los puntajes comenzando desde ruido]{\includegraphics[ height=0.35\textheight]{./img/tubingen_shipwreck_random_scores.png}}
 	    %\subfloat[Evolucion de los puntajes comenzando desde contenido]{\includegraphics[height=0.4\textheight]{./img/tubingen_shipwreck_image_scores.png}}\\
 	  \end{center}
 	  \caption{Evolucion de los puntajes}
@@ -1600,7 +1600,7 @@
 	  \caption{Ejemplos de obras de arte correspondientes a los estilos seleccionados}\label{fig:caso2_scream}
 	\end{figure}
 
-      Al analizar la evolucion de los puntajes predichos por el clasificador nos encontramos con la sorpresa de que el puntaje maximo de clasificación varia dependiendo de la imagen
+      Al analizar la evolucion de los puntajes predichos por el clasificador nos encontramos con que el puntaje maximo de clasificación varia dependiendo de la imagen
       en la cual comienza el proceso de tranferencia de estilo, como se puede ver en la figura \ref {fig:puntajes_caso2}, en el grafico (a) se muestra la evolucion de los puntajes
       partiendo de la imagen de ruido, que luego de las 200 iteraciones se termina normalizando al Expresionismo como predicción, lo cual coincide con la imagen de estilo provista.
       Sin embargo, en el grafico (b) se muestra la evolucion de los puntajes de predicción partiendo de la imagen de contenido, en la cual se exhibe al Simbolismo como prediccion
