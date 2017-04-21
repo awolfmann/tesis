@@ -1632,6 +1632,16 @@
 
 \chapter{Conclusiones, Perspectivas y trabajos a futuro}
   \section{Conclusiones}
+    En este trabajo se presenta la idea de evaluar los resultados generados por el algoritmo de transferencia de Gatys et al. \cite{Gatys:Neural_Style}, mediante una red neuronal que 
+    clasifica estilos artisticos. Esta red inicialmente habia sido entrenada para clasificacion de objetos y luego mediante ajuste fino se reentreno para clasificar estilos.
+    Al establecer una metrica cuantitativa de evaluación, el algoritmo libera al usuario de la responsabilidad de definir el numero de iteraciones, uno de los principales factores 
+    de influencia en la imagen generada.
+    
+    A pesar de que los resultados obtenidos no fueron los esperados respecto al criterio especifico de corte, se observo que evaluar la imagen generado con el clasificador de estilos
+    es un buen indicio de la calidad de la misma. Cuando los puntajes obtenidos por la imagen son bajos, visualmente, no es una imagen de calidad. No obstante, cuando los puntajes
+    van aumentando la imagen suele ser cualitativamente aceptada. Si el puntaje a lo largo de las iteraciones entra en una meseta, tampoco se logran visualizar grandes cambios al cabo 
+    de las mismas. Esto indica que en cierta forma, la evaluacion cualitativa logro ser plasmada en la metrica cuantitativa definida.
+  
   \section{Trabajos a futuro}
     \FIXME{ \url{https://dailyvisionblog.wordpress.com/2016/07/31/notes-on-texture-networks-feed-forward-synthesis-of-textures-and-stylized-images-and-style-transfer-related-papers/}}
     \subsection{Reconocimiento de Estilos}
