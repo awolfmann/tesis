@@ -117,59 +117,59 @@
 
     La transferencia de estilo requiere de la interacción de 2 de las principales áreas de las Ciencias de la Computación, de gran auge en la actualidad: Visión por Computadoras y Aprendizaje Automático,
     mas específicamente Aprendizaje Profundo.
-    Hasta hace un tiempo estas areas fueron evolucionando en paralelo, independientemente una de la otra. Hoy en día se han logrado resultados completamente disruptivos, al aplicar
+    Hasta hace un tiempo estas áreas fueron evolucionando en paralelo, independientemente una de la otra. Hoy en día se han logrado resultados completamente disruptivos, al aplicar
     Aprendizaje Profundo para algunas de las principales tareas de Visión por Computadoras, como lo son la clasificación de imágenes, detección y reconocimiento de objetos.
 
     \paragraph{Aprendizaje Automático}
       El área de Aprendizaje Automático es el área de las Ciencias de la Computación que explora el estudio y la construcción de algoritmos que pueden aprender y hacer predicciones
       sobre los datos de entrada.
-      Tales algoritmos logran aprender a inferir caracteristicas que poseen los datos, a traves de la construcción de un modelo de predicción, en la etapa de entrenamiento del modelo.
-      Cuando finaliza esta etapa, el modelo debe ser capaz de predecir caracteristicas de una muestra nueva, nunca antes vista, en base a lo aprendido en el entrenamiento.
+      Tales algoritmos logran aprender a inferir características que poseen los datos, a través de la construcción de un modelo de predicción, en la etapa de entrenamiento del modelo.
+      Cuando finaliza esta etapa, el modelo debe ser capaz de predecir características de una muestra nueva, nunca antes vista, en base a lo aprendido en el entrenamiento.
 
       El principal objetivo de un sistema de aprendizaje es generalizar desde su experiencia o conocimiento previo. Generalizar en este contexto es la habilidad del sistema de realizar
       predicciones con precisión sobre un ejemplo nuevo no visto antes, luego de aprender sobre el conjunto de entrenamiento. Estos ejemplos de entrenamiento provienen de un espacio
       con probabilidad de distribución desconocida del cual es considerado representativo. El sistema de aprendizaje debe construir un modelo o función sobre el espacio total que le permita realizar
       predicciones lo suficientemente precisas sobre nuevos ejemplos. El modelo aprende una función de predicción $F$, a partir del conjunto de instancias de entrenamiento,
-      cada una de ellas, representada por un vector de características.  Durante el entrenamiento, $F$  \emph{aprende a predecir}, ajustandose a estos vectores.
-      Segun Mitchell, considerado uno de los impulsores del uso masivo del aprendizaje automático, “Un modelo que aprende no asume nada acerca de la identidad del concepto objetivo,
+      cada una de ellas, representada por un vector de características.  Durante el entrenamiento, $F$  \emph{aprende a predecir}, ajustándose a estos vectores.
+      Según Mitchell, considerado uno de los impulsores del uso masivo del aprendizaje automático, “Un modelo que aprende no asume nada acerca de la identidad del concepto objetivo,
       no tiene ninguna base racional para clasificar cosas que nunca vio” \cite{Mitchell:1997:ML:541177}.
 
       El aprendizaje automático esta ideado para ser empleado en una serie de tareas informáticas en las que el diseño y la programación de algoritmos explícitos son inviables,
       como por ejemplo para la detección de Spam, el reconocimiento óptico de caracteres y los motores de búsqueda \cite{Bishop:MachineLearning}.
 
       Dentro del Aprendizaje Automático, existe un subdominio llamado Aprendizaje Profundo, que ataca problemas complejos en los cuales representar una instancia no es una tarea sencilla.
-      Por ejemplo para representar una imagen se suelen utilizar sus pixeles o pequeñas subregiones de pixeles, sin embargo estas representacion no logran capturar caracteristicas de
-      alto nivel, como es el caso de detectar si existe o no un ojo dada una subregion de pixeles de la imagen.
+      Por ejemplo para representar una imagen se suelen utilizar sus píxeles o pequeñas subregiones de píxeles, sin embargo estas representación no logran capturar características de
+      alto nivel, como es el caso de detectar si existe o no un ojo dada una subregion de píxeles de la imagen.
 
-      Dado a que en este tipo de problemas no hay representacion intuitiva clara de los datos, los algoritmos de aprendizaje automático aprenden no solo a realizar predicciones, sino
-      que tambien aprenden a representar los datos de entrada, capturando caracteristicas de alto nivel, de forma tal que la predicción en base a estas representaciones sea lo mas precisa posible \cite{Goodfellow-et-al-2016}.
+      Dado a que en este tipo de problemas no hay representación intuitiva clara de los datos, los algoritmos de aprendizaje automático aprenden no solo a realizar predicciones, sino
+      que también aprenden a representar los datos de entrada, capturando características de alto nivel, de forma tal que la predicción en base a estas representaciones sea lo mas precisa posible \cite{Goodfellow-et-al-2016}.
 
-      Para el caso de los problemas relacionados con imagenes, la tecnica de aprendizaje profundo mayormente utilizada es la de Redes Neuronales Convolucionales.
-      Estas redes, son un tipo especifico de Redes Neuronales Artificiales, que asumen explicitamente que los datos de entrada seran imagenes, lo cual permite implementar
-      ciertas optimizaciones dentro del algoritmo. Todos estos conceptos seran posteriormente explicados en detalle a lo largo del siguiente capítulo.
+      Para el caso de los problemas relacionados con imágenes, la técnica de aprendizaje profundo mayormente utilizada es la de Redes Neuronales Convolucionales.
+      Estas redes, son un tipo especifico de Redes Neuronales Artificiales, que asumen explícitamente que los datos de entrada serán imágenes, lo cual permite implementar
+      ciertas optimizaciones dentro del algoritmo. Todos estos conceptos serán posteriormente explicados en detalle a lo largo del siguiente capítulo.
 
-      Un ejemplo de amplia investigación y desarrollo en la actualidad, es el de los vehiculos autonomos,
+      Un ejemplo de amplia investigación y desarrollo en la actualidad, es el de los vehículos autónomos,
       los cuales emplean estas técnicas de aprendizaje profundo dentro de sus procesos para la detección de objetos en tiempo real, como se puede observar en la figura \ref{fig:car_detection}.
 
       \begin{figure}[h]
 	\includegraphics[width=0.9\linewidth]{./img/nvidia_car_detection.png}
-	\caption{Vehiculo conducido automaticamente, detectando objetos en tiempo real mediante Redes Neuronales Convolucionales}
+	\caption{Vehículo conducido automáticamente, detectando objetos en tiempo real mediante Redes Neuronales Convolucionales}
 	\label{fig:car_detection}
       \end{figure}
 
     \paragraph{Visión por Computadoras}
       El área de Visión por Computadoras es el área de las Ciencias de la Computación encargado de lograr que las computadoras pueden lograr obtener una comprensión de alto nivel de imágenes digitales o vídeos.
       Desde la perspectiva de la ingeniería, busca automatizar tareas que el sistema visual humano puede hacer. Para lograr este nivel de comprensión, en primer lugar emplea métodos de bajo nivel relacionados
-      con el Procesamiento de Imagenes para adquirir, procesar, analizar y comprender las imágenes del mundo real con el fin de producir información numérica o simbólica para que
-      puedan ser tratados por una computadora. Generalmente la salida de estos metodos suele ser una imagen preprocesada o un conjunto de parametros calculados que sirven como entrada
-      para que los metodos de Visión por Computadoras obtengan información de alto nivel a partir de estos.
-      El objetivo principal de esta area es reducir la distancia
+      con el Procesamiento de Imágenes para adquirir, procesar, analizar y comprender las imágenes del mundo real con el fin de producir información numérica o simbólica para que
+      puedan ser tratados por una computadora. Generalmente la salida de estos métodos suele ser una imagen preprocesada o un conjunto de parámetros calculados que sirven como entrada
+      para que los métodos de Visión por Computadoras obtengan información de alto nivel a partir de estos.
+      El objetivo principal de esta área es reducir la distancia
       entre lo que un humano interpreta a partir de una imagen y la forma en la que las computadoras representan esa misma imagen \cite{Szeliski:ComputerVision}.
 
-      La transferencia de estilo en fotografías es considerado un problema complejo dentro del area de vision por computadoras, por lo que, luego de realizar diferentes investigaciones se
-      decidio atacarlo utilizando las Redes Neuronales Convolucionales, como lo hace Gatys et. al \cite{Gatys:Neural_Style}.
-      Para introducir al lector en el tema en la figura \ref{fig:style_transfer_candy_tower} se puede observar un ejemplo del resultado de aplicar la transferencia de estilo en fotografias:
-      Como imagen de estilo se eligio una imagen abstracta \ref{fig:candy} y como imagen de contenido una fotografia de un paisaje \ref{fig:tower}, obteniendo como resultado de la
+      La transferencia de estilo en fotografías es considerado un problema complejo dentro del área de visión por computadoras, por lo que, luego de realizar diferentes investigaciones se
+      decidió atacarlo utilizando las Redes Neuronales Convolucionales, como lo hace Gatys et. al \cite{Gatys:Neural_Style}.
+      Para introducir al lector en el tema en la figura \ref{fig:style_transfer_candy_tower} se puede observar un ejemplo del resultado de aplicar la transferencia de estilo en fotografías:
+      Como imagen de estilo se eligió una imagen abstracta \ref{fig:candy} y como imagen de contenido una fotografía de un paisaje \ref{fig:tower}, obteniendo como resultado de la
       transferencia de estilo una imagen en la cual se mantienen las estructuras de la imagen de contenido pero con los colores y trazos de la imagen de estilo \ref{fig:candy_tower}
       \begin{figure}[h]
 	\subfloat[Imagen de Estilo]{\includegraphics[height=0.27\textheight]{./img/jhonson_style_candy.jpg}\label{fig:candy}}
@@ -184,15 +184,15 @@
     de un determinado punto espacial, representados como píxeles. La representación de los píxeles es muy sensible a cambios en la iluminación, ángulo, contraste y tamaño que pueda existir.
 
     Existen artículos de investigación en los cuales se definen algoritmos para la transferencia de estilos artísticos en fotografías, en los cuales, para efectuar el aprendizaje
-    por parte del modelo, emplean tecnicas estocásticas para lograr el objetivo deseado. Ademas, estos algoritmos requieren una gran cantidad de hiper-parámetros predefinidos
+    por parte del modelo, emplean técnicas estocásticas para lograr el objetivo deseado. Además, estos algoritmos requieren una gran cantidad de hiper-parámetros predefinidos
     empíricamente, es decir parámetros que deben ser ajustados previo a la ejecución del algoritmo, que influyen en gran manera sobre el resultado.
 
-    El principal objetivo de este trabajo es poder realizar una optimización de los hiperparámetros automáticamente. Principalmente el número de iteraciones, el cual, determina
+    El principal objetivo de este trabajo es poder realizar una optimización de los hiper-parámetros automáticamente. Principalmente el número de iteraciones, el cual, determina
     el tiempo que se debe ejecutar el algoritmo y la calidad del resultado obtenido. La idea de optimizar este hiperparametro es obtener un resultado deseable, en el menor tiempo posible.
 
     Determinar cuando un resultado logra ser aceptable requiere definir una métrica cuantitativa que evalue la calidad del resultado. Sin embargo, las obras de arte, suelen ser calificadas
-    con métricas cualitativas. La metrica cuantitativa que se decidió utilizar en este trabajo es el nivel de pertenencia que tiene el resultado con respecto al estilo que se le transfirio.
-    Para medir esta metrica se entreno una red neuronal convolucional que reconoce estilos artisticos y el nivel de pertenencia esta dado por el nivel de confianza que obtiene la imagen resultante
+    con métricas cualitativas. La métrica cuantitativa que se decidió utilizar en este trabajo es el nivel de pertenencia que tiene el resultado con respecto al estilo que se le transfirió.
+    Para medir esta métrica se entreno una red neuronal convolucional que reconoce estilos artísticos y el nivel de pertenencia esta dado por el nivel de confianza que obtiene la imagen resultante
     al ser evaluada en esta red. En base al puntaje obtenido se determina si el numero de iteraciones es suficiente o si es necesario seguir ejecutando el algoritmo.
 
 
@@ -204,7 +204,7 @@
     En el capitulo 3 se hace un recorrido por los principales artículos de investigación y los algoritmos empleados en las técnicas de transferencia estilos artísticos en fotografías.
     Para luego, en el capítulo 4 abordar en detalle la solución propuesta, junto con un análisis y evaluación empírica de la misma.
 
-    En el capítulo 5 contiene los experimentos realizados y los resultados obtenidos. Finalmente en el capitulo 6 se  presentan las conclusiónes obtenidas acerca del trabajo realizado,
+    En el capítulo 5 contiene los experimentos realizados y los resultados obtenidos. Finalmente en el capitulo 6 se  presentan las conclusiones obtenidas acerca del trabajo realizado,
     junto con las perspectivas y posibles tareas a futuro.
 
 \chapter{Marco Teórico}
@@ -236,14 +236,17 @@
 
       Tom M. Mitchell elaboró una definición más formal de este concepto de aprendizaje: “se dice que un programa de computadora aprende de una experiencia E con respecto a una clase
       de tarea T y medición de desempeño P, si su desempeño en la tarea T, medido por P, mejora con la experiencia E” \cite{Mitchell:1997:ML:541177}. Por ejemplo, una posible experiencia
-      E, podria ser observar muchos ejemplos de elementos asociados con su respectiva etiqueta, donde la tarea T sea clasificar a los elementos por etiquetas y P sea el grado de precision
+      E, podría ser observar muchos ejemplos de elementos asociados con su respectiva etiqueta, donde la tarea T sea clasificar a los elementos por etiquetas y P sea el grado de precisión
       con la que el programa clasifica a los elementos con su etiqueta correctamente. De esta forma, el programa aprende a clasificar elementos por etiqueta si el grado de precisión mejora
       a partir de observar ejemplos previamente.
 
+      
     \subsection{Clasificación de algoritmos de aprendizaje automático}
       Dentro del aprendizaje automático, los algoritmos se pueden clasificar en algoritmos de aprendizaje supervisados, no supervisados o semi supervisados,
-      según el grado de control humano que requieren de los datos que provistos para lograr aprender a inferir patrones. A continuación se detallan cada uno de estos tipos de algoritmos.
-
+      según el grado de control humano que requieren de los datos que provistos para lograr aprender a inferir patrones. En todos los casos, los algoritmos requieren de una 
+      representación de los datos, que codifique la información correspondiente. Estas representaciones serán discutidas en la sección \ref{sec:representacion}.
+      A continuación se detallan cada uno de los tipos de algoritmos.
+      
       \subsubsection{Aprendizaje Supervisado} \label{sec:supervisado}
 	Los algoritmos de aprendizaje supervisado emplean como conjunto de entrenamiento ejemplos que consisten de entradas $x$ y etiquetas $y$, es decir
 	aprenden una función de predicción, a partir de datos de entrenamiento etiquetados. Cada ejemplo del conjunto de entrenamiento suele ser un par
@@ -252,7 +255,7 @@
 	las maquinas de vector soporte.
 
 	Las maquinas de vector soporte se utilizan para clasificar objetos, con su respectiva etiqueta, dividendo el espacio de entrada en regiones de decisión, cuyos límites
-	se denominan vectores soporte, ilustrado en la figura \ref{fig:svm}. Esta division en distintas regiones la realiza en base a los datos observados durante el aprendizaje.
+	se denominan vectores soporte, ilustrado en la figura \ref{fig:svm}. Esta división en distintas regiones la realiza en base a los datos observados durante el aprendizaje.
 
 	\begin{figure}[H]
 	  \includegraphics[scale=0.5]{./img/linear_svm.png}
@@ -281,40 +284,40 @@
 
 	El problema de recomendación consiste en tratar de predecir la preferencia que un usuario podría hacer por un artículo. El enfoque mayormente utilizado para realizar una
 	recomendación es el de filtrado colaborativo, que se basa en la recolección y el análisis de una gran cantidad de información sobre los usuarios,
-	los comportamientos, actividades o preferencias. La predicción de un posible articulo de interes para un usuario, se realiza basada en la similitud de este usuario con
-	otros, de los cuales se les conoce mas información. Por ejemplo para recomendar una pelicula a un usuario, utilizando información de las peliculas ya observadas, se puede
-	establecer una similtud de intereses con otros usuarios, que ademas vieron otras peliculas, las cuales son recomendadas a este usuario.
+	los comportamientos, actividades o preferencias. La predicción de un posible articulo de interés para un usuario, se realiza basada en la similitud de este usuario con
+	otros, de los cuales se les conoce mas información. Por ejemplo para recomendar una película a un usuario, utilizando información de las películas ya observadas, se puede
+	establecer una similitud de intereses con otros usuarios, que además vieron otras películas, las cuales son recomendadas a este usuario.
 
-    \subsection{Representación de la Información en Aprendizaje Automático}
-      Para que un modelo pueda aprender, es necesario lograr una representacion adecuada de los objetos sobre los cuales se desea asimilar información.
+    \subsection{Representación de la Información en Aprendizaje Automático} \label{sec:representacion}
+      Para que un modelo pueda aprender, es necesario lograr una representación adecuada de los objetos sobre los cuales se desea asimilar información.
       Dependiendo de la información que se desee aprender, estas representaciones pueden ir variando. Si se desea entender sobre el riesgo crediticio de un usuario,
-      la información que represente a este usuario sera diferente a la representación de ese mismo usuario si se desea  sobre sus intereses gastronomicos.
+      la información que represente a este usuario sera diferente a la representación de ese mismo usuario si se desea  sobre sus intereses gastronómicos.
 
       Definir la representación de un objeto de forma precisa, tal que le permita al modelo capturar toda la información requerida puede llegar a ser la tarea mas importante de todo el 
       proceso de aprendizaje.
       Estas representaciones suelen estructurarse como un vector de características (\emph{features} en inglés) que el modelo deberá obtener a partir de las instancias de entrenamiento.
       Una \emph{feature} puede ser cualquier dato asociado a la instancia, que podría ser útil al modelo para realizar una predicción mas precisa.
 
-      Por ejemplo para representar un conjunto de datos conformado por documentos de texto, el método comunmente utilizado es la bolsa de palabras (\emph{Bag of Words} en la literatura en inglés). 
-      Este metodo emplea una estructura de datos auxiliar conocida como ``vocabulario'' o ``diccionario'', que contiene todas las palabras utilizadas en el conjunto de datos. 
+      Por ejemplo para representar un conjunto de datos conformado por documentos de texto, el método comúnmente utilizado es la bolsa de palabras (\emph{Bag of Words} en la literatura en inglés). 
+      Este método emplea una estructura de datos auxiliar conocida como ``vocabulario'' o ``diccionario'', que contiene todas las palabras utilizadas en el conjunto de datos. 
       Cada documento se representa como un histograma de ocurrencias respecto de las palabras del vocabulario. 
       La dimensionalidad de la representación es igual al número de palabras que componen dicha estructura.
 
       Para representar una imagen, el método más sencillo es usar directamente el valor de los píxeles. No obstante, para que una representación de una imagen sea lo suficientemente
-      descriptiva respecto al contenido de la misma, debe superar ciertos desafios, ilustrados graficamente en la figura \ref{fig:stanford_challenges}:
+      descriptiva respecto al contenido de la misma, debe superar ciertos desafíos, ilustrados gráficamente en la figura \ref{fig:stanford_challenges}:
       \begin{itemize}
-	\item Variación del punto de vista: Una simple instancia de un objeto puede estar orientada de muchas formas frente a la camara que toma la imagen.
+	\item Variación del punto de vista: Una simple instancia de un objeto puede estar orientada de muchas formas frente a la cámara que toma la imagen.
 	\item Variación de escala: Las clases visuales suelen exhibir variaciones en su tamaño en el mundo real y no solo en lo referido a la imagen.
-	\item Deformación: Muchos objetos de interes no tienen un cuerpo rigido y pueden ser deformados de muchas formas
-	\item Oclusión: Los objetos de interes pueden estar ocluidos y solo una pequeña porcion del objeto puede ser visible.
+	\item Deformación: Muchos objetos de interés no tienen un cuerpo rígido y pueden ser deformados de muchas formas
+	\item Oclusión: Los objetos de interés pueden estar ocluidos y solo una pequeña porción del objeto puede ser visible.
 	\item Condiciones de iluminación: Los efectos de la iluminación pueden influir de forma drástica a nivel de píxeles.
-	\item Influencia del fondo: los objetos de interés pueden estar inmersos en un ambiente en el cual sean dificiles de identificar.
+	\item Influencia del fondo: los objetos de interés pueden estar inmersos en un ambiente en el cual sean difíciles de identificar.
 	\item Variaciones intra clase: Existen muchos instancias completamente distinta de una misma categoría de objetos.
       \end{itemize}
       
       \begin{figure}[h]
 	\includegraphics[scale=0.5]{./img/stanford_challenges.jpeg}
-	\caption{Desafios que debe superar la representación de una imagen}
+	\caption{Desafíos que debe superar la representación de una imagen}
 	\label{fig:stanford_challenges}
       \end{figure}
 
@@ -327,9 +330,9 @@
 	con lo cual dependen en cierta forma de una decisión manual de quien construye el algoritmo.
 	El conjunto de estas representaciones locales se codifican y agregan en una representación vectorial de dimensionalidad fija, la cual se emplea como
         entrada a los algoritmos de aprendizaje subsiguientes. Un ejemplo de esta clase de representaciones es el modelo de bolsas de palabras
-        visuales el cual, en analogía al modelo para texto, recurre a una estuctura auxiliar para construir un histograma de ocurrencias de
+        visuales el cual, en analogía al modelo para texto, recurre a una estructura auxiliar para construir un histograma de ocurrencias de
         ``palabras visuales''. Este concepto se ilustra en la figura \ref{fig:bovw} en donde se intenta reconocer un rostro,
-	una bicicleta y una guitarra, basandose en las palabras visuales que contiene su ``Diccionario''.
+	una bicicleta y una guitarra, basándose en las palabras visuales que contiene su ``Diccionario''.
 
 	\begin{figure}[h]
 	  \begin{center}
@@ -340,29 +343,29 @@
 	\end{figure}
 
       \subsubsection{Enfoque de Aprendizaje Profundo}
-	Este enfoque tiene como objetivo lograr una representación composicional de la imagen. Consta de un único algoritmo que, a diferencia del enfoque clasico, aprende a realizar 
+	Este enfoque tiene como objetivo lograr una representación composicional de la imagen. Consta de un único algoritmo que, a diferencia del enfoque clásico, aprende a realizar 
 	la representación por si mismo, en lugar de depender de decisiones externas.
 	El contenido representado dependerá de la información que tenga como objetivo aprender el modelo. Por ejemplo, suponiendo que una misma imagen contenga un gato y un perro,
-	si el modelo debe reconocer perros, la representacion contiene información relevante al perro, en cambio si el modelo debe reconocer animales, la representación incluye
+	si el modelo debe reconocer perros, la representación contiene información relevante al perro, en cambio si el modelo debe reconocer animales, la representación incluye
 	información de ambos animales.
 
-	El problema asociado a este enfoque es que se desconoce cuales serán las \emph{features} que el modelo aprendera a representar durante el entrenamiento.
+	El problema asociado a este enfoque es que se desconoce cuales serán las \emph{features} que el modelo aprenderá a representar durante el entrenamiento.
 	Sin embargo, se puede establecer que las \emph{features} aprendidas tienen en cierto modo una especie de jerarquía, es decir que las \emph{features} de bajo nivel aprendidas desde los píxeles
 	alimentan el aprendizaje de otras \emph{features} que aprenden a reconocer contornos y bordes, y así sucesivamente hasta llegar a las \emph{features} de mas alto nivel
 	que logran reconocer estructuras y objetos. Debido a esto, las estructuras de aprendizaje profundo contemplan esta particularidad organizándose en diferentes capas,
 	donde la salida de una capa es la entrada a la capa siguiente. Las Redes Neuronales Convolucionales soportan el aprendizaje de este tipo \emph{features}
 	y es el modelo empleado en este trabajo. 
 
-	En la figura \ref{fig:shallow_deep} se realiza una comparacion entre los enfoques clasicos y el enfoque de aprendizaje profundo.  En las 3 primeras opciones del diagrama se
+	En la figura \ref{fig:shallow_deep} se realiza una comparación entre los enfoques clásicos y el enfoque de aprendizaje profundo.  En las 3 primeras opciones del diagrama se
 	pueden observar las distintas formas de representar imágenes mediante técnicas de aprendizaje automático tradicional,
-	donde, en todos los casos, las representaciones estan predefinidas antes de entrenar el modelo. Para mejorar estas representaciones se van agregando modulos 
-	que permiten mejorar la prediccion.
+	donde, en todos los casos, las representaciones están predefinidas antes de entrenar el modelo. Para mejorar estas representaciones se van agregando módulos 
+	que permiten mejorar la predicción.
 	En cambio para las técnicas de aprendizaje profundo, las representaciones son directamente aprendidas durante el entrenamiento del modelo.
 
 	\begin{figure}[h]
 	  \begin{center}
 		  \includegraphics[width=0.9\linewidth]{./img/vedaldi_shallow_deep.pdf}
-	  \caption{Comparacion de los distintos enfoques clasicos frente al enfoque de aprendizaje profundo}
+	  \caption{Comparación de los distintos enfoques clásicos frente al enfoque de aprendizaje profundo}
 	  \label{fig:shallow_deep}
 	  \end{center}
 	\end{figure}
@@ -388,7 +391,7 @@
           en donde $\theta=\{W, b\}$, con $W\in\mathbb{R}^{K \times D}$ y $b\in\mathbb{R}^K$.
           El objetivo del aprendizaje es estimar $\theta$, a partir de un conjunto de $N$ pares de entrenamiento $\{(x_i, y_i)\}_{i=1}^N$, $y_i \in \mathcal{X}$, $y_i\in\{1,\dots,K\}$
           donde $x_i$ hace referencia a la representación de la i-esima imagen del conjunto e $y_i$ es la respectiva categoría asociada.
-	  A modo de ilustración, en la figura \ref{fig:linear_classifier} se puede observar graficamente como funciona un clasificador lineal que distingue aviones, autos y ciervos en imagenes.
+	  A modo de ilustración, en la figura \ref{fig:linear_classifier} se puede observar gráficamente como funciona un clasificador lineal que distingue aviones, autos y ciervos en imágenes.
 	  \begin{figure}[ht]
 	    \begin{center}
 	     \includegraphics[width=0.8\linewidth]{./img/stanford_linear_class.jpeg}
@@ -411,20 +414,9 @@
 	    f(x, W, b) = W x + b
 	  \end{equation}
 	  Donde $W \in R^{K \times D}$, $b \in R^{K \times 1}$ son los parámetros de la función. 
-	  Algunas cosas a tener en cuenta:
-	  \begin{itemize}
-	   \item Los datos de entrada $(x, y_{j})$  se consideran prefijados, pero los parámetros contenidos en $\theta$ son ajustables.
-		 El objetivo del aprendizaje será establecerlos de tal manera que las puntuaciones computadas coincidan con las etiquetas correctas sobre todo conjunto de entrenamiento.
-		 Intuitivamente, se desea que la clase correcta tenga una puntuación más alta que las puntuaciones de las clases incorrectas.
-	   \item Una ventaja de este enfoque es que los datos de entrenamiento se utilizan para aprender los parámetros $W$ y $b$, pero una vez que el aprendizaje es completo,
-		podemos descartar el conjunto de entrenamiento completo y sólo mantener los parámetros aprendidos, para evaluar una nueva instancia. Esto se debe a que una nueva imagen nunca vista puede ser
-		simplemente reenviada a través de la función y clasificada en base a las puntuaciones computadas. En cambio, existen otros algoritmos de aprendizaje automático, que requieren
-		mantener información de cada una de las instancias de entrenamiento para poder realizar la evaluación de una nueva instancia,
-		como por ejemplo el algoritmo de K vecinos mas cercanos (\emph{K nearest neighbours} en la literatura en ingles).
-	  \end{itemize}
 \fi
 
-	  El problema de estimar los parámetros de un modelo, se resuelve optimizando una función de costo expresada en la ecuacion \eqref{eq:perdida}.
+	  El problema de estimar los parámetros de un modelo, se resuelve optimizando una función de costo expresada en la ecuación \eqref{eq:perdida}.
           \begin{equation}\label{eq:perdida}
 	    L = \frac{1}{N}\sum_{i=1}^{N} L_i(y_i, f(x_i, W, b)) + \lambda \Omega(W)
           \end{equation}
@@ -446,7 +438,7 @@
 	      \begin{equation*}
 		L({\widehat y}, y) =  max(0, 1 - {\widehat y}y)
 	      \end{equation*}
-	      Esta funcion es ampliamente utilizada para algoritmos de Maquina de Vector Soporte, mencionados en la seccion \ref{sec:supervisado}.
+	      Esta función es ampliamente utilizada para algoritmos de Maquina de Vector Soporte, mencionados en la sección \ref{sec:supervisado}.
 	      Es una función convexa y continua pero no es derivable por lo tanto no se puede utilizar en métodos como el Descenso por el Gradiente.
 	    \item Función de Pérdida Logística:
 	      \begin{equation*}
@@ -460,20 +452,7 @@
 	      Es una función continua, convexa y derivable que se adapta a métodos de Descenso por el gradiente, se utiliza en Redes Neuronales Profundas.
 
 	  \end{itemize}
-\iffalse
-	\subsubsection {Sobreajuste y Regularización}
-	  Uno de los principales objetivos de los algoritmos de aprendizaje automático es su capacidad de generalizar a ejemplos nunca antes vistos. Sin embargo, si la fase
-	  de aprendizaje se realiza durante demasiado tiempo o si los ejemplos del conjunto de entrenamiento son raros, el modelo aprendido podría ajustarse específicamente
-	  a ciertas características aleatorias de estos datos, que en realidad no contribuyen a la generalización. Esto se conoce como sobreajuste (overfitting en la literatura en inglés),
-	  y es un problema importante y ampliamente discutido en el campo de aprendizaje automático. En el proceso de sobre ajuste, el desempeño del algoritmo en el
-	  conjunto de entrenamiento sigue mejorando, pero en el conjunto de evaluación empeora.\\
-	  Una técnica para evitar el sobre ajuste de modelos es utilizar regularización. Esencialmente, consiste en penalizar los parámetros del modelo para evitar su
-	  crecimiento desmedido, agregando un regularizador($\Omega(W)$) a la Función de Pérdida. \\
-	  La función de regularización mas comúnmente utilizada es la norma $L2$, definida como:
-	   \begin{equation*}
-	    \Omega(W) = \frac{1}{2} {\sum_{k} {\sum_{l}} W_{k,l}^2}
-	   \end{equation*}
-\fi
+
     \subsubsection{Optimización} \label{sec:optimizacion}
       Minimizar la función de pérdida \eqref{eq:perdida} puede considerarse un problema de optimización, con lo cual se pueden aplicar las técnicas empleadas en este tipo de problemas, para resolverlo.
       El objetivo de la optimización es encontrar el vector de pesos $W$ que minimice la función de pérdida.
@@ -495,12 +474,14 @@
       
       Un enfoque común que se aplica a este problema es computar el gradiente sobre pequeños lotes del conjunto de entrenamiento,
       que permite lograr una buena aproximación al objetivo completo con una convergencia mucho mas rápida, es decir se reduce $N$ a un pequeño subconjunto, de esta forma se
-      reduce el numero de cálculos realizados en cada iteración. Este método se lo conoce como \emph{Descenso por el gradiente estocástico} y es el mas utilizado para optimizar
-      funciones de pérdida en las Redes Neuronales.
+      reduce el numero de cálculos realizados en cada iteración. 
+      Este método se lo conoce como \textbf{Descenso por el gradiente estocástico}, el cual se exhibe en el diagrama \ref{alg:SGD} en forma de pseudo-código, donde se puede observar
+      como funciona el mismo. El Descenso por el gradiente estocástico  es el mas utilizado para optimizar funciones de pérdida en las Redes Neuronales, un algoritmo de aprendizaje
+      automático que se detalla en las siguientes secciones.
 
 	\begin{algorithm}[ht]
 	  \caption{Descenso por el gradiente estocástico}
-	  \label{SGD}
+	  \label{alg:SGD}
 	  \begin{algorithmic}
 	    \State Elegir una tasa de aprendizaje $\eta$
 	    \State Elegir un vector de pesos inicial $w_0$
@@ -588,7 +569,7 @@
 	Un algoritmo de aprendizaje de red neuronal artificial, usualmente llamado ``red neuronal", es un algoritmo de aprendizaje que sirve como herramienta de modelado de datos
 	en forma no lineal. Usualmente se usan para modelar relaciones complejas entre entradas y salidas,
 	para encontrar patrones en los datos, o para capturar la estructura estadística en una distribución de probabilidad conjunta desconocida entre las variables observadas.
-	Una red neuronal, basicamente es una version compleja del clasificador lineal, pero que utiliza los mismos conceptos de funciones de perdida y funcion de prediccion.
+	Una red neuronal, básicamente es una versión compleja del clasificador lineal, pero que utiliza los mismos conceptos de funciones de perdida y función de predicción.
 	  
 	Las redes neuronales se pueden modelar como un conjunto de unidades de computo (neuronas) conectadas en un grafo acíclico, que se suelen organizar por capas, las neuronas de una capa
 	se conectan con neuronas de sus capas adyacentes pero nunca se conectan 2 neuronas de una misma capa, como se puede observar en la figura \ref{fig:neural_network}.
@@ -598,7 +579,7 @@
 	 \item Una capa de entrada ($x_i$ con $i \in \{0,...,D\}$, donde $x_0$ corresponde al sesgo)
 	 \item Una capa oculta ($z_m$ con $m \in {0,..,M}$ donde $z_0$ corresponde al sesgo). En el caso de que la red tenga mas de una capa oculta, $M$ puede ser distinto para cada una de ellas.
 	 \item Una capa de salida ($y_j$ con $j \in \{1,...,K\}$)
-	 \item Conexiones entre neuronas de capas adyacentes, las cuales contienen un peso $w^{(l)}_{se}$ donde $(l)$ es el numero de capa, $e$ es la neurona de entrada de la conexion y
+	 \item Conexiones entre neuronas de capas adyacentes, las cuales contienen un peso $w^{(l)}_{se}$ donde $(l)$ es el numero de capa, $e$ es la neurona de entrada de la conexión y
 	 $s$ la neurona de salida.
 	\end{itemize}
 
@@ -614,7 +595,7 @@
 	  \label{fig:neural_network}
 	\end{figure}
 
-	La unidad de procesamiento de una red neuronal es una neurona. La misma toma como parametros un vector de entrada, un vector de pesos, un valor de sesgo. El computo realizado
+	La unidad de procesamiento de una red neuronal es una neurona. La misma toma como parámetros un vector de entrada, un vector de pesos, un valor de sesgo. El computo realizado
 	en una neurona puede separarse en 2 etapas.
 	\begin{enumerate}
 	  \item En la primer etapa se realiza la suma de los productos punto a punto de los vectores de entrada, adicionandole finalmente el sesgo.
@@ -623,17 +604,17 @@
 	      a = \sum_{i=1}^{D} w_{i} x_i + w_{0}
 	    \end{equation}
 	    Donde $x_i$ es cada uno de los valores del vector $X$ y $w_{i}$ los valores del vector $W$. El valor $a$ se conoce como el valor de \emph{activación}.
-	  \item En la segunda etapa se realiza una transformacion no lineal del valor de activación, obtenido en la etapa anterior, dada por la funcion de activación $h$,es decir:
+	  \item En la segunda etapa se realiza una transformación no lineal del valor de activación, obtenido en la etapa anterior, dada por la función de activación $h$,es decir:
 	    \begin{equation}\label{eq:neurona_nolineal}
 	      z = h(a)
 	    \end{equation}
 	\end{enumerate}
-	La unidad aqui descripta pertenece a la primer capa oculta de la red, ya que en \eqref{eq:neurona_lineal} se interactua	con los valores del vector de entrada de la red, 
+	La unidad aquí descripta pertenece a la primer capa oculta de la red, ya que en \eqref{eq:neurona_lineal} se interactúa	con los valores del vector de entrada de la red, 
 	en caso de que no pertenezca a la primer capa oculta, se reemplazan los $x_i$ por los correspondientes $z_i$
 	obtenidos en la capa anterior. Finalmente cuando la unidad pertenece a la capa de salida, el valor obtenido en \eqref{eq:neurona_nolineal} termina siendo el valor de salida
-	de la prediccion es decir $y$.
+	de la predicción es decir $y$.
 	
-	Al utilizar una red neuronal como modelo de aprendizaje automatico para clasificación, primero es necesario configurar la arquitectura de la red para luego comenzar con la etapa de aprendizaje.
+	Al utilizar una red neuronal como modelo de aprendizaje automático para clasificación, primero es necesario configurar la arquitectura de la red para luego comenzar con la etapa de aprendizaje.
 
 \iffalse
       \subsection{Aprendizaje basado en el Gradiente}
@@ -644,16 +625,16 @@
 	redes neuronales, la técnica ampliamente utilizada es la de retropropagación del error que se detalla luego en la seccion \ref{sec:backpropagation}.
 \fi
 
-      \subsection{Configuracion y Diseño}
-	En la etapa de configuracion y diseño de una red neuronal es donde se define la arquitectura de la red, es decir cuantas capas tendra, cuantas neuronas tendra cada una de las capas
-	y cuales seran las funciones de activacion que estas utilizaran.
-	Ademas en esta etapa se define cual sera la funcion de perdida que se utilizara para calcular el error durante el entrenamiento.
+      \subsection{Configuración y Diseño}
+	En la etapa de configuración y diseño de una red neuronal es donde se define la arquitectura de la red, es decir cuantas capas tendrá, cuantas neuronas tendrá cada una de las capas
+	y cuales serán las funciones de activación que estas utilizaran.
+	Además en esta etapa se define cual sera la función de perdida que se utilizara para calcular el error durante el entrenamiento.
 
       \subsection {Aprendizaje}
-	Una vez finalizada la etapa de configuracion y diseño es necesario inicializar los pesos, comunmente inicializados con valores aleatorios cercanos a 0, para luego comenzar con la etapa
+	Una vez finalizada la etapa de configuración y diseño es necesario inicializar los pesos, comúnmente inicializados con valores aleatorios cercanos a 0, para luego comenzar con la etapa
 	de entrenamiento de la red.
 	El entrenamiento de una red neuronal consiste en realizar un ciclo de entrenamiento durante un cierto numero de iteraciones, utilizando el conjunto de datos de entrenamiento,
-	de forma tal que se reduzca el error obtenido por la funcion de perdida, al comparar la predicción obtenida con el valor correcto de la etiqueta para esa instancia.
+	de forma tal que se reduzca el error obtenido por la función de perdida, al comparar la predicción obtenida con el valor correcto de la etiqueta para esa instancia.
 	El ciclo de entrenamiento se compone de 2 pasos: paso hacia adelante, y paso de retropropagación del error.
 	\begin{enumerate}
 	  \item En el paso hacia adelante se evalúa la red y se obtiene el resultado de salida, con el cual se mide el error, utilizando la función de perdida elegida.
@@ -675,7 +656,7 @@
 	La mayoría de los algoritmos de aprendizaje implican un procedimiento iterativo para la minimización de una función de perdida o error, en el cual ajustan los pesos mediante
 	una secuencia de pasos. En cada paso, se pueden distinguir dos etapas bien diferenciadas. En la primera etapa, las derivadas de la función de error con
 	respecto a los pesos deben ser evaluados. En la segunda etapa, las derivadas son utilizadas para calcular los ajustes que se les deben efectuar a los pesos, en cada una
-	de las capas de la red. La importante contribución de la retropropagación (propagar el error hacia atras, a traves de la red) es la de proveer un
+	de las capas de la red. La importante contribución de la retropropagación (propagar el error hacia atrás, a través de la red) es la de proveer un
 	método computacionalmente eficiente para evaluar las derivadas requeridas en la primer etapa. A lo largo de esta sección, iremos desarrollando las ideas fundamentales de dicho
 	método.
 
@@ -684,16 +665,16 @@
 	\begin{equation} \label {eq:perdida_simplificada}
 	  L(W) = \frac{1}{N}\sum_{n=1}^{N} L_n(Y_n, f(X_n, W)) + \lambda \Omega(W)
 	\end{equation}
-	donde el sesgo $b$ se considera parte del vector $W$. Ademas, como $(X_n, Y_n)$ estan predefinidas, podemos considerar que cada $L_n$ solo depende de $W$.
-	Debido a todo esto, para calcular el gradiente de la funcion de perdida total, debemos evaluar $\nabla L_n(W)$ para cada término en la función de error. 
+	donde el sesgo $b$ se considera parte del vector $W$. Además, como $(X_n, Y_n)$ están predefinidas, podemos considerar que cada $L_n$ solo depende de $W$.
+	Debido a todo esto, para calcular el gradiente de la función de perdida total, debemos evaluar $\nabla L_n(W)$ para cada término en la función de error. 
 	Esto puede ser usado directamente para la optimización secuencial,o los resultados pueden ser acumulados a lo largo  del conjunto de entrenamiento en el caso de los métodos de optimización por lotes.
 	
 	Consideremos, en primer lugar de un simple modelo lineal en el que las salidas $y_k$ son combinaciones lineales de las variables de entrada $x_i$, es decir:
 	\begin{equation*}
 	  y_k = \sum_i W_{ki} x_i
 	\end{equation*}
-	Por simplicidad de decidió utilizar la función error cuadratica medio, que aunque no aplica para el caso de clasificación, facilita los calculos y puede
-	ser reemplazada facilmente por otras funciones de error como por ejemplo Entropía Cruzada \eqref{eq:cross_entropy}. 
+	Por simplicidad de decidió utilizar la función error cuadrática medio, que aunque no aplica para el caso de clasificación, facilita los cálculos y puede
+	ser reemplazada fácilmente por otras funciones de error como por ejemplo Entropía Cruzada \eqref{eq:cross_entropy}. 
 	Esta función para un determinado valor de entrada $n$, toma la forma:
 	\begin{equation*}
 	  L_n = \frac{1}{2} \sum_k (y_{nk}-Y_{nk})^2   % log-loss
@@ -712,8 +693,8 @@
 	\begin{equation} \label{eq:unidad_computo}
 	  a_j = \sum_{i} w_{ji} z_i
 	\end{equation}
-	Donde $z_i$ es el valor de entrada, $a_j$ es el valor que le envia a la unidad $j$ y $w_{ji}$ es el peso asociado a esa conexion.
-	La suma obtenida en \eqref{eq:unidad_computo} es luego transformada por una funcion no lineal $h(.)$ para calcular el valor correspondiente a la unidad $j$, es decir:
+	Donde $z_i$ es el valor de entrada, $a_j$ es el valor que le envía a la unidad $j$ y $w_{ji}$ es el peso asociado a esa conexión.
+	La suma obtenida en \eqref{eq:unidad_computo} es luego transformada por una función no lineal $h(.)$ para calcular el valor correspondiente a la unidad $j$, es decir:
 	\begin{equation}\label{eq:nolineal}
 	  z_j = h(a_j)
 	\end{equation}
@@ -727,7 +708,7 @@
 	\begin{equation} \label{eq:partial_derivatives}
 	  \frac{\partial L_n}{\partial w_{ji}} = \frac{\partial L_n}{\partial a_j} \frac{\partial a_j}{\partial w_{ji}}
 	\end{equation}
-	Se introduce una notacion util:
+	Se introduce una notación útil:
 	\begin{equation} \label{eq:notation}
 	  \delta_j \equiv \frac{\partial L_n}{\partial a_j}
 	\end{equation}
@@ -742,7 +723,7 @@
 	La ecuación \eqref{eq:sustitution2} nos dice que la derivada se obtiene simplemente multiplicando el valor de $\delta$ para la unidad en el extremo de salida del peso
 	por el valor de$z$ para la unidad en el extremo de entrada del peso. Tenga en cuenta que esto lleva de la misma forma como para el simple modelo lineal considerado al inicio de esta sección.
 	Por lo tanto, con el fin de evaluar los derivados, sólo tenemos que calcular el valor de $\delta_j$ para cada unidad oculta y de salida  en la red y, a continuación, aplicar \eqref{eq:sustitution2}.
-	Dado que para las unidades de salida  utilizamos el enlace canonico \FIXME{REVISAR}, tenemos
+	Dado que para las unidades de salida  utilizamos el enlace canónico \FIXME{REVISAR}, tenemos
 	\begin{equation} \label{eq:delta_salida}
 	  \delta_k = y_k - Y_k
 	\end{equation}
@@ -762,13 +743,13 @@
 	\end{figure}
 	
 	Donde la suma se ejecuta sobre todas las unidades $k$ donde la unidad $j$ envía conexiones. La disposición de las unidades y pesos se ilustra en la Figura \ref{fig:backpropagation}
-	Notar que las unidades etiquetadas k podrían incluir otras unidades ocultas y/o de salida. En la escritura de la ecuacion \eqref{eq:chain_rule}, estamos haciendo uso del hecho
+	Notar que las unidades etiquetadas k podrían incluir otras unidades ocultas y/o de salida. En la escritura de la ecuación \eqref{eq:chain_rule}, estamos haciendo uso del hecho
 	de que las variaciones en un j dan lugar a variaciones en la función de error sólo a través de las variaciones en las variables de k. Si ahora sustituimos la definición
 	de $\delta$ dada por \eqref{eq:notation} dentro de \eqref{eq:chain_rule}, y hacemos uso de \eqref{eq:unidad_computo} y \eqref{eq:nolineal}, obtenemos la siguiente fórmula de retropropagación
 	\begin{equation}\label{eq:backpropagation}
 	  \delta_j = h'(a_j) \sum_k w_{kj} \delta_k
 	\end{equation}
-	donde $h'$ es la función derivada a partir de $h$. La ecuacion \eqref{eq:backpropagation} nos dice que el valor de $\delta$ para una determinada unidad oculta se puede obtener mediante la propagación de la $\delta$'s hacia atrás a partir de unidades
+	donde $h'$ es la función derivada a partir de $h$. La ecuación \eqref{eq:backpropagation} nos dice que el valor de $\delta$ para una determinada unidad oculta se puede obtener mediante la propagación de la $\delta$'s hacia atrás a partir de unidades
 	de más adelante en la red, como se ilustra en la figura \ref{fig:backpropagation}.
 	Como ya conocemos los valores de los $\delta$'s para las unidades de salida, podemos aplicar de forma recursiva \eqref{eq:backpropagation} para evaluar los $\delta$'s
 	para todas las unidades ocultas en una red, independientemente de su arquitectura.
@@ -777,13 +758,13 @@
 	  \item Aplicar un vector de entrada $x_n$ a la red y  propagarlo hacia adelante a través de la red utilizando \eqref{eq:unidad_computo} y \eqref{eq:nolineal} para encontrar
 	  las activaciones de todas las unidades ocultas y de salida.
 	  \item Evaluar las $\delta_k$ para todas las unidades de salida utilizando \eqref{eq:delta_salida}.
-	  \item Propagar hacia atras los $\delta$'s usando \eqref{eq:backpropagation} para obtener el $\delta_j$ de cada unidad oculta de la red.
+	  \item Propagar hacia atrás los $\delta$'s usando \eqref{eq:backpropagation} para obtener el $\delta_j$ de cada unidad oculta de la red.
 	  \item Utilizar \eqref{eq:sustitution2} para evaluar las derivadas requeridas.
 	\end{enumerate}
 
 	\subsection {Funciones de Activación comúnmente utilizadas}
-	  Como hemos visto en la seccion \ref{sec:redes_neuronales}, cada unidad de computo requiere de una funcion de activacion, la toma un único número como entrada,
-	  realiza un operación matemática predefinida, no lineal y devuelve el resultado obtenido. En esta seccion se analizan las principales funciones de activacion utilizadas.
+	  Como hemos visto en la sección \ref{sec:redes_neuronales}, cada unidad de computo requiere de una función de activación, la toma un único número como entrada,
+	  realiza un operación matemática predefinida, no lineal y devuelve el resultado obtenido. En esta sección se analizan las principales funciones de activación utilizadas.
 	  \subsubsection {Sigmoide}
 
 	    La función sigmoide proyecta el dominio al rango (0,1) y su ecuación es:
@@ -795,7 +776,7 @@
 	    ya  que tiene dos inconvenientes principales:
 	    \begin{itemize}
 	     \item Se satura y anula el gradiente. Una propiedad muy indeseable de la sigmoide es que cuando la activación de la neurona se satura en cualquiera de las dos puntas de 0 o 1,
-	      el gradiente en estas regiones es casi cero. Esto hace que en la retropropagación, la información deje de retropropagarse hacia atras, (cuando se topa con un gradiente 0, cualquier
+	      el gradiente en estas regiones es casi cero. Esto hace que en la retropropagación, la información deje de retropropagarse hacia atrás, (cuando se topa con un gradiente 0, cualquier
 	      valor multiplicado por 0 es 0).
 	     \item Las salidas no están centradas en cero. Esto es indeseable ya que las neuronas en capas posteriores de procesamiento en una Red Neuronal estarían recibiendo
 	      datos que no están centrados en cero. Esto tiene implicaciones en la dinámica durante el descenso del gradiente, porque si los datos que llegan a una neurona
@@ -854,12 +835,19 @@
 	    todas partes. Existen generalizaciones sobre esta, que agregan un parámetro de regularización:
 	    \begin{itemize}
 	      \item Leaky ReLU: Agrega un parámetro de fuga $\alpha$, fijándolo en un valor pequeño como por ejemplo 0.01.
-		\begin{equation}
+		\begin{equation*}
 		  f(x)=1(x<0)(\alpha x)+1(x>=0)(x)
-		\end{equation}
-	      \item ReLU Paramétrica: Trata el parámetro de fuga como un parámetro aprendible. \FIXME{AGREGAR FORMULA}
+		\end{equation*}
+	      \item ReLU Paramétrica: Trata el parámetro de fuga $\alpha$ como un parámetro aprendible. 
+		\begin{equation*}
+		  f(x)= \begin{cases}
+			  x & \text{si $x > 0$} \\
+			  \alpha x & \text{en caso contrario.}
+			\end{cases}
+		\end{equation*}
 	    \end{itemize}
 
+\iffalse
       \subsection {Regularización: Marginación}
 	\FIXME{DESARROLLAR MAS, EXPLICAR COMO SE HACE, QUE EFECTO TIENE SI SACAMOS OVERFITING Y REGULARIZACION SACARLO}
 	A la hora de definir la configuracion de una red, es posible agregar capas de marginación las cuales se emplean como
@@ -875,7 +863,7 @@
 	  de las subred basado en los datos de entrada. \cite{Srivastava:Dropout} }
 	  \label{fig:dropout}
 	\end{figure}
-\iffalse
+
   \section {Aprendizaje Profundo}
     La caída de los precios de hardware y el desarrollo de GPUs para uso personal en los últimos años y la gran disponibilidad de datos, han contribuido al desarrollo del
     concepto de aprendizaje profundo (Deep Learning en ingles)
@@ -891,25 +879,26 @@
       Tales espacios también suelen imponer altos costos computacionales. El aprendizaje profundo fue diseñado para superar estos y otros obstáculos.
 \fi
   \section {Redes Neuronales Convolucionales} \label{sec:redes_convolucionales}
-      Las redes neuronales convolucionales (Convolutional Neural Networks en ingles, o CNN) son muy similares a las redes neuronales antes vistas en la seccion \ref{sec:redes_neuronales}.
+      Las redes neuronales convolucionales (Convolutional Neural Networks en ingles, o CNN) son muy similares a las redes neuronales antes vistas en la sección \ref{sec:redes_neuronales}.
       La principal diferencia es que la arquitectura de una red neuronal convolucional asume explícitamente que el conjunto de entrada son imágenes. 
-      Esto le permite codificar ciertas propiedades de las imagenes dentro de la arquitectura, obteniendo una mejor representación de las mismas.
-      Están inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes como la convolucion.
+      Esto le permite codificar ciertas propiedades de las imágenes dentro de la arquitectura, obteniendo una mejor representación de las mismas.
+      Están inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes como la convolución.
       
-      En el area del procesamiento de imagenes, la convolución es una tecnica de proposito general para transferir el efecto a una imagen, utilizando el valor de sus pixeles,
-      mediante una pequeña matriz comunmente llamada filtro (por lo general de $3\times3$ o $5\times5$).
-      Al realizar la convolucion sobre una imagen, se aplica un filtro, obteniendo como resultado otra imagen nueva. Cada uno de los pixeles de esta nueva imagen se calcula de la siguiente forma:
-      El filtro actua determinando el valor del pixel central donde se esta aplicando, sumando los valores de los pixeles vecinos pesados por el valor correspondiente de la matriz para
-      cada pixel. En la figura \ref{fig:convolution}, se puede observar la aplicación de un filtro de $3\times3$. El caculo realizado es (40*0)+(42*1)+(46*0) + (46*0)+(50*0)+(55*0) + (52*0)+(56*0)+(58*0) = 42,
-      por lo que el valor obtenido para ese pixel es 42.
-      Este filtro se va desplazando sobre todos los pixeles de la imagen de entrada hasta lograr calcular el valor todos los pixeles de la imagen de salida. Para el caso de los pixeles 
-      correspondientes a los bordes de la imagen, que no disponen de pixeles vecinos en alguna de las posiciones donde se aplica el filtro, existen diversas formas de completarlo. 
-      Una forma de completar el calculo es considerando que donde hay pixeles ausentes su valor es cero, otra es considerar que tiene el mismo valor que el pixel mas cercano.
+      En el área del procesamiento de imágenes, la convolución es una técnica de propósito general para transferir el efecto a una imagen, utilizando el valor de sus píxeles,
+      mediante una pequeña matriz comúnmente llamada filtro (por lo general de $3\times3$ o $5\times5$).
+      Al realizar la convolución sobre una imagen, se aplica un filtro, obteniendo como resultado otra imagen nueva. Cada uno de los píxeles de esta nueva imagen se calcula de la siguiente forma:
+      El filtro actúa determinando el valor del píxel central donde se esta aplicando, sumando los valores de los píxeles vecinos pesados por el valor correspondiente de la matriz para
+      cada píxel. En la figura \ref{fig:convolution}, se puede observar la aplicación de un filtro de $3\times3$. El cálculo realizado es (40*0)+(42*1)+(46*0) + (46*0)+(50*0)+(55*0) + (52*0)+(56*0)+(58*0) = 42,
+      por lo que el valor obtenido para ese píxel es 42.
+      Este filtro se va desplazando sobre todos los píxeles de la imagen de entrada hasta lograr calcular el valor todos los píxeles de la imagen de salida. Para el caso de los píxeles 
+      correspondientes a los bordes de la imagen, que no disponen de píxeles vecinos en alguna de las posiciones donde se aplica el filtro, existen diversas formas de completarlo. 
+      Una forma de completar el calculo es considerando que donde hay píxeles ausentes su valor es cero, otra es considerar que tiene el mismo valor que el píxel mas cercano.
+      
       \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=0.8\linewidth]{./img/convolution.png}
 	\end{center}
-	\caption{Convolucion}
+	\caption{Convolución}
 	\label{fig:convolution}
       \end{figure}
 
@@ -919,17 +908,17 @@
       locales que son útiles en una región de la imagen, probablemente sean útiles en otras regiones de la imagen.
       Estas nociones son incorporadas a las redes neuronales convolucionales mediante 3 mecanismos: (i) campos receptivos locales, (ii) compartir pesos y (iii) realizar submuestreos o agrupaciones.
       La estructura de una CNN se ilustra en la Figura \ref{fig:bishop_cnn}. En una capa convolucional, las unidades se organizan en 3 dimensiones, donde los distintos planos generados,
-      utilizando la dimensiones alto y ancho se llaman mapa de caracteristicas.
+      utilizando la dimensiones alto y ancho se llaman mapa de características.
 
-      Las unidades en un mapa de caracteristicas toman como entradas solo una pequeña subregión de la imagen, y todas las unidades de un mismo mapa de caracteristicas se
-      ven obligadas a compartir los mismos valores de peso. Por ejemplo, una mapa de caracteristicas puede consistir de 100 unidades dispuestas en una de cuadrícula 10x10,
-      donde cada unidad  toma de entradas una porcion de 5x5 pixeles de la imagen. El mapa de caracteristicas completo tiene entonces 25 parametros de pesos ajustables,
-      más uno de sesgo. Los valores de entrada de cada porcion de imagen son linealmente combinados utilizando los pesos y el sesgo, y el resultado es transformado por una funcion 
-      no lineal como la funcion sigmoide.
+      Las unidades en un mapa de características toman como entradas solo una pequeña subregión de la imagen, y todas las unidades de un mismo mapa de características se
+      ven obligadas a compartir los mismos valores de peso. Por ejemplo, una mapa de características puede consistir de 100 unidades dispuestas en una de cuadrícula 10x10,
+      donde cada unidad  toma de entradas una porción de 5x5 píxeles de la imagen. El mapa de características completo tiene entonces 25 parámetros de pesos ajustables,
+      más uno de sesgo. Los valores de entrada de cada porción de imagen son linealmente combinados utilizando los pesos y el sesgo, y el resultado es transformado por una función 
+      no lineal como la función sigmoide.
 
-      Si consideramos a las unidades como detectores de caracteristicas, entonces, todas las unidades en un mismo mapa de caracteristicas detectan el mismo patrón, pero en diferentes
+      Si consideramos a las unidades como detectores de características, entonces, todas las unidades en un mismo mapa de características detectan el mismo patrón, pero en diferentes
       ubicaciones en la imagen de entrada. Debido a que comparten los pesos, la evaluación de las activaciones de estas unidades es equivalente a  realizar una operación de convolución
-      sobre la intensidad de los pixeles de la imagen con un filtro compuesto por los parámetros de peso.
+      sobre la intensidad de los píxeles de la imagen con un filtro compuesto por los parámetros de peso.
       
       \begin{figure}[h]
 	\begin{center}
@@ -939,9 +928,9 @@
 	\label{fig:bishop_cnn}
       \end{figure}
       
-      Lograr diseñar una red convolucional que funcione correctamente, no es una tarea simple. Ademas, una red neuronal convolucional moderna requiere entre 2 y 3 semanas para entrenarse, 
-      utilizando multiples GPUs para el conjunto de datos ImageNet \cite{imagenet_cvpr09}. Debido a estos motivos, en la actualidad un practica comun es adaptar
-      redes famosas ya preentrenadas, realizando sobre estas ajuste fino (''Finetuning`` en la literatura en ingles), detallado en la seccion \ref{sec:finetuning}.
+      Lograr diseñar una red convolucional que funcione correctamente, no es una tarea simple. Además, una red neuronal convolucional moderna requiere entre 2 y 3 semanas para entrenarse, 
+      utilizando múltiples GPUs para el conjunto de datos ImageNet \cite{imagenet_cvpr09}. Debido a estos motivos, en la actualidad un practica común es adaptar
+      redes famosas ya preentrenadas, realizando sobre estas ajuste fino (''Finetuning`` en la literatura en ingles), detallado en la sección \ref{sec:finetuning}.
 
 \iffalse
     \subsection {Arquitectura de una red neuronal convolucional}
@@ -966,7 +955,7 @@
       \subsubsection{Capa Convolucional} \label{}
 	Los parámetros consisten en un conjunto de filtros aprendibles. Cada filtro es pequeño espacialmente (alto y ancho) pero se extiende sobre toda la profundidad del volumen de entrada.
 	Durante el paso hacia adelante, se desliza o convoluciona el filtro a través del alto y ancho del volumen de entrada y se computa el producto punto entre los valores del filtro y los valores
-	del volumen de entrada. A medida que se va deslizando el filtro sobre el ancho y el alto del volumen de entrada, se va generando un mapa de caracteristicas de 2 dimensiones que contiene los
+	del volumen de entrada. A medida que se va deslizando el filtro sobre el ancho y el alto del volumen de entrada, se va generando un mapa de características de 2 dimensiones que contiene los
 	valores de respuesta de ese filtro en cada posición espacial.
 
 	Intuitivamente, la red aprenderá los filtros que se activan cuando ven algún tipo de característica visual como un borde de cierta orientación o una mancha de algún color en la
@@ -1007,18 +996,18 @@
 	por lo que este tipo de capas suelen estar al final de la red.
 
     \section {Ajuste fino} \label{sec:finetuning}
-      El ajuste fino (Finetuning en inglés), es una tecnica que toma un modelo ya entrenado, con sus respectivos pesos,  y consiste en adaptar la arquitectura
+      El ajuste fino (Finetuning en inglés), es una técnica que toma un modelo ya entrenado, con sus respectivos pesos,  y consiste en adaptar la arquitectura
       del modelo inicial, para el problema al cual se quiere emplear, brindando un conjunto de datos de entrenamiento con el cual se entrena la red adaptada,
-      pero la inicializacion de los pesos coincide con los pesos obtenidos del modelo preentrenado.
-      Por ejemplo una red fue entrenada para reconocer distintas razas de perros en imagenes, y ahora se desea clasificar gatos segun su raza. En lugar de entrenar una
+      pero la inicialización de los pesos coincide con los pesos obtenidos del modelo preentrenado.
+      Por ejemplo una red fue entrenada para reconocer distintas razas de perros en imágenes, y ahora se desea clasificar gatos según su raza. En lugar de entrenar una
       red desde un estado aleatorio inicial, se puede utilizar la red preentrenada para perros, reemplazando la ultima capa completamente conectada por otra que
       tenga la cantidad de salidas igual a la cantidad de razas de gato que se desean reconocer.
-      Para el entrenamiento de esta red adaptada se le da como entrada un conjunto de imagenes, de gatos de las distintas razas, de esta forma los  pesos se van
-      ajustando para lograr reconocer este nuevo tipo de conceptos en las imagenes.
+      Para el entrenamiento de esta red adaptada se le da como entrada un conjunto de imágenes, de gatos de las distintas razas, de esta forma los  pesos se van
+      ajustando para lograr reconocer este nuevo tipo de conceptos en las imágenes.
       
       \subsection{Redes Convolucionales Famosas y Modelos preentrenados} \label{sec:cnn_famosas}
-	Como mencionamos anteriormente, una practica usual es reentrenar modelos preentrenados, adaptandolos a las necesidades especificas. Existen modelos de redes convolucionales
-	que reconocidos por haber ganado competencias orientadas a la clasificacion de imagenes, los cuales son de disponibilidad publica. Estos modelos suelen ser empleados como base 
+	Como mencionamos anteriormente, una practica usual es reentrenar modelos preentrenados, adaptándolos a las necesidades especificas. Existen modelos de redes convolucionales
+	que reconocidos por haber ganado competencias orientadas a la clasificación de imágenes, los cuales son de disponibilidad publica. Estos modelos suelen ser empleados como base 
 	preentrenada. A continuación se mencionan algunos de los mas famosos:
 	
 	\subsubsection{LeNet}
@@ -1052,10 +1041,10 @@
 	\subsubsection{GoogLeNet}
 	  El ganador de ILSVRC 2014 fue la Red Convolucional de Szegedy \cite{Szegedy:Convolutions}, proveniente de Google. Su contribución principal fue el desarrollo de un 
 	  módulo de ``Inception'' que reduce drásticamente el número de parámetros de la red (4M, en comparación con AlexNet con 60M). 
-	  Este modulo basicamente actua como multiples filtros de convolucion
-	  procesados sobre el mismo dato de entrada. Todos los resultados obtenidos son concatenados, lo cual le permite al modelo extraer caracteristicas de multiples niveles sobre
-	  cada entrada. Por ejemplo puede extraer caracteristicas generales (filtros de 5x5) y locales (1x1) en el mismo momento. En la figura \ref{fig:inception} se ilustra la arquitectura
-	  de este modulo graficamente.
+	  Este modulo básicamente actúa como múltiples filtros de convolución
+	  procesados sobre el mismo dato de entrada. Todos los resultados obtenidos son concatenados, lo cual le permite al modelo extraer características de múltiples niveles sobre
+	  cada entrada. Por ejemplo puede extraer características generales (filtros de 5x5) y locales (1x1) en el mismo momento. En la figura \ref{fig:inception} se ilustra la arquitectura
+	  de este modulo gráficamente.
 
 	  \begin{figure}[h]
 	    \begin{center}
@@ -1068,10 +1057,10 @@
 	\subsubsection{VGG}
 	  El segundo puesto en ILSVRC 2014 fue la red de Karen Simonyan y Andrew Zisserman que llegó a ser conocido como VGG \cite{SimonyanVGG}. 
 	  Su contribución principal fue demostrar que la profundidad de
-	  la red es un componente crítico para el buen desempeño. Su version final contiene 19 capas de las cuales 16 son convolucionales. Esta red ofrece una arquitectura 
+	  la red es un componente crítico para el buen desempeño. Su versión final contiene 19 capas de las cuales 16 son convolucionales. Esta red ofrece una arquitectura 
 	  muy homogénea, sólo realiza convoluciones de 3x3 y agrupaciónes de 2x2 desde el principio hasta el final, ilustrado en la figura \ref{fig:vgg}.
 	  Una desventaja de la VGG es que es muy cara para evaluar y consume mucha memoria y parámetros (140M). La mayoría de estos parámetros se encuentran en la primera
-	  capa totalmente conectada, y desde entonces se ha encontrado que estas capas pueden ser removidos con ningúna disminucion de rendimiento, reduciendo significativamente el
+	  capa totalmente conectada, y desde entonces se ha encontrado que estas capas pueden ser removidos con ninguna disminución de rendimiento, reduciendo significativamente el
 	  número de parámetros necesarios.
 	  
 	  \begin{figure}[h]
@@ -1083,7 +1072,7 @@
 	  \end{figure}	
 
 	\subsubsection{Resnet}
-	  Las Redes Residuales (ResNet) fueron desarrolladas por Kaiming He \cite{Kaiming:ResNet}, que fue el ganador de ILSVRC 2015. La caracteristica particular de este tipo de redes 
+	  Las Redes Residuales (ResNet) fueron desarrolladas por Kaiming He \cite{Kaiming:ResNet}, que fue el ganador de ILSVRC 2015. La característica particular de este tipo de redes 
 	  es que utilizan bloques de conexiones salteadas ilustrados en la figura \ref{fig:resnet}. 
 	  Esta arquitectura también solo tiene una capa completamente conectada en el extremo final de la red, en las capas intermedias hacen uso intensivo de la normalización por lotes.
 	  En cuanto al numero de capas de la red, existen diversas versiones de las ResNet, algunas de las cuales llegan a tener mas de 150 capas.
@@ -1092,7 +1081,7 @@
 	    \begin{center}
 	    \includegraphics[width=0.6\linewidth]{./img/resnet_block.png}
 	    \end{center}
-	    \caption{}
+	    \caption{Bloque residual de ResNet}
 	    \label{fig:resnet}
 	  \end{figure}	
 	
@@ -1120,87 +1109,87 @@
 
 \chapter{Algoritmo de Transferencia de estilo} \label{chapter:style_transfer}
     \section{Introducción}
-      En este capitulo se desarrollan los contenidos específicos relativos al Algoritmo de Transferencia de Estilos artisticos a fotografías. 
+      En este capitulo se desarrollan los contenidos específicos relativos al Algoritmo de Transferencia de Estilos artísticos a fotografías. 
       El algoritmo elegido para tal fin es el que presenta Gatys et al. \cite{Gatys:Neural_Style}. 
       
       En lo que al arte respecta, los humanos han desarrollado la capacidad de crear experiencias visuales únicas componiendo una compleja interacción entre el contenido y el estilo de una imagen.
-      Sin embargo, las bases algoritmicas de este proceso se desconocen y no existen sistemas artificiales que con capacidades similares. Sin embargo, en otras areas fundamentales
-      de la percepcion visual como el reconocimiento de objetos y rostros recientemente se ha alcanzado precisión cercana a la de un humano, utilizando modelos de redes neuronales profundas.
+      Sin embargo, las bases algorítmicas de este proceso se desconocen y no existen sistemas artificiales que con capacidades similares. Sin embargo, en otras áreas fundamentales
+      de la percepción visual como el reconocimiento de objetos y rostros recientemente se ha alcanzado precisión cercana a la de un humano, utilizando modelos de redes neuronales profundas.
       Aquí se presenta un sistema artificial basado en una Red Neural Profunda que crea imágenes artísticas de alta calidad perceptiva. El sistema utiliza representaciones neuronales
       para separar y recombinar el contenido y el estilo de imágenes arbitrarias, proporcionando un algoritmo para la creación de imágenes artísticas.
       
-      La publicación de estos artículos, ha incentivado a muchos investigadores del area a continuar desarrollando estas ideas, a tal punto que hasta el dia de hoy se siguen publicando
+      La publicación de estos artículos, ha incentivado a muchos investigadores del área a continuar desarrollando estas ideas, a tal punto que hasta el día de hoy se siguen publicando
       avances el tema, a gran velocidad.
 
 
     \section{Contexto}
       Inicialmente, Gatys et al. publica un articulo para sintetizar texturas naturales utilizando Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos \cite{Gatys:Texture_Synthesis}.
-      En este articulo, define a una textura como la correlación entre los distintos mapas de caracteristicas de cada una de las capas de la red. Aplicando este enfoque
+      En este articulo, define a una textura como la correlación entre los distintos mapas de características de cada una de las capas de la red. Aplicando este enfoque
       logra obtener resultados muy interesantes como se muestran en la figura \ref{fig:textures}. En la parte inferior de la figura se observa la imagen de muestra y en la parte superior
-      se ilusta la reconstrucción de la imagen a partir de los mapas de caracteristicas de una de las ultimas capas de la CNN. Ademas, en la ultima columna se exhibe la representación
-      de una imagen que no corresponde a una textura, para dar una mejor intuicion de como se representa la informacion de la imagen.
+      se ilustra la reconstrucción de la imagen a partir de los mapas de características de una de las ultimas capas de la CNN. Además, en la ultima columna se exhibe la representación
+      de una imagen que no corresponde a una textura, para dar una mejor intuición de como se representa la información de la imagen.
       
-      \textbf{Sintesis de texturas:}
-      En el contexto del procesamiento de imagenes el concepto de textura hace referencia a imagenes digitales que se componen por elementos repetitivos a lo largo de la misma.
-      La sintesis de texturas es el proceso de construir algoritmicamente una imagen digital de grandes dimensiones basandose en una muestra pequeña, respetando la estructura de su contenido. 
-      La sintesis de texturas puede ser utilizada para rellenar agujeros en imágenes (como en los algoritmos de restauración) y la expansión de pequeñas imágenes.
-      Los algoritmos de sintesis de texturas tienen como objetivo principal que la imagen generada sea lo mas parecida posible a la imagen de muestra que estan sintetizando.
+      \textbf{Síntesis de texturas:}
+      En el contexto del procesamiento de imágenes el concepto de textura hace referencia a imágenes digitales que se componen por elementos repetitivos a lo largo de la misma.
+      La síntesis de texturas es el proceso de construir algoritmicamente una imagen digital de grandes dimensiones basándose en una muestra pequeña, respetando la estructura de su contenido. 
+      La síntesis de texturas puede ser utilizada para rellenar agujeros en imágenes (como en los algoritmos de restauración) y la expansión de pequeñas imágenes.
+      Los algoritmos de síntesis de texturas tienen como objetivo principal que la imagen generada sea lo mas parecida posible a la imagen de muestra que están sintetizando.
       
       \begin{figure}[H]
 	\begin{center}
 	  \includegraphics[width=0.8\linewidth]{./img/textures.png}
 	\end{center}
-	\caption{Ejemplos de sintesis de texturas utilizando Redes Neuronales Convolucionales}
+	\caption{Ejemplos de síntesis de texturas utilizando Redes Neuronales Convolucionales}
 	\label{fig:textures}
       \end{figure}
     
       Transferir el estilo de una imagen a otra puede ser considerado un problema de transferencia de texturas. 
       En la transferencia de texturas el objetivo es sintetizar la textura de la imagen de muestra de forma restringida.
-      Estas restricciones permiten preservar el contenido semantico de la imagen a la cual se le desea transferir la textura.
+      Estas restricciones permiten preservar el contenido semántico de la imagen a la cual se le desea transferir la textura.
       Teniendo en cuenta todo esto, Gatys et al. adapta su idea propuesta para sintetizar texturas a la Transferencia de Estilos.
       Dicho problema, normalmente se encaraba en una rama de la visión de computadoras llamada representación no fotorrealista \cite{Kyprianidis:ArtisticStylization}.
       
       Existen otros algoritmos que utilizan este enfoque, por ejemplo: 
-      Hertzmann \cite{Hertzmann:ImageAnalogies}, el cual utiliza analogias de imagenes para transferir la textura de una imagen de estilo a otra imagen. 
-      Ashkimin \cite{Ashikhmin:FastTextureTransfer} se centra en la transferencia de la informacion de alta frecuencia de la textura, preservando la informacion a gruesa escala de 
+      Hertzmann \cite{Hertzmann:ImageAnalogies}, el cual utiliza analogías de imágenes para transferir la textura de una imagen de estilo a otra imagen. 
+      Ashkimin \cite{Ashikhmin:FastTextureTransfer} se centra en la transferencia de la información de alta frecuencia de la textura, preservando la información a gruesa escala de 
       la imagen de destino. 
       Efros y Freeman \cite{Efros:ImageQuilting} introduce un mapa de correspondencias que incluye las características de la imagen de destino, tales como la intensidad 
-      de la imagen para restringir el proceso de sintetizacion de la textura.
-      Lee et al. \cite{Lee:DirectionalTextureTransfer} mejora este algoritmo agregando a la tranferencia de textura, informacion adicional acerca de los contornos y bordes.
+      de la imagen para restringir el proceso de sintetización de la textura.
+      Lee et al. \cite{Lee:DirectionalTextureTransfer} mejora este algoritmo agregando a la transferencia de textura, información adicional acerca de los contornos y bordes.
       
       Aunque estos algoritmos logran resultados notables, todos ellos sufren de la misma limitación fundamental: usan sólo características de bajo nivel de la imagen de destino para
-      informar a la transferencia de textura. Sin embargo, un algortimo de transferencia de estilo debe ser capaz de extraer contenido semántico de la imagen de
-      destino (por ejemplo, los objetos y el paisaje general). Luego debe informar al procedimiento de transferencia de textura para que represente lo extraido
+      informar a la transferencia de textura. Sin embargo, un algoritmo de transferencia de estilo debe ser capaz de extraer contenido semántico de la imagen de
+      destino (por ejemplo, los objetos y el paisaje general). Luego debe informar al procedimiento de transferencia de textura para que represente lo extraído
       junto con el estilo de la imagen de origen. Por lo tanto, un requisito fundamental es encontrar representaciones de la imagen que modelen independientemente las variaciones
-      de contenido semántico de la imagen y el estilo que se les presentan. Dicho requisito se puede lograr utilizando los mapas de caracteristicas de las Redes Neuronales Convolucionales \ref{sec:redes_convolucionales}
-      entrenadas en el reconocimiento de objetos. Se ha comprobado que estas logran extraer información semantica de alto nivel del contenido de las imagenes \cite{AlexNet}.
+      de contenido semántico de la imagen y el estilo que se les presentan. Dicho requisito se puede lograr utilizando los mapas de características de las Redes Neuronales Convolucionales \ref{sec:redes_convolucionales}
+      entrenadas en el reconocimiento de objetos. Se ha comprobado que estas logran extraer información semántica de alto nivel del contenido de las imágenes \cite{AlexNet}.
 
 
-    \section{Sintesis} \label{sec:sintesis}
-      El algoritmo desarrollado por Gatys et al. es, conceptualmente un algoritmo de tranferencia de texturas que utiliza mapas de caracteristicas de redes neuronales convolucionales. 
-      Dado que la modelizacion de la textura se basa en estas mismas representaciones, el metodo de transferencia de estilo se reduce a un problema
-      de optimizacion en una unica red neuronal. Las imagenes son generadas minimizando la distancia entre los mapas de caracteristicas de las imagenes de entrada y los mapas de
-      caracteristica de la imagen de salida.
+    \section{Síntesis} \label{sec:sintesis}
+      El algoritmo desarrollado por Gatys et al. es, conceptualmente un algoritmo de transferencia de texturas que utiliza mapas de características de redes neuronales convolucionales. 
+      Dado que la modelización de la textura se basa en estas mismas representaciones, el método de transferencia de estilo se reduce a un problema
+      de optimización en una única red neuronal. Las imágenes son generadas minimizando la distancia entre los mapas de características de las imágenes de entrada y los mapas de
+      característica de la imagen de salida.
       
       Cuando las Redes Neuronales Convolucionales (CNNs) son entrenadas para el reconocimiento de objetos, desarrollan una representación interna de la imagen.
-      Dicha representacion composicional, hace que la información del objeto sea cada vez más concreta a lo largo de la jerarquia de las capas de la red. 
+      Dicha representación composicional, hace que la información del objeto sea cada vez más concreta a lo largo de la jerarquía de las capas de la red. 
       Por lo tanto, a lo largo de las distintas capas de la red, la imagen de entrada se transforma en representaciones que cada vez más se preocupan 
       por el contenido específico de la imagen en lugar del valor de sus píxeles.
       
       Las capas más altas de la red capturan el contenido de alto nivel en términos de objetos y su ordenamiento en la imagen. 
       En cambio, las reconstrucciones de las capas inferiores simplemente pretenden reproducir los valores exactos de píxeles de la imagen original y algunas formas
-      basicas como lineas o curvas. 
+      básicas como lineas o curvas. 
       Debido a esto, para representar el contenido de una imagen se utilizaran los mapas de características de las capas superiores de la red.
-      Para obtener la representacion del estilo de la imagen, se utiliza un espacio de caracteristicas que fue originalmente diseñado para capturar información de texturas.
-      Estas representaciones se obtienen calculando la correlacion entre los mapas de caracteristicas de cada capa de la red. 
+      Para obtener la representación del estilo de la imagen, se utiliza un espacio de características que fue originalmente diseñado para capturar información de texturas.
+      Estas representaciones se obtienen calculando la correlación entre los mapas de características de cada capa de la red. 
       
-      Incluyendo las correlaciones de multiples capas, se obtiene una representacion que captura información de la textura pero no del ordenamiento global de la imagen.
-      Al reconstruir las imágenes a partir de las representaciones obtenidas, se puede observar que producen una version texturizada de la imagen.
-      Estas representaciones, que capturan su apariencia general en terminos de colores y estructuras localizadas, seran llamadas representaciones de estilo.
+      Incluyendo las correlaciones de múltiples capas, se obtiene una representación que captura información de la textura pero no del ordenamiento global de la imagen.
+      Al reconstruir las imágenes a partir de las representaciones obtenidas, se puede observar que producen una versión texturizada de la imagen.
+      Estas representaciones, que capturan su apariencia general en términos de colores y estructuras localizadas, serán llamadas representaciones de estilo.
       
-      El principal descubrimiento de Gatys et al. es que la representacion del estilo y del contenido de una imagen pueden ser separadas con una Red Neuronal Convolucional entrenada
+      El principal descubrimiento de Gatys et al. es que la representación del estilo y del contenido de una imagen pueden ser separadas con una Red Neuronal Convolucional entrenada
       para el reconocimiento de objetos. De esta forma, al manipularse independientemente se pueden generar una nueva imagen desde 2 imágenes de entradas distintas, que 
-      simultaneamente se corresponda con la representacion del contenido de una imagen y la respresentacion del estilo de la otra.
+      simultáneamente se corresponda con la representación del contenido de una imagen y la representación del estilo de la otra.
       
       \begin{figure}[h]
 	\includegraphics[width=\textwidth]{./img/gatys_1.png}
@@ -1208,8 +1197,8 @@
 	\label{fig:gatys_reconstrucciones}
       \end{figure}
 	  
-      En la figura \ref{fig:gatys_reconstrucciones} se puede observar el resultado de reconstruir el estilo y el contenido utilizando los mapas de caracteristicas que se obtienen al
-      realizar una pasada hacia adelante en la red VGG \cite{SimonyanVGG}. Dada una imagen de entrada, en cada capa de la red, ésta se representa como el mapa de caracteristicas en respuesta a los filtros
+      En la figura \ref{fig:gatys_reconstrucciones} se puede observar el resultado de reconstruir el estilo y el contenido utilizando los mapas de características que se obtienen al
+      realizar una pasada hacia adelante en la red VGG \cite{SimonyanVGG}. Dada una imagen de entrada, en cada capa de la red, ésta se representa como el mapa de características en respuesta a los filtros
       que pertenecen a esa capa. Mientras que el número de filtros va aumentando a lo largo de la jerarquía de la red, el tamaño de las representaciones de la imágenes va siendo reducido 
       por algunos mecanismos disminución de resolución(por ejemplo, agrupación) que conduce a una disminución en el número total de unidades por cada capa de la red.
       
@@ -1221,35 +1210,35 @@
 	
       En la parte superior de la figura \ref{fig:gatys_reconstrucciones} construimos un nuevo espacio de características que captura el estilo de una imagen de entrada.
       La representación de estilo se obtiene calculando las correlaciones entre los mapas de características de diferentes capas de la CNN. Al reconstruir el estilo de la imagen de estilo
-      utlizando diferentes subconjuntos de capas de la red ('conv1\_1' (a), "conv1\_1' y 'conv2\_1' (b), 'conv1\_1', 'conv2\_1' y 'conv3\_1' (c),'conv1\_1', 'conv2\_1', 'conv3\_1 ' y 'conv4\_1' (d),
+      utilizando diferentes subconjuntos de capas de la red ('conv1\_1' (a), "conv1\_1' y 'conv2\_1' (b), 'conv1\_1', 'conv2\_1' y 'conv3\_1' (c),'conv1\_1', 'conv2\_1', 'conv3\_1 ' y 'conv4\_1' (d),
       'conv1\_1', 'conv2\_1', 'conv3\_1', 'conv4\_1' y 'conv5\_1' (e)).
       Esto crea imágenes que coinciden con el estilo de la imagen dada, descartando la información del orden espacial de la escena.
       
-      El algoritmo presentado se reduce a un problema de optimización, en el cual se define una funcion de perdida que mide el error entre las representaciones de estilo y contenido 
-      de la imagen generada, con las respectivas representaciones de las imagenes de entrada.
-      Esta funcion de perdida es una combinación lineal de 2 funciones de perdida distintas, una relacionada al contenido y otra al estilo, las cuales se desarrollan en las secciones \ref{sec:contenido} y \ref{sec:estilo} respectivamente.
-      Comenzando desde una imagen de ruido blanco, se va minimizando el valor obtenido por la funcion de perdida, iterativamente, mediante el metodo de descenso por el gradiente, hasta 
+      El algoritmo presentado se reduce a un problema de optimización, en el cual se define una función de perdida que mide el error entre las representaciones de estilo y contenido 
+      de la imagen generada, con las respectivas representaciones de las imágenes de entrada.
+      Esta función de perdida es una combinación lineal de 2 funciones de perdida distintas, una relacionada al contenido y otra al estilo, las cuales se desarrollan en las secciones \ref{sec:contenido} y \ref{sec:estilo} respectivamente.
+      Comenzando desde una imagen de ruido blanco, se va minimizando el valor obtenido por la función de perdida, iterativamente, mediante el método de descenso por el gradiente, hasta 
       llegar al resultado deseado.
-      De esta forma, tanto el estilo como el contenido de la imagen generada se va aproximando al estilo y al contenido de las respectivas imagenes de entrada.
+      De esta forma, tanto el estilo como el contenido de la imagen generada se va aproximando al estilo y al contenido de las respectivas imágenes de entrada.
       
-      Al ser un algoritmo iterativo, el numero de iteraciones determina el grado de similitud entre la imagen generada con las imagenes elegidas para capturar el contenido y el estilo. 
-      La gran influencia de dicho hiperparametro radica en que el mismo determina cuantas veces se minimizara la funcion de perdida mediante el metodo de descenso por el gradiente.
-      Ademas, como hemos visto en la seccion \ref{sec:optimizacion}, dicho metodo requiere de otro hiperparámetro llamado tasa de aprendizaje que define el tamaño de cada 
+      Al ser un algoritmo iterativo, el numero de iteraciones determina el grado de similitud entre la imagen generada con las imágenes elegidas para capturar el contenido y el estilo. 
+      La gran influencia de dicho hiper-parámetro radica en que el mismo determina cuantas veces se minimizara la función de perdida mediante el método de descenso por el gradiente.
+      Además, como hemos visto en la sección \ref{sec:optimizacion}, dicho método requiere de otro hiper-parámetro llamado tasa de aprendizaje que define el tamaño de cada 
       paso en la iteración.
-      Los hiperparámetros requeridos por el metodo de optimización aqui mencionado, son solo algunos de los hiperparámetros exigidos por el algoritmo, en la siguiente seccion se mencionan los demas.
+      Los hiper-parámetros requeridos por el método de optimización aquí mencionado, son solo algunos de los hiper-parámetros exigidos por el algoritmo, en la siguiente sección se mencionan los demás.
       
-    \section{Representacion del Contenido} \label{sec:contenido}
+    \section{Representación del Contenido} \label{sec:contenido}
       Generalmente, cada capa de la red define un banco de filtros no lineal cuya complejidad aumenta dependiendo de la jerarquía de la capa en la red.
-      Por lo tanto, una imagen de entrada $\overrightarrow{x}$ , se codifica en cada una de las capas de la red convolucional como un mapa de caracteristicas.
+      Por lo tanto, una imagen de entrada $\overrightarrow{x}$ , se codifica en cada una de las capas de la red convolucional como un mapa de características.
       Estos mapas se obtienen a partir de las respuestas de los filtros pertenecientes a dicha capa con respecto a la imagen de entrada.
-      Una capa con $N_l$ filtros distintos, tiene $N_l$ mapas de caracteristicas, cada uno de tamaño $M_l$, donde $M_l$ es el ancho por el largo del mapa de caracteristicas.
+      Una capa con $N_l$ filtros distintos, tiene $N_l$ mapas de características, cada uno de tamaño $M_l$, donde $M_l$ es el ancho por el largo del mapa de características.
       Por consiguiente las respuestas de una capa $l$ pueden ser alojadas en una matriz $F^l \in R^{N_l \times M_l}$, donde $F_{i,j}^l$ es la respuesta del $i$-esimo filtro en la posición $j$.
       
-      Para visualizar la información codificada en distintas capas de la red, segun su jerarquía, se puede ejecutar descenso por el gradiente a partir de una imagen de ruido blanco
+      Para visualizar la información codificada en distintas capas de la red, según su jerarquía, se puede ejecutar descenso por el gradiente a partir de una imagen de ruido blanco
       para encontrar otra imagen que coincida con la respuesta de los filtros de la imagen original. Esto se puede ver en la 
       parte inferior de la figura \ref{fig:gatys_reconstrucciones}.
       Sean $\overrightarrow{p}$ y $\overrightarrow{x}$ la imagen original y la imagen generada, y sean $P^l$ y $F^l$ las respectivas representaciones en la capa $l$.
-      La funcion pérdida del contenido se define como el error cuadratico medio entre sus mapas de caracteristicas:
+      La función pérdida del contenido se define como el error cuadrático medio entre sus mapas de características:
       \begin{equation} \label{eq:perdida_contenido}
        L_{contenido}(\overrightarrow{p},\overrightarrow{x}, l) = \frac{1}{2} \sum_{i,j} (F_{i,j}^l - P_{i,j}^l)^2
       \end{equation}
@@ -1257,20 +1246,20 @@
       Por consecuente, se puede ir adaptando la imagen $\overrightarrow{x}$ hasta que genere la misma respuesta que $\overrightarrow{p}$ en una determinada capa de la red.
 
       
-    \section{Representacion del Estilo} \label{sec:estilo}
-      Para obtener la representación del estilo de una imagen, se construye un espacio caracteristicas sobre las respuestas de los filtros de cualquier capa de la red. 
+    \section{Representación del Estilo} \label{sec:estilo}
+      Para obtener la representación del estilo de una imagen, se construye un espacio características sobre las respuestas de los filtros de cualquier capa de la red. 
       Sobre las respuestas de la CNN en cada capa de la red construimos una representación de estilo que calcula las correlaciones entre las diferentes respuestas de los filtros.
-      Estas correlaciones de las caracteristicas estan dadas por la matriz de Gram $G^l \in R^{N_l \times N_l}$, en la cual $G_{i,j}^l$ se calcula como el producto punto entre los vectores
-      de los mapas de caracteristicas $i$ y $j$ en la capa $l$:
+      Estas correlaciones de las características están dadas por la matriz de Gram $G^l \in R^{N_l \times N_l}$, en la cual $G_{i,j}^l$ se calcula como el producto punto entre los vectores
+      de los mapas de características $i$ y $j$ en la capa $l$:
       \begin{equation}
 	G_{i,j}^l = \sum_{k} F_{i,k}^l F_{j,k}^l
       \end{equation}
 
-      Nuevamente, se puede visualizar la informacion capturada por estas caracteristicas construidas, se puede ejecutar descenso por el gradiente a partir de una imagen de ruido blanco
-      para encontrar otra imagen que coincida con la representacion de estilo de la imagen original. 
-      Esto se hace minimizando la distancia cuadratica media entre las entradas de la matriz de Gram de la imagen
+      Nuevamente, se puede visualizar la información capturada por estas características construidas, se puede ejecutar descenso por el gradiente a partir de una imagen de ruido blanco
+      para encontrar otra imagen que coincida con la representación de estilo de la imagen original. 
+      Esto se hace minimizando la distancia cuadrática media entre las entradas de la matriz de Gram de la imagen
       original y la matriz de Gram de la imagen a generar.
-      En la parte superior de la figura \ref{fig:gatys_reconstrucciones} se puede observar la reconstruccion de estilo.
+      En la parte superior de la figura \ref{fig:gatys_reconstrucciones} se puede observar la reconstrucción de estilo.
       
       Sean $\overrightarrow{a}$ y $\overrightarrow{x}$ la imagen original y la imagen generada, y sean $A^l$ y $G^l$
       las respectivas representaciones de estilo en la capa $l$, la contribución de esa capa a la función de perdida total del estilo es:
@@ -1281,51 +1270,51 @@
       \begin{equation}
        L_{estilo}(\overrightarrow{a},\overrightarrow{x}) = \sum_{l=0}^{L} w_l E_l
       \end{equation}
-      donde $w_l$ son los factores de peso que tiene cada capa sobre el resultado final, estos factores son introducidos como hiperparámetros del algoritmo. 
+      donde $w_l$ son los factores de peso que tiene cada capa sobre el resultado final, estos factores son introducidos como hiper-parámetros del algoritmo. 
       Los gradientes de $E_l$ con respecto a las activaciones de las capas de la red puede ser fácilmente
-      calculados utilizando la tecnica retropropagación del error, explicada en la seccion \ref{sec:backpropagation}, (Figura \ref{fig:gatys_generacion} en la parte izquierda).
+      calculados utilizando la técnica retropropagación del error, explicada en la sección \ref{sec:backpropagation}, (Figura \ref{fig:gatys_generacion} en la parte izquierda).
       
     \section{Transferencia de estilo}
-      Para transferir el estilo de una obra de arte $\overrightarrow{a}$ a una fotografia $\overrightarrow{p}$, se genera una nueva imagen
-      la cual simultaneamente deba coincidir con la representación de contenido de $\overrightarrow{p}$ y la representación de estilo de $\overrightarrow{a}$ (Figura \ref{fig:gatys_generacion}). 
-      Es decir, se minimizan en conjunto la distancia del mapa de caracteristicas de una imagen de ruido con la representacion del contenido de la fotografia
-      en una capa y la representacion del estilo de la obra de arte. Por lo tanto la función de perdida total que se minimiza es:
+      Para transferir el estilo de una obra de arte $\overrightarrow{a}$ a una fotografía $\overrightarrow{p}$, se genera una nueva imagen
+      la cual simultáneamente deba coincidir con la representación de contenido de $\overrightarrow{p}$ y la representación de estilo de $\overrightarrow{a}$ (Figura \ref{fig:gatys_generacion}). 
+      Es decir, se minimizan en conjunto la distancia del mapa de características de una imagen de ruido con la representación del contenido de la fotografía
+      en una capa y la representación del estilo de la obra de arte. Por lo tanto la función de perdida total que se minimiza es:
       \begin{equation}\label{eq:objetivo}
        L_{total}(\overrightarrow{p},\overrightarrow{a},\overrightarrow{x}) = \alpha L_{contenido}(\overrightarrow{p},\overrightarrow{x}) + \beta L_{estilo}(\overrightarrow{a},\overrightarrow{x})
       \end{equation}
-      Esta funcion combina linealmente las funciones de perdida del contenido y el estilo, por lo que se conforma por 2 terminos principales, uno correspondiente a la funcion de perdida
-      del contenido y otro correspondiente a la funcion de perdida del estilo, donde $\alpha$ y $\beta$ son los factores de peso para el contenido y el estilo respectivamente,
-      a la hora de combinarlos, los cuales se consideran hiperparámetros. 
+      Esta función combina linealmente las funciones de perdida del contenido y el estilo, por lo que se conforma por 2 términos principales, uno correspondiente a la función de perdida
+      del contenido y otro correspondiente a la función de perdida del estilo, donde $\alpha$ y $\beta$ son los factores de peso para el contenido y el estilo respectivamente,
+      a la hora de combinarlos, los cuales se consideran hiper-parámetros. 
       
       \begin{figure}[h]
 	\includegraphics[width=\textwidth]{./img/gatys_method.png}
 	\caption{Algoritmo de transferencia de estilo}
 	\label{fig:gatys_generacion}
       \end{figure}
-      A continuacion se realiza una explicacion detallada de lo que se muestra en la figura \ref{fig:gatys_generacion}:
+      A continuación se realiza una explicación detallada de lo que se muestra en la figura \ref{fig:gatys_generacion}:
       
       En primer lugar, las características de contenido y estilo se extraen y almacenan. La imagen de estilo $\overrightarrow{a}$ se pasa a través de la red
       y sus representaciones de estilo $A^l$ en todas las capas incluidas, son calculadas y almacenadas (a la izquierda). La imagen de contenido $\overrightarrow{p}$ pasa a través
       de la red y la representación del contenido $P^l$ en una capa se almacena (a la derecha). Luego a partir de una imagen de ruido blanco $\overrightarrow{x}$ pasa a través de la red y sus
       características de estilo de $G^l$ y sus características de contenido $F^l$ son calculadas.
       
-      En cada capa incluida en la representación de estilo, se calcula la diferencia cuadratica media punto a punto entre $G^l$ y $A^l$ para obtener la funcion de perdida del estilo
-      $L_{estilo}$ (a la izquierda). Tambien se calcula la diferencia cuadratica media entre $F^l$ y $P^l$ para obtener la funcion de perdida del contenido $L_{contenido}$ (a la derecha).
+      En cada capa incluida en la representación de estilo, se calcula la diferencia cuadrática media punto a punto entre $G^l$ y $A^l$ para obtener la función de perdida del estilo
+      $L_{estilo}$ (a la izquierda). También se calcula la diferencia cuadrática media entre $F^l$ y $P^l$ para obtener la función de perdida del contenido $L_{contenido}$ (a la derecha).
       La función pérdida total $L_{total}$ es entonces una combinación lineal entre la función de perdida del contenido y la función de pérdida del estilo.
-      La derivada de  $L_{total}$ con respecto a los valores de los píxeles pueden ser calculadas con el metodo  de retropropagación del error (en el medio).
+      La derivada de  $L_{total}$ con respecto a los valores de los píxeles pueden ser calculadas con el método  de retropropagación del error (en el medio).
       Este gradiente se utiliza de forma iterativa actualizando la imagen $\overrightarrow{x}$ hasta que simultáneamente coincida con las características de estilo de la imagen
       de estilo $\overrightarrow{a}$ y con las características de contenido de la imagen de contenido $\overrightarrow{p}$ (en la parte inferior central).
       
       Finalmente, la salida del algoritmo, a partir de lo enunciado en la ecuación \eqref{eq:objetivo}, sera el argumento $\overrightarrow{x}$
-      que minimice la funcion de perdida total, como se puede observar en la ecuacion \eqref{eq:resultante}. 
+      que minimice la función de perdida total, como se puede observar en la ecuación \eqref{eq:resultante}. 
       \begin{equation} \label{eq:resultante}
        \overrightarrow{x} = \arg\min_{\overrightarrow{x}} L_{total}(\overrightarrow{p},\overrightarrow{a},\overrightarrow{x})
       \end{equation}
       
-      \section{Hiperparámetros del algoritmo} \label{sec:hiperparametros}
-	A continuación se enumera la lista de hiperparámetros que requiere el algoritmo para ejecutarse y se discute acerca de su influencia en el mismo:
+      \section{Hiper-parámetros del algoritmo} \label{sec:hiperparametros}
+	A continuación se enumera la lista de hiper-parámetros que requiere el algoritmo para ejecutarse y se discute acerca de su influencia en el mismo:
 	\begin{itemize}
-	 \item Numero de iteraciones: Determina cuantas veces se ejecuta el metodo de descenso por el gradiente para minimizar la funcion de perdida. 
+	 \item Numero de iteraciones: Determina cuantas veces se ejecuta el método de descenso por el gradiente para minimizar la función de perdida. 
 	  A medida que este numero aumenta, mayores son las chances de obtener un resultado aceptado, como se ilustra en la figura \ref{fig:img_iters}.
 	  \begin{figure}[h]
 	  \begin{center}
@@ -1340,36 +1329,36 @@
 	\end{figure}
 	
 	 \item Tasa de aprendizaje: Define el tamaño del paso en cada iteración del descenso por el gradiente. Si esta tasa es muy pequeña, se requieren mayor numero 
-	  de iteraciones, sin embargo si es muy grande, se puede caer en un ciclo donde nunca se termine minimizando la funcion de perdida. 
-	 \item Red Convolucional: Dependiendo de la red convolucional que se utilice, cambia el tamaño de los mapas de caracteristicas, las capas, etc.
-	  Como se menciona en la seccion \ref{sec:cnn_famosas}, existen varias CNNs entrenadas para el reconocimiento de objetos, que tienen arquitecturas
+	  de iteraciones, sin embargo si es muy grande, se puede caer en un ciclo donde nunca se termine minimizando la función de perdida. 
+	 \item Red Convolucional: Dependiendo de la red convolucional que se utilice, cambia el tamaño de los mapas de características, las capas, etc.
+	  Como se menciona en la sección \ref{sec:cnn_famosas}, existen varias CNNs entrenadas para el reconocimiento de objetos, que tienen arquitecturas
 	  muy distintas, al igual que el procesamiento requerido para utilizarlas.
 	 \item Capas de la red para la representación de estilo y sus respectivos pesos ($w_l, l \in \{1 \dots L\}$): Como hemos vistos anteriormente en la figura \ref{fig:gatys_reconstrucciones}, 
-	 la ubicacion de las capas en la jerarquia de la red, definen distintas experiencias visuales. Como para la representación de estilo se calcula la correlacion entre las capas elegidas,
-	 elegir capas intercaladas dentro de toda la jerarquia de la red otorgan una experiencia visual suave y continua.
+	 la ubicación de las capas en la jerarquía de la red, definen distintas experiencias visuales. Como para la representación de estilo se calcula la correlación entre las capas elegidas,
+	 elegir capas intercaladas dentro de toda la jerarquía de la red otorgan una experiencia visual suave y continua.
 	 Con respecto a los pesos, por lo general a todas las capas elegidas se les asignada el mismo valor, y a las que no fueron elegidas se les asigna 0.
-	 \item Capa de la red para la representacion del contenido: En la figura \ref{fig:content_repr_layers} se analiza la eleccion de la capa $conv2_2$ y la capa $conv4_2$.
-	 Al elegir la capa inferior, gran parte de la información detallada de los píxeles en la fotografía y en la imagen generada coincidem (figura \ref{fig:content_repr_layers} al medio).
+	 \item Capa de la red para la representación del contenido: En la figura \ref{fig:content_repr_layers} se analiza la elección de la capa $conv2_2$ y la capa $conv4_2$.
+	 Al elegir la capa inferior, gran parte de la información detallada de los píxeles en la fotografía y en la imagen generada coinciden (figura \ref{fig:content_repr_layers} al medio).
 	 En contraste, al elegir la capa superior, la estructura fina de la imagen se altera, en concordancia con el estilo (figura \ref{fig:content_repr_layers} abajo).
 	 \begin{figure}[h]
 	    \includegraphics[width=\textwidth]{./img/content_repr_layers.png}
-	    \caption{Comparacion de distintas capas de la red para la representación del contenido}
+	    \caption{Comparación de distintas capas de la red para la representación del contenido}
 	    \label{fig:content_repr_layers}
 	 \end{figure}
 	 
-	 \item Factores de peso para las funciones de perdida de estilo y contenido en la funcion de perdida total $(\alpha, \beta)$: Esto determina el grado de influencia
-	  de cada funcion de perdida. 
-	  Un fuerte enfasis sobre el estilo resultara en una imagen que coincida con la apariencia de la obra de arte pero dificilmente se logre observar el contenido de la fotografía 
+	 \item Factores de peso para las funciones de perdida de estilo y contenido en la función de perdida total $(\alpha, \beta)$: Esto determina el grado de influencia
+	  de cada función de perdida. 
+	  Un fuerte énfasis sobre el estilo resultara en una imagen que coincida con la apariencia de la obra de arte pero difícilmente se logre observar el contenido de la fotografía 
 	  ( $\alpha / \beta = 1 \times 10^{-4}$ figura \ref{fig:ratio_content_style} arriba a la izquierda). Al enfatizar sobre el contenido, se puede visualizar claramente la fotografía,
 	  pero el estilo no coincide completamente con la obra de arte ( $\alpha / \beta = 1 \times 10^{-1}$ figura \ref{fig:ratio_content_style} abajo a la derecha).
 	  \begin{figure}[h]
 	    \includegraphics[width=\textwidth]{./img/ratio_content_style.png}
-	    \caption{Comparacion de los distintos ratios entre el peso del estilo y el contenido en la funcion de perdida total}
+	    \caption{Comparación de los distintos ratios entre el peso del estilo y el contenido en la función de perdida total}
 	    \label{fig:ratio_content_style}
 	 \end{figure}
 	 
-	 \item Inicializacion: A pesar de que en las secciones anteriores, en todo momento se comenzo desde una imagen de ruido, el algortimo podria partir desde la imagen
-	 de contenido o la de estilo. En las primeras iteraciones se puede observar una inclinacion hacia la imagen de la cual se comienza (comenzar desde ruido o desde la imagen de estilo generan resultado similares) 
+	 \item Inicialización: A pesar de que en las secciones anteriores, en todo momento se comenzó desde una imagen de ruido, el algoritmo podría partir desde la imagen
+	 de contenido o la de estilo. En las primeras iteraciones se puede observar una inclinación hacia la imagen de la cual se comienza (comenzar desde ruido o desde la imagen de estilo generan resultado similares) 
 	 como muestra la figura \ref{fig:img_init}, pero en el resultado final no termina mostrando una gran influencia.
 	  \begin{figure}[h]
 	    \begin{center}
@@ -1377,7 +1366,7 @@
 		  \subfloat[Imagen generada a partir de ruido luego de 100 iteraciones]{\includegraphics[width=0.4\linewidth]{./img/chicago_wave_100_random.png}}
 		  & \subfloat[Imagen generada a partir de la fotografía luego de 100 iteraciones]{\includegraphics[width=0.4\linewidth]{./img/chicago_wave_100_image.png}}
 		  \end{tabular}
-	      \caption{Inicializacion del algoritmo}
+	      \caption{Inicialización del algoritmo}
 	      \label{fig:img_init}
 	    \end{center}
 	  \end{figure}
@@ -1386,83 +1375,83 @@
 
 	
 
-\chapter{Elección Automatica de hiperparámetros para Transferencia de estilo}
+\chapter{Elección Automática de hiper-parámetros para Transferencia de estilo}
   \section{Descripción del problema} \label{sec:descripcion}
     Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes. Sin embargo, como se menciona en la sección \ref{sec:hiperparametros}
-    es necesario definir una serie de parametros previa a la ejecución del mismo. Entre estos, se encuentra el número de iteraciones, el cual fue seleccionado como el principal
-    hiperparámetro a automatizarse en este trabajo.
+    es necesario definir una serie de parámetros previa a la ejecución del mismo. Entre estos, se encuentra el número de iteraciones, el cual fue seleccionado como el principal
+    hiper-parámetro a automatizarse en este trabajo.
     
-    El criterio de elección de este hiperparámetro termina siendo muy influyente en el resultado final. A medida que el número de iteraciones
-    aumenta, el resultado generado se va aproximando cada vez a las representaciones de estilo y contenido de las respectivas imagenes de entrada. 
+    El criterio de elección de este hiper-parámetro termina siendo muy influyente en el resultado final. A medida que el número de iteraciones
+    aumenta, el resultado generado se va aproximando cada vez a las representaciones de estilo y contenido de las respectivas imágenes de entrada. 
     No obstante, este numero influye notablemente en el tiempo de ejecución requerido por el algoritmo. 
     El objetivo principal de este trabajo el lograr obtener un resultado aceptado en la menor cantidad de iteraciones posible, reduciendo de esta forma el tiempo de ejecución 
     del algoritmo.
 
-    En lo que respecta a las obras de arte, al ser un campo donde la subjetividad tiene gran poder, las metricas suelen ser cualitativas generalmente. 
-    Por lo tanto, para poder definir el criterio de aceptación de un resultado generado, es necesario lograr definir una metrica cuantitativa que plasme en algun sentido este tipo de 
-    metricas cualitativas. De esta forma, el algoritmo puede definir si aceptar un resultado generado, basandose en el valor obtenido por dicha metrica.
+    En lo que respecta a las obras de arte, al ser un campo donde la subjetividad tiene gran poder, las métricas suelen ser cualitativas generalmente. 
+    Por lo tanto, para poder definir el criterio de aceptación de un resultado generado, es necesario lograr definir una métrica cuantitativa que plasme en algún sentido este tipo de 
+    métricas cualitativas. De esta forma, el algoritmo puede definir si aceptar un resultado generado, basándose en el valor obtenido por dicha métrica.
 
   \section{Solución propuesta \label{sec:solucion}}
-    En este trabajo se plantea definir un criterio de aceptación, de caracter cuantitativo, de forma tal que el algoritmo pueda utilizar el valor obtenido por esta metrica,
+    En este trabajo se plantea definir un criterio de aceptación, de carácter cuantitativo, de forma tal que el algoritmo pueda utilizar el valor obtenido por esta métrica,
     como criterio de parada. Si el valor obtenido por la imagen generada se aproxima al valor esperado para ser aceptado, entonces el algoritmo detiene la ejecución y retorna
     como salida esta misma imagen. En caso contrario, el algoritmo continua iterando hasta obtener una imagen cuyo valor se aproxime al esperado.
-    De esta forma el algoritmo evita requerir como hiperparámetro el número de iteraciones que debe ejecutarse, liberando al usuario de esta responsabilidad.
+    De esta forma el algoritmo evita requerir como hiper-parámetro el número de iteraciones que debe ejecutarse, liberando al usuario de esta responsabilidad.
     
     La solución consta de 3 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo), otro módulo encargado de
-    evaluar la imagen generada, y un tercer modulo que determina, en base al puntaje de clasificacion obtenido si es necesario continuar el proceso de generacion, como se puede
+    evaluar la imagen generada, y un tercer modulo que determina, en base al puntaje de clasificación obtenido si es necesario continuar el proceso de generación, como se puede
     observar en la figura \ref{fig:diagrama}.
 
     \begin{figure}[h]
       \begin{center}
 	\includegraphics[width=\linewidth]{./img/diagrama.png}
       \end{center}
-      \caption{Diagrama de interaccion entre los distintos modulos propuestos}
+      \caption{Diagrama de interacción entre los distintos módulos propuestos}
       \label{fig:diagrama}
     \end{figure}
 
     
-    El modulo de generación de imagenes implementa el algoritmo propuesto por Gatys et al. \cite{Gatys:Neural_Style}, para la transferencia de estilo, descripto a lo largo del 
+    El modulo de generación de imágenes implementa el algoritmo propuesto por Gatys et al. \cite{Gatys:Neural_Style}, para la transferencia de estilo, descripto a lo largo del 
     capitulo \ref{chapter:style_transfer}. 
-    Este algoritmo requiere como entrada una imagen de estilo, una imagen de contenido y una serie de hiperparámetros mencionados en la sección \ref{sec:hiperparametros}.
-    Para el caso de este modulo, el unico hiperparametro que permanece variable es el numero de iteraciones, prefijando lo demas, para poder analizar el comportamiento
+    Este algoritmo requiere como entrada una imagen de estilo, una imagen de contenido y una serie de hiper-parámetros mencionados en la sección \ref{sec:hiperparametros}.
+    Para el caso de este modulo, el único hiper-parámetro que permanece variable es el numero de iteraciones, prefijando lo demás, para poder analizar el comportamiento
     en detalle del mismo.
     La salida del modulo es una imagen generada donde el contenido se acerca a la imagen de contenido y el estilo se acerca a la imagen de estilo, a medida
-    que va aumentando el numero de iteraciones la distancia entre las imagenes de entrada y la imagen generada se va minimizando. 
+    que va aumentando el numero de iteraciones la distancia entre las imágenes de entrada y la imagen generada se va minimizando. 
 
     En lo que respecta al modulo de evaluación, como se mencionó en Sec.~\ref{sec:descripcion}, una de las limitaciones del proceso de transferencia de estilo es que la evaluación de
     la imagen resultante es de carácter cualitativo. A fin de establecer una medida cuantitativa y así controlar el resultado de la generación de
-    manera más objetiva, se propone definir un clasificador. Este clasificador se encarga de determinar a que el estilo aritstico pertenece una imagen, brindando un puntaje 
-    de clasificacion para cada estilo.
-    De esta forma la imagen se evalua cuantitativamente segun el puntaje obtenido en el estilo objetivo.
-    La entrada de este modulo es la imagen generada y la salida es un vector de puntajes de clasificacion obtenidos por la imagen para cada uno de los estilos.
+    manera más objetiva, se propone definir un clasificador. Este clasificador se encarga de determinar a que el estilo artístico pertenece una imagen, brindando un puntaje 
+    de clasificación para cada estilo.
+    De esta forma la imagen se evalúa cuantitativamente según el puntaje obtenido en el estilo objetivo.
+    La entrada de este modulo es la imagen generada y la salida es un vector de puntajes de clasificación obtenidos por la imagen para cada uno de los estilos.
 
-    A partir de la idea de definir un clasificador de estilos, se realizó una investigación de los posibles metodos para lograr esto.
-    Luego de la misma, se decidio basarse en el algortimo presentado en \cite{Karayev:Style_Recognition}, el cual involucra tecnicas de aprendizaje profundo.
-    Este articulo plantea que los vectores de caracteristicas obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy utiles a la hora de
-    reconocer estilos. Aunque muchos estilos parecieran ser principalmente definidos por las elecciones de colores, los vectores de caracteristicas de las CNN, proveen mucha mas información
+    A partir de la idea de definir un clasificador de estilos, se realizó una investigación de los posibles métodos para lograr esto.
+    Luego de la misma, se decidió basarse en el algoritmo presentado en \cite{Karayev:Style_Recognition}, el cual involucra técnicas de aprendizaje profundo.
+    Este articulo plantea que los vectores de características obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy útiles a la hora de
+    reconocer estilos. Aunque muchos estilos parecieran ser principalmente definidos por las elecciones de colores, los vectores de características de las CNN, proveen mucha mas información
     que los vectores obtenidos a partir de histogramas de colores por ejemplo.
-    Basado en esta idea, decidimos implementar una version simplificada que consiste en realizar ajuste fino sobre una Red Neuronal Convolucional preentrenda para el reconocimiento de objetos.
+    Basado en esta idea, decidimos implementar una versión simplificada que consiste en realizar ajuste fino sobre una Red Neuronal Convolucional preentrenada para el reconocimiento de objetos.
     De esta forma se van realizando evaluaciones de la imagen de salida obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
 
-    Finalmente, el modulo de selección, es el encargado de determinar si e se acepta la imagen obtenida en la iteracion actual o es necesario seguir iterando. 
-    La entrada de este modulo es el vector de puntajes de clasificacion calculados por el modulo generador \ref{sec:generador}, y la salida es un valor binario indicando si se acepta o no la imagen.
+    Finalmente, el modulo de selección, es el encargado de determinar si e se acepta la imagen obtenida en la iteración actual o es necesario seguir iterando. 
+    La entrada de este modulo es el vector de puntajes de clasificación calculados por el modulo generador, y la salida es un valor binario indicando si se acepta o no la imagen.
     
     El criterio de selección que se propone para elegir la imagen óptima es el siguiente:
-    Basado en la hipotesis de que el resultado generado por el modulo generador \ref{sec:generador} obtenga un puntaje similar que la imagen de estilo en el modulo evaluador
-    \ref{sec:evaluador}, se define una tolerancia del $\pm 20\%$ con respecto al puntaje obtenido por la imagen de estilo, en caso de que el resultado obtenga un puntaje que pertenezca
+    Basado en la hipótesis de que el resultado generado por el modulo generador obtenga un puntaje similar que la imagen de estilo en el modulo evaluador, 
+    se define una tolerancia del $\pm 20\%$ con respecto al puntaje obtenido por la imagen de estilo, en caso de que el resultado obtenga un puntaje que pertenezca
     a este rango, la imagen es aceptada como resultado final, en caso contrario el generador debe seguir iterando hasta obtener un resultado que cumpla con este requisito.
 
 
 \chapter{Experimentos}
- En este capitulo se exponen los experimentos realizados basados en la solución propuesta en la seccion \ref{sec:solucion}.
- Para ello se realizaron 2 experimentos principales: El primero consiste en crear un modulo de reconocimiento de estilos artisticos realizando ajuste fino sobre una CNN preentrenada
- para el reconocimiento de objetos. En el segundo experimento se realiza el analisis empirico para la elección del numero de iteraciones mediante el criterio de selección propuesto.
+ En este capitulo se exponen los experimentos realizados basados en la solución propuesta en la sección \ref{sec:solucion}.
+ Para ello se realizaron 2 experimentos principales: El primero consiste en crear un modulo de reconocimiento de estilos artísticos realizando ajuste fino sobre una CNN preentrenada
+ para el reconocimiento de objetos. En el segundo experimento se realiza el análisis empírico para la elección del numero de iteraciones mediante el criterio de selección propuesto.
 
 \section{Reconocimiento de estilo}
-  Debido a su buen rendimiento frente a la clasificacion de imagenes, para implementar el clasificador de estilos se decidio utilizar una red neuronal convolucional.
-  Al no existir de forma publica una red entrenada para reconocer estilos artisticos, fue necesario realizar ajuste fino sobre una red neuronal convolucional preentrenada para el reconocimiento de objetos.
-  Para realizar el ajuste fino, es necesario definir la red sobre la cual se realizara, ademas del conjunto de datos que le será provisto a la misma.
-  A lo largo de esta seccion se detallan las caracteristicas de la implementación de este modulo.
+  Debido a su buen rendimiento frente a la clasificación de imágenes, para implementar el clasificador de estilos se decidió utilizar una red neuronal convolucional.
+  Al no existir de forma publica una red entrenada para reconocer estilos artísticos, fue necesario realizar ajuste fino sobre una red neuronal convolucional preentrenada para el reconocimiento de objetos.
+  Para realizar el ajuste fino, es necesario definir la red sobre la cual se realizara, además del conjunto de datos que le será provisto a la misma.
+  A lo largo de esta sección se detallan las características de la implementación de este modulo.
   
   \subsection{Conjunto de datos}
     El conjunto de datos utilizado para en este trabajo, se construye como un subconjunto a partir del conjunto de datos llamado WikiArt \url{https://www.wikiart.org/}.
@@ -1476,11 +1465,11 @@
       \item Definir los 10 principales estilos de los que se dispongan mayor cantidad de obras, enumeradas anteriormente.
       \item Descargar cada una de las obras de arte de todos los estilos seleccionados.
       \item Verificar que la descarga haya sido exitosa y el archivo obtenido este en condiciones para ser utilizado en el proceso.
-      \item Ordenar los archivos segun el estilo al que pertenecen.
+      \item Ordenar los archivos según el estilo al que pertenecen.
     \end{enumerate}
-    Al finalizar este proceso, el conjunto de datos generado queda conformado por 68807 imagenes.
+    Al finalizar este proceso, el conjunto de datos generado queda conformado por 68807 imágenes.
     
-    A continuacion se enumeran los estilos contemplados:
+    A continuación se enumeran los estilos contemplados:
     \begin{enumerate}
       \item Impresionismo  (14433 obras de arte disponibles)
       \item Realismo (13595 obras de arte disponibles)
@@ -1523,35 +1512,35 @@
       Para realizar el ajuste fino, sobre este conjunto de datos generado, se utilizo la arquitectura de la red AlexNet \cite{AlexNet}, 
       reemplazando la ultima capa por una capa que aprenda a reconocer entre los posibles estilos. 
       Los valores con los que se inicializo la red, eran los valores obtenidos al entrenar AlexNet para el reconocimiento de objetos de ImageNet.
-      Para reentrenar la red ajustando los valores para el reconocimiento de estilo, se le proveyo el conjunto de datos generado, y se definio realizar 50000 iteraciones para el ajuste fino.
+      Para reentrenar la red ajustando los valores para el reconocimiento de estilo, se le proveyó el conjunto de datos generado, y se definió realizar 50000 iteraciones para el ajuste fino.
       Para realizar el ajuste fino se utilizó las librerías Caffe y OpenCV en Python, y para el reentrenamiento fue requerido el uso de una GPU GTX 680.
 
   \section{Elección del número de iteraciones empleando el módulo de reconocimiento}
-    Este experimento consiste en realizar un analisis empirico de la evolucion de los puntajes de clasificacion de estilo a medida que aumenta el numero de iteraciones
-    que se ejecuta el modulo de generacion de imagenes.
+    Este experimento consiste en realizar un análisis empírico de la evolución de los puntajes de clasificación de estilo a medida que aumenta el numero de iteraciones
+    que se ejecuta el modulo de generación de imágenes.
     \subsection{Conjunto de datos}
-      Para ejecutar el procedimiento, es necesario disponer de 2 conjuntos de imagenes, uno correspondiente a las imagenes de contenido y otro correspondiente a las imagenes de estilo.
-      Para el conjunto de imagenes de contenido fueron elegidas 5 imagenes, de las cuales 2 son retratos de personas y las 3 restantes son fotografias de paisajes.
-      Con respecto al conjunto de imagenes de estilo, para cada uno de los estilos fueron elegidas 3 imagenes aleatoriamente.
+      Para ejecutar el procedimiento, es necesario disponer de 2 conjuntos de imágenes, uno correspondiente a las imágenes de contenido y otro correspondiente a las imágenes de estilo.
+      Para el conjunto de imágenes de contenido fueron elegidas 5 imágenes, de las cuales 2 son retratos de personas y las 3 restantes son fotografías de paisajes.
+      Con respecto al conjunto de imágenes de estilo, para cada uno de los estilos fueron elegidas 3 imágenes aleatoriamente.
     \subsection{Detalles de implementación}
-      El proceso consistio en aplicar el algoritmo de transferencia de estilo combinando cada una de las fotos del conjunto de contenido con cada una de las fotos del conjunto de estilo,
+      El proceso consistió en aplicar el algoritmo de transferencia de estilo combinando cada una de las fotos del conjunto de contenido con cada una de las fotos del conjunto de estilo,
       y guardando el resultado cada 10 iteraciones, hasta llegar a las 1000 iteraciones para cada uno de los procesos particulares.
-      Ademas para cada combinacion de imagen de estilo e imagen de contenido el algoritmo se ejecuto 2 veces, una comenzando desde la imagen de contenido y otra comenzando desde una imagen de ruido.
-      Finalmente todo el conjunto de imagenes obtenido es evaluado por el modulo de reconocimiento de estilo, que otorga un puntaje de la imagen para cada uno de los estilos considerados.
+      Además para cada combinación de imagen de estilo e imagen de contenido el algoritmo se ejecuto 2 veces, una comenzando desde la imagen de contenido y otra comenzando desde una imagen de ruido.
+      Finalmente todo el conjunto de imágenes obtenido es evaluado por el modulo de reconocimiento de estilo, que otorga un puntaje de la imagen para cada uno de los estilos considerados.
       \subsubsection{Algoritmo de Transferencia de estilo}
-	Existen una gran variedad de implementaciónes de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
+	Existen una gran variedad de implementaciones de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
 	Se decidió basarse en la implementación de Justin Jhonson \cite{Johnson:Neural_Style}, la cual posee el mayor grado de aceptación en la industria.
 	La principal tecnología utilizada en esta implementación es el Framework Torch, que utiliza como lenguaje de programación a Lua.
-	Esta implementacion permite ademas controlar algunas otras variables mediante hiperparametros extras a lo requerido por el algoritmo originalmente, 
+	Esta implementación permite además controlar algunas otras variables mediante hiper-parámetros extras a lo requerido por el algoritmo originalmente, 
 	como por ejemplo el método de optimización a utilizar y tamaño de la imagen generada.
 
     \subsection{Número de iteraciones vs. Puntaje de clasificación}
-      Luego de generar distintas imagenes para cada uno de los estilos, variando entre imagenes de retratos y paisajes como imagenes de contenido, se realizó un analisis
-      de la evolucion de los puntajes obtenidos por estas imagenes, a medida que el numero de iteraciones va aumentando. En esta seccion se presentan algunos casos de ejemplo
-      que permiten ilustrar lo sucedido en la mayoria de los casos del conjunto de datos generado.
+      Luego de generar distintas imágenes para cada uno de los estilos, variando entre imágenes de retratos y paisajes como imágenes de contenido, se realizó un análisis
+      de la evolución de los puntajes obtenidos por estas imágenes, a medida que el numero de iteraciones va aumentando. En esta sección se presentan algunos casos de ejemplo
+      que permiten ilustrar lo sucedido en la mayoría de los casos del conjunto de datos generado.
       
       El primer caso presentado en la figura \ref{fig:caso1_tubingen} es el mas simple, como imagen de estilo se utiliza The Shipwreck of the Minotaur, Joseph Mallord William Turner, 1805 (a),
-      el cual pertenece al Romanticismo, y como imagen de contenido se utiliza una fotografia de un paisaje de la ciudad de Tubingen, Alemania (b).
+      el cual pertenece al Romanticismo, y como imagen de contenido se utiliza una fotografía de un paisaje de la ciudad de Tubingen, Alemania (b).
       En la imagen (c) se puede observar el resultado obtenido partiendo desde una imagen de ruido, luego de 620 iteraciones y en la imagen (d) se puede observar el resultado partiendo desde
       la imagen de contenido, luego de 600 iteraciones.
       La diferencia entre ambos resultados en este caso es sutil, pero al comenzar desde la imagen de contenido, los bordes y contornos de esta, son mas notorios en el resultado
@@ -1561,7 +1550,7 @@
 	  \begin{tabularx}{\textwidth}{@{}cXX@{}}
 	  \begin{tabular}{cc}
 	    \subfloat[Imagen de Estilo: Shipwreck, Turner, 1805]{\includegraphics[height=0.2\textheight]{./img/shipwreck.jpg}}
-	    & \subfloat[Imagen de Contenido: Fotografia de Tubingen]{\includegraphics[height=0.2\textheight]{./img/tubingen.jpg}}\\
+	    & \subfloat[Imagen de Contenido: Fotografía de Tubingen]{\includegraphics[height=0.2\textheight]{./img/tubingen.jpg}}\\
 	    \subfloat[Resultado comenzando desde ruido]{\includegraphics[ height=0.2\textheight]{./img/tubingen_shipwreck_620_random.png}}
 	    & \subfloat[Resultado comenzando desde el contenido]{\includegraphics[height=0.2\textheight]{./img/tubingen_shipwreck_600_image.png}}\\
 	  \end{tabular}
@@ -1569,21 +1558,21 @@
 
 	  \caption{Ejemplos de obras de arte correspondientes a los estilos seleccionados}\label{fig:caso1_tubingen}
 	\end{figure}
-	En cuanto a la evolucion de los puntajes de clasificación, como se puede observar en la figura \ref{fig:puntajes_caso1}, en este caso se cumple con la hipotesis de que el
+	En cuanto a la evolución de los puntajes de clasificación, como se puede observar en la figura \ref{fig:puntajes_caso1}, en este caso se cumple con la hipótesis de que el
 	estilo predicho para el resultado coincide con el estilo de la imagen de estilo (Romanticismo), al partir desde una imagen de ruido, en las primeras 200 iteraciones el
 	clasificador no logra reconocer un claro estilo, pero luego se va normalizando hasta obtener una predicción confiable, ya que la diferencia con los otros estilos es notoria.
 	\begin{figure}[H]
 	  \begin{center}
-	    \subfloat[Evolucion de los puntajes comenzando desde ruido]{\includegraphics[ height=0.35\textheight]{./img/tubingen_shipwreck_random_scores.png}}
+	    \subfloat[Evolución de los puntajes comenzando desde ruido]{\includegraphics[ height=0.35\textheight]{./img/tubingen_shipwreck_random_scores.png}}
 	    %\subfloat[Evolucion de los puntajes comenzando desde contenido]{\includegraphics[height=0.4\textheight]{./img/tubingen_shipwreck_image_scores.png}}\\
 	  \end{center}
-	  \caption{Evolucion de los puntajes}
+	  \caption{Evolución de los puntajes}
 	  \label{fig:puntajes_caso1}
 	\end{figure}
 
-	Como segundo caso de analisis se eligio una situacion en la que la prediccion de la imagen resultante coincide con el estilo de la imagen de estilo provista, si se comienza
+	Como segundo caso de análisis se eligió una situación en la que la predicción de la imagen resultante coincide con el estilo de la imagen de estilo provista, si se comienza
 	el procedimiento desde la imagen de ruido, pero esto no ocurre si se comienza desde la imagen de contenido.
-	Para este caso exhibido en la figura \ref{fig:caso2_scream}, como imagen de estilo se utilizo El grito, de Edward Munch, 1893 correspondiente al Expresionismo (a) y como imagen de contenido una fotografia del Golden Gate, un
+	Para este caso exhibido en la figura \ref{fig:caso2_scream}, como imagen de estilo se utilizo El grito, de Edward Munch, 1893 correspondiente al Expresionismo (a) y como imagen de contenido una fotografía del Golden Gate, un
 	icono de la ciudad de San Francisco, Estados Unidos (b). En la imagen (c) se muestra el resultado partiendo desde ruido y en la (d) desde la imagen de contenido, ambas luego de
 	540 iteraciones, desde el aspecto visual estos resultados son muy similares, pero para el clasificador son muy distintos como luego de muestra en la figura \ref{fig:puntajes_caso2}.
 
@@ -1592,7 +1581,7 @@
 	  \begin{tabularx}{\textwidth}{@{}cXX@{}}
 	  \begin{tabular}{cc}
 	    \subfloat[Imagen de Estilo: The Scream]{\includegraphics[height=0.2\textheight]{./img/the_scream.jpg}}
-	    & \subfloat[Imagen de Contenido: Fotografia del Golden Gate]{\includegraphics[height=0.2\textheight]{./img/golden_gate.jpg}}\\
+	    & \subfloat[Imagen de Contenido: Fotografía del Golden Gate]{\includegraphics[height=0.2\textheight]{./img/golden_gate.jpg}}\\
 	    \subfloat[Resultado comenzando desde ruido]{\includegraphics[ height=0.2\textheight]{./img/golden_gate_the_scream_540_random.png}}
 	    & \subfloat[Resultado comenzando desde el contenido]{\includegraphics[height=0.2\textheight]{./img/golden_gate_the_scream_540_image.png}}\\
 	  \end{tabular}
@@ -1600,58 +1589,59 @@
 	  \caption{Ejemplos de obras de arte correspondientes a los estilos seleccionados}\label{fig:caso2_scream}
 	\end{figure}
 
-      Al analizar la evolucion de los puntajes predichos por el clasificador nos encontramos con que el puntaje maximo de clasificación varia dependiendo de la imagen
-      en la cual comienza el proceso de tranferencia de estilo, como se puede ver en la figura \ref {fig:puntajes_caso2}, en el grafico (a) se muestra la evolucion de los puntajes
+      Al analizar la evolución de los puntajes predichos por el clasificador nos encontramos con que el puntaje máximo de clasificación varia dependiendo de la imagen
+      en la cual comienza el proceso de transferencia de estilo, como se puede ver en la figura \ref {fig:puntajes_caso2}, en el gráfico (a) se muestra la evolución de los puntajes
       partiendo de la imagen de ruido, que luego de las 200 iteraciones se termina normalizando al Expresionismo como predicción, lo cual coincide con la imagen de estilo provista.
-      Sin embargo, en el grafico (b) se muestra la evolucion de los puntajes de predicción partiendo de la imagen de contenido, en la cual se exhibe al Simbolismo como prediccion
+      Sin embargo, en el gráfico (b) se muestra la evolución de los puntajes de predicción partiendo de la imagen de contenido, en la cual se exhibe al Simbolismo como predicción
       mayoritaria.
 
       \begin{figure}[H]
 	\begin{center}
-	  \subfloat[Evolucion de los puntajes comenzando desde ruido]{\includegraphics[height=0.4\textheight]{./img/golden_gate_thescream_random_scores.png}}\\
-	  \subfloat[Evolucion de los puntajes comenzando desde contenido]{\includegraphics[height=0.4\textheight]{./img/golden_gate_thescream_image_scores.png}}\\
+	  \subfloat[Evolución de los puntajes comenzando desde ruido]{\includegraphics[height=0.4\textheight]{./img/golden_gate_thescream_random_scores.png}}\\
+	  \subfloat[Evolución de los puntajes comenzando desde contenido]{\includegraphics[height=0.4\textheight]{./img/golden_gate_thescream_image_scores.png}}\\
 	\end{center}
-	\caption{Evolucion de los puntajes}
+	\caption{Evolución de los puntajes}
 	\label{fig:puntajes_caso2}
       \end{figure}
 
-    \subsection{Validacion de hipotesis para criterio de seleccion}
-      Luego se realizar un analisis en varios graficos como los presentados en la seccion anterior se concluyo que la hipotesis sobre que el el puntaje de clasificacion de la imagen
-      de estilo y el puntaje de la imagen generada coinciden es falsa, debido a que esto no ocurre en todos los casos analizados, dependiendo de la imagen de contenido el estilo
-      que obtiene mayor puntaje de clasificacion puede ser distinto al estilo de la imagen de estilo, ya que la imagen de contenido puede influir en el puntaje de clasificacion de estilo
+    \subsection{Validación de hipótesis para criterio de selección}
+      Luego se realizar un análisis en varios gráficos como los presentados en la sección anterior se concluye que la hipótesis sobre que el el puntaje de clasificación de la imagen
+      de estilo y el puntaje de la imagen generada coinciden es falsa. Esto no ocurre en todos los casos analizados, dependiendo de la imagen de contenido el estilo
+      que obtiene mayor puntaje de clasificación puede ser distinto al estilo de la imagen de estilo. 
+      Dicha situación ocurre dado que la imagen de contenido puede influir en el puntaje de clasificación de estilo
       de la imagen generada, aunque en mucho menor proporción respecto a la imagen de estilo. Este resultado avala la idea que presenta Gatys acerca de que el estilo y el contenido de una
       imagen no son absolutamente separables.
       
-      Debido a esto, el criterio de seleccion que se definio para elegir la imagen optima fue el siguiente: el estilo objetivo, en lugar de ser el estilo correspondiente a la imagen de estilo
-      provista para la transferencia de estilo, se definio como el estilo que tiene asignada una mayor
-      probabilidad de reconocimiento luego de 1000 iteraciones. Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo
-      supera al puntaje del resto de los estilos. La imagen optima elegida es la correspondiente al numero de iteraciones medio del intervalo donde el estilo objetivo es el maximo. En caso de que haya mas de un de
-      un intervalo que cumpla con este requisito, se devuelve una imagen optima de cada intervalo como posibles imagenes optimas para que el usuario elija cual es la optima segun su criterio
+      Debido a esto, el criterio de selección que se definió para elegir la imagen óptima fue el siguiente: el estilo objetivo, en lugar de ser el estilo correspondiente a la imagen de estilo
+      provista para la transferencia de estilo, se definió como el estilo que tiene asignada una mayor probabilidad de reconocimiento luego de 1000 iteraciones. 
+      Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo
+      supera al puntaje del resto de los estilos. La imagen óptima elegida es la correspondiente al numero de iteraciones medio del intervalo donde el estilo objetivo es el máximo. En caso de que haya mas de un de
+      un intervalo que cumpla con este requisito, se devuelve una imagen óptima de cada intervalo como posibles imágenes óptimas para que el usuario elija cual es la óptima según su criterio
       cualitativo.
 
 
 \chapter{Conclusiones, Perspectivas y trabajos a futuro}
   \section{Conclusiones}
     En este trabajo se presenta la idea de evaluar los resultados generados por el algoritmo de transferencia de Gatys et al. \cite{Gatys:Neural_Style}, mediante una red neuronal que 
-    clasifica estilos artisticos. Esta red inicialmente habia sido entrenada para clasificacion de objetos y luego mediante ajuste fino se reentreno para clasificar estilos.
-    Al establecer una metrica cuantitativa de evaluación, el algoritmo libera al usuario de la responsabilidad de definir el numero de iteraciones, uno de los principales factores 
+    clasifica estilos artísticos. Esta red inicialmente había sido entrenada para clasificación de objetos y luego mediante ajuste fino se reentreno para clasificar estilos.
+    Al establecer una métrica cuantitativa de evaluación, el algoritmo libera al usuario de la responsabilidad de definir el numero de iteraciones, uno de los principales factores 
     de influencia en la imagen generada.
     
     A pesar de que los resultados obtenidos no fueron los esperados respecto al criterio especifico de corte, se observo que evaluar la imagen generado con el clasificador de estilos
     es un buen indicio de la calidad de la misma. Cuando los puntajes obtenidos por la imagen son bajos, visualmente, no es una imagen de calidad. No obstante, cuando los puntajes
     van aumentando la imagen suele ser cualitativamente aceptada. Si el puntaje a lo largo de las iteraciones entra en una meseta, tampoco se logran visualizar grandes cambios al cabo 
-    de las mismas. Esto indica que en cierta forma, la evaluacion cualitativa logro ser plasmada en la metrica cuantitativa definida.
+    de las mismas. Esto indica que en cierta forma, la evaluación cualitativa logro ser plasmada en la métrica cuantitativa definida.
   
   \section{Trabajos a futuro}
     \FIXME{ \url{https://dailyvisionblog.wordpress.com/2016/07/31/notes-on-texture-networks-feed-forward-synthesis-of-textures-and-stylized-images-and-style-transfer-related-papers/}}
     \subsection{Reconocimiento de Estilos}
-      Basandose en la misma idea de entrenar una red convolucional para reconocer solo 10 estilos, se podria extender esto a todos los estilos y utilizando todas las imagenes disponibles
+      Basándose en la misma idea de entrenar una red convolucional para reconocer solo 10 estilos, se podría extender esto a todos los estilos y utilizando todas las imágenes disponibles
       en WikiArt.
-    \subsection{Automatizacion de hiperparámetros}
+    \subsection{Automatización de hiper-parámetros}
       Se podría realizar una especie de predefinición del número de iteraciones que requiere cada estilo, ejecutando el algoritmo una gran cantidad de veces y definiendo este valor
-      estadisticamente, aunque esto puede llegar a no funciónar correctamente en todos los casos ya que dependiendo de la imagen de contenido, el estilo objetivo podria variar.
-    \subsection{Compresion de CNN}
-      A partir del articulo presentado por Gatys, se fueron publicando una serie de articulos que presentaban mejoras u optimizaciones al algortimo, ademas de buscar comprimir la red,
+      estadísticamente, aunque esto puede llegar a no funcionar correctamente en todos los casos ya que dependiendo de la imagen de contenido, el estilo objetivo podría variar.
+    \subsection{Compresión de CNN}
+      A partir del articulo presentado por Gatys, se fueron publicando una serie de artículos que presentaban mejoras u optimizaciones al algoritmo, además de buscar comprimir la red,
       para que una vez entrenada en un dispositivo de gran capacidad de computo, luego pueda ser insertado y ejecutado para transferir estilo en dispositivo menor como lo son los smartphones.
       Por ejemplo se lograron entrenar modelos que transfieran el estilo de una obra de arte en particular, que puede ser ejecutado en un smartphone.
     \subsection{Transferencia de Estilos Fotorrealista}
