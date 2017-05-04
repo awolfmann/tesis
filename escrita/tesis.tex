@@ -1199,7 +1199,7 @@
 
 \chapter{Algoritmo de Transferencia de estilo} \label{chapter:style_transfer}
     \section{Introducción}
-      En este capitulo se desarrollan los contenidos específicos relativos al Algoritmo de Transferencia de Estilos artísticos a fotografías. 
+      En este capítulo se desarrollan los contenidos específicos relativos al Algoritmo de Transferencia de Estilos artísticos a fotografías. 
       El algoritmo elegido para tal fin es el que presenta Gatys et al. \cite{Gatys:Neural_Style}. 
       
       En lo que al arte respecta, los humanos han desarrollado la capacidad de crear experiencias visuales únicas componiendo una compleja interacción entre el contenido y el estilo de una imagen.
@@ -1209,18 +1209,20 @@
       para separar y recombinar el contenido y el estilo de imágenes arbitrarias, proporcionando un algoritmo para la creación de imágenes artísticas.
       
       La publicación de este artículo, ha incentivado a muchos investigadores del área a continuar desarrollando estas ideas, a tal punto que hasta el día de hoy se siguen publicando
-      avances el tema, a gran velocidad \cite{Johnson2016Perceptual, UlyanovVL16, luan2017deep} entre otros.
+      avances el tema, a gran velocidad por ejemplo \cite{Johnson2016Perceptual, UlyanovVL16, luan2017deep} entre otros.
 
 
     \section{Contexto}
       Inicialmente, Gatys et al. publica un articulo para sintetizar texturas naturales utilizando Redes Neuronales Convolucionales entrenadas para el reconocimiento de 
       objetos \cite{Gatys:Texture_Synthesis}. 
-      En el contexto del procesamiento de imágenes el concepto de textura hace referencia a imágenes digitales que se componen por elementos repetitivos a lo largo de la misma.
-      La síntesis de texturas es el proceso de construir algoritmicamente una imagen digital de grandes dimensiones basándose en una muestra pequeña, respetando la estructura de su contenido. 
-      La síntesis de texturas puede ser utilizada para rellenar agujeros en imágenes (como en los algoritmos de restauración) y la expansión de pequeñas imágenes.
+      En el contexto del procesamiento de imágenes, el concepto de textura hace referencia a imágenes digitales que se componen por elementos repetitivos a lo largo de la 
+      misma.
+      La síntesis de texturas es el proceso de construir algoritmicamente una imagen digital de grandes dimensiones basándose en una muestra pequeña, respetando la 
+      estructura de su contenido. 
+      La misma puede ser utilizada para rellenar agujeros en imágenes (como en los algoritmos de restauración) y la expansión de pequeñas imágenes.
       Los algoritmos de síntesis de texturas tienen como objetivo principal que la imagen generada sea lo mas parecida posible a la imagen de muestra que están sintetizando.
      
-      En dicho artículo, una textura es definida como la correlación entre los distintos mapas de características de cada una de las capas de la red. Aplicando este enfoque
+      En el artículo de Gatys et al., una textura es definida como la correlación entre los distintos mapas de características de cada una de las capas de la red. Aplicando este enfoque
       logra obtener resultados muy interesantes como se muestran en la figura \ref{fig:textures}. En la parte inferior de la figura se observa la imagen de muestra y en la parte superior
       se ilustra la reconstrucción de la imagen a partir de los mapas de características de una de las ultimas capas de la CNN. Además, en la ultima columna se exhibe la representación
       de una imagen que no corresponde a una textura, para dar una mejor intuición de como se representa la información de la imagen.
@@ -1256,7 +1258,8 @@
 
 
     \section{Síntesis} \label{sec:sintesis}
-      El algoritmo desarrollado por Gatys et al. es, conceptualmente un algoritmo de transferencia de texturas que utiliza mapas de características de redes neuronales convolucionales. 
+      El algoritmo desarrollado por Gatys et al. es, conceptualmente un algoritmo de transferencia de texturas que utiliza mapas de características de redes neuronales 
+      convolucionales. 
       %Dado que la modelización de la textura se basa en estas mismas representaciones, el método de transferencia de estilo se reduce a un problema
       %de optimización en una única red neuronal. Las imágenes son generadas minimizando el valor de la función de error entre los mapas de características de las imágenes de entrada 
       %(imagen de estilo e imagen de contenido) y los mapas de característica de la imagen de salida.
@@ -1312,8 +1315,8 @@
       De esta forma, tanto el estilo como el contenido de la imagen generada se va aproximando al estilo y al contenido de las respectivas imágenes de entrada.
       
       Al ser un algoritmo iterativo, el numero de iteraciones determina el grado de similitud entre la imagen generada con las imágenes elegidas para capturar el contenido y el estilo. 
-      La gran influencia de dicho hiper-parámetro radica en que el mismo determina cuánto se minimizará la función de pérdida mediante el método de descenso por el gradiente.
-      A medida que la cantidad de iteraciones es mayor, el valor obtenido por la función de error se irá reduciendo.
+      La gran influencia de dicho hiper-parámetro radica en que el mismo determina durante cuántos ciclos se  ejecutará la minimización de la función de pérdida mediante el método de descenso por el gradiente.
+      Usualmente, a medida que la cantidad de iteraciones es mayor, el valor obtenido por la función de error se irá reduciendo.
       Además, como hemos visto en la sección \ref{sec:optimizacion}, dicho método requiere de otro hiper-parámetro llamado tasa de aprendizaje que define el tamaño de cada 
       paso en la iteración.
       Los hiper-parámetros requeridos por el método de optimización aquí mencionado, son solo algunos de los hiper-parámetros exigidos por el algoritmo, en la siguiente sección se mencionan los demás.
@@ -1428,7 +1431,7 @@
 	 la ubicación de las capas en la jerarquía de la red, definen distintas experiencias visuales. Como para la representación de estilo se calcula la correlación entre las capas elegidas,
 	 elegir capas intercaladas dentro de toda la jerarquía de la red otorgan una experiencia visual suave y continua.
 	 Con respecto a los pesos, por lo general a todas las capas elegidas se les asignada el mismo valor, y a las que no fueron elegidas se les asigna 0.
-	 \item Capa de la red para la representación del contenido: En la figura \ref{fig:content_repr_layers} se analiza la elección de la capa $conv2_2$ y la capa $conv4_2$.
+	 \item Capa de la red para la representación del contenido: En la figura \ref{fig:content_repr_layers} se analiza la elección de la capa $conv2\_2$ y la capa $conv4\_2$.
 	 Al elegir la capa inferior, gran parte de la información detallada de los píxeles en la fotografía y en la imagen generada coinciden (figura \ref{fig:content_repr_layers} al medio).
 	 En contraste, al elegir la capa superior, la estructura fina de la imagen se altera, en concordancia con el estilo (figura \ref{fig:content_repr_layers} abajo).
 	 \begin{figure}[h]
@@ -1469,29 +1472,31 @@
   \section{Elección Automática de hiper-parámetros para Transferencia de estilo}
     \subsection{Introducción} \label{sec:descripcion}
       Basado en el algoritmo de transferencia de estilo se pueden obtener resultados muy interesantes. Sin embargo, como se menciona en la sección \ref{sec:hiperparametros}
-      es necesario definir una serie de parámetros previa a la ejecución del mismo. Entre estos, se encuentra el número de iteraciones, el cual fue seleccionado como el principal
-      hiper-parámetro a automatizarse en este trabajo.
+      es necesario definir una serie de parámetros previa a la ejecución del mismo. 
+      Entre ellos, el número de iteraciones se ha identificado como el hiper-parámetro de mayor importancia en cuanto a la calidad visual de resultado. 
+      Es por ello que ha sido seleccionado como el principal hiper-parámetro a automatizarse en este trabajo.
+      
+      En lo que respecta a las obras de arte, al ser un campo donde la subjetividad tiene gran poder, las métricas suelen ser cualitativas generalmente. 
+      Por lo tanto, para poder definir el criterio de aceptación de un resultado generado, es necesario lograr definir una métrica cuantitativa que plasme en algún sentido este tipo de 
+      métricas cualitativas. De esta manera, el algoritmo puede definir si aceptar un resultado generado, basándose en el valor obtenido por dicha métrica.
       
       El criterio de elección de este hiper-parámetro termina siendo muy influyente en el resultado final. A medida que el número de iteraciones
       aumenta, el resultado generado se va aproximando cada vez a las representaciones de estilo y contenido de las respectivas imágenes de entrada. 
       No obstante, este numero influye notablemente en el tiempo de ejecución requerido por el algoritmo. 
-      El objetivo principal de este trabajo el lograr obtener un resultado aceptado en la menor cantidad de iteraciones posible, reduciendo de esta forma el tiempo de ejecución 
-      del algoritmo.
+      El objetivo principal de este trabajo realizar un analisis acerca de como se comporta el resultado del algoritmo frente a variaciones en el número de iteraciones. 
+      De modo que, en caso de detectar una regularidad en el comportamiento del mismo, se podría lograr obtener un resultado aceptado en la menor cantidad de iteraciones 
+      posible, reduciendo asi el tiempo de ejecución del algoritmo.
 
-      En lo que respecta a las obras de arte, al ser un campo donde la subjetividad tiene gran poder, las métricas suelen ser cualitativas generalmente. 
-      Por lo tanto, para poder definir el criterio de aceptación de un resultado generado, es necesario lograr definir una métrica cuantitativa que plasme en algún sentido este tipo de 
-      métricas cualitativas. De esta forma, el algoritmo puede definir si aceptar un resultado generado, basándose en el valor obtenido por dicha métrica.
-
-    \subsection{Solución propuesta \label{sec:solucion}}
-      En este trabajo se plantea definir un criterio de aceptación, de carácter cuantitativo, de forma tal que el algoritmo pueda utilizar el valor obtenido por esta métrica,
-      como criterio de parada. Si el valor obtenido por la imagen generada se aproxima al valor esperado para ser aceptado, entonces el algoritmo detiene la ejecución y retorna
-      como salida esta misma imagen. En caso contrario, el algoritmo continua iterando hasta obtener una imagen cuyo valor se aproxime al esperado.
-      De esta forma el algoritmo evita requerir como hiper-parámetro el número de iteraciones que debe ejecutarse, liberando al usuario de esta responsabilidad.
-      La idea consiste en generar una imagen mediante el algoritmo anteriormente presentado, clasificar el estilo de la imagen generada y en base al puntaje obtenido en la 
-      clasificación, se decide si continuar o no.
-      La solución consta de 3 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo), otro módulo encargado de
-      evaluar la imagen generada, y un tercer modulo que determina, en base al puntaje de clasificación obtenido si es necesario continuar el proceso de generación, como se puede
-      observar en la figura \ref{fig:diagrama}.
+    \subsection{Solución propuesta} \label{sec:solucion}
+      En este trabajo se plantea definir un criterio de aceptación, de carácter cuantitativo, como criterio de parada del algoritmo iterativo. 
+      Si la imagen generada cumple con este criterio, entonces el algoritmo detiene la ejecución y retorna como salida esta misma imagen. 
+      En caso contrario, el algoritmo continua iterando hasta obtener una imagen cuyo valor se aproxime al esperado.
+      De esta forma, el algoritmo evita requerir como hiper-parámetro el número de iteraciones que debe ejecutarse, liberando al usuario de esta responsabilidad.
+      La idea consiste en generar una imagen mediante el algoritmo iterativo anteriormente presentado en \ref{sec:sintesis}, clasificar el estilo de la imagen 
+      generada y en base al puntaje obtenido en la clasificación, se decide si continuar o no.
+      La solución consta de 3 módulos principales: un módulo encargado de la generación de la imagen (a partir de una imagen de contenido y otra de estilo), otro módulo 
+      encargado de evaluar la imagen generada. Finalmente, un tercer módulo que determina en base al puntaje de clasificación obtenido, si es necesario continuar el 
+      proceso de generación, como se puede observar en la figura \ref{fig:diagrama}.
 
       \begin{figure}[h]
 	\begin{center}
@@ -1502,30 +1507,32 @@
       \end{figure}
 
       
-      El módulo de generación de imágenes implementa el algoritmo propuesto por Gatys et al. \cite{Gatys:Neural_Style}, para la transferencia de estilo, descripto a lo largo del 
-      capitulo \ref{chapter:style_transfer}. 
-      Este algoritmo requiere como entrada una imagen de estilo, una imagen de contenido y una serie de hiper-parámetros mencionados en la sección \ref{sec:hiperparametros}.
-      Para el caso de este modulo, el único hiper-parámetro que permanece variable es el numero de iteraciones, prefijando lo demás, para poder analizar el comportamiento
-      en detalle del mismo.
-      La salida del modulo es una imagen generada donde el contenido se acerca a la imagen de contenido y el estilo se acerca a la imagen de estilo, a medida
-      que va aumentando el numero de iteraciones la distancia entre las imágenes de entrada y la imagen generada se va minimizando. 
+      El módulo de generación de imágenes implementa el algoritmo propuesto por Gatys et al. \cite{Gatys:Neural_Style}, para la transferencia de estilo, descripto a lo largo 
+      de este capítulo. 
+      Dicho algoritmo requiere como entrada una imagen de estilo, una imagen de contenido y una serie de hiper-parámetros mencionados en la sección \ref{sec:hiperparametros}.
+      Para el caso de este módulo, se realizará un analisis acerca de la variacion del hiperparámetro correspondiente al número de iteraciones, comenzando ya sea desde una imagen
+      de ruido blanco o desde la imagen de contenido. El resto de los hiperparámetros serán fijos, para poder analizar el comportamiento en detalle del mismo.
+      La salida del módulo es una imagen generada donde el contenido se acerca a la imagen de contenido y el estilo se acerca a la imagen de estilo. 
+      A medida que aumenta el número de iteraciones, el valor obtenido por la función de error definida en \eqref{eq:objetivo}, entre las imágenes de entrada y la imagen 
+      generada se irá reduciendo. 
 
-      En lo que respecta al modulo de evaluación, como se mencionó en Sec.~\ref{sec:descripcion}, una de las limitaciones del proceso de transferencia de estilo es que la evaluación de
-      la imagen resultante es de carácter cualitativo. A fin de establecer una medida cuantitativa y así controlar el resultado de la generación de
-      manera más objetiva, se propone definir un clasificador. Este clasificador se encarga de determinar a que el estilo artístico pertenece una imagen, brindando un puntaje 
-      de clasificación para cada estilo.
+      En lo que respecta al módulo de evaluación, como se mencionó en Sec.~\ref{sec:descripcion}, una de las limitaciones del proceso de transferencia de estilo 
+      es que la evaluación de la imagen resultante es de carácter cualitativo.
+      A fin de establecer una medida cuantitativa y así controlar el resultado de la generación de manera más objetiva, se propone definir un clasificador. 
+      Este clasificador se encarga de determinar a que el estilo artístico pertenece una imagen, brindando un puntaje  de clasificación para cada estilo.
       De esta forma la imagen se evalúa cuantitativamente según el puntaje obtenido en el estilo objetivo.
       La entrada de este modulo es la imagen generada y la salida es un vector de puntajes de clasificación obtenidos por la imagen para cada uno de los estilos.
 
-      A partir de la idea de definir un clasificador de estilos, se realizó una investigación de los posibles métodos para lograr esto.
-      Luego de la misma, se decidió basarse en el algoritmo presentado en \cite{Karayev:Style_Recognition}, el cual involucra técnicas de aprendizaje profundo.
-      Este articulo plantea que los vectores de características obtenidos de Redes Neuronales Convolucionales entrenadas para el reconocimiento de objetos, son muy útiles a la hora de
-      reconocer estilos. Aunque muchos estilos parecieran ser principalmente definidos por las elecciones de colores, los vectores de características de las CNN, proveen mucha mas información
+      Con la idea de definir un clasificador de estilos, se decidió basarse en el algoritmo presentado en \cite{Karayev:Style_Recognition}, el cual involucra técnicas 
+      de aprendizaje profundo.
+      Este articulo plantea que los vectores de características obtenidos de CNNs entrenadas para el reconocimiento de objetos, son muy útiles 
+      a la hora de reconocer estilos. 
+      Aunque muchos estilos parecieran ser principalmente definidos por las elecciones de colores, los vectores de características de las CNNs, proveen mucha mas información
       que los vectores obtenidos a partir de histogramas de colores por ejemplo.
-      Basado en esta idea, decidimos implementar una versión simplificada que consiste en realizar ajuste fino sobre una Red Neuronal Convolucional preentrenada para el reconocimiento de objetos.
+      Basado en esta idea, decidimos implementar una versión simplificada que consiste en realizar ajuste fino sobre una CNN preentrenada para el reconocimiento de objetos.
       De esta forma se van realizando evaluaciones de la imagen de salida obtenido por el algoritmo generador contra la predicción que realiza el modelo reentrenado para el reconocimiento de estilos.
 
-      Finalmente, el modulo de selección, es el encargado de determinar si e se acepta la imagen obtenida en la iteración actual o es necesario seguir iterando. 
+      Finalmente, el módulo de selección, es el encargado de determinar si se acepta la imagen obtenida en la iteración actual o es necesario seguir iterando. 
       La entrada de este modulo es el vector de puntajes de clasificación calculados por el modulo generador, y la salida es un valor binario indicando si se acepta o no la imagen.
       
       El criterio de selección que se propone para elegir la imagen óptima es el siguiente:
@@ -1540,39 +1547,37 @@
  para el reconocimiento de objetos. En el segundo experimento se realiza el análisis empírico para la elección del numero de iteraciones mediante el criterio de selección propuesto.
 
 \section{Reconocimiento de estilo}
-  Debido a su buen rendimiento frente a la clasificación de imágenes, para implementar el clasificador de estilos se decidió utilizar una red neuronal convolucional.
-  Al no existir de forma publica una red entrenada para reconocer estilos artísticos, fue necesario realizar ajuste fino sobre una red neuronal convolucional preentrenada para el reconocimiento de objetos.
-  Para realizar el ajuste fino, es necesario definir la red sobre la cual se realizara, además del conjunto de datos que le será provisto a la misma.
+  Para implementar el clasificador de estilos se decidió utilizar una CNN, debido a su buen rendimiento en la clasificación de imágenes.
+  Al no existir de forma pública una red entrenada para reconocer estilos artísticos, fue necesario realizar ajuste fino sobre una CNN preentrenada para el 
+  reconocimiento de objetos.
+  Para realizar el ajuste fino, es necesario definir la red sobre la cual se realizará, además del conjunto de datos que le será provisto a la misma.
   A lo largo de esta sección se detallan las características de la implementación de este modulo.
   
   \subsection{Conjunto de datos}
-    El conjunto de datos utilizado para en este trabajo, se construye como un subconjunto a partir del conjunto de datos llamado WikiArt \url{https://www.wikiart.org/}.
-    Este conjunto proviene de un proyecto de disponibilidad publica que tiene como objetivo principal hacer accesible el mundo del arte a cualquier persona y en cualquier lugar.
+    El conjunto de datos utilizado para en este trabajo, se construye como un subconjunto a partir de WikiArt \footnote{\url{https://www.wikiart.org/}}.
+    Este conjunto proviene de un proyecto de disponibilidad pública que tiene como objetivo principal hacer accesible el mundo del arte a cualquier persona y en cualquier lugar.
     WikiArt, actualmente cuenta con unas 150.000 obras de arte, de 2.500 artistas aproximadamente. 
-    La obras contenidas en este conjunto se encuentran en museos, universidades y otros edificios civiles de más de 70 países. Aunque la mayoría de estas obras de arte no está en la vista pública.
+    La obras contenidas en este conjunto se encuentran en museos, universidades y otros edificios civiles de más de 70 países. 
+    Aunque la mayoría de estas obras de arte no está disponible a la vista pública.
     
-    Para construir el conjunto, se decidió utilizar un subconjunto de los 10 estilos que mayor cantidad de obras de arte disponen. 
-    Luego, es necesario una etapa de recolección la cual consta de los siguientes pasos:
-    \begin{enumerate}
-      \item Definir los 10 principales estilos de los que se dispongan mayor cantidad de obras, enumeradas anteriormente.
-      \item Descargar cada una de las obras de arte de todos los estilos seleccionados.
-      \item Verificar que la descarga haya sido exitosa y el archivo obtenido este en condiciones para ser utilizado en el proceso.
-      \item Ordenar los archivos según el estilo al que pertenecen.
-    \end{enumerate}
+    Para construir el conjunto, se utiliza un subconjunto de los 10 estilos que mayor cantidad de obras de arte disponen. 
+    Luego, se ejecuta una etapa de recolección de datos. 
+    Inicialmente es necesario definir los 10 principales estilos, para lo cual se eligen aquellos que dispongan de mayor cantidad de obras.
+    Posteriormente se debe adquirir localmente los archivos de los estilos elegidos, verificando que esten en condiciones de ser utilizados.
     Al finalizar este proceso, el conjunto de datos generado queda conformado por 68807 imágenes.
     
     A continuación se enumeran los estilos contemplados:
     \begin{enumerate}
-      \item Impresionismo  (14433 obras de arte disponibles)
-      \item Realismo (13595 obras de arte disponibles)
-      \item Romanticismo (10563 obras de arte disponibles)
-      \item Expresionismo (9747 obras de arte disponibles)
-      \item Post Impresionismo (7226 obras de arte disponibles)
-      \item Surrealismo (6636 obras de arte disponibles)
-      \item Modernismo (5969 obras de arte disponibles)
-      \item Barroco (5156 obras de arte disponibles)
-      \item Simbolismo (4689 obras de arte disponibles)
-      \item Neo Clasisimo (3306 obras de arte disponibles)
+      \item Impresionismo  (14433 imágenes disponibles)
+      \item Realismo (13595 imágenes disponibles)
+      \item Romanticismo (10563 imágenes disponibles)
+      \item Expresionismo (9747 imágenes disponibles)
+      \item Post Impresionismo (7226 imágenes disponibles)
+      \item Surrealismo (6636 imágenes disponibles)
+      \item Modernismo (5969 imágenes disponibles)
+      \item Barroco (5156 imágenes disponibles)
+      \item Simbolismo (4689 imágenes disponibles)
+      \item Neo Clasisimo (3306 imágenes disponibles)
     \end{enumerate}
       A modo de ejemplo, en la figura \ref{mosaico_estilos} se muestra una imagen correspondiente a cada uno de los estilos elegidos.
 	\begin{figure}
@@ -1613,7 +1618,7 @@
     \subsection{Conjunto de datos}
       Para ejecutar el procedimiento, es necesario disponer de 2 conjuntos de imágenes, uno correspondiente a las imágenes de contenido y otro correspondiente a las imágenes de estilo.
       Para el conjunto de imágenes de contenido fueron elegidas 5 imágenes, de las cuales 2 son retratos de personas y las 3 restantes son fotografías de paisajes.
-      Con respecto al conjunto de imágenes de estilo, para cada uno de los estilos fueron elegidas 3 imágenes aleatoriamente.
+      Con respecto al conjunto de imágenes de estilo, para cada uno de los estilos fueron elegidas 3 imágenes de forma aleatoria.
     \subsection{Detalles de implementación}
       El proceso consistió en aplicar el algoritmo de transferencia de estilo combinando cada una de las fotos del conjunto de contenido con cada una de las fotos del conjunto de estilo,
       y guardando el resultado cada 10 iteraciones, hasta llegar a las 1000 iteraciones para cada uno de los procesos particulares.
@@ -1622,17 +1627,17 @@
       \subsubsection{Algoritmo de Transferencia de estilo}
 	Existen una gran variedad de implementaciones de código abierto que implementan el algoritmo de transferencia de estilo definido por Gatys.
 	Se decidió basarse en la implementación de Justin Jhonson \cite{Johnson:Neural_Style}, la cual posee el mayor grado de aceptación en la industria.
-	La principal tecnología utilizada en esta implementación es el Framework Torch, que utiliza como lenguaje de programación a Lua.
+	La principal tecnología utilizada en esta implementación es el entorno llamado Torch, ampliamente utilizado para cuestiones relacionadas con aprendizaje profundo.
 	Esta implementación permite además controlar algunas otras variables mediante hiper-parámetros extras a lo requerido por el algoritmo originalmente, 
 	como por ejemplo el método de optimización a utilizar y tamaño de la imagen generada.
 
-    \subsection{Número de iteraciones vs. Puntaje de clasificación}
+    \subsection{Análisis del comportamiento frente a variaciones en el número de iteraciones }
       Luego de generar distintas imágenes para cada uno de los estilos, variando entre imágenes de retratos y paisajes como imágenes de contenido, se realizó un análisis
       de la evolución de los puntajes obtenidos por estas imágenes, a medida que el numero de iteraciones va aumentando. En esta sección se presentan algunos casos de ejemplo
       que permiten ilustrar lo sucedido en la mayoría de los casos del conjunto de datos generado.
       
       El primer caso presentado en la figura \ref{fig:caso1_tubingen} es el mas simple, como imagen de estilo se utiliza The Shipwreck of the Minotaur, Joseph Mallord William Turner, 1805 (a),
-      el cual pertenece al Romanticismo, y como imagen de contenido se utiliza una fotografía de un paisaje de la ciudad de Tubingen, Alemania (b).
+      el cual pertenece al Romanticismo, y como imagen de contenido se utiliza una fotografía de un paisaje de la ciudad de T\"{u}bingen, Alemania (b).
       En la imagen (c) se puede observar el resultado obtenido partiendo desde una imagen de ruido, luego de 620 iteraciones y en la imagen (d) se puede observar el resultado partiendo desde
       la imagen de contenido, luego de 600 iteraciones.
       La diferencia entre ambos resultados en este caso es sutil, pero al comenzar desde la imagen de contenido, los bordes y contornos de esta, son mas notorios en el resultado
@@ -1696,7 +1701,7 @@
 	\label{fig:puntajes_caso2}
       \end{figure}
 
-    \subsection{Validación de hipótesis para criterio de selección}
+    \subsubsection{Análisis del criterio de selección}
       Luego se realizar un análisis en varios gráficos como los presentados en la sección anterior se concluye que la hipótesis sobre que el el puntaje de clasificación de la imagen
       de estilo y el puntaje de la imagen generada coinciden es falsa. Esto no ocurre en todos los casos analizados, dependiendo de la imagen de contenido el estilo
       que obtiene mayor puntaje de clasificación puede ser distinto al estilo de la imagen de estilo. 
