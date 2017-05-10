@@ -1640,6 +1640,8 @@
       el cual pertenece al Romanticismo, y como imagen de contenido se utiliza una fotografía de un paisaje de la ciudad de T\"{u}bingen, Alemania (b).
       En la imagen (c) se puede observar el resultado obtenido partiendo desde una imagen de ruido, luego de 620 iteraciones y en la imagen (d) se puede observar el resultado partiendo desde
       la imagen de contenido, luego de 600 iteraciones.
+      Estas cantidades de iteraciones fueron elegidas con el criterio al término de esta sección, basado en la experiencia y los resultados obtenidos a partir de todos 
+      los experimentos realizados.
       La diferencia entre ambos resultados en este caso es sutil, pero al comenzar desde la imagen de contenido, los bordes y contornos de esta, son mas notorios en el resultado
       que al comenzar desde ruido.
         \begin{figure}[H]
@@ -1647,7 +1649,7 @@
 	  \begin{tabularx}{\textwidth}{@{}cXX@{}}
 	  \begin{tabular}{cc}
 	    \subfloat[Imagen de Estilo: Shipwreck, Turner, 1805]{\includegraphics[height=0.2\textheight]{./img/shipwreck.jpg}}
-	    & \subfloat[Imagen de Contenido: Fotografía de Tubingen]{\includegraphics[height=0.2\textheight]{./img/tubingen.jpg}}\\
+	    & \subfloat[Imagen de Contenido: Fotografía de T\"{u}bingen]{\includegraphics[height=0.2\textheight]{./img/tubingen.jpg}}\\
 	    \subfloat[Resultado comenzando desde ruido]{\includegraphics[ height=0.2\textheight]{./img/tubingen_shipwreck_620_random.png}}
 	    & \subfloat[Resultado comenzando desde el contenido]{\includegraphics[height=0.2\textheight]{./img/tubingen_shipwreck_600_image.png}}\\
 	  \end{tabular}
@@ -1655,23 +1657,48 @@
 
 	  \caption{Ejemplos de obras de arte correspondientes a los estilos seleccionados}\label{fig:caso1_tubingen}
 	\end{figure}
-	En cuanto a la evolución de los puntajes de clasificación, como se puede observar en la figura \ref{fig:puntajes_caso1}, en este caso se cumple con la hipótesis de que el
-	estilo predicho para el resultado coincide con el estilo de la imagen de estilo (Romanticismo), al partir desde una imagen de ruido, en las primeras 200 iteraciones el
+	En cuanto a la evolución de los puntajes de clasificación, como se puede observar en la figura \ref{fig:puntajes_caso1}(a), en este caso el
+	estilo predicho para el resultado coincide con el estilo de la imagen de estilo (Romanticismo). 
+	Al partir desde una imagen de ruido, en las primeras 200 iteraciones el
 	clasificador no logra reconocer un claro estilo, pero luego se va normalizando hasta obtener una predicción confiable, ya que la diferencia con los otros estilos es notoria.
+	Lo mismo ocurre comenzando desde la imagen de contenido, ilustrado en \ref{fig:puntajes_caso1}(b), en ambos los gráficos generados son similares.
 	\begin{figure}[H]
 	  \begin{center}
-	    \subfloat[Evolución de los puntajes comenzando desde ruido]{\includegraphics[ height=0.35\textheight]{./img/tubingen_shipwreck_random_scores.png}}
-	    %\subfloat[Evolucion de los puntajes comenzando desde contenido]{\includegraphics[height=0.4\textheight]{./img/tubingen_shipwreck_image_scores.png}}\\
+	    \subfloat[Evolución de los puntajes comenzando desde ruido]{\includegraphics[ height=0.35\textheight]{./img/tubingen_shipwreck_random_scores.png}}\\
+	    \subfloat[Evolucion de los puntajes comenzando desde contenido]{\includegraphics[height=0.35\textheight]{./img/tubingen_shipwreck_image_scores.png}}\\
 	  \end{center}
 	  \caption{Evolución de los puntajes}
 	  \label{fig:puntajes_caso1}
 	\end{figure}
+	
+	Con respecto a la calidad de la imagen, en el cuadro \ref{fig:caso1_calidad}, se puede observar como va incrementando la calidad de la imagen a medida que aumenta el número
+	de iteraciones en las cuales se ejecuta el algoritmo. 
+	Durante las iteraciones iniciales, el cambio es notorio. Al comenzar, en 50 iteraciones (a), todavía parece ser una imagen de ruido. 
+	En 100 iteraciones (b) ya se comienzan a visualizar destellos de estilo y contenido. Ya a partir de los 200 (c) ciclos de ejecución, la imagen comienza a ser de una calidad visual aceptable.
+	Finalmente, luego de 600 ciclos (d), la heuristica elige esta imagen como óptima. No obstante, las diferencias entre el resultado generado entre las 200 y las 600 iteraciones
+	son de menor impacto visual que en las primeras iteraciones.
+	
+        \begin{figure}[H]
+	  \def\tabularxcolumn#1{m{#1}}
+	  \begin{tabularx}{\textwidth}{@{}cXX@{}}
+	  \begin{tabular}{cc}
+	    \subfloat[Imagen generada en 50 iteraciones]{\includegraphics[height=0.2\textheight]{./img/tubingen_shipwreck_50.png}}
+	    & \subfloat[Imagen generada en 100 iteraciones]{\includegraphics[height=0.2\textheight]{./img/tubingen_shipwreck_100.png}}\\
+	    \subfloat[Imagen generada en 200 iteraciones]{\includegraphics[ height=0.2\textheight]{./img/tubingen_shipwreck_200.png}}
+	    & \subfloat[Imagen generada en 600 iteraciones, elegida como óptima]{\includegraphics[height=0.2\textheight]{./img/tubingen_shipwreck_620_random.png}}\\
+	  \end{tabular}
+	  \end{tabularx}
 
+	  \caption{Analisis de la calidad de la imagen generada segun el numero de iteraciones}\label{fig:caso1_calidad}
+	\end{figure}
+	
+	
 	Como segundo caso de análisis se eligió una situación en la que la predicción de la imagen resultante coincide con el estilo de la imagen de estilo provista, si se comienza
 	el procedimiento desde la imagen de ruido, pero esto no ocurre si se comienza desde la imagen de contenido.
-	Para este caso exhibido en la figura \ref{fig:caso2_scream}, como imagen de estilo se utilizo El grito, de Edward Munch, 1893 correspondiente al Expresionismo (a) y como imagen de contenido una fotografía del Golden Gate, un
+	Para este caso exhibido en la figura \ref{fig:caso2_scream}, como imagen de estilo se utilizó El grito, de Edward Munch, 1893 correspondiente al Expresionismo (a) 
+	y como imagen de contenido una fotografía del Golden Gate, un
 	icono de la ciudad de San Francisco, Estados Unidos (b). En la imagen (c) se muestra el resultado partiendo desde ruido y en la (d) desde la imagen de contenido, ambas luego de
-	540 iteraciones, desde el aspecto visual estos resultados son muy similares, pero para el clasificador son muy distintos como luego de muestra en la figura \ref{fig:puntajes_caso2}.
+	540 iteraciones (mismo criterio de selección que el caso anterior), desde el aspecto visual estos resultados son muy similares, pero para el clasificador son muy distintos como luego de muestra en la figura \ref{fig:puntajes_caso2}.
 
       	\begin{figure}[H]
 	  \def\tabularxcolumn#1{m{#1}}
@@ -1700,8 +1727,28 @@
 	\caption{Evolución de los puntajes}
 	\label{fig:puntajes_caso2}
       \end{figure}
+      
+      Con respecto a la calidad de la imagen, en el cuadro \ref{fig:caso2_calidad} se puede observar que sucede algo similar a lo detallado en la figura \ref{fig:caso1_calidad}.
+      Esto mismo ocurre en el resto de los experimentos realizado, generalmente, desde el comienzo hasta las 200 iteraciones aproximadamente es donde las mejoras son notorias. 
+      Luego de esa cantidad de ciclos, se efectuan las mejoras de menor impacto visual. A pesar de que estas mejoras en el resultado generado no se visualizan claramente,
+      en algunos casos asisten al clasificador a realizar una predicción mas precisa y confiable.
+      
+      \begin{figure}[H]
+	\def\tabularxcolumn#1{m{#1}}
+	\begin{tabularx}{\textwidth}{@{}cXX@{}}
+	\begin{tabular}{cc}
+	  \subfloat[Imagen generada en 50 iteraciones]{\includegraphics[height=0.2\textheight]{./img/golden_gate_the_scream_50.png}}
+	  & \subfloat[Imagen generada en 100 iteraciones]{\includegraphics[height=0.2\textheight]{./img/golden_gate_the_scream_100.png}}\\
+	  \subfloat[Imagen generada en 200 iteraciones]{\includegraphics[ height=0.2\textheight]{./img/golden_gate_the_scream_200.png}}
+	  & \subfloat[Imagen generada en 540 iteraciones, elegida como óptima]{\includegraphics[height=0.2\textheight]{./img/golden_gate_the_scream_540_random.png}}\\
+	\end{tabular}
+	\end{tabularx}
 
-    \subsubsection{Análisis del criterio de selección}
+	\caption{Analisis de la calidad de la imagen generada segun el numero de iteraciones}\label{fig:caso2_calidad}
+      \end{figure}  
+      
+
+    \subsubsection{Análisis del criterio de selección} \label{sec:criterio}
       Luego se realizar un análisis en varios gráficos como los presentados en la sección anterior se concluye que la hipótesis sobre que el el puntaje de clasificación de la imagen
       de estilo y el puntaje de la imagen generada coinciden es falsa. Esto no ocurre en todos los casos analizados, dependiendo de la imagen de contenido el estilo
       que obtiene mayor puntaje de clasificación puede ser distinto al estilo de la imagen de estilo. 
