@@ -1756,12 +1756,13 @@
       de la imagen generada, aunque en mucho menor proporción respecto a la imagen de estilo. Este resultado avala la idea que presenta Gatys acerca de que el estilo y el contenido de una
       imagen no son absolutamente separables.
       
-      Debido a esto, el criterio de selección que se definió para elegir la imagen óptima fue el siguiente: el estilo objetivo, en lugar de ser el estilo correspondiente a la imagen de estilo
+      \textbf{Criterio de Selección:} debido a lo expuesto en el párrafo anterior, el criterio de selección que se definió para elegir la imagen óptima fue el siguiente: el estilo objetivo, en lugar de ser el estilo correspondiente a la imagen de estilo
       provista para la transferencia de estilo, se definió como el estilo que tiene asignada una mayor probabilidad de reconocimiento luego de 1000 iteraciones. 
       Una vez definido el estilo objetivo, se definen los intervalos donde el puntaje obtenido por el estilo objetivo
-      supera al puntaje del resto de los estilos. La imagen óptima elegida es la correspondiente al numero de iteraciones medio del intervalo donde el estilo objetivo es el máximo. En caso de que haya mas de un de
-      un intervalo que cumpla con este requisito, se devuelve una imagen óptima de cada intervalo como posibles imágenes óptimas para que el usuario elija cual es la óptima según su criterio
-      cualitativo.
+      supera al puntaje del resto de los estilos. La imagen óptima elegida es la correspondiente al numero de iteraciones correspondiente al punto medio del intervalo 
+      donde el estilo objetivo es el máximo. 
+      En caso de que exista mas de un de un intervalo que cumpla con este requisito, se devuelve una imagen óptima de cada intervalo como posibles imágenes óptimas 
+      para que el usuario elija cual es la óptima según su criterio cualitativo.
 
 
 \chapter{Conclusiones, Perspectivas y trabajos a futuro}
