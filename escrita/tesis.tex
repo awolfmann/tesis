@@ -223,7 +223,7 @@
     de transferencia estilos artísticos en fotografías. Ademas se presenta la solución propuesta.
 
     En el capítulo \ref{chap:experimentos} contiene los experimentos realizados y los resultados obtenidos, junto con un análisis y evaluación empírica de los mismos. 
-    Finalmente en el capitulo \ref{chap:conclusiones} se  presentan las conclusiones obtenidas acerca del trabajo realizado,junto con las perspectivas y posibles tareas a futuro.
+    Finalmente en el capitulo \ref{chap:conclusiones} se  presentan las conclusiones obtenidas acerca del trabajo realizado, junto con las perspectivas y posibles tareas a futuro.
 
 \chapter{Marco Teórico} \label{chap:marco_teorico}
 
@@ -270,12 +270,13 @@
       \subsubsection{Aprendizaje Supervisado} \label{sec:supervisado}
 	Los algoritmos de aprendizaje supervisado emplean como conjunto de entrenamiento ejemplos que consisten de entradas $x$ y etiquetas $y$, es decir
 	aprenden una función de predicción, a partir de datos de entrenamiento etiquetados. 
-	Cada ejemplo del conjunto de entrenamiento suele ser un par compuesto de un objeto de entrenamiento y una etiqueta, que seria el valor de salida deseado.
+	Cada ejemplo del conjunto de entrenamiento suele ser un par compuesto de un objeto de entrenamiento y una etiqueta, el cual es el valor de salida deseado.
 	A partir de los objetos y etiquetas con las que se entrenó, aprende a predecir la etiqueta de un nuevo objeto nunca antes visto. 
-	Un ejemplo de esta clase de algoritmos es el de	las maquinas de vector soporte.
+	Un ejemplo de esta clase de algoritmos es el de	los clasificadores lineales.
 
-	Las maquinas de vector soporte se utilizan para clasificar objetos, con su respectiva etiqueta, dividendo el espacio de entrada en regiones de decisión, cuyos límites
-	se denominan vectores soporte, ilustrado en la figura \ref{fig:svm}. Esta división en distintas regiones la realiza en base a los datos observados durante el aprendizaje.
+	Las maquinas de vector soporte son un tipo de clasificador lineal, estos clasificadores se utilizan para asociar objetos, con su respectiva etiqueta, 
+	dividendo el espacio de entrada en regiones de decisión, cuyos límites se denominan vectores soporte, ilustrado en la figura \ref{fig:svm}.
+	Como se menciona anteriormente, esta división en distintas regiones se realiza en base a los datos observados durante el aprendizaje.
 
 	\begin{figure}[H]
 	  \includegraphics[scale=0.5]{./img/linear_svm.png}
@@ -289,7 +290,7 @@
 	  A diferencia de los algoritmos de aprendizaje supervisado, estos algoritmos solo requieren de los objetos para el entrenamiento, en lugar de disponer
 	  de objetos y etiquetas. Dichas tecnicas se emplean para detectar patrones o similaridades entre los datos que eran desconocidas.
 
-	  Un ejemplo de esta clase de algoritmos es el algoritmo \emph{K-Means} empleado para el problema de Agrupamiento (Clustering en la literatura en inglés) de datos 
+	  Un ejemplo de esta clase de algoritmos es el algoritmo \emph{K-Means} empleado para el problema de agrupamiento (clustering por su denominación en inglés) de datos 
 	  en distintas clases.
 	  Este algoritmo consiste en reunir objetos de en K grupos, en el que cada observación es asignada al grupo para el cual su valor medio es mas cercano, 
 	  ilustrado en la figura \ref{fig:clustering}.
@@ -316,14 +317,14 @@
     \subsection{Representación de la Información en Aprendizaje Automático} \label{sec:representacion}
       Para que un modelo pueda aprender, es necesario lograr una representación adecuada de los objetos sobre los cuales se desea asimilar información.
       Dependiendo de la información que se desee aprender, estas representaciones pueden ir variando. 
-      Si se desea entender sobre el riesgo crediticio de un usuario, la información que represente a este usuario sera diferente a la representación de ese mismo 
-      usuario si se desea acerca de sus intereses gastronómicos.
+      Si se desea entender sobre el riesgo crediticio de un usuario, la información que represente a este usuario será diferente a la representación de ese mismo 
+      usuario si se desea aprender acerca de sus intereses gastronómicos.
 
       Definir la representación de un objeto de forma precisa, tal que le permita al modelo capturar toda la información requerida puede llegar a ser la tarea mas importante de todo el 
       proceso de aprendizaje.
       Estas representaciones suelen estructurarse como un vector de características (\emph{features} en inglés) que el modelo deberá obtener a partir de las instancias 
       de entrenamiento.
-      Una \emph{feature} puede ser cualquier dato asociado a la instancia, que podría ser útil al modelo para realizar una predicción mas precisa.
+      Una \emph{feature} puede ser cualquier dato asociado a la instancia que podría ser útil al modelo para realizar una predicción mas precisa.
 
       Por ejemplo para representar un conjunto de datos conformado por documentos de texto, el método comúnmente utilizado es la bolsa de palabras (\emph{Bag of Words} 
       en la literatura en inglés). 
@@ -331,7 +332,7 @@
       Cada documento se representa como un histograma de ocurrencias respecto de las palabras del vocabulario. 
       La dimensionalidad de la representación es igual al número de palabras que componen dicha estructura.
 
-      Para representar una imagen, el método más sencillo es usar directamente el valor de los píxeles. 
+      En el caso de las imágenes, el método más sencillo es usar directamente el valor de los píxeles. 
       No obstante, para que una representación de una imagen sea lo suficientemente descriptiva respecto al contenido de la misma, debe superar ciertos desafíos, 
       ilustrados gráficamente en la figura \ref{fig:stanford_challenges}:
       
@@ -356,12 +357,12 @@
 
       \subsubsection{Enfoque Clásico}
 	En el enfoque clásico (o arquitecturas Shallow, como se conocen en la literatura en ingles), se busca generar una representación invariante a la posición, iluminación, 
-	fondo, etc. Que describan regiones locales de la imagen, de forma robusta. 
+	fondo, etc. que describan regiones locales de la imagen, de forma robusta. 
 	Para ello se utilizan principalmente técnicas estadísticas a partir de conocimiento anterior del objeto y del contexto,
 	con lo cual dependen en cierta forma de una decisión manual de quien construye el algoritmo.
 	El conjunto de estas representaciones locales se codifican y agregan en una representación vectorial de dimensionalidad fija, la cual se emplea como
         entrada a los algoritmos de aprendizaje subsiguientes. 
-        Un ejemplo de esta clase de representaciones es el modelo de bolsas de palabras visuales el cual, en analogía al modelo para texto, 
+        Un ejemplo de esta clase de representaciones es el modelo de Bolsas de Palabras visuales el cual, en analogía al modelo para texto, 
         recurre a una estructura auxiliar para construir un histograma de ocurrencias de ``palabras visuales''. 
         Este concepto se ilustra en la figura \ref{fig:bovw} en donde se intenta reconocer un rostro, una bicicleta y una guitarra, basándose en las 
         palabras visuales que contiene su ``Diccionario''.
@@ -415,7 +416,7 @@
 
 	  Una función de predicción en clasificación se puede representar en términos generales como un mapeo $f_{\theta}: \mathcal{X}
           {\rightarrow} \{1,\dots,K\}$ con parámetros $\theta$, del conjunto del espacio de entrada $\mathcal{X}$ (en nuestro caso las imágenes o sus
-          representaciones) al un conjunto discreto de categorías o clases ($\{1,\dots,K\}$). 
+          representaciones) a un conjunto discreto de categorías o clases ($\{1,\dots,K\}$). 
           Al utilizar modelos lineales, la función de predicción toma la forma:
           
           \begin{equation} \label{eq:linear_classifier}
@@ -460,12 +461,13 @@
           \end{equation}
           
           Con $L:\mathcal{Y}\times \mathcal{Y}\rightarrow\mathbb{R}_+$, donde $\mathcal{Y}$ en el caso de la clasificación seria ${1,..,K}$.
-          Esta ecuación contiene 2 términos: Un termino relacionado a las funciones de pérdida de cada imagen $L_i(y_i, f(x_i, W, b))$
-          y un coeficiente de regularización $\lambda \Omega(W)$ que penaliza a los modelos complejos, $\lambda$ es un hiper-parámetro que define cuanto influye 
+          Esta ecuación contiene 2 términos: uno relacionado a las funciones de pérdida de cada imagen $L_i(y_i, f(x_i, W, b))$
+          y otro relacionado a un coeficiente de regularización $\lambda \Omega(W)$ que penaliza a los modelos complejos, donde $\lambda$ es un hiper-parámetro que define cuanto influye 
           la regularización sobre el resultado final y $N$ es la cantidad de datos de entrenamiento.
+          
 	  Una función de pérdida es una función real, no negativa $L({\widehat y}, y)$, que mide cuán diferente es la predicción ${\widehat y}$ obtenida, con respecto a la
 	  salida esperada $y$. 
-	  Existen diversas funciones de pérdida que se utilizan en distintos contextos. A continuación se mencionan algunas que se aplican usualmente:
+	  Existen diversas funciones de pérdida que se utilizan en distintos contextos. A continuación se mencionan algunas que se emplean usualmente:
 	  
 	  \begin{itemize}
 	    \item Función de Pérdida 0-1:
@@ -480,27 +482,26 @@
 		L({\widehat y}, y) =  max(0, 1 - {\widehat y}y)
 	      \end{equation*}
 	      Esta función es ampliamente utilizada para algoritmos de Maquina de Vector Soporte, mencionados en la sección \ref{sec:supervisado}.
-	      Es una función convexa y continua pero no es derivable por lo tanto no se puede utilizar en métodos como el Descenso por el Gradiente.
 	    \item Función de Pérdida Logística:
 	      \begin{equation*}
 		L({\widehat y}, y) =  {\log(1+ {\exp^{-{\widehat y}y}})}
 	      \end{equation*}
-	      Similar a la función Hinge, pero al ser derivable, puede utizarse para aplicar Descenso por el gradiente.
+	      Similar a la función Hinge, pero al ser derivable, puede utizarse para aplicar Descenso por el gradiente, y por consiguiente en redes neuronales.
 	    \item Función de Pérdida de Entropía Cruzada
 	      \begin{equation} \label{eq:cross_entropy}
 		L({\widehat y}, y) = -y{\log({\widehat y}}) - (1-y) {\log(1-{\widehat y})}
 	      \end{equation}
-	      Es una función continua, convexa y derivable que se adapta a métodos de Descenso por el gradiente, se utiliza en Redes Neuronales Profundas.
+	      Es una función continua, convexa y derivable que se adapta a métodos de Descenso por el gradiente, se utiliza en redes neuronales.
 
 	  \end{itemize}
 
     \subsubsection{Optimización} \label{sec:optimizacion}
-      Minimizar la función de pérdida \eqref{eq:perdida} puede considerarse un problema de optimización, con lo cual se pueden aplicar las técnicas empleadas 
+      Minimizar la función de pérdida \eqref{eq:perdida} es un problema de optimización, con lo cual se pueden aplicar las técnicas empleadas 
       en este tipo de problemas, para resolverlo.
       El objetivo de la optimización es encontrar el vector de pesos $W$ que minimice la función de pérdida.
       
-      La estrategia de optimización mas utilizada para este tipo de problemas es la de seguir la dirección del gradiente (también llamado derivada) de la función de pérdida.
-      En este caso que la función toma como entrada un vector de números, se aplican las derivadas parciales y el gradiente es el vector resultante de calcular las derivadas parciales
+      La estrategia de optimización mas utilizada para este tipo de problemas es la de seguir la dirección del gradiente de la función de pérdida.
+      En este caso, la función toma como entrada un vector, se aplican las derivadas parciales y el gradiente es el vector resultante de calcular las derivadas parciales
       en cada dimensión.
       La idea de principal de este método es el refinamiento iterativo, se evalúa el resultado del calculo del gradiente y se actualizan los parámetros repetidamente,
       toma un hiper-parámetro $\eta$ llamado tasa de aprendizaje que define el tamaño de cada paso en la iteración.
@@ -521,7 +522,7 @@
       Este método se lo conoce como \textbf{Descenso por el gradiente estocástico}, el cual se exhibe en el diagrama \ref{alg:SGD} en forma de pseudo-código, 
       donde se puede observar como funciona el mismo. 
       El Descenso por el gradiente estocástico  es el mas utilizado para optimizar funciones de pérdida en las Redes Neuronales, un algoritmo de aprendizaje
-      automático que se detalla en las siguientes secciones.
+      automático que se detalla en la sección \ref{sec:redes_neuronales}.
 
 	\begin{algorithm}[ht]
 	  \caption{Descenso por el gradiente estocástico}
@@ -530,9 +531,9 @@
 	    \State Elegir una tasa de aprendizaje $\eta$
 	    \State Elegir un vector de pesos inicial $w_0$
 	    \State Elegir un numero de iteraciones $J$
-	    \State Ordenar aleatoriamente
 	    \State $w \gets w_0$
 	    \For{$j=1,..J$}
+	      \State Ordenar aleatoriamente
 	      \ForAll {$i=1,..,N$}
 		$sum_{gradiente} \gets sum_{gradiente} + \nabla L_i(w_n)$
 	      \EndFor
@@ -612,13 +613,15 @@
       \subsection{Introducción}
 	Un algoritmo de aprendizaje de red neuronal artificial, usualmente llamado ``red neuronal", es un algoritmo de aprendizaje que sirve como herramienta de modelado de datos
 	en forma no lineal. 
-	Usualmente se usan para modelar relaciones complejas entre entradas y salidas, para encontrar patrones en los datos, o para capturar la estructura estadística 
-	en una distribución de probabilidad conjunta desconocida entre las variables observadas.
-	Una red neuronal, básicamente es una versión compleja del clasificador lineal, pero que utiliza los mismos conceptos de funciones de perdida y función de predicción.
+	Usualmente se usan para modelar relaciones complejas entre entradas y salidas, para encontrar patrones en los datos.
+	Una red neuronal, básicamente es una versión compleja del clasificador lineal, empleando funciones no lineales, 
+	pero que utiliza los mismos conceptos de funciones de pérdida y función de predicción.
 	  
-	Las redes neuronales se pueden modelar como un conjunto de unidades de cómputo (neuronas) conectadas en un grafo acíclico, que se suelen organizar por capas. 
-	Las neuronas de una capa se conectan con neuronas de sus capas adyacentes pero nunca se conectan 2 neuronas de una misma capa, como se puede observar en la figura 
+	Las redes neuronales se pueden modelar como un conjunto de unidades de cómputo (neuronas) conectadas en un grafo acíclico, que se suelen organizar por capas.
+	Las unidades de una capa se conectan con neuronas de sus capas adyacentes pero nunca se conectan 2 unidades de una misma capa, como se puede observar en la figura 
 	\ref{fig:neural_network}.
+	Las funciones no lineales mencionadas, se ubican entre las conexiones de las distintas capas, \emph{rompiendo} con la linealidad del clasificador, por lo que esta es la principal
+	diferencia con los clasificadores lineales.
 	Toda red neuronal tiene una capa de entrada, una capa de salida y un número determinado de capas ocultas, que pueden ser de distintos tipos. 
 	En la caso de la figura \ref{fig:neural_network} la red neuronal que se ilustra, esta conformada por:
 	\begin{itemize}
@@ -626,14 +629,14 @@
 	 \item Una capa oculta ($z_m$ con $m \in {0,..,M}$ donde $z_0$ corresponde al sesgo). En el caso de que la red tenga mas de una capa oculta, $M$ puede ser distinto 
 	 para cada una de ellas.
 	 \item Una capa de salida ($y_j$ con $j \in \{1,...,K\}$)
-	 \item Conexiones entre neuronas de capas adyacentes, las cuales contienen un peso $w^{(l)}_{se}$ donde $(l)$ es el numero de capa, $e$ es la unidad de entrada 
+	 \item Conexiones entre unidades de capas adyacentes, las cuales contienen un peso $w^{(l)}_{se}$ donde $(l)$ es el numero de capa, $e$ es la unidad de entrada 
 	 de la conexión y $s$ la unidad de salida.
 	\end{itemize}
 
 	Una de las principales razones por la cual las redes neuronales están organizadas en capas, es que este tipo de estructura permite evaluar una red, muy simple y eficientemente 
-	realizando operaciones matriciales vectoriales, una red neuronal puede ser pensada como una serie de multiplicaciones de matrices entrelazadas con funciones de 
+	realizando operaciones matriciales vectoriales. Una red neuronal puede ser pensada como una serie de multiplicaciones de matrices entrelazadas con funciones de 
 	activaciones no lineales.
-	Las redes neuronales utilizadas en la actualidad tienen alrededor de 100 millones de parámetros distribuidos entre 10-20 capas.
+	Las redes neuronales utilizadas en la actualidad tienen alrededor de 100 millones de parámetros distribuidos entre 10-20 capas, aunque también existen algunas de 150 capas.
 
 	\begin{figure}[ht]
 	  \begin{center}
@@ -652,7 +655,7 @@
 	      a = \sum_{i=1}^{D} w_{i} x_i + w_{0}
 	    \end{equation}
 	    Donde $x_i$ es cada uno de los valores del vector $X$ y $w_{i}$ los valores del vector $W$. El valor $a$ se conoce como el valor de \emph{activación}.
-	  \item En la segunda etapa se realiza una transformación no lineal del valor de activación, obtenido en la etapa anterior, dada por la función de activación $h$,es decir:
+	  \item En la segunda etapa se realiza una transformación no lineal del valor de activación, obtenido en la etapa anterior, dada por la función de activación $h(.)$,es decir:
 	    \begin{equation}\label{eq:neurona_nolineal}
 	      z = h(a)
 	    \end{equation}
@@ -674,17 +677,18 @@
 	redes neuronales, la técnica ampliamente utilizada es la de retropropagación del error que se detalla luego en la seccion \ref{sec:backpropagation}.
 \fi
 
-      \subsection{Configuración y Diseño}
+      \paragraph{Configuración y Diseño}
 	En la etapa de configuración y diseño de una red neuronal es donde se define la arquitectura de la red, es decir cuantas capas tendrá, cuantas neuronas tendrá 
-	cada una de las capasy cuales serán las funciones de activación que estas utilizarán.
-	Además en esta etapa se define cual sera la función de perdida que se utilizara para calcular el error durante el entrenamiento.
+	cada una de las capas y cuales serán las funciones de activación que estas utilizarán.
+	Además en esta etapa se define cual será la función de perdida que se utilizara para calcular el error durante el entrenamiento.
+	En esta etapa es donde se requiere mayor incidencia manual para este tipo de algoritmos, el resto se aprende automáticamente.
 
       \subsection {Aprendizaje}
-	Una vez finalizada la etapa de configuración y diseño es necesario inicializar los pesos, comúnmente inicializados con valores aleatorios cercanos a 0, 
+	Una vez finalizada la etapa de configuración y diseño es necesario inicializar los pesos, comúnmente inicializados con valores aleatorios cercanos pero distintos a 0, 
 	para luego comenzar con la etapa de entrenamiento de la red.
 	El entrenamiento de una red neuronal consiste en realizar un ciclo de entrenamiento durante un cierto número de iteraciones, utilizando el conjunto de datos de 
 	entrenamiento. 
-	Durante cada una de estas iteraciones, se reduce el error obtenido por la función de perdida, al comparar la predicción obtenida con el valor correcto de la 
+	Durante cada una de estas iteraciones, se reduce el error obtenido por la función de pérdida, al comparar la predicción obtenida con el valor correcto de la 
 	etiqueta para esa instancia.
 	El ciclo de entrenamiento se compone de 2 pasos: paso hacia adelante, y paso de retropropagación del error.
 	
@@ -714,9 +718,9 @@
 	de las capas de la red. 
 	La importante contribución de la retropropagación (propagar el error hacia atrás, a través de la red) es la de proveer un
 	método computacionalmente eficiente para evaluar las derivadas requeridas en la primer etapa. 
-	A lo largo de esta sección, iremos desarrollando las ideas fundamentales de dicho método.
+	A lo largo de esta sección, iremos desarrollando las ideas fundamentales de dicho método, siguiendo la presentación de Bishop \cite{Bishop:MachineLearning}.
 
-	Como hemos visto, la función de perdida total, definida en \eqref{eq:perdida} se calcula midiendo el error en cada una de las $N$ instancias pertenecientes 
+	Como hemos visto, la función de perdida total, definida en la ecuación \eqref{eq:perdida} se calcula midiendo el error en cada una de las $N$ instancias pertenecientes 
 	al conjunto de datos.
 	Una forma simplificada de considerar \eqref{eq:perdida} es:
 	\begin{equation} \label {eq:perdida_simplificada}
@@ -733,7 +737,7 @@
 	\end{equation*}
 	Por simplicidad de decidió utilizar la función error cuadrática medio, que aunque no aplica para el caso de clasificación, facilita los cálculos y puede
 	ser reemplazada fácilmente por otras funciones de error como por ejemplo Entropía Cruzada \eqref{eq:cross_entropy}. 
-	Esta función para un determinado valor de entrada $n$, toma la forma:
+	La función de error para un determinado valor de entrada $n$, toma la forma:
 	\begin{equation*}
 	  L_n = \frac{1}{2} \sum_k (y_{nk}-Y_{nk})^2   % log-loss
 	\end{equation*}
@@ -743,7 +747,7 @@
 	\begin{equation*}
 	  \frac{\partial L_n}{\partial w_{ji}} = (y_{nj} − Y_{nj}) x_{ni}
 	\end{equation*}
-	que puede ser interpretado como un 'computo local' que involucra el producto entre un "error" $y_{nj} − Y_{nj}$ asociado a la de salida del enlace $w_{ji}$ y 
+	que puede ser interpretado como un \emph{cómputo local} que involucra el producto entre un \emph{error} $y_{nj} − Y_{nj}$ asociado a la de salida del enlace $w_{ji}$ y 
 	la variable $x_{ni}$ asociada a la variable de entrada del enlace.
 	Veremos ahora cómo este simple resultado se extiende hasta el escenario más complejo de redes neuronales artificiales.
 
@@ -781,11 +785,11 @@
 	  \frac{\partial L_n}{\partial w_{ji}} = \delta_j z_i
 	\end{equation}
 	La ecuación \eqref{eq:sustitution2} nos dice que la derivada se obtiene simplemente multiplicando el valor de $\delta$ para la unidad en el extremo de salida del peso
-	por el valor de$z$ para la unidad en el extremo de entrada del peso. 
-	Tenga en cuenta que esto lleva de la misma forma como para el simple modelo lineal considerado al inicio de esta sección.
-	Por lo tanto, con el fin de evaluar los derivados, sólo tenemos que calcular el valor de $\delta_j$ para cada unidad oculta y de salida en la red y, 
+	por el valor de $z$ para la unidad en el extremo de entrada del peso. 
+	Tenga en cuenta que esto tiene la misma forma que para el simple modelo lineal considerado al inicio de esta sección.
+	Por lo tanto, con el fin de evaluar las derivadas, sólo tenemos que calcular el valor de $\delta_j$ para cada unidad oculta y de salida en la red y, 
 	a continuación, aplicar \eqref{eq:sustitution2}.
-	Dado que para las unidades de salida  utilizamos el enlace canónico \FIXME{REVISAR}, tenemos
+	Dado que para las unidades de salida utilizamos el enlace canónico, tenemos
 	\begin{equation} \label{eq:delta_salida}
 	  \delta_k = y_k - Y_k
 	\end{equation}
@@ -832,8 +836,8 @@
 	\end{enumerate}
 
 	\subsection {Funciones de Activación comúnmente utilizadas}
-	  Como hemos visto en la sección \ref{sec:redes_neuronales}, cada unidad de computo requiere de una función de activación, la toma un único número como entrada,
-	  realiza un operación matemática predefinida, no lineal y devuelve el resultado obtenido. 
+	  Como hemos visto en la sección \ref{sec:redes_neuronales}, cada unidad de cómputo requiere de una función de activación, la toma un único número como entrada, 
+	  realiza una operación matemática predefinida, no lineal y devuelve el resultado obtenido. 
 	  En esta sección se analizan las principales funciones de activación utilizadas.
 	  \subsubsection {Sigmoide}
 
@@ -870,8 +874,8 @@
 	      \caption{Gráfico de la función Tangente hiperbólica}
 	      \label{fig:tanh}
 	    \end{figure}
-	    Proyecta el dominio al rango [-1,1], como se muestra en la figura \ref{fig:tanh}. Al igual que la neurona sigmoide, sus activaciones saturan, pero a diferencia
-	    de la neurona sigmoide su salida esta centrada en cero. Por lo tanto, en la práctica la tanh siempre es preferida sobre sigmoide.
+	    Proyecta el dominio al rango [-1,1], como se muestra en la figura \ref{fig:tanh}. Al igual que la función sigmoide, sus activaciones saturan, pero a diferencia
+	    de ésta, su salida esta centrada en cero. Por lo tanto, en la práctica la tanh siempre es preferida sobre sigmoide.
 	    \begin{equation*}
 	     f(x) = \frac{\exp^x - \exp^{-x}}{\exp^x + \exp^{-x}}
 	    \end{equation*}
