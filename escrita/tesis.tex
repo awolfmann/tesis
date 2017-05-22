@@ -851,7 +851,7 @@
 	    \begin{itemize}
 	     \item Se satura y anula el gradiente. Una propiedad muy indeseable de la sigmoide es que cuando la activación de la neurona se satura en cualquiera de las dos 
 	     puntas de 0 o 1, el gradiente en estas regiones es casi cero. 
-	     Esto hace que en la retropropagación, la información deje de retropropagarse hacia atrás, (cuando se topa con un gradiente 0, cualquier valor multiplicado por 0
+	     Esto hace que en la retropropagación, la información deje de retropropagarse, (cuando se topa con un gradiente 0, cualquier valor multiplicado por 0
 	     es 0).
 	     \item Las salidas no están centradas en cero.
 	     Esto es indeseable ya que las neuronas en capas posteriores de procesamiento en una Red Neuronal estarían recibiendo datos que no están centrados en cero. 
@@ -960,14 +960,24 @@
       Tales espacios también suelen imponer altos costos computacionales. El aprendizaje profundo fue diseñado para superar estos y otros obstáculos.
 \fi
   \section {Redes Neuronales Convolucionales} \label{sec:redes_convolucionales}
+      Muchos de los enfoques modernos en Visión por Computadoras explotan la propiedad de que píxeles cercanos están más correlacionados entre ellos 
+      que a los píxeles mas distantes. 
+      Esto se realiza mediante la extracción de características locales que dependen sólo pequeñas subregiones de la imagen. 
+      La información de tales características pueden entonces ser combinados en etapas posteriores de procesamiento con el fin de detectar de características de alto nivel 
+      hasta finalmente proveer información de la imagen completa. 
+      Además, las características locales que son útiles en una región de la imagen, probablemente sean útiles en otras regiones de la imagen.
+      Estas nociones son incorporadas a las redes neuronales convolucionales mediante 3 mecanismos: (i) campos receptivos locales, (ii) compartir pesos y 
+      (iii) realizar submuestreos o agrupaciones.
+  
       Las redes neuronales convolucionales (Convolutional Neural Networks en ingles, o CNN) son muy similares a las redes neuronales antes vistas en la 
       sección \ref{sec:redes_neuronales}.
       La principal diferencia es que la arquitectura de una red neuronal convolucional asume explícitamente que el conjunto de entrada son imágenes. 
       Esto le permite codificar ciertas propiedades de las imágenes dentro de la arquitectura, obteniendo una mejor representación de las mismas.
       Están inspiradas en las redes neuronales tradicionales, incorporando operaciones no-lineales de manipulación de imágenes como la convolución.
       
-      En el área del procesamiento de imágenes, la convolución es una técnica de propósito general para transferir el efecto a una imagen, utilizando el valor de sus píxeles,
-      mediante una pequeña matriz comúnmente llamada filtro (por lo general de $3\times3$ o $5\times5$).
+      En el área del procesamiento de imágenes, la convolución es una técnica que modifica una imagen, utilizando el valor de sus píxeles,
+      mediante una pequeña matriz comúnmente llamada filtro (por lo general de $3\times3$ o $5\times5$), que puede ser empleada por ejemplo, para aplicar un efecto 
+      a la imagen.
       Al realizar la convolución sobre una imagen, se aplica un filtro, obteniendo como resultado otra imagen nueva. Cada uno de los píxeles de esta nueva imagen se 
       calcula de la siguiente forma:
       El filtro actúa determinando el valor del píxel central donde se esta aplicando, sumando los valores de los píxeles vecinos pesados por el valor correspondiente de la matriz para
@@ -986,17 +996,9 @@
 	\label{fig:convolution}
       \end{figure}
 
-      Muchos de los enfoques modernos en Visión por Computadoras explotan la propiedad de que píxeles cercanos están más correlacionados entre ellos 
-      que a los píxeles mas distantes. 
-      Esto se realiza mediante la extracción de características locales que dependen sólo pequeñas subregiones de la imagen. 
-      La información de tales características pueden entonces ser combinados en etapas posteriores de procesamiento con el fin de detectar de características de alto nivel 
-      hasta finalmente proveer información de la imagen completa. 
-      Además, las características locales que son útiles en una región de la imagen, probablemente sean útiles en otras regiones de la imagen.
-      Estas nociones son incorporadas a las redes neuronales convolucionales mediante 3 mecanismos: (i) campos receptivos locales, (ii) compartir pesos y 
-      (iii) realizar submuestreos o agrupaciones.
       La estructura de una CNN se ilustra en la Figura \ref{fig:bishop_cnn}. En una capa convolucional, las unidades se organizan en 3 dimensiones, 
       donde los distintos planos generados, utilizando la dimensiones alto y ancho se llaman mapa de características.
-
+      
       Las unidades en un mapa de características toman como entradas solo una pequeña subregión de la imagen, y todas las unidades de un mismo mapa de características se
       ven obligadas a compartir los mismos valores de peso.
       Por ejemplo, una mapa de características puede consistir de 100 unidades dispuestas en una de cuadrícula 10x10,
@@ -1155,7 +1157,8 @@
 	  Su contribución principal fue demostrar que la profundidad de
 	  la red es un componente crítico para el buen desempeño. Su versión final contiene 19 capas de las cuales 16 son convolucionales. Esta red ofrece una arquitectura 
 	  muy homogénea, sólo realiza convoluciones de 3x3 y agrupaciónes de 2x2 desde el principio hasta el final, ilustrado en la figura \ref{fig:vgg}.
-	  Una desventaja de la VGG es que es muy cara para evaluar y consume mucha memoria y parámetros (140M). La mayoría de estos parámetros se encuentran en la primera
+	  Una desventaja de la VGG es que es muy cara para evaluar y consume mucha memoria y requiere de muchos parámetros (140 millones). 
+	  La mayoría de estos parámetros se encuentran en la primera
 	  capa totalmente conectada, y desde entonces se ha encontrado que estas capas pueden ser removidos con ninguna disminución de rendimiento, reduciendo significativamente el
 	  número de parámetros necesarios.
 	  
@@ -1170,7 +1173,9 @@
 	\subsubsection{Resnet}
 	  Las Redes Residuales (ResNet) fueron desarrolladas por Kaiming He \cite{Kaiming:ResNet}, que fue el ganador de ILSVRC 2015. La característica particular de este tipo de redes 
 	  es que utilizan bloques de conexiones salteadas ilustrados en la figura \ref{fig:resnet}. 
-	  Esta arquitectura también solo tiene una capa completamente conectada en el extremo final de la red, en las capas intermedias hacen uso intensivo de la normalización por lotes.
+	  Esta arquitectura también solo tiene una capa completamente conectada en el extremo final de la red, 
+	  en las capas intermedias hacen uso intensivo de la normalización por lotes. La normalización por lotes consiste en normalizar el conjunto de datos pertenecientes
+	  a un mismo lote en el proceso de descenso por el gradiente en lotes, lo que permite incrementar la tasa de aprendizaje, como se explica en \cite{BatchNormalization:Ioffe}.
 	  En cuanto al numero de capas de la red, existen diversas versiones de las ResNet, algunas de las cuales llegan a tener mas de 150 capas.
 	
 	  \begin{figure}[h]
