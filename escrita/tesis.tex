@@ -996,8 +996,8 @@
 	\label{fig:convolution}
       \end{figure}
 
-      La estructura de una CNN se ilustra en la Figura \ref{fig:bishop_cnn}. En una capa convolucional, las unidades se organizan en 3 dimensiones, 
-      donde los distintos planos generados, utilizando la dimensiones alto y ancho se llaman mapa de características.
+      La estructura de una CNN se ilustra en la Figura \ref{fig:bishop_cnn}. En una capa convolucional (capa compuesta por unidades que realizan convoluciones), 
+      las unidades se organizan en 3 dimensiones, donde los distintos planos generados, utilizando la dimensiones alto y ancho se llaman mapa de características.
       
       Las unidades en un mapa de características toman como entradas solo una pequeña subregión de la imagen, y todas las unidades de un mismo mapa de características se
       ven obligadas a compartir los mismos valores de peso.
@@ -1016,13 +1016,15 @@
 	\begin{center}
 	\includegraphics[width=0.8\linewidth]{./img/bishop_cnn.jpg}
 	\end{center}
-	\caption{Diagrama que ilustra parte de una CNN, mostrando una capa convolucional, seguido por una capa de agrupación.}
+	\caption{Diagrama que ilustra parte de una CNN, mostrando una capa convolucional, seguido por una capa de submuestreo.}
 	\label{fig:bishop_cnn}
       \end{figure}
       
       Lograr diseñar una red convolucional que funcione correctamente, no es una tarea simple. Además, una red neuronal convolucional moderna requiere entre 2 y 3 semanas para entrenarse, 
       utilizando múltiples GPUs para el conjunto de datos ImageNet \cite{imagenet_cvpr09}. Debido a estos motivos, en la actualidad un practica común es adaptar
-      redes famosas ya preentrenadas, realizando sobre estas ajuste fino (''Finetuning`` en la literatura en ingles), detallado en la sección \ref{sec:finetuning}.
+      redes famosas ya preentrenadas, realizando sobre estas ajuste fino (''Finetuning`` en la literatura en ingles), técnica que consiste en adaptar el clasificador de la 
+      red preentrenada a las nuevas etiquetas, proveyendo un pequeño conjunto de datos que permita \emph{reentrenar} la red ajustando los pesos a los datos actuales.
+      Dicha técnica se detalla en la sección \ref{sec:finetuning}.
 
 \iffalse
     \subsection {Arquitectura de una red neuronal convolucional}
@@ -1101,8 +1103,8 @@
       ajustando para lograr reconocer este nuevo tipo de conceptos en las imágenes.
       
       \subsection{Redes Convolucionales Famosas y Modelos preentrenados} \label{sec:cnn_famosas}
-	Como mencionamos anteriormente, una práctica usual es reentrenar modelos preentrenados, adaptándolos a las necesidades especificas. E
-	xisten modelos de redes convolucionales	que reconocidos por haber ganado competencias orientadas a la clasificación de imágenes, 
+	Como mencionamos anteriormente, una práctica usual es reentrenar modelos preentrenados, adaptándolos a las necesidades especificas. 
+	Existen modelos de redes convolucionales que fueron reconocidos por haber ganado competencias orientadas a la clasificación de imágenes, 
 	los cuales son de disponibilidad publica. Estos modelos suelen ser empleados como base 
 	preentrenada. A continuación se mencionan algunos de los mas famosos:
 	
