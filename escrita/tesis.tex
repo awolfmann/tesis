@@ -1011,7 +1011,24 @@
       pero en diferentes ubicaciones en la imagen de entrada. 
       Debido a que comparten los pesos, la evaluación de las activaciones de estas unidades es equivalente a  realizar una operación de convolución
       sobre la intensidad de los píxeles de la imagen con un filtro compuesto por los parámetros de peso.
-      
+
+      Además de las capas convolucionales, existen otros 2 tipos de capas comunmente utilizadas en las CNN: Capas de submuestreo o agrupación (subsampling o pooling en inglés) y
+      capas completamente conectadas. Las capas de submuestreo tienen como función reducir progresivamente el tamaño espacial de la representación.
+      De esta forma, se reduce la cantidad de parámetros y por ende de cálculos en la red, como asi también permite obtener una mejor generalización a la hora de predecir. 
+      Estas capas funciona independientemente en cada segmento de profundidad de la entrada y la redimensiona espacialmente, utilizando la operación de máximo como se observa en
+      la figura \ref{fig:maxpool_layer}. En algunos casos se suele utilizar la operación de promedio o la norma L2 en lugar del máximo.
+
+      \begin{figure}[H]
+	\begin{center}
+	  \includegraphics[width=0.8\linewidth]{./img/stanford_maxpool.jpeg}
+	\end{center}
+	\caption{La capa agrupación reduce el volumen espacialmente, de forma independiente en cada una profundidad de la entrada de volumen.
+	  A la izquierda: En este ejemplo, el volumen de entrada de tamaño [224x224x64] es agrupado con un filtro de tamaño 2 y salto 2 en un volumen de salida de tamaño [112x112x64].
+	  Observe que la profundidad del volumen se conserva. A la Derecha: la forma más común de reducción de tamaño de la operación de máximo, dando lugar agrupación por máximo,
+	  que aquí se muestra, con un salto de 2. Es decir, cada operación se toma con 4 números (pequeño cuadrado de 2x2). \cite{Karpathy:Stanford}}
+	\label{fig:maxpool_layer}
+      \end{figure}
+    
       \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=0.8\linewidth]{./img/bishop_cnn.jpg}
@@ -1020,87 +1037,31 @@
 	\label{fig:bishop_cnn}
       \end{figure}
       
+      En cuanto a las capas completamente conectadas, éstas toman todas las neuronas de la capa anterior y las conectan a cada una de las neuronas que posee, es decir,
+      mediante una capa completamente conectada, las neuronas entre dos capas adyacentes están completamente conectadas de a pares. De esta forma, se pierde la localidad espacial,
+      por lo que este tipo de capas suelen estar al final de la red.
+      
       Lograr diseñar una red convolucional que funcione correctamente, no es una tarea simple. Además, una red neuronal convolucional moderna requiere entre 2 y 3 semanas para entrenarse, 
       utilizando múltiples GPUs para el conjunto de datos ImageNet \cite{imagenet_cvpr09}. Debido a estos motivos, en la actualidad un practica común es adaptar
       redes famosas ya preentrenadas, realizando sobre estas ajuste fino (''Finetuning`` en la literatura en ingles), técnica que consiste en adaptar el clasificador de la 
       red preentrenada a las nuevas etiquetas, proveyendo un pequeño conjunto de datos que permita \emph{reentrenar} la red ajustando los pesos a los datos actuales.
       Dicha técnica se detalla en la sección \ref{sec:finetuning}.
 
-\iffalse
-    \subsection {Arquitectura de una red neuronal convolucional}
-      En las redes neuronales convolucionales, las unidades dentro de una capa se organizan en 3 dimensiones: alto, ancho y profundidad, como se ilustra en la figura \ref{fig:cnn}.
-      Cada capa acepta un volumen de 3 dimensiones como entrada y lo transforma en un volumen de salida de 3 dimensiones a través de una función diferenciable.
-      La entrada y salida de cada una de estas capas son conjuntos de arreglos llamados mapas de caracteristicas.
-      En el caso mas simple de arquitectura, la red transforma el volumen de una imagen de entrada en un volumen de salida, conteniendo los puntajes de cada clase para el problema de clasificación.
-      Típicamente, las CNNs suelen además organizarse por etapas, cada etapa consiste de una capa convolucional, una no lineal y una de agrupamiento.
-      A continuación se detallan estos tipos de capas.
-      \begin{figure}[H]
-	\begin{center}
-	\includegraphics[width=0.8\linewidth]{./img/stanford_cnn.jpeg}
-	\end{center}
-	\caption{Una CNN ordena a sus neuronas en tres dimensiones (ancho, alto, profundidad), como se visualiza en una de
-	  las capas. Cada capa de una CNN transforma un volumen 3D de entrada a un volumen 3D de salida. En este ejemplo, en la capa de entrada se encuentra la imagen, por lo que su ancho y su altura
-	  serían las dimensiones de la imagen, y la profundidad sería 3 (los canales Rojo, Verde, Azul). \cite{Karpathy:Stanford}}
-	\label{fig:cnn}
-      \end{figure}
-\fi
-
-    \subsection {Tipos de Capas}
-      \subsubsection{Capa Convolucional} \label{}
-	Los parámetros consisten en un conjunto de filtros aprendibles. Cada filtro es pequeño espacialmente (alto y ancho) pero se extiende sobre toda la profundidad del v
-	olumen de entrada.
-	Durante el paso hacia adelante, se desliza o convoluciona el filtro a través del alto y ancho del volumen de entrada y se computa el producto punto entre los valores del filtro y los valores
-	del volumen de entrada. 
-	A medida que se va deslizando el filtro sobre el ancho y el alto del volumen de entrada, se va generando un mapa de características de 2 dimensiones que contiene 
-	los valores de respuesta de ese filtro en cada posición espacial.
-
-	Intuitivamente, la red aprenderá los filtros que se activan cuando ven algún tipo de característica visual como un borde de cierta orientación o una mancha de algún c
-	olor en la primera capa, o eventualmente panal entero o patrones de rueda en las capas más altas de la red. 
-	Dado que tendremos un conjunto de filtros en cada capa Convolucional, y cada uno de ellos producirá un mapa de activación bidimensional separado, estos se apilarán 
-	a lo largo de la dimensión de profundidad para producir el volumen de salida.
-
-	\begin{figure}[H]
-	  \begin{center}
-	   \includegraphics[width=0.8\linewidth]{./img/stanford_conv_layer.jpeg}
-	  \end{center}
-	  \caption{Un ejemplo del volumen de entrada (por ejemplo, un volumen de 32x32x3), y un ejemplo de volumen de neuronas en la primer capa Convolucional.
-	    Cada neurona de la capa convolucional está conectada sólo a una región local en el volumen de entrada espacialmente, pero a la profundidad total (es decir, todos
-	    los canales de color). Notar que hay múltiples neuronas (5 en este ejemplo) a lo largo de la profundidad, todos mirando en la misma región en la entrada.
-	    A la derecha: Las neuronas de la Red Neuronal se mantienen sin cambios: Se calcula un producto punto de su peso con el de entrada seguido de una no-linealidad,
-	    pero su conectividad está ahora restringida a ser local en el espacio. \cite{Karpathy:Stanford}}
-	  \label{fig:conv_layer}
-	\end{figure}
-
-      \subsubsection{Capa de Agrupación}
-	Su función es reducir progresivamente el tamaño espacial de la representación para reducir la cantidad de parámetros y de cálculo en la red, y por lo tanto también para controlar
-	el sobreajuste. La capa de Agrupación (Pooling en la literatura en ingles) funciona independientemente en cada segmento de profundidad de la entrada y la redimensiona espacialmente, utilizando la operación de máximo,
-	también se suele utilizar la operación de promedio o la norma L2.
-
-	\begin{figure}[H]
-	  \begin{center}
-	   \includegraphics[width=0.8\linewidth]{./img/stanford_maxpool.jpeg}
-	  \end{center}
-	  \caption{La capa agrupación reduce el volumen espacialmente, de forma independiente en cada una profundidad de la entrada de volumen.
-	    A la izquierda: En este ejemplo, el volumen de entrada de tamaño [224x224x64] es agrupado con un filtro de tamaño 2 y salto 2 en un volumen de salida de tamaño [112x112x64].
-	    Observe que la profundidad del volumen se conserva. A la Derecha: la forma más común de reducción de tamaño de la operación de máximo, dando lugar agrupación por máximo,
-	    que aquí se muestra, con un salto de 2. Es decir, cada operación se toma con 4 números (pequeño cuadrado de 2x2). \cite{Karpathy:Stanford}}
-	  \label{fig:maxpool_layer}
-	\end{figure}
-
-      \subsubsection{Capa Completamente Conectada}
-	Una capa completamente conectada toma todas las neuronas de la capa anterior y las conecta a cada una de las neuronas que posee, es decir,
-	mediante una capa completamente conectada, las neuronas entre dos capas adyacentes están completamente conectadas de a pares, de esta forma, se pierde la localidad espacial,
-	por lo que este tipo de capas suelen estar al final de la red.
-
     \section {Ajuste fino} \label{sec:finetuning}
-      El ajuste fino (Finetuning en inglés), es una técnica que toma un modelo ya entrenado, con sus respectivos pesos. Consiste en adaptar la arquitectura
-      del modelo inicial, para el problema al cual se quiere emplear, brindando un conjunto de datos de entrenamiento con el cual se entrena la red adaptada.
-      No obstante, la inicialización de los pesos coincide con los pesos obtenidos del modelo preentrenado.
-      Por ejemplo una red fue entrenada para reconocer distintas razas de perros en imágenes, y ahora se desea clasificar gatos según su raza. 
+      El ajuste fino (Finetuning en inglés), es una técnica que toma un modelo ya entrenado, con sus respectivos pesos y lo ajusta a los nuevas etiquetas de clasificación. 
+      Dado un modelo inicial, preentrenado y un pequeño nuevo conjunto de datos junto con las respectivas etiquetas en las cuales se desea clasificar, el ajuste fino
+      permite adaptar el modelo inicial a las nuevos datos y etiquetas.
+      Por lo general, consiste en reentrenar la arquitectura del modelo inicial, reemplazando la última capa, quien se encarga de la clasificación, por una nueva capa
+      adaptada a las nuevas etiquetas.
+      Para reentrenar el modelo, se utilizan los pesos obtenidos del modelo preentrenado como inicialización, y luego se van ajustando en base al nuevo conjunto de entrenamiento.
+      Ésta técnica suele ser muy exitosa en casos donde la clasificación inicial de la red no difiera en gran manera de la clasificación a la cual se desea adaptar.
+      
+      Por ejemplo una red que fue entrenada para reconocer 100 razas de perros en imágenes, ahora se desea clasificar entre 50 razas de gatos. 
       En lugar de entrenar una red desde un estado aleatorio inicial, se puede utilizar la red preentrenada para perros, reemplazando la ultima capa completamente conectada
-      por otra que tenga la cantidad de salidas igual a la cantidad de razas de gato que se desean reconocer.
-      Para el entrenamiento de esta red adaptada se le da como entrada un conjunto de imágenes, de gatos de las distintas razas, de esta forma los  pesos se van
+      (de 100 salidas) por otra que tenga la cantidad de salidas igual a la cantidad de razas de gato que se desean reconocer (en este caso 50).
+      Para el entrenamiento de esta red adaptada se le brinda como entrada un conjunto de imágenes, de gatos de las distintas razas. De este modo los pesos se van
       ajustando para lograr reconocer este nuevo tipo de conceptos en las imágenes.
+ 
       
       \subsection{Redes Convolucionales Famosas y Modelos preentrenados} \label{sec:cnn_famosas}
 	Como mencionamos anteriormente, una práctica usual es reentrenar modelos preentrenados, adaptándolos a las necesidades especificas. 
@@ -1187,28 +1148,6 @@
 	    \caption{Bloque residual de ResNet}
 	    \label{fig:resnet}
 	  \end{figure}	
-	
-\iffalse
-      \paragraph{Como y cuando hacer Reentrenamiento}
-      \FIXME{REVISAR SI HACE FALTA PONERLO}
-	¿Cómo decidir qué tipo de transferencia de aprendizaje debe realizar en un nuevo conjunto de datos? Esta es una función de varios factores, pero los dos más importantes son el
-	tamaño del nuevo conjunto de datos (pequeño o grande), y su similitud con el conjunto de datos original (por ejemplo ImageNet-como en términos de contenido de imágenes y las clases,
-	O muy diferentes, tales como imágenes de microscopio). Teniendo en cuenta que las características de CNN son más genéricas en capas tempranas y más específicas del conjunto de datos
-	originales en capas posteriores, aquí hay algunas reglas comunes para navegar por los 4 escenarios principales:
-	\begin{itemize}
-	  \item El nuevo conjunto de datos es pequeño y similar al conjunto de datos original. Dado que los datos son pequeños, no es una buena idea afinar la red convolucional debido a las
-	  preocupaciones excesivas. Dado que los datos son similares a los datos originales, esperamos que las características de mayor nivel en la red convolucional sean relevantes para este
-	  conjunto de datos. Por lo tanto, la mejor idea podría ser la de formar un clasificador lineal utilizando las caracteristicas extraidas en la ultima capa de la red.
-	  \item El nuevo conjunto de datos es grande y similar al conjunto de datos original. Dado que tenemos más datos, podemos tener más confianza de que no superaremos si intentáramos
-	  ajustar a través de la red completa.
-	  \item El nuevo conjunto de datos es pequeño pero muy diferente del conjunto de datos original. Dado que los datos son pequeños, lo más probable es que sólo entrenen un clasificador
-	  lineal. Dado que el conjunto de datos es muy diferente, puede que no sea mejor entrenar al clasificador en la parte superior de la red, que contiene más características específicas
-	  de conjunto de datos. En su lugar, podría funciónar mejor para entrenar el clasificador SVM de las activaciones en algún lugar anterior en la red.
-	  \item El nuevo conjunto de datos es grande y muy diferente del conjunto de datos original. Dado que el conjunto de datos es muy grande, podemos esperar que podamos permitirnos
-	  entrenar a una red convolucional desde cero. Sin embargo, en la práctica es muy a menudo todavía beneficioso para inicializar con pesos de un modelo pre-entrenado.
-	  En este caso, tendríamos suficientes datos y confianza para afinar a través de toda la red.
-	\end{itemize}
-\fi
 
 \chapter{Algoritmo de Transferencia de estilo} \label{chapter:style_transfer}
     \section{Introducción}
