@@ -228,7 +228,7 @@
     En el capítulo \ref{chap:experimentos} contiene los experimentos realizados y los resultados obtenidos, junto con un análisis y evaluación empírica de los mismos. 
     Finalmente en el capitulo \ref{chap:conclusiones} se  presentan las conclusiones obtenidas acerca del trabajo realizado, junto con las perspectivas y posibles tareas a futuro.
 
-\chapter{Marco Teórico} \label{chap:marco_teorico}
+\chapter{Marco teórico} \label{chap:marco_teorico}
 
 %Material para revisar
 %http://cs231n.github.io/
@@ -251,7 +251,7 @@
 
   \section{Aprendizaje Automático}
     \subsection{Introducción}
-      El aprendizaje automático (\emph{Machine Learning} , por su denominación en inglés) es un campo que se encuentra en la intersección de las ciencias de la computación
+      El aprendizaje automático (\emph{Machine Learning}, por su denominación en inglés) es un campo que se encuentra en la intersección de las ciencias de la computación
       y el aprendizaje estadístico. 
       Tiene por objetivo dotar a las computadoras con la habilidad de aprender o inferir reglas que no fueron explícitamente programadas, a partir
       de los datos que le sean provistos.
@@ -270,7 +270,7 @@
       Estas representaciones serán discutidas en la sección \ref{sec:representacion}.
       A continuación se detallan cada uno de los tipos de algoritmos.
       
-      \subsubsection{Aprendizaje Supervisado} \label{sec:supervisado}
+      \subsubsection{Aprendizaje supervisado} \label{sec:supervisado}
 	Los algoritmos de aprendizaje supervisado emplean como conjunto de entrenamiento ejemplos que consisten de entradas $x$ y etiquetas $y$, es decir
 	aprenden una función de predicción, a partir de datos de entrenamiento etiquetados. 
 	Cada ejemplo del conjunto de entrenamiento suele ser un par compuesto de un objeto de entrenamiento y una etiqueta, el cual es el valor de salida deseado.
@@ -287,8 +287,8 @@
 	  \label{fig:svm}
 	\end{figure}
 
-      \subsubsection{Aprendizaje No Supervisado}
-	  Los algoritmos de aprendizaje No Supervisado se caracterizan por aplicarse a conjuntos de datos a los cuales, durante la etapa de entrenamiento no se les conoce 
+      \subsubsection{Aprendizaje no supervisado}
+	  Los algoritmos de aprendizaje no supervisado se caracterizan por aplicarse a conjuntos de datos a los cuales, durante la etapa de entrenamiento no se les conoce 
 	  su etiqueta de salida. 
 	  A diferencia de los algoritmos de aprendizaje supervisado, estos algoritmos solo requieren de los objetos para el entrenamiento, en lugar de disponer
 	  de objetos y etiquetas. Dichas técnicas se emplean para detectar patrones o similaridades entre los datos que eran desconocidas.
@@ -317,7 +317,7 @@
 	Por ejemplo para recomendar una película a un usuario, utilizando información de las películas ya observadas, se puede
 	establecer una similitud de intereses con otros usuarios, que además vieron otras películas, las cuales son recomendadas a este usuario.
 
-    \subsection{Representación de la Información en Aprendizaje Automático} \label{sec:representacion}
+    \subsection{Representación de la información en aprendizaje automático} \label{sec:representacion}
       Para que un modelo pueda aprender, es necesario lograr una representación adecuada de los objetos sobre los cuales se desea asimilar información.
       Dependiendo de la información que se desee aprender, estas representaciones pueden ir variando. 
       Si se desea entender sobre el riesgo crediticio de un usuario, la información que represente a este usuario será diferente a la representación de ese mismo 
@@ -340,17 +340,17 @@
       ilustrados gráficamente en la figura \ref{fig:stanford_challenges}:
       
       \begin{itemize}
-	\item Variación del punto de vista: Una simple instancia de un objeto puede estar orientada de muchas formas frente a la cámara que toma la imagen.
-	\item Variación de escala: Las clases visuales suelen exhibir variaciones en su tamaño en el mundo real y no solo en lo referido a la imagen.
-	\item Deformación: Muchos objetos de interés no tienen un cuerpo rígido y pueden ser deformados de muchas formas
-	\item Oclusión: Los objetos de interés pueden estar ocluidos y solo una pequeña porción del objeto puede ser visible.
-	\item Condiciones de iluminación: Los efectos de la iluminación pueden influir de forma drástica a nivel de píxeles.
+	\item Variación del punto de vista: una simple instancia de un objeto puede estar orientada de muchas formas frente a la cámara que toma la imagen.
+	\item Variación de escala: las clases visuales suelen exhibir variaciones en su tamaño en el mundo real y no solo en lo referido a la imagen.
+	\item Deformación: muchos objetos de interés no tienen un cuerpo rígido y pueden ser deformados de muchas formas
+	\item Oclusión: los objetos de interés pueden estar ocluidos y solo una pequeña porción del objeto puede ser visible.
+	\item Condiciones de iluminación: los efectos de la iluminación pueden influir de forma drástica a nivel de píxeles.
 	\item Influencia del fondo: los objetos de interés pueden estar inmersos en un ambiente en el cual sean difíciles de identificar.
-	\item Variaciones intra clase: Existen muchos instancias completamente distinta de una misma categoría de objetos.
+	\item Variaciones intra clase: existen muchos instancias completamente distinta de una misma categoría de objetos.
       \end{itemize}
       
       \begin{figure}[h]
-	\includegraphics[scale=0.5]{./img/stanford_challenges.jpeg}
+	\includegraphics[scale=0.5]{./img/stanford_challenges_spanish.jpeg}
 	\caption{Desafíos que debe superar la representación de una imagen}
 	\label{fig:stanford_challenges}
       \end{figure}
@@ -358,7 +358,7 @@
       A lo largo del desarrollo de la visión por computadora se distinguen dos enfoques para la generación de representaciones que permitan reconocer características 
       de una imagen: El enfoque basado en técnicas superficiales (o \emph{Shallow} en inglés) y el enfoque de aprendizaje profundo (o \emph{Deep} en inglés).
 
-      \subsubsection{Enfoque Clásico}
+      \subsubsection{Enfoque clásico}
 	En el enfoque clásico (o arquitecturas \emph{Shallow}, como se conocen en la literatura en inglés), se busca generar una representación invariante a la posición, iluminación, 
 	fondo, etc. que describan regiones locales de la imagen, de forma robusta. 
 	Para ello se utilizan principalmente técnicas estadísticas a partir de conocimiento anterior del objeto y del contexto,
@@ -378,7 +378,7 @@
 	  \end{center}
 	\end{figure}
 
-      \subsubsection{Enfoque de Aprendizaje Profundo}
+      \subsubsection{Enfoque de aprendizaje profundo}
 	Este enfoque tiene como objetivo lograr una representación composicional de la imagen. 
 	Consta de un único algoritmo que, a diferencia del enfoque clásico, aprende a realizar la representación por si mismo, en lugar de depender de decisiones externas.
 	El contenido representado dependerá de la información que tenga como objetivo aprender el modelo. 
@@ -390,7 +390,7 @@
 	Las \emph{features} de bajo nivel aprendidas desde los píxeles alimentan el aprendizaje de otras \emph{features} que aprenden a reconocer contornos y bordes, 
 	y así sucesivamente hasta llegar a las \emph{features} de mas alto nivel que logran reconocer estructuras y objetos. 
 	Debido a esto, las estructuras de aprendizaje profundo contemplan esta particularidad organizándose en diferentes capas, donde la salida de una capa es la entrada 
-	a la capa siguiente. Las Redes Neuronales Convolucionales soportan el aprendizaje de este tipo \emph{features} y es el modelo empleado en este trabajo. 
+	a la capa siguiente. Las redes neuronales convolucionales soportan el aprendizaje de este tipo \emph{features} y es el modelo empleado en este trabajo. 
 
 	En la figura \ref{fig:shallow_deep} se realiza una comparación entre los enfoques clásicos y el enfoque de aprendizaje profundo.  
 	En las 3 primeras opciones del diagrama se pueden observar las distintas formas de representar imágenes mediante técnicas de aprendizaje automático tradicional,
@@ -435,7 +435,7 @@
 	  
 	  \begin{figure}[ht]
 	    \begin{center}
-	     \includegraphics[width=0.8\linewidth]{./img/stanford_linear_class.jpeg}
+	     \includegraphics[width=0.8\linewidth]{./img/stanford_linear_class_spanish.jpeg}
 	    \end{center}
 	    \caption{Ejemplo de clasificador lineal que utiliza una función de puntuación lineal para clasificar entre autos, aviones y ciervos}
 	    \label{fig:linear_classifier}
@@ -610,7 +610,7 @@
       \paragraph{Configuración y Diseño}
 	En la etapa de configuración y diseño de una red neuronal es donde se define la arquitectura de la red, es decir cuantas capas tendrá, cuantas neuronas tendrá 
 	cada una de las capas y cuales serán las funciones de activación que estas utilizarán.
-	Además en esta etapa se define cual será la función de perdida que se utilizara para calcular el error durante el entrenamiento.
+	Además en esta etapa se define cual será la función de pérdida que se utilizará para calcular el error durante el entrenamiento.
 	En esta etapa es donde se requiere mayor incidencia manual para este tipo de algoritmos, el resto se aprende automáticamente.
 
       \subsection {Aprendizaje}
@@ -623,13 +623,13 @@
 	El ciclo de entrenamiento se compone de 2 pasos: paso hacia adelante, y paso de retropropagación del error.
 	
 	\begin{enumerate}
-	  \item En el paso hacia adelante se evalúa la red y se obtiene el resultado de salida, con el cual se mide el error, utilizando la función de perdida elegida.
+	  \item En el paso hacia adelante se evalúa la red y se obtiene el resultado de salida, con el cual se mide el error, utilizando la función de pérdida elegida.
 	  \item En el paso de retropropagación del error se calcula el gradiente para luego ajustar los pesos internos de la red en base al resultado del gradiente,
 	    desde las capas finales de la red hasta las capas iniciales.
 	\end{enumerate}
 
       \subsection{Retropropagación del Error} \label{sec:backpropagation}
-	La mayoría de los algoritmos de aprendizaje implican un procedimiento iterativo para la minimización de una función de perdida o error, en el cual ajustan 
+	La mayoría de los algoritmos de aprendizaje implican un procedimiento iterativo para la minimización de una función de pérdida o error, en el cual ajustan 
 	los pesos mediante una secuencia de pasos. 
 	En cada paso, se pueden distinguir dos etapas bien diferenciadas. En la primera etapa, las derivadas de la función de error con
 	respecto a los pesos deben ser evaluados. 
@@ -646,7 +646,7 @@
 	  L(W) = \frac{1}{N}\sum_{n=1}^{N} L_n(Y_n, f(X_n, W)) + \lambda \Omega(W)
 	\end{equation}
 	donde el sesgo $b$ se considera parte del vector $W$. Además, como $(X_n, Y_n)$ están predefinidas, podemos considerar que cada $L_n$ solo depende de $W$.
-	Debido a todo esto, para calcular el gradiente de la función de perdida total, debemos evaluar $\nabla L_n(W)$ para cada término en la función de error. 
+	Debido a todo esto, para calcular el gradiente de la función de pérdida total, debemos evaluar $\nabla L_n(W)$ para cada término en la función de error. 
 	Esto puede ser usado directamente para la optimización secuencial,o los resultados pueden ser acumulados a lo largo  del conjunto de entrenamiento en el 
 	caso de los métodos de optimización por lotes.
 	
@@ -911,7 +911,7 @@
 
       \begin{figure}[H]
 	\begin{center}
-	  \includegraphics[width=0.8\linewidth]{./img/stanford_maxpool.jpeg}
+	  \includegraphics[width=0.8\linewidth]{./img/stanford_maxpool_spanish.jpeg}
 	\end{center}
 	\caption{La capa agrupación reduce el volumen espacialmente, de forma independiente en cada una profundidad de la entrada de volumen.
 	  A la izquierda: En este ejemplo, el volumen de entrada de tamaño [224x224x64] es agrupado con un filtro de tamaño 2 y salto 2 en un volumen de salida de tamaño [112x112x64].
@@ -1150,10 +1150,10 @@
       'conv1\_1', 'conv2\_1', 'conv3\_1', 'conv4\_1' y 'conv5\_1' (e)).
       Esto crea imágenes que coinciden con el estilo de la imagen dada, descartando la información del orden espacial de la escena.
       
-      El algoritmo presentado se reduce a un problema de optimización, en el cual se define una función de perdida que mide el error entre las representaciones de estilo y contenido 
+      El algoritmo presentado se reduce a un problema de optimización, en el cual se define una función de pérdida que mide el error entre las representaciones de estilo y contenido 
       de la imagen generada, con las respectivas representaciones de las imágenes de entrada.
-      Esta función de perdida es una combinación lineal de 2 funciones de perdida distintas, una relacionada al contenido y otra al estilo, las cuales se desarrollan en las secciones \ref{sec:contenido} y \ref{sec:estilo} respectivamente.
-      Comenzando desde una imagen de ruido blanco, se va minimizando el valor obtenido por la función de perdida, iterativamente, mediante el método de descenso por el gradiente, hasta 
+      Esta función de pérdida es una combinación lineal de 2 funciones de pérdida distintas, una relacionada al contenido y otra al estilo, las cuales se desarrollan en las secciones \ref{sec:contenido} y \ref{sec:estilo} respectivamente.
+      Comenzando desde una imagen de ruido blanco, se va minimizando el valor obtenido por la función de pérdida, iterativamente, mediante el método de descenso por el gradiente, hasta 
       llegar al resultado deseado.
       De esta forma, tanto el estilo como el contenido de la imagen generada se va aproximando al estilo y al contenido de las respectivas imágenes de entrada.
       
@@ -1199,11 +1199,11 @@
       En la parte superior de la figura \ref{fig:gatys_reconstrucciones} se puede observar la reconstrucción de estilo.
       
       Sean $\overrightarrow{a}$ y $\overrightarrow{x}$ la imagen original y la imagen generada, y sean $A^l$ y $G^l$
-      las respectivas representaciones de estilo en la capa $l$, la contribución de esa capa a la función de perdida total del estilo es:
+      las respectivas representaciones de estilo en la capa $l$, la contribución de esa capa a la función de pérdida total del estilo es:
       \begin{equation}
        E_l = \frac{1}{4 N_l^2 M_l^2} \sum_{i,j} (G_{i,j}^l - A_{i,j}^l)^2
       \end{equation}
-      De esta forma, la función de pérdida del estilo total queda definida como una combinación lineal de las funciones de perdida de estilo de cada capa:
+      De esta forma, la función de pérdida del estilo total queda definida como una combinación lineal de las funciones de pérdida de estilo de cada capa:
       \begin{equation}
        L_{estilo}(\overrightarrow{a},\overrightarrow{x}) = \sum_{l=0}^{L} w_l E_l
       \end{equation}
@@ -1215,12 +1215,12 @@
       Para transferir el estilo de una obra de arte $\overrightarrow{a}$ a una fotografía $\overrightarrow{p}$, se genera una nueva imagen
       la cual simultáneamente deba coincidir con la representación de contenido de $\overrightarrow{p}$ y la representación de estilo de $\overrightarrow{a}$ (Figura \ref{fig:gatys_generacion}). 
       Es decir, se minimizan en conjunto la distancia del mapa de características de una imagen de ruido con la representación del contenido de la fotografía
-      en una capa y la representación del estilo de la obra de arte. Por lo tanto la función de perdida total que se minimiza es:
+      en una capa y la representación del estilo de la obra de arte. Por lo tanto la función de pérdida total que se minimiza es:
       \begin{equation}\label{eq:objetivo}
        L_{total}(\overrightarrow{p},\overrightarrow{a},\overrightarrow{x}) = \alpha L_{contenido}(\overrightarrow{p},\overrightarrow{x}) + \beta L_{estilo}(\overrightarrow{a},\overrightarrow{x})
       \end{equation}
-      Esta función combina linealmente las funciones de perdida del contenido y el estilo, por lo que se conforma por 2 términos principales, uno correspondiente a la función de perdida
-      del contenido y otro correspondiente a la función de perdida del estilo, donde $\alpha$ y $\beta$ son los factores de peso para el contenido y el estilo respectivamente,
+      Esta función combina linealmente las funciones de pérdida del contenido y el estilo, por lo que se conforma por 2 términos principales, uno correspondiente a la función de pérdida
+      del contenido y otro correspondiente a la función de pérdida del estilo, donde $\alpha$ y $\beta$ son los factores de peso para el contenido y el estilo respectivamente,
       a la hora de combinarlos, los cuales se consideran hiper-parámetros. 
       
       \begin{figure}[h]
@@ -1235,15 +1235,15 @@
       de la red y la representación del contenido $P^l$ en una capa se almacena (a la derecha). Luego a partir de una imagen de ruido blanco $\overrightarrow{x}$ pasa a través de la red y sus
       características de estilo de $G^l$ y sus características de contenido $F^l$ son calculadas.
       
-      En cada capa incluida en la representación de estilo, se calcula la diferencia cuadrática media punto a punto entre $G^l$ y $A^l$ para obtener la función de perdida del estilo
-      $L_{estilo}$ (a la izquierda). También se calcula la diferencia cuadrática media entre $F^l$ y $P^l$ para obtener la función de perdida del contenido $L_{contenido}$ (a la derecha).
-      La función pérdida total $L_{total}$ es entonces una combinación lineal entre la función de perdida del contenido y la función de pérdida del estilo.
+      En cada capa incluida en la representación de estilo, se calcula la diferencia cuadrática media punto a punto entre $G^l$ y $A^l$ para obtener la función de pérdida del estilo
+      $L_{estilo}$ (a la izquierda). También se calcula la diferencia cuadrática media entre $F^l$ y $P^l$ para obtener la función de pérdida del contenido $L_{contenido}$ (a la derecha).
+      La función pérdida total $L_{total}$ es entonces una combinación lineal entre la función de pérdida del contenido y la función de pérdida del estilo.
       La derivada de  $L_{total}$ con respecto a los valores de los píxeles pueden ser calculadas con el método  de retropropagación del error (en el medio).
       Este gradiente se utiliza de forma iterativa actualizando la imagen $\overrightarrow{x}$ hasta que simultáneamente coincida con las características de estilo de la imagen
       de estilo $\overrightarrow{a}$ y con las características de contenido de la imagen de contenido $\overrightarrow{p}$ (en la parte inferior central).
       
       Finalmente, la salida del algoritmo, a partir de lo enunciado en la ecuación \eqref{eq:objetivo}, sera el argumento $\overrightarrow{x}$
-      que minimice la función de perdida total, como se puede observar en la ecuación \eqref{eq:resultante}. 
+      que minimice la función de pérdida total, como se puede observar en la ecuación \eqref{eq:resultante}. 
       \begin{equation} \label{eq:resultante}
        \overrightarrow{x} = \arg\min_{\overrightarrow{x}} L_{total}(\overrightarrow{p},\overrightarrow{a},\overrightarrow{x})
       \end{equation}
@@ -1251,7 +1251,7 @@
       \section{Hiper-parámetros del algoritmo} \label{sec:hiperparametros}
 	A continuación se enumera la lista de hiper-parámetros que requiere el algoritmo para ejecutarse y se discute acerca de su influencia en el mismo:
 	\begin{itemize}
-	 \item Numero de iteraciones: Determina cuantas veces se ejecuta el método de descenso por el gradiente para minimizar la función de perdida. 
+	 \item Numero de iteraciones: Determina cuantas veces se ejecuta el método de descenso por el gradiente para minimizar la función de pérdida. 
 	  A medida que este numero aumenta, mayores son las posibilidades de obtener un resultado aceptado, como se ilustra en la figura \ref{fig:img_iters}.
 	  \begin{figure}[h]
 	  \begin{center}
@@ -1266,7 +1266,7 @@
 	\end{figure}
 	
 	 \item Tasa de aprendizaje: Define el tamaño del paso en cada iteración del descenso por el gradiente. Si esta tasa es muy pequeña, se requieren mayor numero 
-	  de iteraciones, sin embargo si es muy grande, se puede caer en un ciclo donde nunca se termine minimizando la función de perdida. 
+	  de iteraciones, sin embargo si es muy grande, se puede caer en un ciclo donde nunca se termine minimizando la función de pérdida. 
 	 \item Red Convolucional: Dependiendo de la red convolucional que se utilice, cambia el tamaño de los mapas de características, las capas, etc.
 	  Como se menciona en la sección \ref{sec:cnn_famosas}, existen varias CNNs entrenadas para el reconocimiento de objetos, que tienen arquitecturas
 	  muy distintas, al igual que el procesamiento requerido para utilizarlas.
@@ -1283,14 +1283,14 @@
 	    \label{fig:content_repr_layers}
 	 \end{figure}
 	 
-	 \item Factores de peso para las funciones de perdida de estilo y contenido en la función de perdida total $(\alpha, \beta)$: Esto determina el grado de influencia
-	  de cada función de perdida. 
+	 \item Factores de peso para las funciones de pérdida de estilo y contenido en la función de pérdida total $(\alpha, \beta)$: Esto determina el grado de influencia
+	  de cada función de pérdida. 
 	  Un fuerte énfasis sobre el estilo resultara en una imagen que coincida con la apariencia de la obra de arte pero difícilmente se logre observar el contenido de la fotografía 
 	  ( $\alpha / \beta = 1 \times 10^{-4}$ figura \ref{fig:ratio_content_style} arriba a la izquierda). Al enfatizar sobre el contenido, se puede visualizar claramente la fotografía,
 	  pero el estilo no coincide completamente con la obra de arte ( $\alpha / \beta = 1 \times 10^{-1}$ figura \ref{fig:ratio_content_style} abajo a la derecha).
 	  \begin{figure}[h]
 	    \includegraphics[width=\textwidth]{./img/ratio_content_style.png}
-	    \caption{Comparación de los distintos ratios entre el peso del estilo y el contenido en la función de perdida total}
+	    \caption{Comparación de los distintos ratios entre el peso del estilo y el contenido en la función de pérdida total}
 	    \label{fig:ratio_content_style}
 	 \end{figure}
 	 
