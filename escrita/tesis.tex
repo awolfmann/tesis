@@ -16,6 +16,7 @@
 \usepackage[chapter]{algorithm}
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
+\usepackage{svg}
 %\usepackage[options]{natbib}
 \usepackage{verbatim, amsmath, amsfonts, amssymb, amsthm} % For code environment and math support
 
@@ -65,27 +66,33 @@
 
 
 \begin{titlepage}
+    \begin{figure}[H]
+      \begin{center}
+      \includegraphics[width=0.8\textwidth]{./img/logo_unc.jpg}
+    \end{center}
+  \end{figure}
   \begin{center}
-  \vspace*{1in}
+  \vspace*{0.5in}
     \begin{Huge}
-    \textbf{Trabajo Final}\\
-    \textbf{Transferencia de Estilo en Fotografias utilizando Redes Neuronales Convolucionales} \\
+    \textbf{Transferencia de Estilo en Fotografias mediante Redes Neuronales Convolucionales} \\
     \end{Huge}
+    \begin{large}
+      \vspace*{0.25in}
+       Trabajo Final de Licenciatura en Ciencias de la Computación\\
+       \vspace*{0.15in}
+       Autor: Wolfmann, Ariel Mauricio\\
+       Director: Doctor Sanchez, Jorge\\
+    \end{large}
   \end{center}
   \begin{center}
-    \begin{large}
-      \vspace*{1in}
-      Autor: Wolfmann, Ariel Mauricio\\
-      Director: Sanchez, Jorge\\
-    \end{large}
     \vspace*{0.15in}
-     Marzo de 2017\\
+     Julio de 2017\\
     \vspace*{0.15in}
     Universidad Nacional de Córdoba\\
     \vspace*{0.15in}
     Facultad de Matemática, Astronomía, Física y Computación\\
-    \vspace*{0.6in}
   \end{center}
+  
 \end{titlepage}
 
 \iffalse
@@ -1610,30 +1617,41 @@
 
 \chapter{Conclusiones, Perspectivas y trabajos a futuro} \label{chap:conclusiones}
   \section{Conclusiones}
-    En este trabajo se presenta la idea de evaluar los resultados generados por el algoritmo de transferencia de Gatys et al. \cite{Gatys:Neural_Style}, mediante una red neuronal que 
-    clasifica estilos artísticos. Esta red inicialmente había sido entrenada para clasificación de objetos y luego mediante ajuste fino se reentreno para clasificar estilos.
-    Al establecer una métrica cuantitativa de evaluación, el algoritmo libera al usuario de la responsabilidad de definir el numero de iteraciones, uno de los principales factores 
+    En este trabajo se presenta la idea de evaluar los resultados generados por el algoritmo de transferencia presentado por Gatys et al. \cite{Gatys:Neural_Style}, 
+    mediante una red neuronal que clasifica estilos artísticos. En base al puntaje obtenido en la clasificación, se determina la calidad de la imagen generada. 
+    Esto permite automatizar la elección del número de iteraciones, uno de los hiper parámetros que requiere el algoritmo de transferencia de estilo.
+    En el presente trabajo se utilizan 2 redes neuronales convolucionales: una para la transferencia de estilo y otra para la clasificación de los estilos.
+    Esta última, inicialmente había sido entrenada para clasificación de objetos y luego mediante ajuste fino se reentrenó para clasificar estilos artísticos.
+    Dado que las obras de arte suelen ser calificadas cualitativamente, era necesario definir una métrica cuantitativa para poder establecer la calidad de la imagen obtenida.
+    La métrica que empleada para definir la calidad de una imagen generada fue el puntaje obtenido por ésta, al ser evaluada en la red de clasificación de estilos. 
+    Al establecer una métrica cuantitativa de evaluación, el algoritmo libera al usuario de la responsabilidad de definir el número de iteraciones, uno de los principales factores 
     de influencia en la imagen generada.
     
-    A pesar de que los resultados obtenidos no fueron los esperados respecto al criterio especifico de corte, se observo que evaluar la imagen generado con el clasificador de estilos
-    es un buen indicio de la calidad de la misma. Cuando los puntajes obtenidos por la imagen son bajos, visualmente, no es una imagen de calidad. No obstante, cuando los puntajes
-    van aumentando la imagen suele ser cualitativamente aceptada. Si el puntaje a lo largo de las iteraciones entra en una meseta, tampoco se logran visualizar grandes cambios al cabo 
-    de las mismas. Esto indica que en cierta forma, la evaluación cualitativa logro ser plasmada en la métrica cuantitativa definida.
+    Los resultados obtenidos no fueron los esperados, dado que el estilo de la imagen generada no depende solo de la imagen de estilo sino tambien de la imagen de contenido,
+    con lo cual, en algunos casos, el puntaje obtenido no era comparable con el puntaje de la imagen de estilo. 
+    No obstante, se observó que evaluar la imagen generado con el clasificador de estilo es un buen indicio de la calidad de la misma. 
+    Cuando los puntajes obtenidos por la imagen son bajos, visualmente, no es una imagen de calidad. 
+    A medida que los puntajes van aumentando, la imagen suele ser cualitativamente aceptada. 
+    En casos donde la gráfica el puntaje obtenido a lo largo de las iteraciones entra en una meseta, es decir no mejora a medida que aumenta el número de iteraciones,
+    tampoco se logran visualizar grandes cambios a nivel cualitativo. 
+    Esto indica que en cierta forma, que la evaluación cualitativa logró ser plasmada en la métrica cuantitativa definida.
   
   \section{Trabajos a futuro}
-    \FIXME{ \url{https://dailyvisionblog.wordpress.com/2016/07/31/notes-on-texture-networks-feed-forward-synthesis-of-textures-and-stylized-images-and-style-transfer-related-papers/}}
-    \subsection{Reconocimiento de Estilos}
+    Dado que es un area que ha tenido mucha investigación en el último tiempo, es posible seguir profundizar el trabajo realizado, en distintos aspectos:
+    \paragraph{Reconocimiento de Estilos}
       Basándose en la misma idea de entrenar una red convolucional para reconocer solo 10 estilos, se podría extender esto a todos los estilos y utilizando todas las imágenes disponibles
       en WikiArt.
-    \subsection{Automatización de hiper-parámetros}
+    \paragraph{Automatización de hiper parámetros}
       Se podría realizar una especie de predefinición del número de iteraciones que requiere cada estilo, ejecutando el algoritmo una gran cantidad de veces y definiendo este valor
       estadísticamente, aunque esto puede llegar a no funcionar correctamente en todos los casos ya que dependiendo de la imagen de contenido, el estilo objetivo podría variar.
-    \subsection{Compresión de CNN}
+    \paragraph{Compresión de CNN}
       A partir del articulo presentado por Gatys, se fueron publicando una serie de artículos que presentaban mejoras u optimizaciones al algoritmo, además de buscar comprimir la red,
-      para que una vez entrenada en un dispositivo de gran capacidad de computo, luego pueda ser insertado y ejecutado para transferir estilo en dispositivo menor como lo son los smartphones.
-      Por ejemplo se lograron entrenar modelos que transfieran el estilo de una obra de arte en particular, que puede ser ejecutado en un smartphone.
-    \subsection{Transferencia de Estilos Fotorrealista}
-      \cite{luan2017deep}
+      para que una vez entrenada en un dispositivo de gran capacidad de cómputo, pueda ser insertado y ejecutado para transferir estilo en dispositivo menor como lo son los 
+      dispositivos móviles.
+      Por ejemplo se lograron entrenar modelos que transfieran el estilo de una obra de arte en particular, que puede ser ejecutado en un dispositivo móvil 
+      \cite{Johnson2016Perceptual, UlyanovVL16}.
+      Además ya existen algunos otros avances para lograr ejecutar una red neuronal en dispositivos móviles: \cite{MobileNets}. 
+
 
 \printindex
 \bibliography{./tex/biblio}        %use a bibtex bibliography file refs.bib
