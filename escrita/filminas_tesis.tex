@@ -1,0 +1,204 @@
+\documentclass[12pt,center]{beamer}
+
+\input{tex/pre.tex}
+%%%%%%%%%%% Lo que viene  a continuacion es el tipo de presentacion que quieres, 
+% las presentaciones se llaman con nombres de ciudades puedes cambiarlas y tomar
+%%%%%%%%la que mas te guste.
+\mode<presentation> {
+  %\usetheme{Frankfurt}
+  %\usetheme{Warsaw}
+  %\usetheme{Darmstadt}
+   %\usetheme{Dresden}
+  \usetheme{Singapore}
+  %\usetheme{Bergen}
+  %\usetheme{Boadilla}
+  %\usetheme{BerKeley}
+  \setbeamercovered{transparent}
+  %\setbeamertemplate{background canvas}[vertical shading][bottom=red!20,top=yellow!30]
+%   \setbeamertemplate{headline}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% aqui vienen los colores
+
+  %\usecolortheme{crane}
+  %\usecolortheme{seahorse}
+  \usecolortheme{whale}
+  %\usecolortheme{rose}
+  %\usecolortheme{orchid}
+} \usepackage{alltt}
+
+
+
+%%%%%%%los paquetes. 
+\usepackage{amssymb,amsmath,latexsym}
+%\usepackage[mathcal]{euscript}
+%\usepackage[polish]{babel}
+\usepackage{color}
+\usepackage{hyperref}
+%\usepackage{dsfont}
+%\usepackage[normalem]{ulem}
+\usepackage{enumerate}
+%\usepackage[all,2cell,dvips]{xy} \UseAllTwocells \SilentMatrices
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{verbatim}
+\usepackage{float}
+
+\title{Transferencia de Estilo en Fotografias mediante Redes Neuronales Convolucionales}
+%
+%
+\author{Ariel Wolfmann}
+
+%
+\institute{Facultad de Matemática, Astronomía, Física y Computación\\
+	  Universidad Nacional de Córdoba}
+
+\date{28 de Julio, 2017}
+
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%PAGINA DEL TITULO
+\begin{frame}
+  \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%  tODO LO QUE QUIERAS PONER EN LOS FRAMES.
+\begin{frame}
+  \frametitle{Agenda}
+  \tableofcontents[pausesections]
+\end{frame}
+  %  \tableofcontents[pausesections]
+%   %You might wish to add the option [pausesections]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% EFDs & Algebraic Functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introducción}
+  \begin{frame}{Contexto}
+
+  \end{frame}	
+
+  \begin{frame}{Motivación}
+
+  \end{frame}	
+
+\section{Aprendizaje Automatico}
+  \begin{frame}{Definicion}
+    Definicion
+    Aprendizaje supervisado vs no supervisado: labels
+  \end{frame}
+	
+  \begin{frame}{Clasificacion de imagenes}
+    Enfoque clasico vs enfoque aprendizaje profundo
+  \end{frame}
+
+\section{Redes Neuronales Artificiales}
+  \begin{frame}
+    \frametitle{Funcion de perdida y optimizacion}
+  \end{frame}
+
+  \begin{frame}
+      Retropropagacion
+  \end{frame}
+
+
+\section{Redes Neuronales Convolucionales}
+\begin{frame}
+    Funcion de convolucion
+\end{frame}
+\begin{frame}
+\end{frame}
+
+\section{Ajuste Fino}
+\begin{frame}
+ Ajuste Fino
+\end{frame}
+
+
+\section{Algoritmo de transferencia de estilo}
+\begin{frame}
+ \frametitle{}
+ Funcion de perdida de estilo
+\end{frame}
+\begin{frame}
+ Funcion de perdida del contenido
+\end{frame}
+\begin{frame}
+ Proceso completo
+\end{frame}
+
+\begin{frame}
+Hiperparametros
+\end{frame}
+
+
+\section{Elección automática de hiperparámetros}
+\begin{frame}
+ Descripcion del problema
+\end{frame}
+\begin{frame}
+ Evaluacion
+\end{frame}
+\begin{frame}
+  Solucion propuesta
+\end{frame}
+\begin{frame}
+  Modulo de generacion de imagenes
+\end{frame}
+\begin{frame}
+  Modulo de evaluacion de imagenes
+\end{frame}
+
+\section{Experimentos}
+  \begin{frame}
+    \frametitle{Reconocimiento de estilo}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Imagenes de ejemplo}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Eleccion del numero de iteraciones}
+  \end{frame}
+  
+  \begin{frame}
+    \frametitle{Graficos evaluacion vs numero de iteraciones}
+  \end{frame}
+
+\section{Conclusiones}
+\begin{frame}{Conclusiones}
+%%%%%%%
+\end{frame}
+
+
+
+\begin{frame}
+ {\Huge ¿Preguntas?}
+\end{frame}
+
+\begin{frame}
+ {\Huge ¡Gracias por escuchar!}
+\end{frame}
+
+
+
+% \begin{frame}%%%%%%%%%%
+% \frametitle{Referencias}
+% \begin{thebibliography}
+% 
+% %\pause
+% \bibitem[KrCla79]{AE-classes}\textrm{Krauss, P.H., Clark, D.M.}, 
+% \textit{Global Subdirect Products}, Amer. Math. Soc. Mem. \textbf{210} (1979).
+% 
+% 
+% \end{thebibliography}
+% 
+% \end{frame}
+
+\begin{frame}
+\begin{figure}[center]
+% \includegraphics[width=95mm]{19127354.jpg}
+%\caption{algebraically closed clones in Post's Lattice} 
+\end{figure}
+\end{frame}
+
+\end{document}
