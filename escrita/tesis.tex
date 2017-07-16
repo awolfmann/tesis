@@ -1055,7 +1055,7 @@
       En lo que al arte respecta, los humanos han desarrollado la capacidad de crear experiencias visuales únicas componiendo una compleja interacción entre el contenido y el estilo de una imagen.
       Sin embargo, las bases algorítmicas de este proceso se desconocen y no existen sistemas artificiales que con capacidades similares. Sin embargo, en otras áreas fundamentales
       de la percepción visual como el reconocimiento de objetos y rostros recientemente se ha alcanzado precisión cercana a la de un humano, utilizando modelos de redes neuronales profundas.
-      Aquí se presenta un sistema artificial basado en una Red Neural Profunda que crea imágenes artísticas de alta calidad perceptiva. El sistema utiliza representaciones neuronales
+      Aquí se presenta un sistema artificial basado en una Red Neural Convolucional que crea imágenes artísticas de alta calidad perceptiva. El sistema utiliza representaciones neuronales
       para separar y recombinar el contenido y el estilo de imágenes arbitrarias, proporcionando un algoritmo para la creación de imágenes artísticas.
       
       La publicación de este artículo, ha incentivado a muchos investigadores del área a continuar desarrollando estas ideas, a tal punto que hasta el día de hoy se siguen publicando
@@ -1063,7 +1063,7 @@
 
 
     \section{Contexto}
-      Inicialmente, Gatys et al. publica un articulo para sintetizar texturas naturales utilizando Redes Neuronales Convolucionales entrenadas para el reconocimiento de 
+      Inicialmente, Gatys et al. publica un artículo para sintetizar texturas naturales utilizando Redes Neuronales Convolucionales entrenadas para el reconocimiento de 
       objetos \cite{Gatys:Texture_Synthesis}. 
       En el contexto del procesamiento de imágenes, el concepto de textura hace referencia a imágenes digitales que se componen por elementos repetitivos a lo largo de la 
       misma.
@@ -1258,7 +1258,7 @@
       \section{Hiper-parámetros del algoritmo} \label{sec:hiperparametros}
 	A continuación se enumera la lista de hiper-parámetros que requiere el algoritmo para ejecutarse y se discute acerca de su influencia en el mismo:
 	\begin{itemize}
-	 \item Numero de iteraciones: Determina cuantas veces se ejecuta el método de descenso por el gradiente para minimizar la función de pérdida. 
+	 \item Número de iteraciones: Determina cuantas veces se ejecuta el método de descenso por el gradiente para minimizar la función de pérdida. 
 	  A medida que este numero aumenta, mayores son las posibilidades de obtener un resultado aceptado, como se ilustra en la figura \ref{fig:img_iters}.
 	  \begin{figure}[h]
 	  \begin{center}
