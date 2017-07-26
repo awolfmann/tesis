@@ -7,14 +7,15 @@
   %\usetheme{Frankfurt}
   %\usetheme{Warsaw}
   %\usetheme{Darmstadt}
-  \usetheme{Dresden}
-  %\usetheme{Singapore}
+  %\usetheme{Dresden}
+  \usetheme{Singapore}
   %\usetheme{Bergen}
   %\usetheme{Boadilla}
   %\usetheme{BerKeley}
   \setbeamercovered{transparent}
+  \setbeamertemplate{footline}[frame number]
   %\setbeamertemplate{background canvas}[vertical shading][bottom=red!20,top=yellow!30]
-%   \setbeamertemplate{headline}{}
+  \setbeamertemplate{headline}{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% aqui vienen los colores
 
@@ -54,7 +55,6 @@
 \usepackage{mathtools}
 \usepackage{svg}
 
-\newcommand{\subitem}{\par\qquad}
 
 \title{Transferencia de Estilo en Fotografias mediante Redes Neuronales Convolucionales}
 %
@@ -77,16 +77,13 @@
 %%%%%%%%%%%%%%%%%  tODO LO QUE QUIERAS PONER EN LOS FRAMES.
 \begin{frame}
   \frametitle{Agenda}
-  \tableofcontents[pausesections]
+  \tableofcontents
 \end{frame}
-  %  \tableofcontents[pausesections]
-%   %You might wish to add the option [pausesections]
 
-
-%%%%%%%%%%%%%%%%%%%%%%%% EFDs & Algebraic Functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introducción}
 \begin{frame}
-  \frametitle{Contexto}
+  \frametitle{Introducción}
+  \framesubtitle{Contexto}
   Aplicaciones de efectos en fotografias:
     \begin{figure}[H]
       \begin{center}
@@ -96,8 +93,8 @@
 \end{frame}	
 
 \begin{frame}
-  \frametitle{Como se representa una imágen}
-  Arreglo de píxeles ordenados
+  \frametitle{¿Como se representa una imágen?}
+  Arreglo de píxeles ordenados, puede tener 1 o más canales
     \begin{figure}[H]
       \begin{center}
 	\includegraphics[width=0.8\linewidth]{./img/image_pixel.png}
@@ -111,23 +108,22 @@
     \item \textbf{Visión por computadoras} (Computer Vision): Comprensión de alto nivel sobre imágenes digitales, busca automatizar tareas del sistema visual humano.
     \item \textbf{Aprendizaje automático} (Machine Learning): Algortimos que otorgan a las computadoras la habilidad de aprender y hacer predicciones sobre los datos de entrada. 
   \end{itemize}
-
   
-    \begin{figure}[H]
-      \begin{center}
-	\includegraphics[height=0.4\textheight]{./img/nvidia_car_detection.png}
-      \end{center}
-      \caption{Vehiculos autónomos}
-    \end{figure}    
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[height=0.4\textheight]{./img/nvidia_car_detection.png}
+    \end{center}
+    \caption{Vehiculos autónomos}
+  \end{figure}    
 \end{frame}
   
 \begin{frame}
   \frametitle{Transferencia de estilo}
-  A partir de una imagen de contenido y una imagen de estilo se genera una nueva imagen que combina ambos.
+  A partir de una imagen de contenido y una imagen de estilo se genera una nueva imagen que combina ambas.
   \begin{figure}[h]
     \begin{center}
-      \subfloat[\small Estilo]{\includegraphics[height=0.25\textheight]{./img/jhonson_style_candy.jpg}} \vspace{1.0cm}
-      \subfloat[\small Contenido]{\includegraphics[height=0.25\textheight]{./img/jhonson_content_tower.jpg}} \vspace{1.0cm}
+      \subfloat[\small Estilo]{\includegraphics[height=0.25\textheight]{./img/jhonson_style_candy.jpg}} \hspace{1.0cm}
+      \subfloat[\small Contenido]{\includegraphics[height=0.25\textheight]{./img/jhonson_content_tower.jpg}} \hspace{1.0cm}
       \subfloat[\small Resultado]{\includegraphics[height=0.25\textheight]{./img/jhonson_result_tower_candy.jpg}}
       
     \end{center}
@@ -148,7 +144,7 @@
   \begin{figure}[h]
     \begin{center}
       \subfloat[Clasificación lineal]{\includegraphics[ height=0.35\textheight]{./img/linear_svm.png}}
-      \subfloat[Clustering]{\includegraphics[height=0.35\textheight]{./img/stackoverflow_clustering.png}}
+      \subfloat[Clustering]{\includegraphics[height=0.40\textheight]{./img/stackoverflow_clustering.png}}
     \end{center}
   \end{figure}  
 %  
@@ -157,11 +153,11 @@
 \begin{frame}
   \frametitle{Clasificación de imágenes}
   \begin{itemize}
-    \item Representación de la información: \textit{Features}
+    \item Representación de la información: \textit{features}
     \item Enfoque clásico vs enfoque aprendizaje profundo
     \begin{itemize}
       \item Enfoque clásico: \textit{features} predefinidas para entrenar el modelo
-      \item Enfoque aprendizaje profundo: Tanto las \textit{features} como el modelo se entrenan en conjunto
+      \item Enfoque aprendizaje profundo: Tanto las \textit{features} como el modelo se entrenan y aprenden en conjunto
     \end{itemize}
   \end{itemize}
   \begin{figure}[h]
@@ -172,20 +168,25 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{En que consiste el aprendizaje?}
+  \frametitle{¿En que consiste el aprendizaje?}
   \begin{itemize}
-    \item Funcion de predicción: mapeo $f_{\theta}: \mathcal{X} {\rightarrow} \{1,\dots,K\}$
-    \item Objetivo del aprendizaje: minimizar $\theta$
+    \item Funcion de predicción: mapeo $f_{\overrightarrow{w}}: \mathcal{X} {\rightarrow} \{1,\dots,K\}$
+    \item Objetivo del aprendizaje: ajustar $\overrightarrow{w}$ para mejorar la predicción
     \item Optimización: minimizar función de pérdida (diferencia entre la predicción y el valor esperado)
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Descenso por el gradiente}
-    Optimizar mediante refinamiento iterativo, siguiendo la dirección del gradiente de la función de pérdida.
-    \begin{equation}
-      w_{n+1} = w_n - \eta \nabla L(w_n)  = w_n - \eta \sum_{i=1}^{N} \nabla L_i(w_n)
-    \end{equation}
+    Optimizar mediante refinamiento iterativo, siguiendo la dirección del gradiente de la función de pérdida ($L(.)$).
+  \begin{equation*}
+    w_{n+1} = w_n - \nabla L(w_n)
+  \end{equation*}
+  \begin{figure}[h]
+    \begin{center}
+	    \includegraphics[height=0.4\textheight]{./img/gradient_descent_1.png}
+    \end{center}
+  \end{figure}
 \end{frame}
 
 \section{Redes Neuronales Artificiales}
@@ -194,11 +195,9 @@
     \begin{itemize}
       \item Versión compleja de un clasificador lineal, utilizando funciones no lineales.
       \item Conjunto de unidades de cómputo (neuronas) conectadas en un grafo acíclico organizadas por capas. 
-      \item Las unidades de una capa se conectan con neuronas de sus capas adyacentes pero nunca se conectan 2 unidades de una misma capa.
-    
+      \item Las unidades de una capa solo se conectan con neuronas de sus capas adyacentes.
     \end{itemize}
 
-    
     \begin{figure}[ht]
       \begin{center}
 	\includegraphics[height=0.5\textheight]{./img/bishop_neural_network.jpg}
@@ -211,7 +210,7 @@
     \frametitle{Entrenando una red neuronal}
     Ciclos de 2 pasos
     \begin{enumerate}
-      \item Paso hacia adelante: evaluación de la red en base al dato de entrada
+      \item Paso hacia adelante: evaluación de la red en base al dato de entrada.
       \item Retropropagación: corrección de los pesos internos de la red, según el gradiente de la función de pérdida.
     \end{enumerate}
 
@@ -227,27 +226,23 @@
 \begin{frame}
   \frametitle{Redes Neuronales Convolucionales - CNN}
     \begin{itemize}
-      \item Redes Neuronales que asumen que sus entradas son imágenes
-      \item Codificar propiedades en la arquitectura de la red:
+      \item Redes neuronales que asumen que sus entradas son imágenes.
+      \item Codifican propiedades de la imagen en la arquitectura de la red:
       \begin{itemize}
-	\item Localidad espacial
-	\item Convolución
-	\item Submuestreo
+	\item \textbf{Localidad espacial}: píxeles cercanos tienes comportamiento similar.
+	\item \textbf{Submuestreo}: reduce el tamaño de la salida tomando un valor que representa a su región.
+	\item \textbf{Convolución}:
+	  \begin{itemize}
+	    \item Se aplica un filtro (matriz de 3x3 o 5x5) desplazándolo por toda la imagen.
+	    \item Se obtiene una nueva imagen resultante de aplicar el filtro.
+	  \end{itemize}
       \end{itemize}
     \end{itemize}
-\end{frame}
-  
-\begin{frame}
-  \frametitle{Función de convolución}
-  \begin{itemize}
-    \item Se aplica un filtro (matriz de 3x3 o 5x5) desplazandolo por toda la imagen.
-    \item Se obtiene una nueva imagen resultante de aplicar el filtro
-  \end{itemize}
-  \begin{figure}[h]
-    \begin{center}
-    \includegraphics[width=\textwidth]{./img/convolution_wiki.jpg}
-    \end{center}
-  \end{figure}
+    \begin{figure}[h]
+      \begin{center}
+      \includegraphics[width=\textwidth]{./img/convolution_wiki.jpg}
+      \end{center}
+    \end{figure}
 \end{frame}
   
 \begin{frame}
@@ -259,8 +254,8 @@
      \item Capa de Submuestreo
      \item Capa de Salida
     \end{itemize}
-  Los resultados intermedios entre cada una de las capas de los conoce como mapas de características o feature maps.
- 
+  Los resultados intermedios entre cada una de las capas de los conoce como mapas de características o \textit{feature maps}.
+  REVISAR QUE NO COINCIDE LA IMAGEN CON LA ESTRUCTURA PLANTEADA
   \begin{figure}[h]
     \begin{center}
     \includegraphics[height=0.5\textheight]{./img/bishop_cnn.jpg}
@@ -271,12 +266,17 @@
 \section{Ajuste Fino}
 \begin{frame}
   \frametitle{Ajuste Fino - Finetuning}
+  Adaptar una red preentrenada a un problema similar.
     \begin{itemize}
-     \item Adaptar una red preentrenada a un problema similar.
      \item Toma una red pre-entrenada y un pequeño conjunto de datos.
      \item Reemplaza la última capa adaptada al problema.
      \item Reentrena la red comenzando con los pesos predefinidos, ajustándolos a los nuevos datos.
     \end{itemize}
+  \begin{figure}[h]
+    \begin{center}
+      \includegraphics[height=0.6\textheight]{./img/fine_tuning.jpg}
+    \end{center}
+  \end{figure}
 \end{frame}
 
 
@@ -285,7 +285,7 @@
  \frametitle{Algoritmo de transferencia de estilo}
  \begin{itemize}
     \item Algoritmo publicado por Gatys et. al.
-    \item Toma como entrada 2 imágenes: una de contenido y otra de estilo
+    \item Toma como entrada 2 imágenes: una de contenido y otra de estilo.
     \item Partiendo de una imagen de ruido, genera iterativamente una imagen artificial, compuesta por el contenido de una imagen y el estilo de la otra.
     \item Utiliza los mapas de características de CNN para calcular el estilo y el contenido.
  \end{itemize}
@@ -295,7 +295,7 @@
   \frametitle{Reconstrucciones del estilo y contenido utilizando una CNN}
    \begin{figure}[h]
     \begin{center}
-     \includegraphics[width=0.8\textwidth]{./img/gatys_1.png}
+     \includegraphics[width=\textwidth]{./img/gatys_1.png}
     \end{center}
   \end{figure} 
 \end{frame}
@@ -304,9 +304,9 @@
 \begin{frame}
  \frametitle{Contenido}
   \begin{itemize}
-   \item Representación del contenido: mapa de características de una de las últimas capas de la red.
-   \item Mapa de características de la imagen de contenido: matriz $F^l \in R^{N_l \times M_l}$, donde $F_{i,j}^l$ es la respuesta del $i$-esimo filtro en la posición $j$.
-   \item Función de pérdida del contenido: Error cuadrático medio entre los mapas de características de la imagen generada $F$ y la imagen de contenido $P$.
+   \item \textbf{Representación del contenido}: mapa de características de una de las últimas capas de la red.
+   \item \textbf{Mapa de características de la imagen de contenido}: matriz $F^l \in R^{N_l \times M_l}$, donde $F_{i,j}^l$ es la respuesta del $i$-esimo filtro en la posición $j$.
+   \item \textbf{Función de pérdida del contenido}: Error cuadrático medio entre los mapas de características de la imagen generada $F$ y la imagen de contenido $P$.
   \end{itemize}
   \begin{equation}
     L_{contenido}(\overrightarrow{p},\overrightarrow{x}, l) = \frac{1}{2} \sum_{i,j} (F_{i,j}^l - P_{i,j}^l)^2
@@ -316,12 +316,12 @@
 \begin{frame}
  \frametitle{Estilo}
   \begin{itemize}
-    \item Representación del estilo: correlación entre los valores del mapa de características.
-    \item Correlación de características: $G^l \in R^{N_l \times N_l}$, en la cual $G_{i,j}^l$ se calcula como el producto punto entre los vectores
+    \item \textbf{Representación del estilo}: correlación entre los valores del mapa de características.
+    \item \textbf{Correlación de características}: matriz de Gramm $G^l \in R^{N_l \times N_l}$, en la cual $G_{i,j}^l$ se calcula como el producto punto entre los vectores
       de los mapas de características $i$ y $j$ en la capa $l$:
-	\begin{equation}
+	\begin{equation*}
 	  G_{i,j}^l = \sum_{k} F_{i,k}^l F_{j,k}^l
-	\end{equation}
+	\end{equation*}
   \end{itemize}
 
 \end{frame}
@@ -330,13 +330,13 @@
   \frametitle{Función de pérdida del estilo}
   Suma pesada de los errores entre el estilo calculado de la imagen generada y la imagen de estilo, de varias capas.\\
     La contribución de esa capa a la función de pérdida total del estilo es:
-      \begin{equation}
+      \begin{equation*}
        E_l = \frac{1}{4 N_l^2 M_l^2} \sum_{i,j} (G_{i,j}^l - A_{i,j}^l)^2
-      \end{equation}
+      \end{equation*}
       De esta forma, la función de pérdida del estilo total queda definida como una combinación lineal de las funciones de pérdida de estilo de cada capa:
-      \begin{equation}
+      \begin{equation*}
        L_{estilo}(\overrightarrow{a},\overrightarrow{x}) = \sum_{l=0}^{L} w_l E_l
-      \end{equation}
+      \end{equation*}
 \end{frame}
 
 
@@ -369,7 +369,9 @@
   \begin{itemize}
    \item El número de iteraciones se detectó como el principal factor de influencia en el resultado del algoritmo.
    \item En el arte, las evaluaciones suelen ser cualitativas.
-    \subitem Es necesario definir un criterio cuantitativo de evaluación para poder determinar si un resultado es aceptado o no.
+   \begin{itemize}
+    \item Es necesario definir un criterio cuantitativo de evaluación para poder determinar si un resultado es aceptado o no.
+   \end{itemize}
   \item Objetivo: generar una imagen aceptada en la menor cantidad de iteraciones posible.
   \end{itemize}
 
@@ -378,9 +380,9 @@
 \begin{frame}
  \frametitle{Solución propuesta}
   \begin{itemize}
-   \item Módulo de generación de imágen: transferencia de estilo
-   \item Módulo de evaluación: reconocimiento de estilo
-   \item Definir critero de aceptación cuantitativo: estilo cercano a la imagen objetivo 
+   \item \textbf{Módulo de generación de imágen}: transferencia de estilo.
+   \item \textbf{Módulo de evaluación}: reconocimiento de estilo.
+   \item \textbf{Definir critero de aceptación cuantitativo}: estilo cercano a la imagen objetivo .
   \end{itemize}
   \begin{figure}[h]
     \begin{center}
@@ -394,9 +396,9 @@
 \begin{frame}
   \frametitle{Reconocimiento de estilo}
   \begin{itemize}
-    \item Finetuning sobre red preentrenada para clasificar objetos
+    \item Finetuning sobre red preentrenada para clasificar objetos.
     \item Datos provenientes de WikiArt.
-    \item POC sobre los 10 principales estilos
+    \item POC sobre los 10 principales estilos.
   \end{itemize}
 \end{frame}
 
@@ -430,14 +432,14 @@
   \frametitle{Elección del número de iteraciones}
   Se detectaron 2 situaciones distintas en los resultados obtenidos:
   \begin{itemize}
-    \item El estilo de la imagen resultante coincide con el estilo de la imagen obtenida
-    \item El estilo de la imagen resuttante NO coincide con el estilo de la imagen obtenida
+    \item El estilo de la imagen resultante coincide con el estilo de la imagen obtenida.
+    \item El estilo de la imagen resuttante NO coincide con el estilo de la imagen obtenida.
   \end{itemize}
 
 \end{frame}
 
 \begin{frame}
-  \frametitle{Caso 1}
+  \frametitle{Caso 1 - Estilos coinciden}
     \begin{figure}[H]
     \begin{center}
     \begin{tabularx}{\textwidth}{@{}cXX@{}}
@@ -479,7 +481,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Caso 2}
+  \frametitle{Caso 2 - Estilos NO coinciden}
 	\begin{figure}[H]
 	  %\def\tabularxcolumn#1{m{#1}}
 	  \begin{tabularx}{\textwidth}{@{}cXX@{}}
