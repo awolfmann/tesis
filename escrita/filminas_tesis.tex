@@ -243,6 +243,7 @@
       \end{itemize}
     \end{itemize}
     \begin{figure}[h]
+    \captionsetup[subfigure]{labelformat=empty}
       \begin{center}
       \includegraphics[width=\textwidth]{./img/convolution_wiki.jpg}
       \end{center}
@@ -262,6 +263,7 @@
      \item \textbf{Capa de Salida}: realiza predicción final. 
     \end{itemize}
   \begin{figure}[h]
+  \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
     \includegraphics[height=0.45\textheight]{./img/bishop_cnn.jpg}
     \end{center}
@@ -278,6 +280,7 @@
      \item Reentrena la red comenzando con los pesos predefinidos, ajustándolos a los nuevos datos.
     \end{itemize}
   \begin{figure}[h]
+  \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
       \includegraphics[height=0.6\textheight]{./img/fine_tuning.jpg}
     \end{center}
@@ -295,6 +298,7 @@
     \item Utiliza los mapas de características de CNN para calcular el estilo y el contenido.
  \end{itemize}
     \begin{figure}[h]
+    \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
      \includegraphics[width=0.5\textwidth]{./img/gatys_style_transfer.png}
     \end{center}
@@ -304,6 +308,7 @@
 \begin{frame}
   \frametitle{Reconstrucciones del estilo y contenido utilizando una CNN}
    \begin{figure}[h]
+   \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
      \includegraphics[width=\textwidth]{./img/gatys_1.png}
     \end{center}
@@ -363,11 +368,11 @@
 \begin{frame}
   \frametitle{Hiperparámetros}
   \begin{itemize}
-   \item Número de iteraciones: Determina cuantas veces se ejecuta el método de descenso por el gradiente para minimizar la función de pérdida. 
-   \item Red Convolucional: Dependiendo de la red convolucional que se utilice, cambia el tamaño de los mapas de características, las capas, etc.
-   \item Capas de la red para la representación de estilo y sus respectivos pesos ($w_l, l \in \{1 \dots L\}$).
-   \item Capa de la red para la representación del contenido.
-   \item Factores de peso para las funciones de pérdida de estilo y contenido en la función de pérdida total $(\alpha, \beta)$.
+   \item Número de iteraciones: Determina cuantas veces se ejecuta el método de descenso por el gradiente para minimizar la función de pérdida. \vspace{0.5cm}
+   \item Red Convolucional: Dependiendo de la red convolucional que se utilice, cambia el tamaño de los mapas de características, las capas, etc. \vspace{0.5cm}
+   \item Capas de la red para la representación de estilo y sus respectivos pesos ($w_l, l \in \{1 \dots L\}$). \vspace{0.5cm}
+   \item Capa de la red para la representación del contenido. \vspace{0.5cm}
+   \item Factores de peso para las funciones de pérdida de estilo y contenido en la función de pérdida total $(\alpha, \beta)$. \vspace{0.5cm}
    \item otros..
   \end{itemize}
 \end{frame}
@@ -376,10 +381,10 @@
 \begin{frame}
   \frametitle{Problema: elección automática de hiperparámetros}
   \begin{itemize}
-   \item El número de iteraciones se detectó como el principal factor de influencia en el resultado del algoritmo.
+   \item El número de iteraciones se detectó como el principal factor de influencia en el resultado del algoritmo. \vspace{0.5cm}
    \item En el arte, las evaluaciones suelen ser cualitativas.
    \begin{itemize}
-    \item Es necesario definir un criterio cuantitativo de evaluación para poder determinar si un resultado es aceptado o no.
+    \item Es necesario definir un criterio cuantitativo de evaluación para poder determinar si un resultado es aceptado o no. \vspace{0.5cm}
    \end{itemize}
   \item Objetivo: generar una imagen aceptada en la menor cantidad de iteraciones posible.
   \end{itemize}
@@ -394,6 +399,7 @@
    \item \textbf{Definir critero de aceptación cuantitativo}: estilo cercano a la imagen objetivo .
   \end{itemize}
   \begin{figure}[h]
+  \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
       \includegraphics[width=\linewidth]{./img/diagrama.png}
     \end{center}
@@ -405,9 +411,9 @@
 \begin{frame}
   \frametitle{Reconocimiento de estilo}
   \begin{itemize}
-    \item Finetuning sobre red preentrenada para clasificar objetos.
-    \item Datos provenientes de WikiArt.
-    \item POC sobre los 10 principales estilos.
+    \item Finetuning sobre red preentrenada para clasificar objetos. \vspace{0.5cm}
+    \item Datos provenientes de WikiArt. \vspace{0.5cm}
+    \item POC sobre los 10 principales estilos. \vspace{0.5cm}
   \end{itemize}
 \end{frame}
 
@@ -415,6 +421,7 @@
   \frametitle{Estilos}
   \captionsetup{font=scriptsize}
   \begin{figure}
+  \captionsetup[subfigure]{labelformat=empty}
       \begin{center}
       %\def\tabularxcolumn##1{m{##1}}
       \begin{tabularx}{\textwidth}{@{}cXX@{}}
@@ -442,8 +449,8 @@
   \frametitle{Elección del número de iteraciones}
   Se detectaron 2 situaciones distintas en los resultados obtenidos:
   \begin{itemize}
-    \item El estilo de la imagen resultante coincide con el estilo de la imagen obtenida.
-    \item El estilo de la imagen resultante NO coincide con el estilo de la imagen obtenida.
+    \item El estilo de la imagen resultante coincide con el estilo de la imagen propuesta.
+    \item El estilo de la imagen resultante NO coincide con el estilo de la imagen propuesta.
   \end{itemize}
 
 \end{frame}
@@ -451,6 +458,7 @@
 \begin{frame}
   \frametitle{Caso 1 - Estilos coinciden}
     \begin{figure}[H]
+    \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
     \begin{tabularx}{\textwidth}{@{}cXX@{}}
     \begin{tabular}{cc}
@@ -467,17 +475,19 @@
 \begin{frame}
   \frametitle{Caso 1 - Evolución de los puntajes}
  \begin{figure}[H]
+ \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
-      \subfloat[Evolución de los puntajes comenzando desde ruido]{\includegraphics[ height=0.5\textheight]{./img/tubingen_shipwreck_random_scores.png}}
-      \subfloat[Evolución de los puntajes comenzando desde contenido]{\includegraphics[height=0.5\textheight]{./img/tubingen_shipwreck_image_scores.png}}
+      \subfloat[Evolución de los puntajes comenzando desde ruido]{\includegraphics[ height=0.45\textheight]{./img/tubingen_shipwreck_random_scores.png}}
+      \subfloat[Evolución de los puntajes comenzando desde contenido]{\includegraphics[height=0.45\textheight]{./img/tubingen_shipwreck_image_scores.png}}
     \end{center}
   \end{figure}
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{Caso 1}
+  \frametitle{Caso 1 - Evolución de la calidad perceptiva}
   \begin{figure}[H]
+  \captionsetup[subfigure]{labelformat=empty}
     %\def\tabularxcolumn#1{m{#1}}
     \begin{tabularx}{\textwidth}{@{}cXX@{}}
     \begin{tabular}{cc}
@@ -493,6 +503,7 @@
 \begin{frame}
   \frametitle{Caso 2 - Estilos NO coinciden}
 	\begin{figure}[H]
+	\captionsetup[subfigure]{labelformat=empty}
 	  %\def\tabularxcolumn#1{m{#1}}
 	  \begin{tabularx}{\textwidth}{@{}cXX@{}}
 	  \begin{tabular}{cc}
@@ -506,20 +517,21 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Caso 2}
+  \frametitle{Caso 2 - Evolución de los puntajes}
   \begin{figure}[H]
+  \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
-      \subfloat[Evolución de los puntajes comenzando desde ruido]{\includegraphics[height=0.5\textheight]{./img/golden_gate_thescream_random_scores.png}}
-      \subfloat[Evolución de los puntajes comenzando desde contenido]{\includegraphics[height=0.5\textheight]{./img/golden_gate_thescream_image_scores.png}}
+      \subfloat[Evolución de los puntajes comenzando desde ruido]{\includegraphics[height=0.45\textheight]{./img/golden_gate_thescream_random_scores.png}}
+      \subfloat[Evolución de los puntajes comenzando desde contenido]{\includegraphics[height=0.45\textheight]{./img/golden_gate_thescream_image_scores.png}}
     \end{center}
-    \caption{Evolución de los puntajes}
     \label{fig:puntajes_caso2}
   \end{figure}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Caso 2}
+  \frametitle{Caso 2 - Evolución de la calidad perceptiva}
       \begin{figure}[H]
+      \captionsetup[subfigure]{labelformat=empty}
 	%\def\tabularxcolumn#1{m{#1}}
 	\begin{tabularx}{\textwidth}{@{}cXX@{}}
 	\begin{tabular}{cc}
@@ -534,10 +546,11 @@
 
 \begin{frame}
   \frametitle{Análisis criterio de aceptación planteado}
-  \begin{enumerate}
-    \item En base a los resultados obtenidos, se determinó que el criterio inicialmente planteado no es válido.
-    \item El criterio empírico utilizado fue determinar número de iteraciones el punto medio del período donde alcanza un mayor puntaje de reconocimiento de estilo.
-  \end{enumerate}
+  \begin{itemize}
+    \item En base a los resultados obtenidos, se determinó que el criterio inicialmente planteado no es válido. \vspace{0.5cm}
+    \item Dependiendo de la imagen de contenido y del punto de partida el estilo puede coincidir o no. \vspace{0.5cm}
+    \item El criterio empírico utilizado fue determinar número de iteraciones como el punto medio del período donde alcanza un mayor puntaje de reconocimiento de estilo.
+  \end{itemize}
 \end{frame}
 
 \section{Conclusiones}
@@ -545,7 +558,13 @@
   \frametitle{Conclusiones}
   \begin{itemize}
     \item El estilo de la imagen generada no depende solo de la imagen objetivo.
+    \begin{itemize}
+     \item Concuerda con lo que plantea Gatys et. al.
+    \end{itemize}
+    \vspace{0.5cm}
     \item Evaluar la imagen generada con el clasificador de estilo es un buen indicio de la calidad de la misma.
+    \vspace{0.5cm}
+    \item Empíricamente luego de las 300 iteraciones el resultado es aceptable y el puntaje de estilo suele entrar en una meseta.
   \end{itemize}
 
 \end{frame}
