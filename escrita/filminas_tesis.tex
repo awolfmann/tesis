@@ -16,6 +16,7 @@
   \setbeamertemplate{footline}[frame number]
   %\setbeamertemplate{background canvas}[vertical shading][bottom=red!20,top=yellow!30]
   \setbeamertemplate{headline}{}
+  %\setbeamerfont{caption}{size=\tiny}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% aqui vienen los colores
 
@@ -54,7 +55,7 @@
 \usepackage[spanish]{babel}
 \usepackage{mathtools}
 \usepackage{svg}
-
+\usepackage{caption}
 
 \title{Transferencia de Estilo en Fotografias mediante Redes Neuronales Convolucionales}
 %
@@ -156,8 +157,8 @@
     \item Representación de la información: \textit{features}
     \item Enfoque clásico vs enfoque aprendizaje profundo
     \begin{itemize}
-      \item Enfoque clásico: \textit{features} predefinidas para entrenar el modelo
-      \item Enfoque aprendizaje profundo: Tanto las \textit{features} como el modelo se entrenan y aprenden en conjunto
+      \item Enfoque clásico: \textit{features} predefinidas para entrenar el modelo.
+      \item Enfoque aprendizaje profundo: Tanto las \textit{features} como el modelo se entrenan y aprenden en conjunto.
     \end{itemize}
   \end{itemize}
   \begin{figure}[h]
@@ -171,8 +172,8 @@
   \frametitle{¿En que consiste el aprendizaje?}
   \begin{itemize}
     \item Funcion de predicción: mapeo $f_{\overrightarrow{w}}: \mathcal{X} {\rightarrow} \{1,\dots,K\}$
-    \item Objetivo del aprendizaje: ajustar $\overrightarrow{w}$ para mejorar la predicción
-    \item Optimización: minimizar función de pérdida (diferencia entre la predicción y el valor esperado)
+    \item Objetivo del aprendizaje: ajustar $\overrightarrow{w}$ para mejorar la predicción.
+    \item Optimización: minimizar función de pérdida (diferencia entre la predicción y el valor esperado).
   \end{itemize}
 \end{frame}
 
@@ -226,15 +227,18 @@
 \begin{frame}
   \frametitle{Redes Neuronales Convolucionales - CNN}
     \begin{itemize}
-      \item Redes neuronales que asumen que sus entradas son imágenes.
-      \item Codifican propiedades de la imagen en la arquitectura de la red:
+      \item Redes neuronales que asumen que sus entradas son \textbf{imágenes}.
+      \item Codifican propiedades de la imagen en la arquitectura de la red mediante:
       \begin{itemize}
-	\item \textbf{Localidad espacial}: píxeles cercanos tienes comportamiento similar.
-	\item \textbf{Submuestreo}: reduce el tamaño de la salida tomando un valor que representa a su región.
+	\item \textbf{Volumen}: Las capas y los resultados intermedios (\textit{feature maps}) se ordenan en 3 dimensiones.
+	\item \textbf{Localidad espacial}: píxeles cercanos suelen estar correlacionados.
+	\item \textbf{Submuestreo}: reduce el tamaño de la salida tomando un valor que representa a su región. 
+	Otorga tolerancia a desplazamientos y variaciones.
 	\item \textbf{Convolución}:
 	  \begin{itemize}
 	    \item Se aplica un filtro (matriz de 3x3 o 5x5) desplazándolo por toda la imagen.
 	    \item Se obtiene una nueva imagen resultante de aplicar el filtro.
+	    \item Permite detectar \textit{features}. 
 	  \end{itemize}
       \end{itemize}
     \end{itemize}
@@ -248,17 +252,18 @@
 \begin{frame}
   \frametitle{Estructura de la CNN}
     \begin{itemize}
-     \item Capa de Entrada
-     \item Capa de Convolución
-     \item Capa de Activación (No lineal)
-     \item Capa de Submuestreo
-     \item Capa de Salida
+     \item \textbf{Capa de Entrada}: píxeles en bruto.
+     \item \textbf{Capa de Convolución}
+     \begin{itemize}
+      \item Produce un \textit{feature map} por cada filtro (aumenta la profundidad del volumen).
+      \item Luego de la convolución se aplica una función no lineal (por ej. $f(x) = max(0,x)$)
+     \end{itemize}
+     \item \textbf{Capa de Submuestreo}: reduce dimensiones espaciales (largo y ancho).
+     \item \textbf{Capa de Salida}: realiza predicción final. 
     \end{itemize}
-  Los resultados intermedios entre cada una de las capas de los conoce como mapas de características o \textit{feature maps}.
-  REVISAR QUE NO COINCIDE LA IMAGEN CON LA ESTRUCTURA PLANTEADA
   \begin{figure}[h]
     \begin{center}
-    \includegraphics[height=0.5\textheight]{./img/bishop_cnn.jpg}
+    \includegraphics[height=0.45\textheight]{./img/bishop_cnn.jpg}
     \end{center}
   \end{figure}
 \end{frame}
@@ -266,10 +271,10 @@
 \section{Ajuste Fino}
 \begin{frame}
   \frametitle{Ajuste Fino - Finetuning}
-  Adaptar una red preentrenada a un problema similar.
+  Adaptar una red pre-entrenada a un problema similar.
     \begin{itemize}
      \item Toma una red pre-entrenada y un pequeño conjunto de datos.
-     \item Reemplaza la última capa adaptada al problema.
+     \item Reemplaza la última capa de la red por una adaptada al problema.
      \item Reentrena la red comenzando con los pesos predefinidos, ajustándolos a los nuevos datos.
     \end{itemize}
   \begin{figure}[h]
@@ -286,9 +291,14 @@
  \begin{itemize}
     \item Algoritmo publicado por Gatys et. al.
     \item Toma como entrada 2 imágenes: una de contenido y otra de estilo.
-    \item Partiendo de una imagen de ruido, genera iterativamente una imagen artificial, compuesta por el contenido de una imagen y el estilo de la otra.
+    \item Genera iterativamente una imagen artificial, compuesta por el contenido de una imagen y el estilo de la otra.
     \item Utiliza los mapas de características de CNN para calcular el estilo y el contenido.
  \end{itemize}
+    \begin{figure}[h]
+    \begin{center}
+     \includegraphics[width=0.5\textwidth]{./img/gatys_style_transfer.png}
+    \end{center}
+  \end{figure} 
 \end{frame}
 
 \begin{frame}
@@ -304,21 +314,21 @@
 \begin{frame}
  \frametitle{Contenido}
   \begin{itemize}
-   \item \textbf{Representación del contenido}: mapa de características de una de las últimas capas de la red.
-   \item \textbf{Mapa de características de la imagen de contenido}: matriz $F^l \in R^{N_l \times M_l}$, donde $F_{i,j}^l$ es la respuesta del $i$-esimo filtro en la posición $j$.
-   \item \textbf{Función de pérdida del contenido}: Error cuadrático medio entre los mapas de características de la imagen generada $F$ y la imagen de contenido $P$.
+   \item \textbf{Representación del contenido}: \textit{feature map} de una de las últimas capas de la red.
+   \item \textbf{Mapa de características de la imagen de contenido}: matriz $F^l$, donde $F_{i,j}^l$ es la respuesta del $i$-esimo filtro en la posición $j$ de la capa $l$.
+   \item \textbf{Función de pérdida del contenido}: Error cuadrático medio entre los \textit{feature maps} de la imagen generada $F$ y la imagen de contenido $P$.
   \end{itemize}
-  \begin{equation}
+  \begin{equation*}
     L_{contenido}(\overrightarrow{p},\overrightarrow{x}, l) = \frac{1}{2} \sum_{i,j} (F_{i,j}^l - P_{i,j}^l)^2
-  \end{equation}
+  \end{equation*}
 \end{frame}
 
 \begin{frame}
  \frametitle{Estilo}
   \begin{itemize}
-    \item \textbf{Representación del estilo}: correlación entre los valores del mapa de características.
+    \item \textbf{Representación del estilo}: correlación entre los valores del \textit{feature map}.
     \item \textbf{Correlación de características}: matriz de Gramm $G^l \in R^{N_l \times N_l}$, en la cual $G_{i,j}^l$ se calcula como el producto punto entre los vectores
-      de los mapas de características $i$ y $j$ en la capa $l$:
+      de los \textit{feature maps} $i$ y $j$ en la capa $l$:
 	\begin{equation*}
 	  G_{i,j}^l = \sum_{k} F_{i,k}^l F_{j,k}^l
 	\end{equation*}
@@ -327,18 +337,19 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Función de pérdida del estilo}
-  Suma pesada de los errores entre el estilo calculado de la imagen generada y la imagen de estilo, de varias capas.\\
-    La contribución de esa capa a la función de pérdida total del estilo es:
+  \frametitle{Función de pérdida de estilo}
+  \begin{itemize}
+   \item Suma pesada de los errores entre el estilo calculado de la imagen generada y la imagen de estilo, de varias capas.
+   \item La función de pérdida de estilo de cada capa es:
       \begin{equation*}
-       E_l = \frac{1}{4 N_l^2 M_l^2} \sum_{i,j} (G_{i,j}^l - A_{i,j}^l)^2
+	E_l = \sum_{i,j} (G_{i,j}^l - A_{i,j}^l)^2
       \end{equation*}
-      De esta forma, la función de pérdida del estilo total queda definida como una combinación lineal de las funciones de pérdida de estilo de cada capa:
+   \item La función de pérdida de estilo total: combinación lineal de las funciones de pérdida de estilo de cada capa:
       \begin{equation*}
-       L_{estilo}(\overrightarrow{a},\overrightarrow{x}) = \sum_{l=0}^{L} w_l E_l
+	L_{estilo}(\overrightarrow{a},\overrightarrow{x}) = \sum_{l=0}^{L} w_l E_l
       \end{equation*}
+  \end{itemize}
 \end{frame}
-
 
 \begin{frame}
   \frametitle{Transferencia de estilo}
@@ -359,9 +370,7 @@
    \item Factores de peso para las funciones de pérdida de estilo y contenido en la función de pérdida total $(\alpha, \beta)$.
    \item otros..
   \end{itemize}
-
 \end{frame}
-
 
 \section{Elección automática de hiperparámetros}
 \begin{frame}
@@ -404,22 +413,23 @@
 
 \begin{frame}
   \frametitle{Estilos}
+  \captionsetup{font=scriptsize}
   \begin{figure}
       \begin{center}
       %\def\tabularxcolumn##1{m{##1}}
       \begin{tabularx}{\textwidth}{@{}cXX@{}}
       %
       \begin{tabular}{ccccc}
-	\subfloat[\small Modernismo]{\includegraphics[height=0.17\textheight]{./img/frida_kahlo.jpg}}
-	& \subfloat[\small Impresionismo]{\includegraphics[height=0.17\textheight]{./img/cezanne.jpg}}
-	& \subfloat[\small Surrealismo]{\includegraphics[ height=0.17\textheight]{./img/jhonson_style_candy.jpg}}
-	& \subfloat[\small Post Impresionismo]{\includegraphics[height=0.17\textheight]{./img/starry_night.jpg}}
-	& \subfloat[\small Simbolismo]{\includegraphics[ height=0.17\textheight]{./img/nicholas-roerich_chiktan-citadel-in-himalayas.jpg}}\\
-	\subfloat[\small Neo Clasisimo]{\includegraphics[height=0.17\textheight]{./img/pierre-narcisse-guerin_not-detected.jpg}}
-	& \subfloat[\small Romanticismo]{\includegraphics[height=0.17\textheight]{./img/shipwreck.jpg}}
-	& \subfloat[\small Barroco]{\includegraphics[height=0.17\textheight]{./img/rembrandt_bathsheba-bathing.jpg}}
-	& \subfloat[\small Realismo]{\includegraphics[height=0.17\textheight]{./img/vincent-van-gogh_cart-with-red-and-white-ox.jpg}}
-	& \subfloat[\small Expresionismo]{\includegraphics[height=0.17\textheight]{./img/picasso_selfport.jpg}}
+	\subfloat[\small Modernismo]{\includegraphics[height=0.15\textheight]{./img/frida_kahlo.jpg}}
+	& \subfloat[\small Impresionismo]{\includegraphics[height=0.15\textheight]{./img/cezanne.jpg}}
+	& \subfloat[\small Surrealismo]{\includegraphics[ height=0.15\textheight]{./img/jhonson_style_candy.jpg}}
+	& \subfloat[\small Post Impresionismo]{\includegraphics[height=0.15\textheight]{./img/starry_night.jpg}}
+	& \subfloat[\small Simbolismo]{\includegraphics[ height=0.15\textheight]{./img/nicholas-roerich_chiktan-citadel-in-himalayas.jpg}}\\
+	\subfloat[\small Neo Clasisimo]{\includegraphics[height=0.15\textheight]{./img/pierre-narcisse-guerin_not-detected.jpg}}
+	& \subfloat[\small Romanticismo]{\includegraphics[height=0.15\textheight]{./img/shipwreck.jpg}}
+	& \subfloat[\small Barroco]{\includegraphics[height=0.15\textheight]{./img/rembrandt_bathsheba-bathing.jpg}}
+	& \subfloat[\small Realismo]{\includegraphics[height=0.15\textheight]{./img/vincent-van-gogh_cart-with-red-and-white-ox.jpg}}
+	& \subfloat[\small Expresionismo]{\includegraphics[height=0.15\textheight]{./img/picasso_selfport.jpg}}
       \end{tabular}
 
       \end{tabularx}
@@ -433,7 +443,7 @@
   Se detectaron 2 situaciones distintas en los resultados obtenidos:
   \begin{itemize}
     \item El estilo de la imagen resultante coincide con el estilo de la imagen obtenida.
-    \item El estilo de la imagen resuttante NO coincide con el estilo de la imagen obtenida.
+    \item El estilo de la imagen resultante NO coincide con el estilo de la imagen obtenida.
   \end{itemize}
 
 \end{frame}
