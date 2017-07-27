@@ -81,36 +81,40 @@
   \tableofcontents
 \end{frame}
 
-\section{Introducción}
+\section{Introducción}	
 \begin{frame}
   \frametitle{Introducción}
-  \framesubtitle{Contexto}
-  Aplicaciones de efectos en fotografias:
+  \framesubtitle{¿Como se representa una imágen?}
+  Arreglo de píxeles ordenados, puede tener 1 o más canales.
     \begin{figure}[H]
-      \begin{center}
-	\includegraphics[width=0.8\linewidth]{./img/filtro_snapchat.jpg}
-      \end{center}
-    \end{figure}
-\end{frame}	
-
-\begin{frame}
-  \frametitle{¿Como se representa una imágen?}
-  Arreglo de píxeles ordenados, puede tener 1 o más canales
-    \begin{figure}[H]
+    \captionsetup[subfigure]{labelformat=empty}
       \begin{center}
 	\includegraphics[width=0.8\linewidth]{./img/image_pixel.png}
       \end{center}
     \end{figure}
 \end{frame}
+
+\begin{frame}
   
+  \frametitle{Contexto}
+  Aplicaciones de efectos en fotografias:
+    \begin{figure}[H]
+    \captionsetup[subfigure]{labelformat=empty}
+      \begin{center}
+	\includegraphics[width=0.8\linewidth]{./img/filtro_snapchat.jpg}
+      \end{center}
+    \end{figure}
+\end{frame}
+
 \begin{frame}
   \frametitle{Aprendizaje automático en visión por computadoras}
   \begin{itemize}
-    \item \textbf{Visión por computadoras} (Computer Vision): Comprensión de alto nivel sobre imágenes digitales, busca automatizar tareas del sistema visual humano.
-    \item \textbf{Aprendizaje automático} (Machine Learning): Algortimos que otorgan a las computadoras la habilidad de aprender y hacer predicciones sobre los datos de entrada. 
+    \item \textbf{Visión por computadoras} (\textit{Computer Vision}): Comprensión de alto nivel sobre imágenes digitales, busca automatizar tareas del sistema visual humano.
+    \item \textbf{Aprendizaje automático} (\textit{Machine Learning}): Algortimos que otorgan a las computadoras la habilidad de aprender y hacer predicciones sobre los datos de entrada. 
   \end{itemize}
   
   \begin{figure}[H]
+  \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
       \includegraphics[height=0.4\textheight]{./img/nvidia_car_detection.png}
     \end{center}
@@ -122,6 +126,7 @@
   \frametitle{Transferencia de estilo}
   A partir de una imagen de contenido y una imagen de estilo se genera una nueva imagen que combina ambas.
   \begin{figure}[h]
+  \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
       \subfloat[\small Estilo]{\includegraphics[height=0.25\textheight]{./img/jhonson_style_candy.jpg}} \hspace{1.0cm}
       \subfloat[\small Contenido]{\includegraphics[height=0.25\textheight]{./img/jhonson_content_tower.jpg}} \hspace{1.0cm}
@@ -143,6 +148,7 @@
   \end{itemize}
 %  
   \begin{figure}[h]
+  \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
       \subfloat[Clasificación lineal]{\includegraphics[ height=0.35\textheight]{./img/linear_svm.png}}
       \subfloat[Clustering]{\includegraphics[height=0.40\textheight]{./img/stackoverflow_clustering.png}}
@@ -157,11 +163,12 @@
     \item Representación de la información: \textit{features}
     \item Enfoque clásico vs enfoque aprendizaje profundo
     \begin{itemize}
-      \item Enfoque clásico: \textit{features} predefinidas para entrenar el modelo.
-      \item Enfoque aprendizaje profundo: Tanto las \textit{features} como el modelo se entrenan y aprenden en conjunto.
+      \item \textbf{Enfoque clásico}: \textit{features} predefinidas para entrenar el modelo.
+      \item \textbf{Enfoque aprendizaje profundo}: Tanto las \textit{features} como el modelo se entrenan y aprenden en conjunto.
     \end{itemize}
   \end{itemize}
   \begin{figure}[h]
+  \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
 	    \includegraphics[height=0.6\textheight]{./img/vedaldi_shallow_deep.pdf}
     \end{center}
@@ -171,9 +178,9 @@
 \begin{frame}
   \frametitle{¿En que consiste el aprendizaje?}
   \begin{itemize}
-    \item Funcion de predicción: mapeo $f_{\overrightarrow{w}}: \mathcal{X} {\rightarrow} \{1,\dots,K\}$
-    \item Objetivo del aprendizaje: ajustar $\overrightarrow{w}$ para mejorar la predicción.
-    \item Optimización: minimizar función de pérdida (diferencia entre la predicción y el valor esperado).
+    \item \textbf{Funcion de predicción}: mapeo $f_{\overrightarrow{w}}: \mathcal{X} {\rightarrow} \{1,\dots,K\}$
+    \item \textbf{Objetivo del aprendizaje}: ajustar $\overrightarrow{w}$ para mejorar la predicción.
+    \item \textbf{Optimización}: minimizar función de pérdida (diferencia entre la predicción y el valor esperado).
   \end{itemize}
 \end{frame}
 
@@ -184,6 +191,7 @@
     w_{n+1} = w_n - \nabla L(w_n)
   \end{equation*}
   \begin{figure}[h]
+  \captionsetup[subfigure]{labelformat=empty}
     \begin{center}
 	    \includegraphics[height=0.4\textheight]{./img/gradient_descent_1.png}
     \end{center}
@@ -209,13 +217,14 @@
 
 \begin{frame}
     \frametitle{Entrenando una red neuronal}
-    Ciclos de 2 pasos
+    \textbf{Ciclos de 2 pasos}
     \begin{enumerate}
-      \item Paso hacia adelante: evaluación de la red en base al dato de entrada.
-      \item Retropropagación: corrección de los pesos internos de la red, según el gradiente de la función de pérdida.
+      \item \textbf{Paso hacia adelante} (\textit{forward}): evaluación de la red en base al dato de entrada.
+      \item \textbf{Retropropagación} (\textit{backpropagation}): corrección de los pesos internos de la red, según el gradiente de la función de pérdida.
     \end{enumerate}
 
     \begin{figure}[ht]
+    \captionsetup[subfigure]{labelformat=empty}
       \begin{center}
       \includegraphics[width=0.5\linewidth]{./img/bishop_backpropagation.jpg}
       \end{center}
@@ -332,7 +341,7 @@
  \frametitle{Estilo}
   \begin{itemize}
     \item \textbf{Representación del estilo}: correlación entre los valores del \textit{feature map}.
-    \item \textbf{Correlación de características}: matriz de Gramm $G^l \in R^{N_l \times N_l}$, en la cual $G_{i,j}^l$ se calcula como el producto punto entre los vectores
+    \item \textbf{Correlación de características}: matriz de Gramm $G^l$, en la cual $G_{i,j}^l$ se calcula como el producto punto entre los vectores
       de los \textit{feature maps} $i$ y $j$ en la capa $l$:
 	\begin{equation*}
 	  G_{i,j}^l = \sum_{k} F_{i,k}^l F_{j,k}^l
@@ -345,11 +354,11 @@
   \frametitle{Función de pérdida de estilo}
   \begin{itemize}
    \item Suma pesada de los errores entre el estilo calculado de la imagen generada y la imagen de estilo, de varias capas.
-   \item La función de pérdida de estilo de cada capa es:
+   \item \textbf{Función de pérdida de estilo de cada capa}:
       \begin{equation*}
 	E_l = \sum_{i,j} (G_{i,j}^l - A_{i,j}^l)^2
       \end{equation*}
-   \item La función de pérdida de estilo total: combinación lineal de las funciones de pérdida de estilo de cada capa:
+   \item \textbf{Función de pérdida de estilo total}: combinación lineal de las funciones de pérdida de estilo de cada capa.
       \begin{equation*}
 	L_{estilo}(\overrightarrow{a},\overrightarrow{x}) = \sum_{l=0}^{L} w_l E_l
       \end{equation*}
